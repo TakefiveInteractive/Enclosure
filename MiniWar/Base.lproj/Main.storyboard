@@ -18,15 +18,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="136-em-Ico">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="136-em-Ico">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Aq7-DX-xSp" firstAttribute="top" secondItem="136-em-Ico" secondAttribute="bottom" id="2HO-b1-hJl"/>
+                            <constraint firstAttribute="trailing" secondItem="136-em-Ico" secondAttribute="trailing" id="CBE-kk-0az"/>
+                            <constraint firstItem="136-em-Ico" firstAttribute="top" secondItem="T8B-cA-Pm5" secondAttribute="top" id="KVX-RP-JN8"/>
+                            <constraint firstItem="136-em-Ico" firstAttribute="leading" secondItem="T8B-cA-Pm5" secondAttribute="leading" id="Os1-6A-TuD"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="entry" destination="136-em-Ico" id="rLQ-Od-vjo"/>
-                        <segue destination="BYZ-38-t0r" kind="presentation" id="vAb-CW-qNN"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="tofirst" modalTransitionStyle="crossDissolve" id="vAb-CW-qNN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3s2-zA-0cm" userLabel="First Responder" sceneMemberID="firstResponder"/>
