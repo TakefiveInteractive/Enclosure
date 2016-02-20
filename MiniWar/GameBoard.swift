@@ -40,6 +40,9 @@ class GameBoard: UIView {
     
     func setup(){
         
+        lineLayer.backgroundColor = UIColor.clearColor().CGColor
+        self.layer.addSublayer(lineLayer)
+        
         for p in players{
             playerscore.append(0)
         }
@@ -164,10 +167,29 @@ class GameBoard: UIView {
                         self.tempPath[index].edges[self.tempPath[index + 1]]!.user = -1
                     }
                 }
+                
             }
             tempPath = [Grid]()
+            
+            lineLayer.lineWidth = 0
+
+        }else{
+            if !((fistStep && tempPath.count == 3) || tempPath.count == 4) {
+                let drawingLine = UIBezierPath()
+                drawingLine.moveToPoint((tempPath.last?.center)!)
+                drawingLine.addLineToPoint(point)
+                drawingLine.closePath()
+                lineLayer.path = drawingLine.CGPath
+                lineLayer.strokeColor = players[totalStep%players.count].CGColor
+                lineLayer.lineWidth = edgeWidth
+            }else{
+                lineLayer.lineWidth = 0
+            }
         }
+        
     }
+    var lineLayer = CAShapeLayer()
+
     
     var tempPathes = [[Grid]]()
     func checkArea(start:Grid, current: Grid, var path: [Grid]){

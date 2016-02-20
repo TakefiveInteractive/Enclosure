@@ -13,6 +13,7 @@
 		42627FE71C783E0700DC69EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42627FE61C783E0700DC69EC /* Assets.xcassets */; };
 		42627FEA1C783E0700DC69EC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42627FE81C783E0700DC69EC /* LaunchScreen.storyboard */; };
 		42627FF21C78445A00DC69EC /* GameBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42627FF11C78445A00DC69EC /* GameBoard.swift */; };
+		42627FF41C790D5600DC69EC /* Game1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42627FF31C790D5600DC69EC /* Game1ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		42627FE91C783E0700DC69EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		42627FEB1C783E0700DC69EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		42627FF11C78445A00DC69EC /* GameBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameBoard.swift; sourceTree = "<group>"; };
+		42627FF31C790D5600DC69EC /* Game1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game1ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 			children = (
 				42627FDF1C783E0700DC69EC /* AppDelegate.swift */,
 				42627FE11C783E0700DC69EC /* ViewController.swift */,
+				42627FF31C790D5600DC69EC /* Game1ViewController.swift */,
 				42627FE31C783E0700DC69EC /* Main.storyboard */,
 				42627FF11C78445A00DC69EC /* GameBoard.swift */,
 				42627FE61C783E0700DC69EC /* Assets.xcassets */,
@@ -140,6 +143,7 @@
 			files = (
 				42627FE21C783E0700DC69EC /* ViewController.swift in Sources */,
 				42627FF21C78445A00DC69EC /* GameBoard.swift in Sources */,
+				42627FF41C790D5600DC69EC /* Game1ViewController.swift in Sources */,
 				42627FE01C783E0700DC69EC /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
