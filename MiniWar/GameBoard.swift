@@ -13,13 +13,19 @@ let edgeWidth: CGFloat = 4
 let leng = 10
 let pathNum = 3
 
+protocol GameBoardDelegate{
+    func updateScore(playerscore:[Int])
+}
+
 class GameBoard: UIView {
     
     let players = [UIColor.redColor(), UIColor.blueColor()]
+    var delegate: GameBoardDelegate?
     
     var totalStep = 0
     
     var gesture: UIPanGestureRecognizer!
+    var playerscore = [Int]()
     
     var nodes = [[Grid]]()
     var areas = [[Area]]()
@@ -27,13 +33,17 @@ class GameBoard: UIView {
     var unitWidth: CGFloat!
     
     override init(frame: CGRect) {
-
         super.init(frame: frame)
         gesture = UIPanGestureRecognizer(target: self, action: "dragged:")
         self.addGestureRecognizer(gesture)
     }
     
     func setup(){
+        
+        for p in players{
+            playerscore.append(0)
+        }
+        
         unitWidth = self.frame.width / CGFloat(leng)
         
         //build all nodes
@@ -88,23 +98,30 @@ class GameBoard: UIView {
         }else{
             if !tempPath.contains(grid) && grid.edges.keys.contains(tempPath.last!) && tempPath.count <= pathNum && (grid.edges[tempPath.last!]?.user == -1 || grid.edges[tempPath.last!]?.user == totalStep % players.count) && (!fistStep || tempPath.count <= pathNum - 1){
                 tempPath.append(grid)
+
             }
             if tempPath.count > 1 && grid == tempPath[tempPath.count - 2]{
-                tempPath.last?.edges[tempPath[tempPath.count - 2]]?.backgroundColor = UIColor.clearColor()
-                self.tempPath.last?.edges[tempPath[tempPath.count - 2]]?.user = -1
+                if self.tempPath.last?.edges[tempPath[tempPath.count - 2]]?.user == -1 {
+                    tempPath.last?.edges[tempPath[tempPath.count - 2]]?.backgroundColor = UIColor.clearColor()
+                }else{
+                    tempPath.last?.edges[tempPath[tempPath.count - 2]]?.backgroundColor = players[totalStep % players.count]
+                }
                 tempPath.removeLast()
             }
         }
         if self.tempPath.count > 1{
             for var index = 0; index < self.tempPath.count - 1; index++ {
                 self.tempPath[index].edges[self.tempPath[index + 1]]!.backgroundColor = self.players[self.totalStep % 2]
-                self.tempPath[index].edges[self.tempPath[index + 1]]!.user = self.totalStep % 2
             }
         }
         
         if sender.state == UIGestureRecognizerState.Cancelled || sender.state == UIGestureRecognizerState.Ended || sender.state == UIGestureRecognizerState.Failed {
             
             if (fistStep && tempPath.count == 3) || tempPath.count == 4 {
+                for var index = 0; index < self.tempPath.count - 1; index++ {
+                    self.tempPath[index].edges[self.tempPath[index + 1]]!.backgroundColor = players[totalStep % players.count]
+                    self.tempPath[index].edges[self.tempPath[index + 1]]!.user = totalStep % players.count
+                }
                 if fistStep {
                     fistStep = false
                 }
@@ -132,11 +149,12 @@ class GameBoard: UIView {
                                     UIView.animateWithDuration(0.3, animations: { () -> Void in
                                         y.alpha = 0.7
                                     })
+                                    playerscore[totalStep % players.count]++
                                 }
                             }
                         }
                     }
-                    print(polygons)
+                    self.delegate?.updateScore(playerscore)
                 }
                 totalStep++
             }else{
