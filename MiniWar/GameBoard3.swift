@@ -174,30 +174,94 @@ class GameBoard3: GameBoard2 {
 
     
     override func calculateScore(polygons: [[CGPoint]]){
-        for x in areas3{
-            for y in x{
+        for var x = 0; x < areas3.count; x++ {
+            for var y = 0; y < areas3[x].count; y++ {
                 for p in polygons{
-                    if containPolygon(p, test: y.center) && y.user == -1{
-                        y.user = totalStep % players.count
-                        y.backgroundColor = players[totalStep % players.count]
-                        y.lab.alpha = 1
-                        y.lab.textColor = UIColor.whiteColor()
-                        UIView.animateWithDuration(0.3, animations: { () -> Void in
-                            y.alpha = 0.65
-                        })
-                        if y.score == -1{
 
-                        }else if y.score == -2{
-                            playerMove[totalStep % players.count]++
-                            self.delegate?.setTotalRow(totalStep % players.count, row: playerMove[totalStep % players.count])
-                            self.delegate?.showTotalRow(totalStep % players.count, row: 0)
+                    if containPolygon(p, test: areas3[x][y].center) && areas3[x][y].user == -1{
+                        areas3[x][y].user = totalStep % players.count
+                        areas3[x][y].backgroundColor = players[totalStep % players.count]
+                        areas3[x][y].lab.alpha = 1
+                        areas3[x][y].lab.textColor = UIColor.whiteColor()
+                        UIView.animateWithDuration(0.3, animations: { () -> Void in
+                            self.areas3[x][y].alpha = 0.65
+                        })
+                        
+                        if areas3[x][y].score == -1{
+                            checkBomb(x, y: y)
+                        }else if areas3[x][y].score == -2{
+                            if playerMove[totalStep % players.count] < 5{
+                                playerMove[totalStep % players.count]++
+                                self.delegate?.setTotalRow(totalStep % players.count, row: playerMove[totalStep % players.count])
+                                self.delegate?.showTotalRow(totalStep % players.count, row: 0)
+                            }
                         }else{
-                            playerscore[totalStep % players.count] = playerscore[totalStep % players.count] + y.score
+                            playerscore[totalStep % players.count] = playerscore[totalStep % players.count] + areas3[x][y].score
                         }
                     }
                 }
             }
         }
+    }
+    
+    func checkBomb(x: Int, y: Int){
+        var ars = [Area3]()
+        if x-1 >= 0 {
+            ars.append(areas3[x-1][y])
+            if y-1 >= 0 {
+                ars.append(areas3[x-1][y-1])
+            }
+            if y+1 < areas3.count{
+                ars.append(areas3[x-1][y+1])
+            }
+        }
+        if x+1 < areas3.count {
+            ars.append(areas3[x+1][y])
+            if y-1 >= 0 {
+                ars.append(areas3[x+1][y-1])
+            }
+            if y+1 < areas3.count{
+                ars.append(areas3[x+1][y+1])
+            }
+        }
+        if y-1 >= 0 {
+            ars.append(areas3[x][y-1])
+        }
+        if y+1 < areas3.count{
+            ars.append(areas3[x][y+1])
+        }
+        
+        for a in ars{
+            if a.user == (totalStep + 1) % players.count{
+                if a.score == -2{
+                    if playerMove[totalStep % players.count] < 5{
+                        playerMove[totalStep % players.count]++
+                        self.delegate?.setTotalRow(totalStep % players.count, row: playerMove[totalStep % players.count])
+                        self.delegate?.showTotalRow(totalStep % players.count, row: 0)
+                    }
+                    playerMove[(1 + totalStep) % players.count]--
+                    self.delegate?.setTotalRow((1 + totalStep) % players.count, row: playerMove[(1 + totalStep) % players.count])
+                }else if a.score > 0{
+                    playerscore[totalStep % players.count] = playerscore[totalStep % players.count] + a.score
+                    playerscore[(1 + totalStep) % players.count] = playerscore[(1 + totalStep) % players.count] - a.score
+
+                }
+            }else if a.user == -1{
+                if a.score == -2{
+                    if playerMove[totalStep % players.count] < 5{
+                        playerMove[totalStep % players.count]++
+                        self.delegate?.setTotalRow(totalStep % players.count, row: playerMove[totalStep % players.count])
+                        self.delegate?.showTotalRow(totalStep % players.count, row: 0)
+                    }
+                }else if a.score > 0{
+                    playerscore[totalStep % players.count] = playerscore[totalStep % players.count] + a.score
+                }
+
+            }
+            a.backgroundColor = players[totalStep % players.count]
+            a.user = totalStep % players.count
+        }
+
     }
 }
 

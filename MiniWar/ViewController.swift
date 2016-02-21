@@ -18,9 +18,10 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         
+        entry.contentSize = CGSizeMake(self.view.frame.width, self.view.frame.width*3)
+        
         circleLength = self.view.frame.width * 0.75
         
-        entry.contentSize = CGSizeMake(self.view.frame.width, self.view.frame.width*3)
         circle1.backgroundColor = UIColor.whiteColor()
         circle1.frame = CGRect(x: self.view.frame.width * 1 / 8, y: self.view.frame.width * 1 / 8, width: circleLength, height: circleLength)
         circle1.layer.cornerRadius = circleLength / 2
