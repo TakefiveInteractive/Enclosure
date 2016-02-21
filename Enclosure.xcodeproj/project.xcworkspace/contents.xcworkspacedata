@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:MiniWar.xcodeproj">
+      location = "self:/Users/kedanli/Desktop/MiniWar/Enclosure.xcodeproj">
    </FileRef>
 </Workspace>

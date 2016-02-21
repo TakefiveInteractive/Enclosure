@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MiniWar/GameBoard.swift"
-            timestampString = "477708556.128801"
+            timestampString = "477719026.190842"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "219"
-            endingLineNumber = "219"
+            startingLineNumber = "218"
+            endingLineNumber = "218"
             landmarkName = "checkArea(_:current:path:)"
             landmarkType = "5">
          </BreakpointContent>

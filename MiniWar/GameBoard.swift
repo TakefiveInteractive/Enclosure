@@ -165,8 +165,7 @@ class GameBoard: UIView {
                     for x in areas{
                         for y in x{
                             for p in polygons{
-                                print(containPolygon(p, test: y.center))
-                                if containPolygon(p, test: y.center) && y.user != totalStep % players.count{
+                                if containPolygon(p, test: y.center) && y.user == -1{
                                     y.user = totalStep % players.count
                                     y.backgroundColor = players[totalStep % players.count]
                                     UIView.animateWithDuration(0.3, animations: { () -> Void in
@@ -301,11 +300,18 @@ class Edge: UIView {
 }
 
 class Area: UIView {
+    var lab:UILabel!
     var user = -1
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = UIColor.whiteColor()
         self.alpha = 0.8
+        
+        lab = UILabel(frame: frame)
+        lab.textColor = UIColor.grayColor()
+        lab.alpha = 0.6
+        
+        
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

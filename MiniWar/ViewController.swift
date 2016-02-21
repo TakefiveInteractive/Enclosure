@@ -29,7 +29,7 @@ class ViewController: UIViewController {
         entry.addSubview(circle1)
         circle1.addTarget(self, action: "toFirst:", forControlEvents: UIControlEvents.TouchUpInside)
         
-        let img1 = UIImage(named: "2.pic_hd.jpg")
+        let img1 = UIImage(named: "3.pic.jpg")
         
         let img1V = UIImageView(frame: CGRectMake(0, 0, circleLength*0.6, circleLength*0.6))
         img1V.center = circle1.center

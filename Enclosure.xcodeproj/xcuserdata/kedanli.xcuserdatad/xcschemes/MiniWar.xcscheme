@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "42627FDB1C783E0700DC69EC"
-               BuildableName = "MiniWar.app"
-               BlueprintName = "MiniWar"
-               ReferencedContainer = "container:MiniWar.xcodeproj">
+               BuildableName = "Enclosure.app"
+               BlueprintName = "Enclosure"
+               ReferencedContainer = "container:Enclosure.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "42627FDB1C783E0700DC69EC"
-            BuildableName = "MiniWar.app"
-            BlueprintName = "MiniWar"
-            ReferencedContainer = "container:MiniWar.xcodeproj">
+            BuildableName = "Enclosure.app"
+            BlueprintName = "Enclosure"
+            ReferencedContainer = "container:Enclosure.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -56,9 +56,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "42627FDB1C783E0700DC69EC"
-            BuildableName = "MiniWar.app"
-            BlueprintName = "MiniWar"
-            ReferencedContainer = "container:MiniWar.xcodeproj">
+            BuildableName = "Enclosure.app"
+            BlueprintName = "Enclosure"
+            ReferencedContainer = "container:Enclosure.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -75,9 +75,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "42627FDB1C783E0700DC69EC"
-            BuildableName = "MiniWar.app"
-            BlueprintName = "MiniWar"
-            ReferencedContainer = "container:MiniWar.xcodeproj">
+            BuildableName = "Enclosure.app"
+            BlueprintName = "Enclosure"
+            ReferencedContainer = "container:Enclosure.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
