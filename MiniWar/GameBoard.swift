@@ -229,7 +229,7 @@ class GameBoard: UIView {
                         UIView.animateWithDuration(0.3, animations: { () -> Void in
                             y.alpha = 0.65
                         })
-                        playerscore[totalStep % players.count] = playerscore[totalStep % players.count]
+                        playerscore[totalStep % players.count]++
                     }
                 }
             }
