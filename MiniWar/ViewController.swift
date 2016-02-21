@@ -27,7 +27,7 @@ class ViewController: UIViewController {
 
     override func viewDidAppear(animated: Bool) {
         
-        entry.contentSize = CGSizeMake(self.view.frame.width, self.view.frame.width*3)
+        entry.contentSize = CGSizeMake(self.view.frame.width, self.view.frame.width*4)
         
         circleLength = self.view.frame.width * 0.75
         lineLength = 200 + self.view.frame.width * 0.75
@@ -83,15 +83,15 @@ class ViewController: UIViewController {
         
         
         
-        let img1V = UIImageView(frame: CGRectMake(0, 0, circleLength/2, circleLength/2))
+        let img1V = UIImageView(frame: CGRectMake(0, 0, circleLength*0.6, circleLength*0.6))
         img1V.center = circle1.center
         img1V.image = img1
-        img1V.alpha = 0.5
+        img1V.alpha = 0.75
         
-        let img2V = UIImageView(frame: CGRectMake(0, 0, circleLength/2, circleLength/2))
+        let img2V = UIImageView(frame: CGRectMake(0, 0, circleLength*0.6, circleLength*0.6))
         img2V.center = circle2.center
         img2V.image = img2
-        img2V.alpha = 0.5
+        img2V.alpha = 0.75
         
         let img3V = UIImageView(frame: CGRectMake(0, 0, circleLength*0.6, circleLength*0.6))
         img3V.center = circle3.center
