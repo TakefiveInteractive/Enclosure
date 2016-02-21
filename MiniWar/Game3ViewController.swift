@@ -16,7 +16,8 @@ class Game3ViewController: UIViewController, GameBoardDelegate {
 
     @IBOutlet var player1row: Rows!
     @IBOutlet var player0row: Rows!
-    
+    @IBOutlet var restart: UIButton!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         board.layer.shadowOpacity = 0.3
@@ -25,7 +26,13 @@ class Game3ViewController: UIViewController, GameBoardDelegate {
         
         player0row.color = player0Score.textColor
         player1row.color = player1Score.textColor
+        restart.addTarget(self, action: "replay:", forControlEvents: UIControlEvents.TouchUpInside)
+
         // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    func replay(but: UIButton){
+        board.setup()
     }
     
     func updateScore(playerscore: [Int]) {

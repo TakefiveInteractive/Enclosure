@@ -153,6 +153,7 @@
                         <outlet property="player0row" destination="ZiL-5L-Vhn" id="U69-k9-aCD"/>
                         <outlet property="player1Score" destination="brD-42-E7c" id="j3v-Ip-84e"/>
                         <outlet property="player1row" destination="nHe-GB-45Q" id="Hy5-JP-mNU"/>
+                        <outlet property="restart" destination="mgm-bP-myW" id="YqY-VQ-j0X"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -271,6 +272,7 @@
                         <outlet property="player0row" destination="Xcn-gY-Rfw" id="8X1-iD-mH1"/>
                         <outlet property="player1Score" destination="vwp-cx-ZUf" id="Qy6-wj-iNf"/>
                         <outlet property="player1row" destination="st2-Sz-8j3" id="edU-ik-7gG"/>
+                        <outlet property="restart" destination="1Qd-t6-X9o" id="KXz-pD-fod"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4v3-Co-cTS" sceneMemberID="firstResponder"/>
@@ -389,6 +391,7 @@
                         <outlet property="player0row" destination="SJW-IM-PyR" id="GtN-96-1Vp"/>
                         <outlet property="player1Score" destination="qAZ-UD-4Ma" id="VSY-Iw-Jb0"/>
                         <outlet property="player1row" destination="hAo-Wo-bf1" id="ZBM-oP-7WC"/>
+                        <outlet property="restart" destination="Jil-Fa-cOQ" id="tOe-YW-lRc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dRb-qs-ojC" sceneMemberID="firstResponder"/>

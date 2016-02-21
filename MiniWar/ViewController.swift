@@ -55,7 +55,7 @@ class ViewController: UIViewController {
         lab1.textColor = UIColor.grayColor()
         lab1.alpha = 0.6
         lab1.textAlignment = NSTextAlignment.Center
-        lab1.font = UIFont(name: "Avenir-Light", size: 22.0)
+        lab1.font = UIFont(name: "Avenir-Light", size: 20.0)
         lab1.text = "I. Rural Land"
         
         circle2.backgroundColor = UIColor.whiteColor()
@@ -69,7 +69,7 @@ class ViewController: UIViewController {
         lab2.textColor = UIColor.grayColor()
         lab2.alpha = 0.6
         lab2.textAlignment = NSTextAlignment.Center
-        lab2.font = UIFont(name: "Avenir-Light", size: 22.0)
+        lab2.font = UIFont(name: "Avenir-Light", size: 20.0)
         lab2.text = "II. Farm & Village"
         
         circle3.backgroundColor = UIColor.whiteColor()
@@ -83,7 +83,7 @@ class ViewController: UIViewController {
         lab3.textColor = UIColor.grayColor()
         lab3.alpha = 0.6
         lab3.textAlignment = NSTextAlignment.Center
-        lab3.font = UIFont(name: "Avenir-Light", size: 22.0)
+        lab3.font = UIFont(name: "Avenir-Light", size: 20.0)
         lab3.text = "III. War & Chao"
         
         entry.addSubview(rect1)

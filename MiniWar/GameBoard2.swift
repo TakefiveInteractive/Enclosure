@@ -14,6 +14,17 @@ class GameBoard2: GameBoard {
 
     override func setup(){
         
+        for v in self.subviews{
+            v.removeFromSuperview()
+        }
+        
+        playerscore = [Int]()
+        nodes = [[Grid]]()
+        areas2 = [[Area2]]()
+        totalStep = 0
+        tempPath = [Grid]()
+        firstStep = true
+        
         self.delegate?.setTotalRow(0, row: 2)
         self.delegate?.setTotalRow(1, row: 3)
         self.delegate?.showTotalRow(1, row: 0)

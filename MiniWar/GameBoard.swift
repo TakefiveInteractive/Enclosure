@@ -25,6 +25,8 @@ class GameBoard: UIView {
     var delegate: GameBoardDelegate?
     
     var totalStep = 0
+    var tempPath = [Grid]()
+    var firstStep = true
     
     var gesture: UIPanGestureRecognizer!
     var playerscore = [Int]()
@@ -41,6 +43,17 @@ class GameBoard: UIView {
     }
     
     func setup(){
+        
+        for v in self.subviews{
+            v.removeFromSuperview()
+        }
+        
+        playerscore = [Int]()
+        nodes = [[Grid]]()
+        areas = [[Area]]()
+        totalStep = 0
+        tempPath = [Grid]()
+        firstStep = true
         
         self.delegate?.setTotalRow(0, row: 2)
         self.delegate?.setTotalRow(1, row: 3)
@@ -97,8 +110,6 @@ class GameBoard: UIView {
         }
     }
     
-    var tempPath = [Grid]()
-    var firstStep = true
     func dragged(sender: UIPanGestureRecognizer){
         let point = sender.locationInView(self)
         let grid = getCorrespondingGrid(point)
@@ -230,12 +241,22 @@ class GameBoard: UIView {
                             y.alpha = 0.65
                         })
                         playerscore[totalStep % players.count]++
+                        
                     }
                 }
             }
         }
     }
 
+    func animateScore(area: Area, score: Int){
+        var lab = UILabel(frame: area.frame)
+        lab.textColor = UIColor.grayColor()
+        lab.alpha = 0.8
+        lab.textAlignment = NSTextAlignment.Center
+        lab.font = UIFont(name: "Avenir-Light", size: 10.0)
+        lab.text = "+\(score)"
+    }
+    
     func getCorrespondingGrid(p: CGPoint)->Grid{
         var x = Int(p.x/unitWidth)
         if x < 0{
