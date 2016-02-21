@@ -9,6 +9,7 @@
 import UIKit
 
 class Game1ViewController: UIViewController, GameBoardDelegate {
+    
     @IBOutlet var board: GameBoard!
     @IBOutlet var player1Score: UILabel!
     @IBOutlet var player0Score: UILabel!

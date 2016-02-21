@@ -21,7 +21,7 @@ protocol GameBoardDelegate{
 
 class GameBoard: UIView {
     
-    let players = [UIColor.redColor(), UIColor.blueColor()]
+    let players = [UIColor(red: 247.0/255.0, green: 149.0/255.0, blue: 157.0/255.0, alpha: 1), UIColor(red: 126.0/255.0, green: 194.0/255.0, blue: 226.0/255.0, alpha: 1)]
     var delegate: GameBoardDelegate?
     
     var totalStep = 0
@@ -44,11 +44,12 @@ class GameBoard: UIView {
         
         self.delegate?.setTotalRow(0, row: 2)
         self.delegate?.setTotalRow(1, row: 3)
+        self.delegate?.showTotalRow(1, row: 0)
 
         lineLayer.backgroundColor = UIColor.clearColor().CGColor
         self.layer.addSublayer(lineLayer)
         
-        for p in players{
+        for _ in players{
             playerscore.append(0)
         }
         
@@ -133,10 +134,16 @@ class GameBoard: UIView {
         
         if sender.state == UIGestureRecognizerState.Cancelled || sender.state == UIGestureRecognizerState.Ended || sender.state == UIGestureRecognizerState.Failed {
             
-            if firstStep{
+            if firstStep && tempPath.count < 3{
                 self.delegate?.showTotalRow(totalStep % players.count, row: 2)
             }else{
-                self.delegate?.showTotalRow(totalStep % players.count, row: 3)
+                if (firstStep && tempPath.count == 3) || tempPath.count == 4{
+                    self.delegate?.showTotalRow(totalStep % players.count, row: 0)
+                    self.delegate?.showTotalRow((totalStep + 1) % players.count, row: 3)
+                }else{
+                    self.delegate?.showTotalRow(totalStep % players.count, row: 3)
+                    self.delegate?.showTotalRow((totalStep + 1) % players.count, row: 0)
+                }
             }
             
             if (firstStep && tempPath.count == 3) || tempPath.count == 4 {
@@ -146,7 +153,6 @@ class GameBoard: UIView {
                 }
                 if firstStep {
                     firstStep = false
-                    self.delegate?.setTotalRow(0, row: 3)
                 }
                 tempPathes = [[Grid]]()
                 for g in tempPath{
@@ -162,20 +168,7 @@ class GameBoard: UIView {
                         }
                         polygons.append(polygon)
                     }
-                    for x in areas{
-                        for y in x{
-                            for p in polygons{
-                                if containPolygon(p, test: y.center) && y.user == -1{
-                                    y.user = totalStep % players.count
-                                    y.backgroundColor = players[totalStep % players.count]
-                                    UIView.animateWithDuration(0.3, animations: { () -> Void in
-                                        y.alpha = 0.65
-                                    })
-                                    playerscore[totalStep % players.count]++
-                                }
-                            }
-                        }
-                    }
+                    calculateScore(polygons)
                     self.delegate?.updateScore(playerscore)
                 }
                 totalStep++
@@ -199,6 +192,7 @@ class GameBoard: UIView {
                 lineLayer.path = drawingLine.CGPath
                 lineLayer.strokeColor = players[totalStep%players.count].CGColor
                 lineLayer.lineWidth = edgeWidth
+
             }else{
                 lineLayer.lineWidth = 0
             }
@@ -222,6 +216,24 @@ class GameBoard: UIView {
             }
         }
 
+    }
+    
+    
+    func calculateScore(polygons: [[CGPoint]]){
+        for x in areas{
+            for y in x{
+                for p in polygons{
+                    if containPolygon(p, test: y.center) && y.user == -1{
+                        y.user = totalStep % players.count
+                        y.backgroundColor = players[totalStep % players.count]
+                        UIView.animateWithDuration(0.3, animations: { () -> Void in
+                            y.alpha = 0.65
+                        })
+                        playerscore[totalStep % players.count] = playerscore[totalStep % players.count]
+                    }
+                }
+            }
+        }
     }
 
     func getCorrespondingGrid(p: CGPoint)->Grid{
@@ -300,18 +312,13 @@ class Edge: UIView {
 }
 
 class Area: UIView {
-    var lab:UILabel!
     var user = -1
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = UIColor.whiteColor()
         self.alpha = 0.8
-        
-        lab = UILabel(frame: frame)
-        lab.textColor = UIColor.grayColor()
-        lab.alpha = 0.6
-        
-        
+
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
