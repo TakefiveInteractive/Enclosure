@@ -51,42 +51,61 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H56-1Y-XIr" customClass="GameBoard" customModule="MiniWar" customModuleProvider="target">
-                                <rect key="frame" x="319" y="188" width="295" height="305"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="H56-1Y-XIr" secondAttribute="height" multiplier="1:1" id="rSv-Hq-ySb"/>
-                                </constraints>
-                            </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="brD-42-E7c">
-                                <rect key="frame" x="273" y="501" width="55" height="57"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="68" id="5pY-hd-YWv"/>
-                                    <constraint firstAttribute="height" constant="68" id="lsP-ht-ldp"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="35"/>
-                                <color key="textColor" red="0.043137254899999998" green="0.40000000000000002" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i6L-k8-04p">
                                 <rect key="frame" x="266" y="46" width="68" height="67"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="68" id="MN5-QO-bQ5"/>
                                     <constraint firstAttribute="height" constant="68" id="hbg-xD-fui"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="35"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="40"/>
                                 <color key="textColor" red="1" green="0.15303676869999999" blue="0.0294614929" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H56-1Y-XIr" customClass="GameBoard" customModule="MiniWar" customModuleProvider="target">
+                                <rect key="frame" x="259" y="188" width="295" height="305"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="H56-1Y-XIr" secondAttribute="height" multiplier="1:1" id="rSv-Hq-ySb"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="brD-42-E7c">
+                                <rect key="frame" x="252" y="535" width="55" height="57"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="68" id="5pY-hd-YWv"/>
+                                    <constraint firstAttribute="height" constant="68" id="lsP-ht-ldp"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="40"/>
+                                <color key="textColor" red="0.043137254899999998" green="0.40000000000000002" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZiL-5L-Vhn" customClass="Rows" customModule="MiniWar" customModuleProvider="target">
+                                <rect key="frame" x="259" y="154" width="295" height="16"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="15" id="KM1-DT-Y3H"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nHe-GB-45Q" customClass="Rows" customModule="MiniWar" customModuleProvider="target">
+                                <rect key="frame" x="259" y="501" width="295" height="8"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="15" id="Uls-sA-IMf"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="brD-42-E7c" secondAttribute="bottom" constant="40" id="3Oa-IV-1ZA"/>
                             <constraint firstItem="brD-42-E7c" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="84r-yP-b6w"/>
+                            <constraint firstItem="H56-1Y-XIr" firstAttribute="leading" secondItem="ZiL-5L-Vhn" secondAttribute="leading" id="BvC-dv-4qL"/>
                             <constraint firstItem="i6L-k8-04p" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="FV7-7O-dqs"/>
+                            <constraint firstItem="nHe-GB-45Q" firstAttribute="trailing" secondItem="H56-1Y-XIr" secondAttribute="trailing" id="GYJ-0D-gTB"/>
                             <constraint firstItem="H56-1Y-XIr" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="LbR-BE-yVA"/>
+                            <constraint firstItem="nHe-GB-45Q" firstAttribute="top" secondItem="H56-1Y-XIr" secondAttribute="bottom" constant="15" id="Mbf-Vs-fga"/>
                             <constraint firstItem="H56-1Y-XIr" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="Ntk-bm-KId"/>
+                            <constraint firstItem="nHe-GB-45Q" firstAttribute="leading" secondItem="H56-1Y-XIr" secondAttribute="leading" id="OGB-hK-ie1"/>
                             <constraint firstItem="i6L-k8-04p" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="TeC-LZ-S3K"/>
+                            <constraint firstItem="H56-1Y-XIr" firstAttribute="trailing" secondItem="ZiL-5L-Vhn" secondAttribute="trailing" id="eRQ-ne-s22"/>
+                            <constraint firstItem="H56-1Y-XIr" firstAttribute="top" secondItem="ZiL-5L-Vhn" secondAttribute="bottom" constant="15" id="kB3-OJ-3e8"/>
                             <constraint firstItem="i6L-k8-04p" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="40" id="ufD-Ok-bPE"/>
                             <constraint firstAttribute="trailing" secondItem="H56-1Y-XIr" secondAttribute="trailing" constant="10" id="zbB-0T-o0b"/>
                         </constraints>
@@ -99,7 +118,9 @@
                     <connections>
                         <outlet property="board" destination="H56-1Y-XIr" id="BDB-ue-qoZ"/>
                         <outlet property="player0Score" destination="i6L-k8-04p" id="wOa-0H-dHG"/>
+                        <outlet property="player0row" destination="ZiL-5L-Vhn" id="U69-k9-aCD"/>
                         <outlet property="player1Score" destination="brD-42-E7c" id="j3v-Ip-84e"/>
+                        <outlet property="player1row" destination="nHe-GB-45Q" id="Hy5-JP-mNU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

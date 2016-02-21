@@ -15,6 +15,8 @@ let pathNum = 3
 
 protocol GameBoardDelegate{
     func updateScore(playerscore:[Int])
+    func setTotalRow(player:Int, row: Int)
+    func showTotalRow(player:Int, row: Int)
 }
 
 class GameBoard: UIView {
@@ -40,6 +42,9 @@ class GameBoard: UIView {
     
     func setup(){
         
+        self.delegate?.setTotalRow(0, row: 2)
+        self.delegate?.setTotalRow(1, row: 3)
+
         lineLayer.backgroundColor = UIColor.clearColor().CGColor
         self.layer.addSublayer(lineLayer)
         
@@ -92,14 +97,14 @@ class GameBoard: UIView {
     }
     
     var tempPath = [Grid]()
-    var fistStep = true
+    var firstStep = true
     func dragged(sender: UIPanGestureRecognizer){
         let point = sender.locationInView(self)
         let grid = getCorrespondingGrid(point)
         if tempPath.count == 0{
             tempPath.append(grid)
         }else{
-            if !tempPath.contains(grid) && grid.edges.keys.contains(tempPath.last!) && tempPath.count <= pathNum && (grid.edges[tempPath.last!]?.user == -1 || grid.edges[tempPath.last!]?.user == totalStep % players.count) && (!fistStep || tempPath.count <= pathNum - 1){
+            if !tempPath.contains(grid) && grid.edges.keys.contains(tempPath.last!) && tempPath.count <= pathNum && (grid.edges[tempPath.last!]?.user == -1 || grid.edges[tempPath.last!]?.user == totalStep % players.count) && (!firstStep || tempPath.count <= pathNum - 1){
                 tempPath.append(grid)
 
             }
@@ -118,15 +123,30 @@ class GameBoard: UIView {
             }
         }
         
+        if tempPath.count > 0 {
+            if firstStep{
+                self.delegate?.showTotalRow(totalStep % players.count, row: 3 - tempPath.count)
+            }else{
+                self.delegate?.showTotalRow(totalStep % players.count, row: 4 - tempPath.count)
+            }
+        }
+        
         if sender.state == UIGestureRecognizerState.Cancelled || sender.state == UIGestureRecognizerState.Ended || sender.state == UIGestureRecognizerState.Failed {
             
-            if (fistStep && tempPath.count == 3) || tempPath.count == 4 {
+            if firstStep{
+                self.delegate?.showTotalRow(totalStep % players.count, row: 2)
+            }else{
+                self.delegate?.showTotalRow(totalStep % players.count, row: 3)
+            }
+            
+            if (firstStep && tempPath.count == 3) || tempPath.count == 4 {
                 for var index = 0; index < self.tempPath.count - 1; index++ {
                     self.tempPath[index].edges[self.tempPath[index + 1]]!.backgroundColor = players[totalStep % players.count]
                     self.tempPath[index].edges[self.tempPath[index + 1]]!.user = totalStep % players.count
                 }
-                if fistStep {
-                    fistStep = false
+                if firstStep {
+                    firstStep = false
+                    self.delegate?.setTotalRow(0, row: 3)
                 }
                 tempPathes = [[Grid]]()
                 for g in tempPath{
@@ -146,11 +166,11 @@ class GameBoard: UIView {
                         for y in x{
                             for p in polygons{
                                 print(containPolygon(p, test: y.center))
-                                if containPolygon(p, test: y.center) && y.user == -1{
+                                if containPolygon(p, test: y.center) && y.user != totalStep % players.count{
                                     y.user = totalStep % players.count
                                     y.backgroundColor = players[totalStep % players.count]
                                     UIView.animateWithDuration(0.3, animations: { () -> Void in
-                                        y.alpha = 0.7
+                                        y.alpha = 0.65
                                     })
                                     playerscore[totalStep % players.count]++
                                 }
@@ -167,14 +187,12 @@ class GameBoard: UIView {
                         self.tempPath[index].edges[self.tempPath[index + 1]]!.user = -1
                     }
                 }
-                
             }
             tempPath = [Grid]()
-            
             lineLayer.lineWidth = 0
 
         }else{
-            if !((fistStep && tempPath.count == 3) || tempPath.count == 4) {
+            if !((firstStep && tempPath.count == 3) || tempPath.count == 4) {
                 let drawingLine = UIBezierPath()
                 drawingLine.moveToPoint((tempPath.last?.center)!)
                 drawingLine.addLineToPoint(point)
@@ -287,9 +305,51 @@ class Area: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = UIColor.whiteColor()
-        self.alpha = 0.3
+        self.alpha = 0.8
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+class Rows: UIView {
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    let length:CGFloat = 60
+    var color: UIColor!
+    var views = [UIView]()
+    
+    func changeBarNum(num : Int){
+        
+        for v in views{
+            v.removeFromSuperview()
+        }
+        views = [UIView]()
+        let startIndex: CGFloat = (self.frame.width - (length * CGFloat(num) + 10 * CGFloat(num - 1))) / 2
+        for var index = 0; index < num; index++ {
+            let v = UIView(frame: CGRect(x: startIndex + (10.0 + length) * CGFloat(index), y: 0, width: length, height: 6))
+            v.backgroundColor = color
+            views.append(v)
+            self.addSubview(v)
+        }
+    }
+    
+    func displayNum(num : Int){
+        for var index = 0; index < views.count; index++ {
+            if index < num{
+                views[index].alpha = 1
+            }else{
+                views[index].alpha = 0
+            }
+        }
+    }
+    
+}
+

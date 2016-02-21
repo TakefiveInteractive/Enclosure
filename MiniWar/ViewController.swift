@@ -28,6 +28,14 @@ class ViewController: UIViewController {
         circle1.layer.shadowOpacity = 0.4
         entry.addSubview(circle1)
         circle1.addTarget(self, action: "toFirst:", forControlEvents: UIControlEvents.TouchUpInside)
+        
+        let img1 = UIImage(named: "2.pic_hd.jpg")
+        
+        let img1V = UIImageView(frame: CGRectMake(0, 0, circleLength*0.6, circleLength*0.6))
+        img1V.center = circle1.center
+        img1V.image = img1
+        img1V.alpha = 0.75
+        entry.addSubview(img1V)
         // UIColor(red: 239.0/255.0 , green: 239.0/255.0, blue: 244.0/255.0,
 
     }
