@@ -98,15 +98,9 @@ class Area2: Area {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        score = (x * y)/1000
+        score = (x * y)/1500
         if score == 0{
             score = 1
-        }
-        if (x * y) > 7000{
-            score = -1
-        }
-        if (x * y) > 8400{
-            score = -2
         }
         lab = UILabel(frame: self.bounds)
         lab.textColor = UIColor.grayColor()
@@ -114,11 +108,7 @@ class Area2: Area {
         lab.textAlignment = NSTextAlignment.Center
         lab.font = UIFont(name: "Avenir-Light", size: 15.0)
         
-        if score == -1{
-            lab.text = "B"
-        }else if score == -2{
-            lab.text = "M+"
-        }else if score != 1{
+        if score != 1{
             lab.text = "\(score)"
         }
         self.addSubview(lab)

@@ -12,8 +12,7 @@ class GameBoard3: GameBoard2 {
     
     var areas3 = [[Area3]]()
 
-    var player0Move = 3
-    var player1Move = 3
+    var playerMove = [3, 3]
     
     override func setup(){
         
@@ -47,7 +46,7 @@ class GameBoard3: GameBoard2 {
         
         //build all edges and area
         for var x = 0; x < leng; x++ {
-            areas2.append([Area2]())
+            areas3.append([Area3]())
             for var y = 0; y < leng; y++ {
                 if x < leng - 1{
                     let edge = Edge(frame: CGRect(x: nodes[x][y].center.x + edgeWidth/2, y: nodes[x][y].center.y - edgeWidth/2, width: unitWidth - edgeWidth, height: edgeWidth))
@@ -64,17 +63,118 @@ class GameBoard3: GameBoard2 {
                 }
                 
                 if y < leng - 1 && x < leng - 1{
-                    let area = Area2(frame: CGRect(x: nodes[x][y].center.x + edgeWidth/2, y: nodes[x][y].center.y + edgeWidth/2, width: unitWidth - edgeWidth, height: unitWidth - edgeWidth))
-                    areas2[x].append(area)
+                    let area = Area3(frame: CGRect(x: nodes[x][y].center.x + edgeWidth/2, y: nodes[x][y].center.y + edgeWidth/2, width: unitWidth - edgeWidth, height: unitWidth - edgeWidth))
+                    areas3[x].append(area)
                     self.addSubview(area)
                 }
             }
         }
     }
 
+    override func dragged(sender: UIPanGestureRecognizer){
+        let point = sender.locationInView(self)
+        let grid = getCorrespondingGrid(point)
+        if tempPath.count == 0{
+            tempPath.append(grid)
+        }else{
+            if !tempPath.contains(grid) && grid.edges.keys.contains(tempPath.last!) && tempPath.count <= playerMove[totalStep % players.count] && (grid.edges[tempPath.last!]?.user == -1 || grid.edges[tempPath.last!]?.user == totalStep % players.count) && (!firstStep || tempPath.count <= pathNum - 1){
+                tempPath.append(grid)
+                
+            }
+            if tempPath.count > 1 && grid == tempPath[tempPath.count - 2]{
+                if self.tempPath.last?.edges[tempPath[tempPath.count - 2]]?.user == -1 {
+                    tempPath.last?.edges[tempPath[tempPath.count - 2]]?.backgroundColor = UIColor.clearColor()
+                }else{
+                    tempPath.last?.edges[tempPath[tempPath.count - 2]]?.backgroundColor = players[totalStep % players.count]
+                }
+                tempPath.removeLast()
+            }
+        }
+        if self.tempPath.count > 1{
+            for var index = 0; index < self.tempPath.count - 1; index++ {
+                self.tempPath[index].edges[self.tempPath[index + 1]]!.backgroundColor = self.players[self.totalStep % 2]
+            }
+        }
+        
+        if tempPath.count > 0 {
+            if firstStep{
+                self.delegate?.showTotalRow(totalStep % players.count, row: 3 - tempPath.count)
+            }else{
+                self.delegate?.showTotalRow(totalStep % players.count, row: playerMove[totalStep % players.count] + 1 - tempPath.count)
+            }
+        }
+        
+        if sender.state == UIGestureRecognizerState.Cancelled || sender.state == UIGestureRecognizerState.Ended || sender.state == UIGestureRecognizerState.Failed {
+            
+            if firstStep && tempPath.count < 3{
+                self.delegate?.showTotalRow(totalStep % players.count, row: 2)
+            }else{
+                if (firstStep && tempPath.count == 3) || tempPath.count == playerMove[totalStep % players.count] + 1{
+                    self.delegate?.showTotalRow(totalStep % players.count, row: 0)
+                    self.delegate?.showTotalRow((totalStep + 1) % players.count, row: playerMove[(totalStep + 1) % players.count])
+                }else{
+                    self.delegate?.showTotalRow(totalStep % players.count, row: playerMove[totalStep % players.count])
+                    self.delegate?.showTotalRow((totalStep + 1) % players.count, row: 0)
+                }
+            }
+            
+            if (firstStep && tempPath.count == 3) || tempPath.count == playerMove[totalStep % players.count] + 1 {
+                for var index = 0; index < self.tempPath.count - 1; index++ {
+                    self.tempPath[index].edges[self.tempPath[index + 1]]!.backgroundColor = players[totalStep % players.count]
+                    self.tempPath[index].edges[self.tempPath[index + 1]]!.user = totalStep % players.count
+                }
+                if firstStep {
+                    firstStep = false
+                }
+                tempPathes = [[Grid]]()
+                for g in tempPath{
+                    checkArea(g, current: g, path: [Grid]())
+                }
+                
+                if tempPathes.count > 0{
+                    var polygons = [[CGPoint]]()
+                    for p in tempPathes{
+                        var polygon = [CGPoint]()
+                        for grid in p{
+                            polygon.append(grid.center)
+                        }
+                        polygons.append(polygon)
+                    }
+                    calculateScore(polygons)
+                    self.delegate?.updateScore(playerscore)
+                }
+                totalStep++
+            }else{
+                if self.tempPath.count > 1{
+                    for var index = 0; index < self.tempPath.count - 1; index++ {
+                        self.tempPath[index].edges[self.tempPath[index + 1]]!.backgroundColor = UIColor.clearColor()
+                        self.tempPath[index].edges[self.tempPath[index + 1]]!.user = -1
+                    }
+                }
+            }
+            tempPath = [Grid]()
+            lineLayer.lineWidth = 0
+            
+        }else{
+            if !((firstStep && tempPath.count == 3) || tempPath.count == playerMove[totalStep % players.count] + 1) {
+                let drawingLine = UIBezierPath()
+                drawingLine.moveToPoint((tempPath.last?.center)!)
+                drawingLine.addLineToPoint(point)
+                drawingLine.closePath()
+                lineLayer.path = drawingLine.CGPath
+                lineLayer.strokeColor = players[totalStep%players.count].CGColor
+                lineLayer.lineWidth = edgeWidth
+                
+            }else{
+                lineLayer.lineWidth = 0
+            }
+        }
+        
+    }
+
     
     override func calculateScore(polygons: [[CGPoint]]){
-        for x in areas2{
+        for x in areas3{
             for y in x{
                 for p in polygons{
                     if containPolygon(p, test: y.center) && y.user == -1{
@@ -86,9 +186,11 @@ class GameBoard3: GameBoard2 {
                             y.alpha = 0.65
                         })
                         if y.score == -1{
-                            self.delegate?.setTotalRow(totalStep % players.count, row: <#T##Int#>)
+
                         }else if y.score == -2{
-                            
+                            playerMove[totalStep % players.count]++
+                            self.delegate?.setTotalRow(totalStep % players.count, row: playerMove[totalStep % players.count])
+                            self.delegate?.showTotalRow(totalStep % players.count, row: 0)
                         }else{
                             playerscore[totalStep % players.count] = playerscore[totalStep % players.count] + y.score
                         }
@@ -99,6 +201,44 @@ class GameBoard3: GameBoard2 {
     }
 }
 
-class Area3: Area2 {
+class Area3: Area {
+    
+    var lab: UILabel!
+    let x = Int(arc4random_uniform(100))
+    let y = Int(arc4random_uniform(100))
+    var score = 0
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        score = (x * y)/1000
+        if score == 0{
+            score = 1
+        }
+        if (x * y) > 7000{
+            score = -1
+        }
+        if (x * y) > 8400{
+            score = -2
+        }
+        lab = UILabel(frame: self.bounds)
+        lab.textColor = UIColor.grayColor()
+        lab.alpha = 0.6
+        lab.textAlignment = NSTextAlignment.Center
+        lab.font = UIFont(name: "Avenir-Light", size: 15.0)
+        
+        if score == -1{
+            lab.text = "B"
+        }else if score == -2{
+            lab.text = "M+"
+        }else if score != 1{
+            lab.text = "\(score)"
+        }
+        self.addSubview(lab)
+        
+    }
 
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
