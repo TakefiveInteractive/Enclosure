@@ -18,8 +18,6 @@ class ViewController: UIViewController {
     var rect1 = UIView()
     var rect2 = UIView()
 
-
-    
     var circleLength: CGFloat = 0
     var lineLength: CGFloat = 0
     var lineWidth: CGFloat = 0
