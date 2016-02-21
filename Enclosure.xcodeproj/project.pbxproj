@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		107EE37B1986C9B911A41FF9 /* Pods_Enclosure.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FDF6B9C43FF0722F64A3577 /* Pods_Enclosure.framework */; };
 		42627FE01C783E0700DC69EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42627FDF1C783E0700DC69EC /* AppDelegate.swift */; };
 		42627FE21C783E0700DC69EC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42627FE11C783E0700DC69EC /* ViewController.swift */; };
 		42627FE51C783E0700DC69EC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42627FE31C783E0700DC69EC /* Main.storyboard */; };
@@ -14,12 +15,14 @@
 		42627FEA1C783E0700DC69EC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42627FE81C783E0700DC69EC /* LaunchScreen.storyboard */; };
 		42627FF21C78445A00DC69EC /* GameBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42627FF11C78445A00DC69EC /* GameBoard.swift */; };
 		42627FF41C790D5600DC69EC /* Game2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42627FF31C790D5600DC69EC /* Game2ViewController.swift */; };
-		42627FF81C7969B200DC69EC /* Game1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42627FF71C7969B200DC69EC /* Game1ViewController.swift */; };
-		42627FFA1C796A5000DC69EC /* 3.pic.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 42627FF91C796A5000DC69EC /* 3.pic.jpg */; };
+		6204250E972F9D33F452A800 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		42627FDC1C783E0700DC69EC /* Enclosure.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Enclosure.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C0293DDB018C9E49E18FA83 /* Pods-Enclosure.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Enclosure.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Enclosure/Pods-Enclosure.debug.xcconfig"; sourceTree = "<group>"; };
+		20D8FAF0367CD33306C7BA45 /* Pods-MiniWar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MiniWar.release.xcconfig"; path = "Pods/Target Support Files/Pods-MiniWar/Pods-MiniWar.release.xcconfig"; sourceTree = "<group>"; };
+		3FDF6B9C43FF0722F64A3577 /* Pods_Enclosure.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Enclosure.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		42627FDC1C783E0700DC69EC /* MiniWar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = MiniWar.app; path = Enclosure.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42627FDF1C783E0700DC69EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42627FE11C783E0700DC69EC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		42627FE41C783E0700DC69EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -37,24 +40,36 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6204250E972F9D33F452A800 /* (null) in Frameworks */,
+				107EE37B1986C9B911A41FF9 /* Pods_Enclosure.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		239694A48C89AF62B7418150 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3FDF6B9C43FF0722F64A3577 /* Pods_Enclosure.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		42627FD31C783E0700DC69EC = {
 			isa = PBXGroup;
 			children = (
 				42627FDE1C783E0700DC69EC /* MiniWar */,
 				42627FDD1C783E0700DC69EC /* Products */,
+				9F21061046FBDAA5E1531D81 /* Pods */,
+				239694A48C89AF62B7418150 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		42627FDD1C783E0700DC69EC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				42627FDC1C783E0700DC69EC /* Enclosure.app */,
+				42627FDC1C783E0700DC69EC /* MiniWar.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -76,6 +91,15 @@
 			path = MiniWar;
 			sourceTree = "<group>";
 		};
+		9F21061046FBDAA5E1531D81 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				20D8FAF0367CD33306C7BA45 /* Pods-MiniWar.release.xcconfig */,
+				0C0293DDB018C9E49E18FA83 /* Pods-Enclosure.debug.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -83,9 +107,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 42627FEE1C783E0700DC69EC /* Build configuration list for PBXNativeTarget "Enclosure" */;
 			buildPhases = (
+				5600C3673F5E42B66AAE2961 /* Check Pods Manifest.lock */,
 				42627FD81C783E0700DC69EC /* Sources */,
 				42627FD91C783E0700DC69EC /* Frameworks */,
 				42627FDA1C783E0700DC69EC /* Resources */,
+				3B6A91312890B953BC45B5E1 /* Embed Pods Frameworks */,
+				B71805A2B4958835827ADE01 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -93,7 +120,7 @@
 			);
 			name = Enclosure;
 			productName = MiniWar;
-			productReference = 42627FDC1C783E0700DC69EC /* Enclosure.app */;
+			productReference = 42627FDC1C783E0700DC69EC /* MiniWar.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -135,13 +162,60 @@
 			buildActionMask = 2147483647;
 			files = (
 				42627FEA1C783E0700DC69EC /* LaunchScreen.storyboard in Resources */,
-				42627FFA1C796A5000DC69EC /* 3.pic.jpg in Resources */,
 				42627FE71C783E0700DC69EC /* Assets.xcassets in Resources */,
 				42627FE51C783E0700DC69EC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3B6A91312890B953BC45B5E1 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Enclosure/Pods-Enclosure-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5600C3673F5E42B66AAE2961 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B71805A2B4958835827ADE01 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Enclosure/Pods-Enclosure-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		42627FD81C783E0700DC69EC /* Sources */ = {
@@ -152,7 +226,6 @@
 				42627FF21C78445A00DC69EC /* GameBoard.swift in Sources */,
 				42627FF41C790D5600DC69EC /* Game2ViewController.swift in Sources */,
 				42627FE01C783E0700DC69EC /* AppDelegate.swift in Sources */,
-				42627FF81C7969B200DC69EC /* Game1ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +334,7 @@
 		};
 		42627FEF1C783E0700DC69EC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0C0293DDB018C9E49E18FA83 /* Pods-Enclosure.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = MiniWar/Info.plist;
@@ -272,6 +346,7 @@
 		};
 		42627FF01C783E0700DC69EC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 20D8FAF0367CD33306C7BA45 /* Pods-MiniWar.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = MiniWar/Info.plist;
@@ -300,6 +375,7 @@
 				42627FF01C783E0700DC69EC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
