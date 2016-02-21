@@ -241,7 +241,7 @@ class GameBoard: UIView {
                             y.alpha = 0.65
                         })
                         playerscore[totalStep % players.count]++
-                        animateScore(y, score: 1, player: totalStep % players.count)
+//                        animateScore(y, score: 1, player: totalStep % players.count)
                         
                     }
                 }
@@ -259,12 +259,12 @@ class GameBoard: UIView {
         lab.text = "+\(score)"
         self.addSubview(lab)
         
-        UIView.animateWithDuration(0.3, animations: { () -> Void in
-            lab.alpha = 0
-            lab.frame =
-            }) { (haha) -> Void in
-                
-        }
+//        UIView.animateWithDuration(0.3, animations: { () -> Void in
+//            lab.alpha = 0
+//            lab.frame =
+//            }) { (haha) -> Void in
+//                
+//        }
     }
     
     func getCorrespondingGrid(p: CGPoint)->Grid{
