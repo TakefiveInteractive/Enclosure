@@ -8,9 +8,9 @@
 
 import UIKit
 
-class GameBoard2: GameBoard {
+class GameBoard3: GameBoard2 {
     
-    var areas2 = [[Area2]]()
+    var areas3 = [[Area3]]()
 
     override func setup(){
         
@@ -82,13 +82,7 @@ class GameBoard2: GameBoard {
                         UIView.animateWithDuration(0.3, animations: { () -> Void in
                             y.alpha = 0.65
                         })
-//                        if y.score == -1{
-//                            self.delegate?.setTotalRow(totalStep % players.count, row: <#T##Int#>) 
-//                        }else if y.score == -2{
-//                            
-//                        }else{
-                            playerscore[totalStep % players.count] = playerscore[totalStep % players.count] + y.score
-//                        }
+                        playerscore[totalStep % players.count] = playerscore[totalStep % players.count] + y.score
                     }
                 }
             }
@@ -96,41 +90,6 @@ class GameBoard2: GameBoard {
     }
 }
 
-class Area2: Area {
-    var lab: UILabel!
-    let x = Int(arc4random_uniform(100))
-    let y = Int(arc4random_uniform(100))
-    var score = 0
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        score = (x * y)/1000
-        if score == 0{
-            score = 1
-        }
-        if (x * y) > 7000{
-            score = -1
-        }
-        if (x * y) > 8400{
-            score = -2
-        }
-        lab = UILabel(frame: self.bounds)
-        lab.textColor = UIColor.grayColor()
-        lab.alpha = 0.6
-        lab.textAlignment = NSTextAlignment.Center
-        lab.font = UIFont(name: "Avenir-Light", size: 15.0)
-        
-        if score == -1{
-            lab.text = "B"
-        }else if score == -2{
-            lab.text = "M+"
-        }else if score != 1{
-            lab.text = "\(score)"
-        }
-        self.addSubview(lab)
-        
-    }
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+class Area3: Area2 {
+
 }
