@@ -241,6 +241,7 @@ class GameBoard: UIView {
                             y.alpha = 0.65
                         })
                         playerscore[totalStep % players.count]++
+                        animateScore(y, score: 1, player: totalStep % players.count)
                         
                     }
                 }
@@ -248,13 +249,14 @@ class GameBoard: UIView {
         }
     }
 
-    func animateScore(area: Area, score: Int){
+    func animateScore(area: Area, score: Int, player: Int){
         var lab = UILabel(frame: area.frame)
-        lab.textColor = UIColor.grayColor()
+        lab.textColor = players[player]
         lab.alpha = 0.8
         lab.textAlignment = NSTextAlignment.Center
         lab.font = UIFont(name: "Avenir-Light", size: 10.0)
         lab.text = "+\(score)"
+        self.addSubview(lab)
     }
     
     func getCorrespondingGrid(p: CGPoint)->Grid{
