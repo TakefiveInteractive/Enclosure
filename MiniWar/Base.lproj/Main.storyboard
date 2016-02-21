@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -269,6 +270,28 @@
                                     <constraint firstAttribute="width" secondItem="Dac-3t-2uh" secondAttribute="height" multiplier="1:1" id="et5-re-165"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zCa-hm-j31">
+                                <rect key="frame" x="234" y="8" width="62" height="39"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="jPn-OM-UyC"/>
+                                    <constraint firstAttribute="width" constant="60" id="w5X-FZ-Q6G"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
+                                <state key="normal" title="Home">
+                                    <color key="titleColor" red="0.22352941179999999" green="0.22352941179999999" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jil-Fa-cOQ">
+                                <rect key="frame" x="327" y="8" width="70" height="37.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="0tb-yd-8kj"/>
+                                    <constraint firstAttribute="width" constant="60" id="lIG-C1-Fvy"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
+                                <state key="normal" title="Restart">
+                                    <color key="titleColor" red="0.22352941179999999" green="0.22352941179999999" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -277,13 +300,17 @@
                             <constraint firstItem="hAo-Wo-bf1" firstAttribute="trailing" secondItem="Dac-3t-2uh" secondAttribute="trailing" id="BVl-zG-9Uo"/>
                             <constraint firstItem="qAZ-UD-4Ma" firstAttribute="centerX" secondItem="pxe-NP-5zM" secondAttribute="centerX" id="BXJ-QM-ljN"/>
                             <constraint firstItem="Dac-3t-2uh" firstAttribute="centerY" secondItem="pxe-NP-5zM" secondAttribute="centerY" id="E3B-KN-BTS"/>
+                            <constraint firstItem="zqW-7F-D4M" firstAttribute="top" secondItem="Jil-Fa-cOQ" secondAttribute="bottom" constant="-15" id="IfD-cC-H6f"/>
                             <constraint firstItem="Dac-3t-2uh" firstAttribute="leading" secondItem="pxe-NP-5zM" secondAttribute="leading" constant="10" id="POK-iy-zJI"/>
+                            <constraint firstAttribute="trailing" secondItem="Jil-Fa-cOQ" secondAttribute="trailing" constant="30" id="POt-DY-bu9"/>
                             <constraint firstItem="HM3-b6-3t3" firstAttribute="top" secondItem="qAZ-UD-4Ma" secondAttribute="bottom" constant="40" id="SUq-eM-57f"/>
                             <constraint firstItem="Dac-3t-2uh" firstAttribute="leading" secondItem="SJW-IM-PyR" secondAttribute="leading" id="WMe-Ou-8ls"/>
                             <constraint firstItem="hAo-Wo-bf1" firstAttribute="top" secondItem="Dac-3t-2uh" secondAttribute="bottom" constant="15" id="aOc-9M-swT"/>
                             <constraint firstItem="Dac-3t-2uh" firstAttribute="top" secondItem="SJW-IM-PyR" secondAttribute="bottom" constant="15" id="av8-wu-0H5"/>
                             <constraint firstAttribute="trailing" secondItem="Dac-3t-2uh" secondAttribute="trailing" constant="10" id="cNQ-r8-oHp"/>
                             <constraint firstItem="hAo-Wo-bf1" firstAttribute="leading" secondItem="Dac-3t-2uh" secondAttribute="leading" id="gJk-et-IPO"/>
+                            <constraint firstItem="zCa-hm-j31" firstAttribute="leading" secondItem="pxe-NP-5zM" secondAttribute="leadingMargin" constant="30" id="nHi-Kz-qQB"/>
+                            <constraint firstItem="zqW-7F-D4M" firstAttribute="top" secondItem="zCa-hm-j31" secondAttribute="bottom" constant="-15" id="pHa-Ae-wCG"/>
                             <constraint firstItem="Dac-3t-2uh" firstAttribute="trailing" secondItem="SJW-IM-PyR" secondAttribute="trailing" id="pnM-RW-MHq"/>
                             <constraint firstItem="zqW-7F-D4M" firstAttribute="top" secondItem="bBG-Fu-M8c" secondAttribute="bottom" constant="20" id="zA0-4K-fg6"/>
                         </constraints>
