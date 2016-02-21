@@ -82,13 +82,7 @@ class GameBoard2: GameBoard {
                         UIView.animateWithDuration(0.3, animations: { () -> Void in
                             y.alpha = 0.65
                         })
-//                        if y.score == -1{
-//                            self.delegate?.setTotalRow(totalStep % players.count, row: <#T##Int#>) 
-//                        }else if y.score == -2{
-//                            
-//                        }else{
-                            playerscore[totalStep % players.count] = playerscore[totalStep % players.count] + y.score
-//                        }
+                        playerscore[totalStep % players.count] = playerscore[totalStep % players.count] + y.score
                     }
                 }
             }

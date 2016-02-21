@@ -12,6 +12,9 @@ class GameBoard3: GameBoard2 {
     
     var areas3 = [[Area3]]()
 
+    var player0Move = 3
+    var player1Move = 3
+    
     override func setup(){
         
         self.delegate?.setTotalRow(0, row: 2)
@@ -82,7 +85,13 @@ class GameBoard3: GameBoard2 {
                         UIView.animateWithDuration(0.3, animations: { () -> Void in
                             y.alpha = 0.65
                         })
-                        playerscore[totalStep % players.count] = playerscore[totalStep % players.count] + y.score
+                        if y.score == -1{
+                            self.delegate?.setTotalRow(totalStep % players.count, row: <#T##Int#>)
+                        }else if y.score == -2{
+                            
+                        }else{
+                            playerscore[totalStep % players.count] = playerscore[totalStep % players.count] + y.score
+                        }
                     }
                 }
             }
