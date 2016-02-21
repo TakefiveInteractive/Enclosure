@@ -35,7 +35,7 @@
                         <outlet property="entry" destination="136-em-Ico" id="rLQ-Od-vjo"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="tofirst" modalTransitionStyle="crossDissolve" id="vAb-CW-qNN"/>
                         <segue destination="IXN-4O-JaO" kind="presentation" identifier="tosecond" modalTransitionStyle="crossDissolve" id="q2C-N0-hU0"/>
-                        <segue destination="cd2-Eu-PtS" kind="presentation" identifier="tothird" id="EO9-AY-NNT"/>
+                        <segue destination="cd2-Eu-PtS" kind="presentation" identifier="tothird" modalTransitionStyle="crossDissolve" id="EO9-AY-NNT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3s2-zA-0cm" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -94,9 +94,35 @@
                                     <constraint firstAttribute="height" constant="15" id="Uls-sA-IMf"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KHC-kv-RI0">
+                                <rect key="frame" x="245" y="3" width="62" height="39"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="DGZ-oS-yGZ"/>
+                                    <constraint firstAttribute="height" constant="40" id="dNl-s8-9KR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
+                                <state key="normal" title="Home">
+                                    <color key="titleColor" red="0.22352941179999999" green="0.22352941179999999" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <segue destination="ghp-vG-u8Q" kind="unwind" unwindAction="backToMain:" id="udp-MC-ZbU"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mgm-bP-myW">
+                                <rect key="frame" x="315" y="3" width="70" height="37.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="8Wn-lH-wtY"/>
+                                    <constraint firstAttribute="width" constant="60" id="ikF-F1-IKi"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
+                                <state key="normal" title="Restart">
+                                    <color key="titleColor" red="0.22352941179999999" green="0.22352941179999999" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="i6L-k8-04p" firstAttribute="top" secondItem="mgm-bP-myW" secondAttribute="bottom" constant="-15" id="3If-8M-mj9"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="brD-42-E7c" secondAttribute="bottom" constant="40" id="3Oa-IV-1ZA"/>
                             <constraint firstItem="brD-42-E7c" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="84r-yP-b6w"/>
                             <constraint firstItem="H56-1Y-XIr" firstAttribute="leading" secondItem="ZiL-5L-Vhn" secondAttribute="leading" id="BvC-dv-4qL"/>
@@ -106,9 +132,12 @@
                             <constraint firstItem="nHe-GB-45Q" firstAttribute="top" secondItem="H56-1Y-XIr" secondAttribute="bottom" constant="15" id="Mbf-Vs-fga"/>
                             <constraint firstItem="H56-1Y-XIr" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="Ntk-bm-KId"/>
                             <constraint firstItem="nHe-GB-45Q" firstAttribute="leading" secondItem="H56-1Y-XIr" secondAttribute="leading" id="OGB-hK-ie1"/>
+                            <constraint firstItem="KHC-kv-RI0" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="30" id="PBW-bc-mM9"/>
                             <constraint firstItem="i6L-k8-04p" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="TeC-LZ-S3K"/>
+                            <constraint firstAttribute="trailing" secondItem="mgm-bP-myW" secondAttribute="trailing" constant="30" id="VaA-xU-U3x"/>
                             <constraint firstItem="H56-1Y-XIr" firstAttribute="trailing" secondItem="ZiL-5L-Vhn" secondAttribute="trailing" id="eRQ-ne-s22"/>
                             <constraint firstItem="H56-1Y-XIr" firstAttribute="top" secondItem="ZiL-5L-Vhn" secondAttribute="bottom" constant="15" id="kB3-OJ-3e8"/>
+                            <constraint firstItem="i6L-k8-04p" firstAttribute="top" secondItem="KHC-kv-RI0" secondAttribute="bottom" constant="-15" id="kO0-Vi-pAA"/>
                             <constraint firstItem="i6L-k8-04p" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="40" id="ufD-Ok-bPE"/>
                             <constraint firstAttribute="trailing" secondItem="H56-1Y-XIr" secondAttribute="trailing" constant="10" id="zbB-0T-o0b"/>
                         </constraints>
@@ -127,8 +156,9 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <exit id="ghp-vG-u8Q" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="741" y="-337"/>
+            <point key="canvasLocation" x="681" y="-323"/>
         </scene>
         <!--Game2 View Controller-->
         <scene sceneID="IQ5-wz-HKu">
@@ -182,6 +212,31 @@
                                     <constraint firstAttribute="width" secondItem="FXJ-Au-wvz" secondAttribute="height" multiplier="1:1" id="Neb-Z4-rng"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YW1-Fl-LsK">
+                                <rect key="frame" x="245" y="2" width="62" height="39"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="Wqu-ie-7Mi"/>
+                                    <constraint firstAttribute="height" constant="40" id="hMQ-Ai-dpW"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
+                                <state key="normal" title="Home">
+                                    <color key="titleColor" red="0.22352941179999999" green="0.22352941179999999" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <segue destination="X5C-jb-Xde" kind="unwind" unwindAction="backToMain:" id="MBL-fa-yME"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Qd-t6-X9o">
+                                <rect key="frame" x="306" y="1" width="70" height="37.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="6xG-Nf-5zy"/>
+                                    <constraint firstAttribute="width" constant="60" id="Pme-u8-Nko"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
+                                <state key="normal" title="Restart">
+                                    <color key="titleColor" red="0.22352941179999999" green="0.22352941179999999" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -189,15 +244,19 @@
                             <constraint firstItem="st2-Sz-8j3" firstAttribute="leading" secondItem="FXJ-Au-wvz" secondAttribute="leading" id="20P-7A-UyT"/>
                             <constraint firstItem="vwp-cx-ZUf" firstAttribute="centerX" secondItem="dHA-gt-ItQ" secondAttribute="centerX" id="2mH-Is-z3G"/>
                             <constraint firstAttribute="trailing" secondItem="FXJ-Au-wvz" secondAttribute="trailing" constant="10" id="4LS-6P-w8I"/>
+                            <constraint firstItem="YW1-Fl-LsK" firstAttribute="leading" secondItem="dHA-gt-ItQ" secondAttribute="leading" constant="30" id="5DY-KI-zTg"/>
                             <constraint firstItem="xr8-gr-LnV" firstAttribute="top" secondItem="C2A-Da-kgl" secondAttribute="bottom" constant="20" id="P1x-yJ-rfE"/>
                             <constraint firstItem="FXJ-Au-wvz" firstAttribute="leading" secondItem="dHA-gt-ItQ" secondAttribute="leading" constant="10" id="P7t-kR-5CE"/>
+                            <constraint firstAttribute="trailing" secondItem="1Qd-t6-X9o" secondAttribute="trailing" constant="30" id="UqC-bZ-TuY"/>
                             <constraint firstItem="9Ds-jP-Blq" firstAttribute="top" secondItem="vwp-cx-ZUf" secondAttribute="bottom" constant="40" id="YEC-C8-Zv6"/>
                             <constraint firstItem="FXJ-Au-wvz" firstAttribute="trailing" secondItem="Xcn-gY-Rfw" secondAttribute="trailing" id="ZVP-ey-Iwd"/>
                             <constraint firstItem="st2-Sz-8j3" firstAttribute="trailing" secondItem="FXJ-Au-wvz" secondAttribute="trailing" id="dyV-NG-G3y"/>
                             <constraint firstItem="xr8-gr-LnV" firstAttribute="centerX" secondItem="dHA-gt-ItQ" secondAttribute="centerX" id="jpu-qC-NRm"/>
                             <constraint firstItem="xr8-gr-LnV" firstAttribute="top" secondItem="C2A-Da-kgl" secondAttribute="bottom" constant="40" id="kWR-4i-ZIR"/>
                             <constraint firstItem="FXJ-Au-wvz" firstAttribute="leading" secondItem="Xcn-gY-Rfw" secondAttribute="leading" id="n7x-Il-spE"/>
+                            <constraint firstItem="xr8-gr-LnV" firstAttribute="top" secondItem="YW1-Fl-LsK" secondAttribute="bottom" constant="-15" id="rOl-0d-yCn"/>
                             <constraint firstItem="FXJ-Au-wvz" firstAttribute="top" secondItem="Xcn-gY-Rfw" secondAttribute="bottom" constant="15" id="rtE-dl-ddH"/>
+                            <constraint firstItem="xr8-gr-LnV" firstAttribute="top" secondItem="1Qd-t6-X9o" secondAttribute="bottom" constant="-15" id="uOP-gE-7V1"/>
                             <constraint firstItem="st2-Sz-8j3" firstAttribute="top" secondItem="FXJ-Au-wvz" secondAttribute="bottom" constant="15" id="ws0-LR-Gsk"/>
                         </constraints>
                         <variation key="default">
@@ -215,6 +274,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4v3-Co-cTS" sceneMemberID="firstResponder"/>
+                <exit id="X5C-jb-Xde" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="705" y="449"/>
         </scene>
@@ -280,6 +340,9 @@
                                 <state key="normal" title="Home">
                                     <color key="titleColor" red="0.22352941179999999" green="0.22352941179999999" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <segue destination="qz4-RK-1Yx" kind="unwind" unwindAction="backToMain:" id="Szb-oL-LqA"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jil-Fa-cOQ">
                                 <rect key="frame" x="327" y="8" width="70" height="37.5"/>
@@ -329,6 +392,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dRb-qs-ojC" sceneMemberID="firstResponder"/>
+                <exit id="qz4-RK-1Yx" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="15" y="-477"/>
         </scene>

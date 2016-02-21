@@ -131,6 +131,10 @@ class ViewController: UIViewController {
         
     }
     
+    @IBAction func backToMain(segue:UIStoryboardSegue) {
+        
+    }
+    
     func toFirst(but:UIButton){
         self.performSegueWithIdentifier("tofirst", sender: self)
     }
