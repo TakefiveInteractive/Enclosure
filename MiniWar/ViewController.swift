@@ -33,12 +33,12 @@ class ViewController: UIViewController {
         lineLength = 200 + self.view.frame.width * 0.75
         lineWidth = self.view.frame.width * 0.5
         
-        rect1.backgroundColor = UIColor.init(red: 143/255, green: 205/255, blue: 232/255, alpha: 1)
+        rect1.backgroundColor = UIColor.init(red: 200/255, green: 226/255, blue: 241/255, alpha: 1)
         rect1.frame = CGRect(x: self.view.frame.width * 1 / 4, y: self.view.frame.width * 1 / 8 + circleLength/2, width: lineWidth, height: lineLength)
         rect1.layer.shadowRadius = 3
         rect1.layer.shadowOpacity = 0.4
         
-        rect2.backgroundColor = UIColor.init(red: 143/255, green: 205/255, blue: 232/255, alpha: 1)
+        rect2.backgroundColor =  UIColor.init(red: 249/255, green: 208/255, blue: 213/255, alpha: 1)
         rect2.frame = CGRect(x: self.view.frame.width * 1 / 4, y: self.view.frame.width * 1 / 8 + circleLength*3/2 + circleLength, width: lineWidth, height: lineLength)
         rect2.layer.shadowRadius = 3
         rect2.layer.shadowOpacity = 0.4
@@ -83,15 +83,15 @@ class ViewController: UIViewController {
         
         
         
-        let img1V = UIImageView(frame: CGRectMake(0, 0, circleLength*0.6, circleLength*0.6))
+        let img1V = UIImageView(frame: CGRectMake(0, 0, circleLength/2, circleLength/2))
         img1V.center = circle1.center
         img1V.image = img1
-        img1V.alpha = 0.75
+        img1V.alpha = 0.5
         
-        let img2V = UIImageView(frame: CGRectMake(0, 0, circleLength*0.6, circleLength*0.6))
+        let img2V = UIImageView(frame: CGRectMake(0, 0, circleLength/2, circleLength/2))
         img2V.center = circle2.center
         img2V.image = img2
-        img2V.alpha = 0.75
+        img2V.alpha = 0.5
         
         let img3V = UIImageView(frame: CGRectMake(0, 0, circleLength*0.6, circleLength*0.6))
         img3V.center = circle3.center
