@@ -74,8 +74,8 @@ class ViewController: UIViewController {
         entry.addSubview(circle3)
         
         circle1.addTarget(self, action: "toFirst:", forControlEvents: UIControlEvents.TouchUpInside)
-        circle2.addTarget(self, action: "toFirst:", forControlEvents: UIControlEvents.TouchUpInside)
-        circle3.addTarget(self, action: "toFirst:", forControlEvents: UIControlEvents.TouchUpInside)
+        circle2.addTarget(self, action: "toSecond:", forControlEvents: UIControlEvents.TouchUpInside)
+        circle3.addTarget(self, action: "toThird:", forControlEvents: UIControlEvents.TouchUpInside)
         
         let img1 = UIImage(named: "1.jpg")
         let img2 = UIImage(named: "2.png")
@@ -109,6 +109,12 @@ class ViewController: UIViewController {
     
     func toFirst(but:UIButton){
         self.performSegueWithIdentifier("tofirst", sender: self)
+    }
+    func toSecond(but:UIButton){
+        self.performSegueWithIdentifier("tosecond", sender: self)
+    }
+    func toThird(but:UIButton){
+        self.performSegueWithIdentifier("tothird", sender: self)
     }
 }
 

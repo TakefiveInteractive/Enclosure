@@ -19,8 +19,8 @@
 		426280021C7976FE00DC69EC /* Game1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426280011C7976FE00DC69EC /* Game1ViewController.swift */; };
 		426280041C797DB400DC69EC /* Game3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426280031C797DB400DC69EC /* Game3ViewController.swift */; };
 		426280061C797DCC00DC69EC /* GameBoard3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426280051C797DCC00DC69EC /* GameBoard3.swift */; };
+		42A5D15A1C7A0B5000C0AAC8 /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 42A5D1591C7A0B5000C0AAC8 /* 1.jpg */; };
 		6204250E972F9D33F452A800 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
-		B5D624E61C79A5C20072A98C /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B5D624E51C79A5C20072A98C /* 1.jpg */; };
 		B5D624E81C79A5C60072A98C /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = B5D624E71C79A5C60072A98C /* 2.png */; };
 		B5D624EC1C79ABC30072A98C /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = B5D624EB1C79ABC30072A98C /* 3.png */; };
 /* End PBXBuildFile section */
@@ -42,7 +42,7 @@
 		426280011C7976FE00DC69EC /* Game1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game1ViewController.swift; sourceTree = "<group>"; };
 		426280031C797DB400DC69EC /* Game3ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game3ViewController.swift; sourceTree = "<group>"; };
 		426280051C797DCC00DC69EC /* GameBoard3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameBoard3.swift; sourceTree = "<group>"; };
-		B5D624E51C79A5C20072A98C /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
+		42A5D1591C7A0B5000C0AAC8 /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
 		B5D624E71C79A5C60072A98C /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
 		B5D624EB1C79ABC30072A98C /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -94,7 +94,7 @@
 				426280031C797DB400DC69EC /* Game3ViewController.swift */,
 				42627FF31C790D5600DC69EC /* Game2ViewController.swift */,
 				426280011C7976FE00DC69EC /* Game1ViewController.swift */,
-				B5D624E51C79A5C20072A98C /* 1.jpg */,
+				42A5D1591C7A0B5000C0AAC8 /* 1.jpg */,
 				B5D624E71C79A5C60072A98C /* 2.png */,
 				B5D624EB1C79ABC30072A98C /* 3.png */,
 				42627FE31C783E0700DC69EC /* Main.storyboard */,
@@ -180,9 +180,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				42627FEA1C783E0700DC69EC /* LaunchScreen.storyboard in Resources */,
-				B5D624E61C79A5C20072A98C /* 1.jpg in Resources */,
 				B5D624E81C79A5C60072A98C /* 2.png in Resources */,
 				B5D624EC1C79ABC30072A98C /* 3.png in Resources */,
+				42A5D15A1C7A0B5000C0AAC8 /* 1.jpg in Resources */,
 				42627FE71C783E0700DC69EC /* Assets.xcassets in Resources */,
 				42627FE51C783E0700DC69EC /* Main.storyboard in Resources */,
 			);

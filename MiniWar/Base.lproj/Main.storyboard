@@ -33,6 +33,8 @@
                     <connections>
                         <outlet property="entry" destination="136-em-Ico" id="rLQ-Od-vjo"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="tofirst" modalTransitionStyle="crossDissolve" id="vAb-CW-qNN"/>
+                        <segue destination="IXN-4O-JaO" kind="presentation" identifier="tosecond" modalTransitionStyle="crossDissolve" id="q2C-N0-hU0"/>
+                        <segue destination="cd2-Eu-PtS" kind="presentation" identifier="tothird" id="EO9-AY-NNT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3s2-zA-0cm" userLabel="First Responder" sceneMemberID="firstResponder"/>
