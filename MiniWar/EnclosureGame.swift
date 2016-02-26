@@ -50,8 +50,8 @@ class EnclosureGame: NSObject {
                     fence.nodes.append(nodes[x][y])
                     fence.nodes.append(nodes[x+1][y])
                     
-                    nodes[x][y].fences.append(fence)
-                    nodes[x+1][y].fences.append(fence)
+                    nodes[x][y].fences[nodes[x+1][y]] = fence
+                    nodes[x+1][y].fences[nodes[x][y]] = fence
                     fences.append(fence)
                 }
                 if y < boardSize - 1{
@@ -59,8 +59,8 @@ class EnclosureGame: NSObject {
                     fence.nodes.append(nodes[x][y])
                     fence.nodes.append(nodes[x][y+1])
                     
-                    nodes[x][y].fences.append(fence)
-                    nodes[x][y+1].fences.append(fence)
+                    nodes[x][y].fences[nodes[x][y+1]] = fence
+                    nodes[x][y+1].fences[nodes[x][y]] = fence
                     fences.append(fence)
                 }
             }
@@ -82,7 +82,7 @@ class EnclosureGame: NSObject {
 
 class FenceNode: NSObject {
     
-    var fences = [Fence]()
+    var fences = [FenceNode: Fence]()
     let x:Int
     let y:Int
     var view = UIView()

@@ -25,8 +25,12 @@ class GameBoard: UIView {
     
     var delegate: GameBoardDelegate?
     
-    var tempPath = [Grid]()
+    let drawAnimationTime = 0.5
     
+    var tempPath = [Grid]()
+    var tempPathes = [[Grid]]()
+    var lineLayer = CAShapeLayer()
+
     var gesture: UIPanGestureRecognizer!
     
     var grids = [Grid]()
@@ -66,7 +70,7 @@ class GameBoard: UIView {
         //build all nodes
         for arr in game.nodes{
             for node in arr{
-                let grid = Grid(frame: CGRect(x: CGFloat(node.x) * unitWidth, y: CGFloat(node.y) * unitWidth, width: unitWidth, height: unitWidth), gameElement: node)
+                let grid = Grid(frame: CGRect(x: CGFloat(node.x) * unitWidth, y: CGFloat(node.y) * unitWidth, width: unitWidth, height: unitWidth), gameElement: node, game: self)
                 grids.append(grid)
                 node.view = grid
                 grid.alpha = 0
@@ -89,7 +93,7 @@ class GameBoard: UIView {
                 }else{
                     upper = fence.nodes[1]
                 }
-                let edge = Edge(frame: CGRect(x: upper.view.center.x - edgeWidth/2, y: upper.view.center.y + edgeWidth/2, width: edgeWidth, height: unitWidth - edgeWidth), gameElement: fence)
+                let edge = Edge(frame: CGRect(x: upper.view.center.x - edgeWidth/2, y: upper.view.center.y + edgeWidth/2, width: edgeWidth, height: unitWidth - edgeWidth), gameElement: fence, game: self)
                 self.addSubview(edge)
                 fence.view = edge
                 edges.append(edge)
@@ -101,7 +105,7 @@ class GameBoard: UIView {
                 }else{
                     lefter = fence.nodes[1]
                 }
-                let edge = Edge(frame: CGRect(x: lefter.view.center.x + edgeWidth/2, y: lefter.view.center.y - edgeWidth/2, width: unitWidth - edgeWidth, height: edgeWidth), gameElement: fence)
+                let edge = Edge(frame: CGRect(x: lefter.view.center.x + edgeWidth/2, y: lefter.view.center.y - edgeWidth/2, width: unitWidth - edgeWidth, height: edgeWidth), gameElement: fence, game: self)
                 self.addSubview(edge)
                 fence.view = edge
                 edges.append(edge)
@@ -113,7 +117,7 @@ class GameBoard: UIView {
         for arr in game.nodes{
             for node in arr{
                 if node.y < game.boardSize - 1 && node.x < game.boardSize - 1{
-                    let area = Area(frame: CGRect(x: node.view.center.x + edgeWidth/2, y: node.view.center.y + edgeWidth/2, width: unitWidth - edgeWidth, height: unitWidth - edgeWidth), gameElement: game.lands[node.x][node.y])
+                    let area = Area(frame: CGRect(x: node.view.center.x + edgeWidth/2, y: node.view.center.y + edgeWidth/2, width: unitWidth - edgeWidth, height: unitWidth - edgeWidth), gameElement: game.lands[node.x][node.y], game: self)
                     game.lands[node.x][node.y].view = area
                     areas.append(area)
                     self.addSubview(area)
@@ -123,56 +127,66 @@ class GameBoard: UIView {
         
     }
     
-    var lineLayer = CAShapeLayer()
-    var tempPathes = [[Grid]]()
+    // redraw all the element on the board according to the game
+    func drawBoard(){
+        for edge in edges{
+            edge.update()
+        }
+        for area in areas{
+            area.update()
+        }
+    }
     
-//    func dragged(sender: UIPanGestureRecognizer){
-//        let point = sender.locationInView(self)
-//        let grid = getCorrespondingGrid(point)
-//        if tempPath.count == 0{
-//            tempPath.append(grid)
-//        }else{
-//            if !tempPath.contains(grid) && grid.edges.keys.contains(tempPath.last!) && tempPath.count <= pathNum && (grid.edges[tempPath.last!]?.user == -1 || grid.edges[tempPath.last!]?.user == totalStep % players.count) && (!firstStep || tempPath.count <= pathNum - 1){
-//                tempPath.append(grid)
+    func drawPath(){
+        for elem in tempPath{
+            if elem != tempPath.last{
+                let index = tempPath.indexOf(elem)
+                (elem.gameElement.fences[self.tempPath[index! + 1].gameElement]?.view as! Edge).backgroundColor = self.playerColors[self.game.currentPlayer()]
+            }
+        }
+    }
+    
+    func dragged(sender: UIPanGestureRecognizer){
+        let point = sender.locationInView(self)
+        let grid = getCorrespondingGrid(point)
+        
+        if tempPath.count == 0{
+            tempPath.append(grid)
+        }else{
+            
+            //add temp drew line
+            let connectWithLast = grid.gameElement.fences.keys.contains(tempPath.last!.gameElement)
+            let withinAvailableStep = tempPath.count <= game.playerFences[game.currentPlayer()]
+            if !tempPath.contains(grid) && connectWithLast && withinAvailableStep && (grid.gameElement.fences[tempPath.last!.gameElement]?.player == -1 || grid.gameElement.fences[tempPath.last!.gameElement]?.player == game.currentPlayer()){
+                tempPath.append(grid)
+                drawPath()
+            }
+            
+            //remove drawn line
+            
+            if tempPath.count > 1 && grid == tempPath[tempPath.count - 2]{
+                tempPath.removeLast()
+                drawBoard()
+                drawPath()
+            }
+
+        if tempPath.count > 0 {
+            self.delegate?.showTotalRow(game.currentPlayer(), row: game.playerFences[game.currentPlayer()] + 1 - tempPath.count)
+            }
+        }
+
+        if sender.state == UIGestureRecognizerState.Cancelled || sender.state == UIGestureRecognizerState.Ended || sender.state == UIGestureRecognizerState.Failed {
+
+            //haven't finish game
+            if tempPath.count < game.playerFences[game.currentPlayer()] + 1{
+                tempPath.removeAll()
+                self.delegate?.showTotalRow(game.currentPlayer(), row: game.playerFences[game.currentPlayer()])
+                drawBoard()
+                drawPath()
+            }else{
+
+            }
 //
-//            }
-//            if tempPath.count > 1 && grid == tempPath[tempPath.count - 2]{
-//                if self.tempPath.last?.edges[tempPath[tempPath.count - 2]]?.user == -1 {
-//                    tempPath.last?.edges[tempPath[tempPath.count - 2]]?.backgroundColor = UIColor.clearColor()
-//                }else{
-//                    tempPath.last?.edges[tempPath[tempPath.count - 2]]?.backgroundColor = players[totalStep % players.count]
-//                }
-//                tempPath.removeLast()
-//            }
-//        }
-//        if self.tempPath.count > 1{
-//            for var index = 0; index < self.tempPath.count - 1; index++ {
-//                self.tempPath[index].edges[self.tempPath[index + 1]]!.backgroundColor = self.players[self.totalStep % 2]
-//            }
-//        }
-//        
-//        if tempPath.count > 0 {
-//            if firstStep{
-//                self.delegate?.showTotalRow(totalStep % players.count, row: 3 - tempPath.count)
-//            }else{
-//                self.delegate?.showTotalRow(totalStep % players.count, row: 4 - tempPath.count)
-//            }
-//        }
-//        
-//        if sender.state == UIGestureRecognizerState.Cancelled || sender.state == UIGestureRecognizerState.Ended || sender.state == UIGestureRecognizerState.Failed {
-//            
-//            if firstStep && tempPath.count < 3{
-//                self.delegate?.showTotalRow(totalStep % players.count, row: 2)
-//            }else{
-//                if (firstStep && tempPath.count == 3) || tempPath.count == 4{
-//                    self.delegate?.showTotalRow(totalStep % players.count, row: 0)
-//                    self.delegate?.showTotalRow((totalStep + 1) % players.count, row: 3)
-//                }else{
-//                    self.delegate?.showTotalRow(totalStep % players.count, row: 3)
-//                    self.delegate?.showTotalRow((totalStep + 1) % players.count, row: 0)
-//                }
-//            }
-//            
 //            if (firstStep && tempPath.count == 3) || tempPath.count == 4 {
 //                for var index = 0; index < self.tempPath.count - 1; index++ {
 //                    self.tempPath[index].edges[self.tempPath[index + 1]]!.backgroundColor = players[totalStep % players.count]
@@ -223,9 +237,9 @@ class GameBoard: UIView {
 //            }else{
 //                lineLayer.lineWidth = 0
 //            }
-//        }
+        }
         
-//    }
+    }
     
 //
 //    func checkArea(start:Grid, current: Grid, var path: [Grid]){
@@ -281,21 +295,21 @@ class GameBoard: UIView {
 ////        }
 //    }
     
-//    func getCorrespondingGrid(p: CGPoint)->Grid{
-//        var x = Int(p.x/unitWidth)
-//        if x < 0{
-//            x = 0
-//        }else if x >= leng{
-//            x = leng - 1
-//        }
-//        var y = Int(p.y/unitWidth)
-//        if y < 0{
-//            y = 0
-//        }else if y >= leng{
-//            y = leng - 1
-//        }
-//        return grids[x][y]
-//    }
+    func getCorrespondingGrid(p: CGPoint)->Grid{
+        var x = Int(p.x/unitWidth)
+        if x < 0{
+            x = 0
+        }else if x >= game.boardSize{
+            x = game.boardSize - 1
+        }
+        var y = Int(p.y/unitWidth)
+        if y < 0{
+            y = 0
+        }else if y >= game.boardSize{
+            y = game.boardSize - 1
+        }
+        return game.nodes[x][y].view as! Grid
+    }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -308,7 +322,7 @@ class GameBoard: UIView {
             return false //or if first point = test -> return true
         }
         
-        var p = UIBezierPath()
+        let p = UIBezierPath()
         let firstPoint = polygon[0] as CGPoint
         
         p.moveToPoint(firstPoint)
@@ -327,10 +341,12 @@ class GameBoard: UIView {
 class Grid: UIView {
     
     let gameElement: FenceNode
-    
+    let game: GameBoard
+
     var centerGrid: UIView!
-    init(frame: CGRect, gameElement: FenceNode) {
+    init(frame: CGRect, gameElement: FenceNode, game: GameBoard) {
         self.gameElement = gameElement
+        self.game = game
         super.init(frame: frame)
         centerGrid = UIView(frame: CGRect(x: 0, y: 0, width: edgeWidth, height: edgeWidth))
         centerGrid.backgroundColor = UIColor.blackColor()
@@ -347,28 +363,58 @@ class Grid: UIView {
 class Edge: UIView {
     
     let gameElement: Fence
+    let game: GameBoard
 
-    init(frame: CGRect, gameElement: Fence) {
+    init(frame: CGRect, gameElement: Fence, game: GameBoard) {
         self.gameElement = gameElement
+        self.game = game
         super.init(frame: frame)
         self.backgroundColor = UIColor.clearColor()
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func update(){
+        var selectedColor = UIColor.clearColor()
+        if gameElement.player != -1{
+            selectedColor = game.playerColors[gameElement.player]
+        }
+        UIView.animateWithDuration(game.drawAnimationTime) { () -> Void in
+            self.backgroundColor = selectedColor
+        }
+    }
+    
 }
 
 class Area: UIView {
 
+    let game: GameBoard
     let gameElement: Land
     
-    init(frame: CGRect, gameElement: Land) {
+    init(frame: CGRect, gameElement: Land, game: GameBoard) {
         self.gameElement = gameElement
+        self.game = game
         super.init(frame: frame)
         self.backgroundColor = UIColor.whiteColor()
         self.alpha = 0.8
 
     }
+    
+    func update(){
+        var selectedColor = UIColor.whiteColor()
+        var a:CGFloat = 0.8
+        if gameElement.player != -1{
+            selectedColor = game.playerColors[gameElement.player]
+            a = 0.6
+        }
+            UIView.animateWithDuration(0.5) { () -> Void in
+                self.backgroundColor = selectedColor
+                self.alpha = a
+            }
+
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

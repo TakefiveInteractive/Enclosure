@@ -148,7 +148,7 @@
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="board" destination="H56-1Y-XIr" id="BDB-ue-qoZ"/>
+                        <outlet property="board" destination="H56-1Y-XIr" id="f1B-wj-RU6"/>
                         <outlet property="player0Score" destination="i6L-k8-04p" id="wOa-0H-dHG"/>
                         <outlet property="player0row" destination="ZiL-5L-Vhn" id="U69-k9-aCD"/>
                         <outlet property="player1Score" destination="brD-42-E7c" id="j3v-Ip-84e"/>
