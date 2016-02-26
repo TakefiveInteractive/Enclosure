@@ -10,7 +10,7 @@ import UIKit
 
 
 let edgeWidth: CGFloat = 4
-let leng = 10
+let leng = 8
 let pathNum = 3
 
 protocol GameBoardDelegate{
