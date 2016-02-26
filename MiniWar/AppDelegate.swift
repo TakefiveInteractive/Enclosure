@@ -16,6 +16,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        let game = EnclosureGame()
+
+//        for n in game.nodes{
+//            for nn in n{
+//                print("\(nn.fences.count)  x:\(nn.x)  y:\(nn.y)")
+//                //print("\(f.nodes.count == 2)")
+//            }
+//        }
+        
+//        print(game.fences)
+        
         return true
     }
 

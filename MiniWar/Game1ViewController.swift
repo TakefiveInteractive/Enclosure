@@ -10,6 +10,9 @@ import UIKit
 
 class Game1ViewController: UIViewController, GameBoardDelegate {
     
+    
+    var game = EnclosureGame()
+
     @IBOutlet var board: GameBoard!
     @IBOutlet var player1Score: UILabel!
     @IBOutlet var player0Score: UILabel!
@@ -33,7 +36,7 @@ class Game1ViewController: UIViewController, GameBoardDelegate {
     }
     
     func replay(but: UIButton){
-        board.setup()
+        board.buildGame(game)
     }
     
     func updateScore(playerscore: [Int]) {
@@ -58,7 +61,7 @@ class Game1ViewController: UIViewController, GameBoardDelegate {
     }
     
     override func viewDidAppear(animated: Bool) {
-        board.setup()
+        board.buildGame(game)
         
     }
     
