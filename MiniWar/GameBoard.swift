@@ -12,7 +12,7 @@ import UIKit
 let edgeWidth: CGFloat = 4
 
 protocol GameBoardDelegate{
-    func updateScore(playerscore:[Int])
+    func animateScore(area: Area, score: Int, player: Int)
     func setTotalRow(player:Int, row: Int)
     func showTotalRow(player:Int, row: Int)
 }
@@ -21,7 +21,7 @@ class GameBoard: UIView {
     
     var game: EnclosureGame!
     
-    let playerColors = [UIColor(red: 247.0/255.0, green: 149.0/255.0, blue: 157.0/255.0, alpha: 1), UIColor(red: 176.0/255.0, green: 226.0/255.0, blue: 246.0/255.0, alpha: 1)]
+    let playerColors = [UIColor(red: 247.0/255.0, green: 149.0/255.0, blue: 157.0/255.0, alpha: 1), UIColor(red: 140.0/255.0, green: 196.0/255.0, blue: 299.0/255.0, alpha: 1)]
     
     var delegate: GameBoardDelegate?
     
@@ -156,25 +156,6 @@ class GameBoard: UIView {
         }
     }
     
-//    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-//        for t in touches{
-//            tempPath.append(getCorrespondingGrid(t.locationInView(self)))
-//        }
-//        drawPath()
-//    }
-//    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
-//        for t in touches!{
-//            tempPath.removeAll()
-//        }
-//        drawBoard()
-//    }
-//    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-//        for t in touches{
-//            tempPath.removeAll()
-//        }
-//        drawBoard()
-//    }
-    
     func dragged(sender: UIPanGestureRecognizer){
         let point = sender.locationInView(self)
         let grid = getCorrespondingGrid(point)
@@ -227,11 +208,13 @@ class GameBoard: UIView {
                 self.delegate?.showTotalRow(game.currentPlayer(), row: 0)
                 
                 // move to next step
-                game.updateMove(fences, nodes: nodes)
-                
+                var areaChanged = game.updateMove(fences, nodes: nodes)
+                print(areaChanged)
+                for land in areaChanged{
+                    self.delegate?.animateScore(land.view as! Area, score: land.score, player: (game.currentPlayer()+1)%2)
+                }
                 drawBoard()
                 self.delegate?.showTotalRow(game.currentPlayer(), row: game.playerFences[game.currentPlayer()])
-
             }
             
             lineLayer.lineWidth = 0
@@ -247,25 +230,6 @@ class GameBoard: UIView {
         
     }
 
-
-//    func animateScore(area: Area, score: Int, player: Int){
-//        var lab = UILabel(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
-//        lab.center = area.center
-//        lab.textColor = players[player]
-//        lab.alpha = 1
-//        lab.textAlignment = NSTextAlignment.Center
-//        lab.font = UIFont(name: "Avenir-Light", size: 20.0)
-//        lab.text = "+\(score)"
-//        self.addSubview(lab)
-//        
-////        UIView.animateWithDuration(0.3, animations: { () -> Void in
-////            lab.alpha = 0
-////            lab.frame =
-////            }) { (haha) -> Void in
-////                
-////        }
-//    }
-    
     func getCorrespondingGrid(p: CGPoint)->Grid{
         var x = Int(p.x/unitWidth)
         if x < 0{
@@ -286,25 +250,6 @@ class GameBoard: UIView {
         super.init(coder: aDecoder)
         gesture = UIPanGestureRecognizer(target: self, action: "dragged:")
         self.addGestureRecognizer(gesture)
-    }
-    
-    func containPolygon(polygon: [CGPoint], test: CGPoint) -> Bool {
-        if polygon.count <= 1 {
-            return false //or if first point = test -> return true
-        }
-        
-        let p = UIBezierPath()
-        let firstPoint = polygon[0] as CGPoint
-        
-        p.moveToPoint(firstPoint)
-        
-        for index in 1...polygon.count-1 {
-            p.addLineToPoint(polygon[index] as CGPoint)
-        }
-        
-        p.closePath()
-        
-        return p.containsPoint(test)
     }
     
 }

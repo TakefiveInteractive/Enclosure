@@ -12,11 +12,11 @@ class Game1ViewController: UIViewController, GameBoardDelegate {
     
     
     var game = EnclosureGame()
-
+    
     @IBOutlet var board: GameBoard!
     @IBOutlet var player1Score: UILabel!
     @IBOutlet var player0Score: UILabel!
-
+    
     @IBOutlet var player1row: Rows!
     @IBOutlet var player0row: Rows!
     
@@ -31,17 +31,73 @@ class Game1ViewController: UIViewController, GameBoardDelegate {
         player0row.color = player0Score.textColor
         player1row.color = player1Score.textColor
         
+        player1Score.tag = -2
+        player0Score.tag = -2
+        
         restart.addTarget(self, action: "replay:", forControlEvents: UIControlEvents.TouchUpInside)
         // Do any additional setup after loading the view, typically from a nib.
     }
     
+    
+    func animateScore(area: Area, score: Int, player: Int){
+        
+        var lab = UILabel(frame: CGRect(x: 0, y: 0, width: board.unitWidth * 1.5, height: board.unitWidth * 1.5))
+        lab.center = self.view.convertPoint(area.center, fromView: board)
+        lab.textColor = board.playerColors[player]
+        lab.alpha = 1
+        lab.textAlignment = NSTextAlignment.Center
+        lab.font = UIFont(name: "Avenir-Light", size: 30.0)
+        lab.text = "+\(score)"
+        self.view.addSubview(lab)
+        
+        UIView.animateWithDuration(1, animations: { () -> Void in
+            lab.alpha = 0
+            if player == 0{
+                lab.transform = CGAffineTransformMakeTranslation(self.player0Score.center.x - lab.center.x, self.player0Score.center.y - lab.center.y)
+                
+            }else{
+                lab.transform = CGAffineTransformMakeTranslation(self.player1Score.center.x - lab.center.x, self.player1Score.center.y - lab.center.y)
+            }
+            }) { (haha) -> Void in
+                self.updateScore(player, playerscore: self.game.playerScore[player])
+        }
+    }
+    
     func replay(but: UIButton){
+        game = EnclosureGame()
         board.buildGame(game)
     }
     
-    func updateScore(playerscore: [Int]) {
-        player1Score.text = String(playerscore[1])
-        player0Score.text = String(playerscore[0])
+    func updateScore(player: Int, playerscore: Int) {
+        if player == 0{
+            player0Score.text = String(playerscore)
+            if player0Score.tag == -2{
+                player0Score.tag = -1
+                UIView.animateWithDuration(0.3, animations: { () -> Void in
+                    self.player0Score.transform = CGAffineTransformMakeScale(1.5, 1.5)
+                    }, completion: { (finish) -> Void in
+                        UIView.animateWithDuration(0.3, animations: { () -> Void in
+                            self.player0Score.transform = CGAffineTransformMakeScale(1, 1)
+                            }, completion: { (finish) -> Void in
+                                self.player0Score.tag = -2
+                        })
+                })
+            }
+        }else{
+            player1Score.text = String(playerscore)
+            if player1Score.tag == -2{
+                player1Score.tag = -1
+                UIView.animateWithDuration(0.3, animations: { () -> Void in
+                    self.player1Score.transform = CGAffineTransformMakeScale(1.5, 1.5)
+                    }, completion: { (finish) -> Void in
+                        UIView.animateWithDuration(0.3, animations: { () -> Void in
+                            self.player1Score.transform = CGAffineTransformMakeScale(1, 1)
+                            }, completion: { (finish) -> Void in
+                                self.player1Score.tag = -2
+                        })
+                })
+            }
+        }
     }
     
     func showTotalRow(player: Int, row: Int) {
@@ -69,5 +125,5 @@ class Game1ViewController: UIViewController, GameBoardDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
 }

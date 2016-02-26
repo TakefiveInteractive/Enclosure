@@ -33,6 +33,28 @@ class Game3ViewController: UIViewController, GameBoardDelegate {
         // Do any additional setup after loading the view, typically from a nib.
     }
     
+    func animateScore(area: Area, score: Int, player: Int){
+        var lab = UILabel(frame: CGRect(x: 0, y: 0, width: board.unitWidth * 1.5, height: board.unitWidth * 1.5))
+        lab.center = lab.convertPoint(area.center, fromView: area)
+        lab.textColor = board.playerColors[game.currentPlayer()]
+        lab.alpha = 1
+        lab.textAlignment = NSTextAlignment.Center
+        lab.font = UIFont(name: "Avenir-Light", size: 20.0)
+        lab.text = "+\(score)"
+        self.view.addSubview(lab)
+        
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            lab.alpha = 0
+            if player == 0{
+                lab.center == self.player0Score.center
+            }else{
+                lab.center == self.player1Score.center
+            }
+            }) { (haha) -> Void in
+                
+        }
+    }
+    
     func replay(but: UIButton){
         board.buildGame(game)
     }
