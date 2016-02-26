@@ -28,7 +28,6 @@ class GameBoard: UIView {
     let drawAnimationTime = 0.5
     
     var tempPath = [Grid]()
-    var tempPathes = [[Grid]]()
     var lineLayer = CAShapeLayer()
 
     var gesture: UIPanGestureRecognizer!
@@ -157,24 +156,24 @@ class GameBoard: UIView {
         }
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        for t in touches{
-            tempPath.append(getCorrespondingGrid(t.locationInView(self)))
-        }
-        drawPath()
-    }
-    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
-        for t in touches!{
-            tempPath.removeAll()
-        }
-        drawBoard()
-    }
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        for t in touches{
-            tempPath.removeAll()
-        }
-        drawBoard()
-    }
+//    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+//        for t in touches{
+//            tempPath.append(getCorrespondingGrid(t.locationInView(self)))
+//        }
+//        drawPath()
+//    }
+//    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
+//        for t in touches!{
+//            tempPath.removeAll()
+//        }
+//        drawBoard()
+//    }
+//    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+//        for t in touches{
+//            tempPath.removeAll()
+//        }
+//        drawBoard()
+//    }
     
     func dragged(sender: UIPanGestureRecognizer){
         let point = sender.locationInView(self)
@@ -216,7 +215,9 @@ class GameBoard: UIView {
             }else{
                 // update current step
                 var fences = [Fence]()
+                var nodes = [FenceNode]()
                 for elem in tempPath{
+                    nodes.append(elem.gameElement)
                     if elem != tempPath.last{
                         let index = tempPath.indexOf(elem)
                         fences.append(elem.gameElement.fences[self.tempPath[index! + 1].gameElement]!)
@@ -226,43 +227,13 @@ class GameBoard: UIView {
                 self.delegate?.showTotalRow(game.currentPlayer(), row: 0)
                 
                 // move to next step
-                game.updateMove(fences)
+                game.updateMove(fences, nodes: nodes)
                 
                 drawBoard()
                 self.delegate?.showTotalRow(game.currentPlayer(), row: game.playerFences[game.currentPlayer()])
 
             }
-//
-//            if (firstStep && tempPath.count == 3) || tempPath.count == 4 {
-
-
-//                tempPathes = [[Grid]]()
-//                for g in tempPath{
-//                    checkArea(g, current: g, path: [Grid]())
-//                }
-//                
-//                if tempPathes.count > 0{
-//                    var polygons = [[CGPoint]]()
-//                    for p in tempPathes{
-//                        var polygon = [CGPoint]()
-//                        for grid in p{
-//                            polygon.append(grid.center)
-//                        }
-//                        polygons.append(polygon)
-//                    }
-//                    calculateScore(polygons)
-//                    self.delegate?.updateScore(playerscore)
-//                }
-//                totalStep++
-//            }else{
-//                if self.tempPath.count > 1{
-//                    for var index = 0; index < self.tempPath.count - 1; index++ {
-//                        self.tempPath[index].edges[self.tempPath[index + 1]]!.backgroundColor = UIColor.clearColor()
-//                        self.tempPath[index].edges[self.tempPath[index + 1]]!.user = -1
-//                    }
-//                }
-//            }
-//            tempPath = [Grid]()
+            
             lineLayer.lineWidth = 0
         }else{
             let drawingLine = UIBezierPath()
@@ -275,42 +246,7 @@ class GameBoard: UIView {
         }
         
     }
-    
-//
-//    func checkArea(start:Grid, current: Grid, var path: [Grid]){
-//        if current == start && path.count >= 3{
-//            path.append(current)
-//            tempPathes.append(path)
-//        }else{
-//            path.append(current)
-//            for key in (current.edges.keys){
-//                if (path.count == 1 || !path.contains(key) && key != start || key == start && path.count > 2) && current.edges[key]?.user == totalStep % players.count{
-//                    checkArea(start, current: key, path: path)
-//                }
-//            }
-//        }
-//
-//    }
-    
-    
-//    func calculateScore(polygons: [[CGPoint]]){
-//        for x in areas{
-//            for y in x{
-//                for p in polygons{
-//                    if containPolygon(p, test: y.center) && y.user == -1{
-//                        y.user = totalStep % players.count
-//                        y.backgroundColor = players[totalStep % players.count]
-//                        UIView.animateWithDuration(0.3, animations: { () -> Void in
-//                            y.alpha = 0.65
-//                        })
-//                        playerscore[totalStep % players.count]++
-////                        animateScore(y, score: 1, player: totalStep % players.count)
-//                        
-//                    }
-//                }
-//            }
-//        }
-//    }
+
 
 //    func animateScore(area: Area, score: Int, player: Int){
 //        var lab = UILabel(frame: CGRect(x: 0, y: 0, width: 30, height: 30))

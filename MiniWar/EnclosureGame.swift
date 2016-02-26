@@ -25,16 +25,91 @@ class EnclosureGame: NSObject {
     var playerScore = [Int]()
     var playerFences = [Int]()
 
+    var tempPathes = [[FenceNode]]()
+    var polygons = [[FenceNode]]()
+
     func currentPlayer()->Int{
         return self.totalStep % self.playerNum
     }
     
-    func updateMove(fences:[Fence]){
-        for fence in fences{
+    func updateMove(fs:[Fence], nodes:[FenceNode]){
+        for fence in fs{
             fence.player = currentPlayer()
         }
+        
+        if !firstMove {
+            firstMove = true
+            playerFences[currentPlayer()]++
+        }
+        
+        tempPathes = [[FenceNode]]()
+        polygons = [[FenceNode]]()
+        tempPathes.append([nodes[0]])
+
+        while tempPathes.count > 0{
+            for var path = tempPathes.count-1 ; path >= 0 ; path-- {
+                let toExpand = tempPathes[path].last
+                for n in (toExpand?.fences.keys)!{
+                    print(!toExpand!.fences[n]!.exploreFlag)
+                    if toExpand!.fences[n]!.player == currentPlayer() && !toExpand!.fences[n]!.exploreFlag{
+                        toExpand!.fences[n]!.exploreFlag = true
+                        
+                        var mergePath:[FenceNode]!
+                        // check if meet with the head of another search path
+                        for p in tempPathes{
+                            if n == p.last && p.last != toExpand{
+                                mergePath = p
+                                break
+                            }
+                        }
+                        
+                        if mergePath != nil{
+                            polygons.append(tempPathes[path] + mergePath.reverse())
+                        }else{
+                            var newP = tempPathes[path]
+                            newP.append(n)
+                            tempPathes.append(newP)
+                        }
+                        
+                    }
+                }
+                tempPathes.removeAtIndex(path)
+            }
+        }
+        for pp in polygons{
+            for p in pp{
+                print("\(p.x)  \(p.y)")
+            }
+            print("xxxxx")
+        }
+        for fence in fences{
+            fence.exploreFlag = false
+        }
+        
         totalStep++
     }
+    
+    
+    //    func calculateScore(polygons: [[CGPoint]]){
+    //        for x in areas{
+    //            for y in x{
+    //                for p in polygons{
+    //                    if containPolygon(p, test: y.center) && y.user == -1{
+    //                        y.user = totalStep % players.count
+    //                        y.backgroundColor = players[totalStep % players.count]
+    //                        UIView.animateWithDuration(0.3, animations: { () -> Void in
+    //                            y.alpha = 0.65
+    //                        })
+    //                        playerscore[totalStep % players.count]++
+    ////                        animateScore(y, score: 1, player: totalStep % players.count)
+    //
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }
+    
+
     
     override init() {
         super.init()
@@ -107,6 +182,7 @@ class Fence: NSObject {
     var player: Int
     var nodes = [FenceNode]()
     var view = UIView()
+    var exploreFlag = false
 
     init(player: Int) {
         self.player = player
