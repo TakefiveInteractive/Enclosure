@@ -14,7 +14,8 @@ class EnclosureGame: NSObject {
 
     let playerNum = 2
     let boardSize = 10
-
+    var firstMove = false
+    
     var totalStep = 0
     
     var nodes = [[FenceNode]]()
@@ -26,6 +27,13 @@ class EnclosureGame: NSObject {
 
     func currentPlayer()->Int{
         return self.totalStep % self.playerNum
+    }
+    
+    func updateMove(fences:[Fence]){
+        for fence in fences{
+            fence.player = currentPlayer()
+        }
+        totalStep++
     }
     
     override init() {

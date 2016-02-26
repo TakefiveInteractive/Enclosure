@@ -21,7 +21,7 @@ class GameBoard: UIView {
     
     var game: EnclosureGame!
     
-    let playerColors = [UIColor(red: 247.0/255.0, green: 149.0/255.0, blue: 157.0/255.0, alpha: 1), UIColor(red: 126.0/255.0, green: 194.0/255.0, blue: 226.0/255.0, alpha: 1)]
+    let playerColors = [UIColor(red: 247.0/255.0, green: 149.0/255.0, blue: 157.0/255.0, alpha: 1), UIColor(red: 176.0/255.0, green: 226.0/255.0, blue: 246.0/255.0, alpha: 1)]
     
     var delegate: GameBoardDelegate?
     
@@ -32,7 +32,7 @@ class GameBoard: UIView {
     var lineLayer = CAShapeLayer()
 
     var gesture: UIPanGestureRecognizer!
-    
+
     var grids = [Grid]()
     var areas = [Area]()
     var edges = [Edge]()
@@ -61,9 +61,6 @@ class GameBoard: UIView {
         self.delegate?.setTotalRow(0, row: 2)
         self.delegate?.setTotalRow(1, row: 3)
         self.delegate?.showTotalRow(1, row: 0)
-
-        lineLayer.backgroundColor = UIColor.clearColor().CGColor
-        self.layer.addSublayer(lineLayer)
         
         unitWidth = self.frame.width / CGFloat(game.boardSize)
         
@@ -125,10 +122,23 @@ class GameBoard: UIView {
             }
         }
         
+        lineLayer.backgroundColor = UIColor.clearColor().CGColor
+        self.layer.addSublayer(lineLayer)
+        
+        //lift nodes up
+        for node in grids{
+            self.bringSubviewToFront(node)
+        }
+        
+
+        
     }
     
     // redraw all the element on the board according to the game
     func drawBoard(){
+        for node in grids{
+            node.toNormal()
+        }
         for edge in edges{
             edge.update()
         }
@@ -139,11 +149,31 @@ class GameBoard: UIView {
     
     func drawPath(){
         for elem in tempPath{
+            elem.enlarge()
             if elem != tempPath.last{
                 let index = tempPath.indexOf(elem)
                 (elem.gameElement.fences[self.tempPath[index! + 1].gameElement]?.view as! Edge).backgroundColor = self.playerColors[self.game.currentPlayer()]
             }
         }
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        for t in touches{
+            tempPath.append(getCorrespondingGrid(t.locationInView(self)))
+        }
+        drawPath()
+    }
+    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
+        for t in touches!{
+            tempPath.removeAll()
+        }
+        drawBoard()
+    }
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        for t in touches{
+            tempPath.removeAll()
+        }
+        drawBoard()
     }
     
     func dragged(sender: UIPanGestureRecognizer){
@@ -184,17 +214,28 @@ class GameBoard: UIView {
                 drawBoard()
                 drawPath()
             }else{
+                // update current step
+                var fences = [Fence]()
+                for elem in tempPath{
+                    if elem != tempPath.last{
+                        let index = tempPath.indexOf(elem)
+                        fences.append(elem.gameElement.fences[self.tempPath[index! + 1].gameElement]!)
+                    }
+                }
+                tempPath.removeAll()
+                self.delegate?.showTotalRow(game.currentPlayer(), row: 0)
+                
+                // move to next step
+                game.updateMove(fences)
+                
+                drawBoard()
+                self.delegate?.showTotalRow(game.currentPlayer(), row: game.playerFences[game.currentPlayer()])
 
             }
 //
 //            if (firstStep && tempPath.count == 3) || tempPath.count == 4 {
-//                for var index = 0; index < self.tempPath.count - 1; index++ {
-//                    self.tempPath[index].edges[self.tempPath[index + 1]]!.backgroundColor = players[totalStep % players.count]
-//                    self.tempPath[index].edges[self.tempPath[index + 1]]!.user = totalStep % players.count
-//                }
-//                if firstStep {
-//                    firstStep = false
-//                }
+
+
 //                tempPathes = [[Grid]]()
 //                for g in tempPath{
 //                    checkArea(g, current: g, path: [Grid]())
@@ -222,21 +263,15 @@ class GameBoard: UIView {
 //                }
 //            }
 //            tempPath = [Grid]()
-//            lineLayer.lineWidth = 0
-//
-//        }else{
-//            if !((firstStep && tempPath.count == 3) || tempPath.count == 4) {
-//                let drawingLine = UIBezierPath()
-//                drawingLine.moveToPoint((tempPath.last?.center)!)
-//                drawingLine.addLineToPoint(point)
-//                drawingLine.closePath()
-//                lineLayer.path = drawingLine.CGPath
-//                lineLayer.strokeColor = players[totalStep%players.count].CGColor
-//                lineLayer.lineWidth = edgeWidth
-//
-//            }else{
-//                lineLayer.lineWidth = 0
-//            }
+            lineLayer.lineWidth = 0
+        }else{
+            let drawingLine = UIBezierPath()
+            drawingLine.moveToPoint((tempPath.last?.center)!)
+            drawingLine.addLineToPoint(point)
+            drawingLine.closePath()
+            lineLayer.path = drawingLine.CGPath
+            lineLayer.strokeColor = playerColors[game.currentPlayer()].CGColor
+            lineLayer.lineWidth = edgeWidth
         }
         
     }
@@ -355,6 +390,14 @@ class Grid: UIView {
         self.userInteractionEnabled = false
     }
 
+    func enlarge(){
+        self.transform = CGAffineTransformMakeScale(2, 2)
+    }
+    
+    func toNormal(){
+        self.transform = CGAffineTransformMakeScale(1, 1)
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -408,10 +451,10 @@ class Area: UIView {
             selectedColor = game.playerColors[gameElement.player]
             a = 0.6
         }
-            UIView.animateWithDuration(0.5) { () -> Void in
-                self.backgroundColor = selectedColor
-                self.alpha = a
-            }
+        UIView.animateWithDuration(0.5) { () -> Void in
+            self.backgroundColor = selectedColor
+            self.alpha = a
+        }
 
     }
     
