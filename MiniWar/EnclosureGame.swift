@@ -39,11 +39,13 @@ class EnclosureGame: NSObject {
     }
     
     func updateMove(fs:[Fence], nodes:[FenceNode])->[Land]{
-        for fence in fs{
-            fence.player = currentPlayer()
-            playerFence[currentPlayer()].append(fence)
+        for f in fs{
+            f.player = currentPlayer()
+            playerFence[currentPlayer()].append(f)
         }
-        
+        let set1 = Set(neutralFence)
+        let set2 = Set(fs)
+        neutralFence = Array(set1.subtract(set2))
         
         if !firstMove {
             firstMove = true
@@ -100,6 +102,9 @@ class EnclosureGame: NSObject {
         }
         
         totalStep++
+        
+        let c = playerFence[1].count + playerFence[0].count + neutralFence.count
+        print(c)
         
         return updatedAreas
     }

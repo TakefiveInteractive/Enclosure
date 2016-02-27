@@ -210,7 +210,6 @@ class GameBoard: UIView {
                 
                 // move to next step
                 var areaChanged = game.updateMove(fences, nodes: nodes)
-                print(areaChanged)
                 for land in areaChanged{
                     self.delegate?.animateScore(land.view as! Area, score: land.score, player: (game.currentPlayer()+1)%2)
                 }
