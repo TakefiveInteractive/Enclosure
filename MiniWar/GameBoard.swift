@@ -216,6 +216,10 @@ class GameBoard: UIView {
                 if areaChanged.count > 0{
                     self.delegate?.updateScoreLabel((game.currentPlayer()+1)%2)
                 }
+                
+                let ai = AI(game: game, lastSteps: nodes)
+                ai.calculateNextStep()
+                
                 drawBoard()
                 self.delegate?.showTotalRow(game.currentPlayer(), row: game.playerFencesNum[game.currentPlayer()])
             }

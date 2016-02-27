@@ -190,84 +190,6 @@ class EnclosureGame: NSObject {
         return end
     }
     
-    init(otherGame: EnclosureGame) {
-        super.init()
-        neutralLand = [Land]()
-        playerLand = [[Land]](count: playerNum, repeatedValue: [Land]())
-        neutralFence = [Fence]()
-        playerFence = [[Fence]](count: playerNum, repeatedValue: [Fence]())
-        playerScore = [Int](count: playerNum, repeatedValue: 0)
-        playerFencesNum = [2, 3]
-        
-        //create nodees
-        for var x = 0; x <  boardSize; x++ {
-            nodes.append([FenceNode]())
-            for var y = 0; y < boardSize; y++ {
-                nodes[x].append(FenceNode(x: x, y: y))
-                // copy view
-                nodes[x][y].view = otherGame.nodes[x][y].view
-            }
-        }
-        
-        //create fences
-        for var x = 0; x <  boardSize; x++ {
-            for var y = 0; y < boardSize; y++ {
-                if x < boardSize - 1{
-                    let fence = Fence(player: otherGame.nodes[x][y].fences[otherGame.nodes[x+1][y]]!.player)
-                    fence.nodes.append(nodes[x][y])
-                    fence.nodes.append(nodes[x+1][y])
-                    
-                    nodes[x][y].fences[nodes[x+1][y]] = fence
-                    nodes[x+1][y].fences[nodes[x][y]] = fence
-                    fences.append(fence)
-                    fence.view = otherGame.nodes[x][y].fences[otherGame.nodes[x+1][y]]!.view
-                    
-                    if otherGame.nodes[x][y].fences[otherGame.nodes[x+1][y]]!.player == -1{
-                        neutralFence.append(fence)
-                    }else{
-                        playerFence[otherGame.nodes[x][y].fences[otherGame.nodes[x+1][y]]!.player].append(fence)
-                    }
-                }
-                if y < boardSize - 1{
-                    let fence = Fence(player: otherGame.nodes[x][y].fences[otherGame.nodes[x][y+1]]!.player)
-                    fence.nodes.append(nodes[x][y])
-                    fence.nodes.append(nodes[x][y+1])
-                    
-                    nodes[x][y].fences[nodes[x][y+1]] = fence
-                    nodes[x][y+1].fences[nodes[x][y]] = fence
-                    fences.append(fence)
-                    fence.view = otherGame.nodes[x][y].fences[otherGame.nodes[x][y+1]]!.view
-                    
-                    if otherGame.nodes[x][y].fences[otherGame.nodes[x+1][y]]!.player == -1{
-                        neutralFence.append(fence)
-                    }else{
-                        playerFence[otherGame.nodes[x][y].fences[otherGame.nodes[x+1][y]]!.player].append(fence)
-                    }
-                }
-            }
-        }
-        
-        //create lands
-        for var x = 0; x <  boardSize; x++ {
-            if x < boardSize - 1{
-                lands.append([Land]())
-                for var y = 0; y < boardSize; y++ {
-                    if x < boardSize - 1 && y < boardSize - 1{
-                        let land = Land(player: otherGame.lands[x][y].player, x: x, y: y)
-                        lands[x].append(land)
-                        if otherGame.lands[x][y].player == -1{
-                            neutralLand.append(land)
-                        }else{
-                            playerLand[otherGame.lands[x][y].player].append(land)
-                        }
-                        land.view = otherGame.lands[x][y].view
-                    }
-                }
-            }
-        }
-        
-    }
-    
     override init() {
         super.init()
         
@@ -333,7 +255,7 @@ class FenceNode: NSObject {
     var fences = [FenceNode: Fence]()
     let x:Int
     let y:Int
-    var view = UIView()
+    var view:UIView!
 
     init(x:Int, y:Int) {
         self.x = x
@@ -346,7 +268,7 @@ class Fence: NSObject {
     
     var player: Int
     var nodes = [FenceNode]()
-    var view = UIView()
+    var view:UIView!
     var exploreFlag = false
 
     init(player: Int) {
@@ -361,7 +283,7 @@ class Land: NSObject {
     var player: Int
     let x:Int
     let y:Int
-    var view = UIView()
+    var view:UIView!
     
     init(player: Int, x:Int, y:Int) {
         self.x = x
