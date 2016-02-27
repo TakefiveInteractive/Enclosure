@@ -21,27 +21,20 @@ class AI: NSObject {
     }
     
     func calculateNextStep(){
-        var possibleMove:Set<Set<NSArray>> = Set()
         
-//        for var x = 0; x < rootBoard.boardSize; x++ {
-//            for var y = 0; y < rootBoard.boardSize; y++ {
-////                s.insert(Set([[x,y],[x,y+1]]))
-////                s.insert(<#T##member: Hashable##Hashable#>)
-////                if y + 3 < rootBoard.boardSize{
-////                    possibleMove.insert(Set([Set([[x,y],[x,y+1]]),Set([[x,1],[x,y+2]])]))
-////                }
-//            }
-//        }
-//        print(rootBoard.tempPath)
+        var possibleMove:Set<Set<Set<NSArray>>> = Set()
         
-        print(rootBoard.getAllWays([0,0]).count)
-        print(rootBoard.getAllWays([2,0]).count)
-        print(rootBoard.getAllWays([2,0]).union(rootBoard.getAllWays([0,0])).count)
-
-//        for p in rootBoard.tempPath{
-//            print(p)
-//        }
-//        print(rootBoard.tempPath)
+        let hhh = {
+            for var x = 0; x < self.rootBoard.boardSize; x++ {
+                for var y = 0; y < self.rootBoard.boardSize; y++ {
+                    let r = self.rootBoard.getAllWays([x,y])
+                    possibleMove = possibleMove.union(r)
+                }
+            }
+        }
+        print(Tool.profile(hhh))
+        
+        print(possibleMove.count)
     }
 }
 
@@ -76,7 +69,7 @@ class AIBoard: NSObject {
         var tempPath = Set<Set<Set<NSArray>>>()
         
         func getAllWaysBranch(head:[Int], path: Set<Set<NSArray>>){
-            if path.count < 2{//playerFencesNum[playerToGo]{
+            if path.count < playerFencesNum[playerToGo]{
                 if head[0] - 1 >= 0{
                     var tp = path
                     if !tp.contains(Set([head,[head[0] - 1, head[1]]])){
