@@ -13,7 +13,7 @@ import UIKit
 class EnclosureGame: NSObject {
 
     let playerNum = 2
-    let boardSize = 10
+    let boardSize = 9
     var firstMove = false
     
     var totalStep = 0
@@ -49,22 +49,10 @@ class EnclosureGame: NSObject {
             playerFencesNum[currentPlayer()]++
         }
         
-        var polygons = searchPolygon(nodes[0])
-        
-        var uiPolygon = [[CGPoint]]()
-        for var x = 0; x < polygons.count; x++ {
-            uiPolygon.append([CGPoint]())
-            for var y = 0; y < polygons[x].count; y++ {
-                uiPolygon[x].append(polygons[x][y].view.center)
-            }
-        }
-
-        
-        let updatedAreas = updateArea(uiPolygon)
+        var polygons = searchPolygon(nodes[0], good: [currentPlayer()])
+        let updatedAreas = updateArea(polygons)
         recalculateScore()
-        for fence in fences{
-            fence.exploreFlag = false
-        }
+        print(checkEnd())
         
         totalStep++
 //        let c = playerFence[1].count + playerFence[0].count + neutralFence.count
@@ -81,7 +69,11 @@ class EnclosureGame: NSObject {
         }
     }
     
-    func searchPolygon(seed: FenceNode)->[[FenceNode]]{
+    func searchPolygon(seed: FenceNode, good: [Int])->[[CGPoint]]{
+        
+        for fence in fences{
+            fence.exploreFlag = false
+        }
         var tempPathes = [[FenceNode]]()
         var polygons = [[FenceNode]]()
         tempPathes.append([seed])
@@ -90,7 +82,7 @@ class EnclosureGame: NSObject {
             for var path = tempPathes.count-1 ; path >= 0 ; path-- {
                 let toExpand = tempPathes[path].last
                 for n in (toExpand?.fences.keys)!{
-                    if toExpand!.fences[n]!.player == currentPlayer() && !toExpand!.fences[n]!.exploreFlag{
+                    if good.contains(toExpand!.fences[n]!.player) && !toExpand!.fences[n]!.exploreFlag{
                         toExpand!.fences[n]!.exploreFlag = true
                         
                         var mergePath:[FenceNode]!
@@ -115,7 +107,16 @@ class EnclosureGame: NSObject {
                 tempPathes.removeAtIndex(path)
             }
         }
-        return polygons
+        
+        var uiPolygon = [[CGPoint]]()
+        for var x = 0; x < polygons.count; x++ {
+            uiPolygon.append([CGPoint]())
+            for var y = 0; y < polygons[x].count; y++ {
+                uiPolygon[x].append(polygons[x][y].view.center)
+            }
+        }
+
+        return uiPolygon
     }
     
     func updateArea(polygons: [[CGPoint]])->[Land]{
@@ -158,12 +159,32 @@ class EnclosureGame: NSObject {
     
     func checkEnd()->Bool{
         
-        var end = false
+        var end = true
         
-//        let polygon = searchPolygon(neutralFence[0].nodes[1], good: [-1, currentPlayer()])
-        
+        var polygon = searchPolygon(neutralFence[0].nodes[1], good: [-1, currentPlayer()])
         for neutral in neutralLand{
-            
+            for p in polygon{
+                if containPolygon(p, test: neutral.view.center){
+                    end = false
+                    break
+                }
+            }
+            if !end{
+                break
+            }
+        }
+        
+        polygon = searchPolygon(neutralFence[0].nodes[1], good: [-1, (currentPlayer()+1)%2])
+        for neutral in neutralLand{
+            for p in polygon{
+                if containPolygon(p, test: neutral.view.center){
+                    end = false
+                    break
+                }
+            }
+            if !end{
+                break
+            }
         }
         
         return end
