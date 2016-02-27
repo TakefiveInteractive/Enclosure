@@ -15,6 +15,7 @@ protocol GameBoardDelegate{
     func animateScore(area: Area, score: Int, player: Int)
     func setTotalRow(player:Int, row: Int)
     func showTotalRow(player:Int, row: Int)
+    func updateScoreLabel(player: Int)
 }
 
 class GameBoard: UIView {
@@ -166,7 +167,7 @@ class GameBoard: UIView {
             
             //add temp drew line
             let connectWithLast = grid.gameElement.fences.keys.contains(tempPath.last!.gameElement)
-            let withinAvailableStep = tempPath.count <= game.playerFences[game.currentPlayer()]
+            let withinAvailableStep = tempPath.count <= game.playerFencesNum[game.currentPlayer()]
             if !tempPath.contains(grid) && connectWithLast && withinAvailableStep && (grid.gameElement.fences[tempPath.last!.gameElement]?.player == -1 || grid.gameElement.fences[tempPath.last!.gameElement]?.player == game.currentPlayer()){
                 tempPath.append(grid)
                 drawPath()
@@ -181,16 +182,16 @@ class GameBoard: UIView {
             }
 
         if tempPath.count > 0 {
-            self.delegate?.showTotalRow(game.currentPlayer(), row: game.playerFences[game.currentPlayer()] + 1 - tempPath.count)
+            self.delegate?.showTotalRow(game.currentPlayer(), row: game.playerFencesNum[game.currentPlayer()] + 1 - tempPath.count)
             }
         }
 
         if sender.state == UIGestureRecognizerState.Cancelled || sender.state == UIGestureRecognizerState.Ended || sender.state == UIGestureRecognizerState.Failed {
 
             //haven't finish game
-            if tempPath.count < game.playerFences[game.currentPlayer()] + 1{
+            if tempPath.count < game.playerFencesNum[game.currentPlayer()] + 1{
                 tempPath.removeAll()
-                self.delegate?.showTotalRow(game.currentPlayer(), row: game.playerFences[game.currentPlayer()])
+                self.delegate?.showTotalRow(game.currentPlayer(), row: game.playerFencesNum[game.currentPlayer()])
                 drawBoard()
                 drawPath()
             }else{
@@ -213,8 +214,11 @@ class GameBoard: UIView {
                 for land in areaChanged{
                     self.delegate?.animateScore(land.view as! Area, score: land.score, player: (game.currentPlayer()+1)%2)
                 }
+                if areaChanged.count > 0{
+                    self.delegate?.updateScoreLabel((game.currentPlayer()+1)%2)
+                }
                 drawBoard()
-                self.delegate?.showTotalRow(game.currentPlayer(), row: game.playerFences[game.currentPlayer()])
+                self.delegate?.showTotalRow(game.currentPlayer(), row: game.playerFencesNum[game.currentPlayer()])
             }
             
             lineLayer.lineWidth = 0

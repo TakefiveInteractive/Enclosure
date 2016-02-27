@@ -33,6 +33,33 @@ class Game3ViewController: UIViewController, GameBoardDelegate {
         // Do any additional setup after loading the view, typically from a nib.
     }
     
+    func updateScoreLabel(player: Int) {
+        if player == 0{
+            player0Score.text = String(1)
+            UIView.animateWithDuration(0.3, delay: 0.8, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
+                self.player0Score.transform = CGAffineTransformMakeScale(1.5, 1.5)
+                }, completion: { (finish) -> Void in
+                    UIView.animateWithDuration(0.3, animations: { () -> Void in
+                        self.player0Score.transform = CGAffineTransformMakeScale(1, 1)
+                        }, completion: { (finish) -> Void in
+                            self.player0Score.tag = -2
+                    })
+            })
+            
+        }else{
+            player1Score.text = String(1)
+            UIView.animateWithDuration(0.3, delay: 0.8, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
+                self.player1Score.transform = CGAffineTransformMakeScale(1.5, 1.5)
+                }, completion: { (finish) -> Void in
+                    UIView.animateWithDuration(0.3, animations: { () -> Void in
+                        self.player1Score.transform = CGAffineTransformMakeScale(1, 1)
+                        }, completion: { (finish) -> Void in
+                            self.player1Score.tag = -2
+                    })
+            })
+        }
+    }
+    
     func animateScore(area: Area, score: Int, player: Int){
         var lab = UILabel(frame: CGRect(x: 0, y: 0, width: board.unitWidth * 1.5, height: board.unitWidth * 1.5))
         lab.center = lab.convertPoint(area.center, fromView: area)

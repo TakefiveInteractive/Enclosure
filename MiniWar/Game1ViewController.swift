@@ -31,9 +31,6 @@ class Game1ViewController: UIViewController, GameBoardDelegate {
         player0row.color = player0Score.textColor
         player1row.color = player1Score.textColor
         
-        player1Score.tag = -2
-        player0Score.tag = -2
-        
         restart.addTarget(self, action: "replay:", forControlEvents: UIControlEvents.TouchUpInside)
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -41,7 +38,7 @@ class Game1ViewController: UIViewController, GameBoardDelegate {
     
     func animateScore(area: Area, score: Int, player: Int){
         
-        var lab = UILabel(frame: CGRect(x: 0, y: 0, width: board.unitWidth * 1.5, height: board.unitWidth * 1.5))
+        let lab = UILabel(frame: CGRect(x: 0, y: 0, width: board.unitWidth * 1.5, height: board.unitWidth * 1.5))
         lab.center = self.view.convertPoint(area.center, fromView: board)
         lab.textColor = board.playerColors[player]
         lab.alpha = 1
@@ -49,8 +46,8 @@ class Game1ViewController: UIViewController, GameBoardDelegate {
         lab.font = UIFont(name: "Avenir-Light", size: 30.0)
         lab.text = "+\(score)"
         self.view.addSubview(lab)
-        
-        UIView.animateWithDuration(1, animations: { () -> Void in
+        let duration = Double(arc4random_uniform(10)) * 0.02 + 1
+        UIView.animateWithDuration(duration, animations: { () -> Void in
             lab.alpha = 0
             if player == 0{
                 lab.transform = CGAffineTransformMakeTranslation(self.player0Score.center.x - lab.center.x, self.player0Score.center.y - lab.center.y)
@@ -59,7 +56,7 @@ class Game1ViewController: UIViewController, GameBoardDelegate {
                 lab.transform = CGAffineTransformMakeTranslation(self.player1Score.center.x - lab.center.x, self.player1Score.center.y - lab.center.y)
             }
             }) { (haha) -> Void in
-                self.updateScore(player, playerscore: self.game.playerScore[player])
+                lab.removeFromSuperview()
         }
     }
     
@@ -68,35 +65,30 @@ class Game1ViewController: UIViewController, GameBoardDelegate {
         board.buildGame(game)
     }
     
-    func updateScore(player: Int, playerscore: Int) {
+    func updateScoreLabel(player: Int) {
         if player == 0{
-            player0Score.text = String(playerscore)
-            if player0Score.tag == -2{
-                player0Score.tag = -1
+            player0Score.text = String(game.playerScore[player])
+            UIView.animateWithDuration(0.3, delay: 0.8, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
+                self.player0Score.transform = CGAffineTransformMakeScale(1.5, 1.5)
+                }, completion: { (finish) -> Void in
                 UIView.animateWithDuration(0.3, animations: { () -> Void in
-                    self.player0Score.transform = CGAffineTransformMakeScale(1.5, 1.5)
+                    self.player0Score.transform = CGAffineTransformMakeScale(1, 1)
                     }, completion: { (finish) -> Void in
-                        UIView.animateWithDuration(0.3, animations: { () -> Void in
-                            self.player0Score.transform = CGAffineTransformMakeScale(1, 1)
-                            }, completion: { (finish) -> Void in
-                                self.player0Score.tag = -2
-                        })
+                        self.player0Score.tag = -2
                 })
-            }
+            })
+
         }else{
-            player1Score.text = String(playerscore)
-            if player1Score.tag == -2{
-                player1Score.tag = -1
-                UIView.animateWithDuration(0.3, animations: { () -> Void in
-                    self.player1Score.transform = CGAffineTransformMakeScale(1.5, 1.5)
-                    }, completion: { (finish) -> Void in
-                        UIView.animateWithDuration(0.3, animations: { () -> Void in
-                            self.player1Score.transform = CGAffineTransformMakeScale(1, 1)
-                            }, completion: { (finish) -> Void in
-                                self.player1Score.tag = -2
-                        })
-                })
-            }
+            player1Score.text = String(game.playerScore[player])
+            UIView.animateWithDuration(0.3, delay: 0.8, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
+                self.player1Score.transform = CGAffineTransformMakeScale(1.5, 1.5)
+                }, completion: { (finish) -> Void in
+                    UIView.animateWithDuration(0.3, animations: { () -> Void in
+                        self.player1Score.transform = CGAffineTransformMakeScale(1, 1)
+                        }, completion: { (finish) -> Void in
+                            self.player1Score.tag = -2
+                    })
+            })
         }
     }
     
