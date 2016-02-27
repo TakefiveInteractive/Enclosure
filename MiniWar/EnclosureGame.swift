@@ -25,9 +25,6 @@ class EnclosureGame: NSObject {
     var playerScore = [Int]()
     var playerFencesNum = [Int]()
 
-    var tempPathes = [[FenceNode]]()
-    var polygons = [[FenceNode]]()
-
     var neutralLand = [Land]()
     var playerLand = [[Land]]()
 
@@ -52,10 +49,43 @@ class EnclosureGame: NSObject {
             playerFencesNum[currentPlayer()]++
         }
         
-        tempPathes = [[FenceNode]]()
-        polygons = [[FenceNode]]()
-        tempPathes.append([nodes[0]])
+        var polygons = searchPolygon(nodes[0])
+        
+        var uiPolygon = [[CGPoint]]()
+        for var x = 0; x < polygons.count; x++ {
+            uiPolygon.append([CGPoint]())
+            for var y = 0; y < polygons[x].count; y++ {
+                uiPolygon[x].append(polygons[x][y].view.center)
+            }
+        }
 
+        
+        let updatedAreas = updateArea(uiPolygon)
+        recalculateScore()
+        for fence in fences{
+            fence.exploreFlag = false
+        }
+        
+        totalStep++
+//        let c = playerFence[1].count + playerFence[0].count + neutralFence.count
+//        print(c)
+        return updatedAreas
+    }
+    
+    func recalculateScore(){
+        playerScore = [Int](count: playerNum, repeatedValue: 0)
+        for var player = 0; player < playerNum; player++ {
+            for land in playerLand[player]{
+                playerScore[player] += land.score
+            }
+        }
+    }
+    
+    func searchPolygon(seed: FenceNode)->[[FenceNode]]{
+        var tempPathes = [[FenceNode]]()
+        var polygons = [[FenceNode]]()
+        tempPathes.append([seed])
+        
         while tempPathes.count > 0{
             for var path = tempPathes.count-1 ; path >= 0 ; path-- {
                 let toExpand = tempPathes[path].last
@@ -85,37 +115,7 @@ class EnclosureGame: NSObject {
                 tempPathes.removeAtIndex(path)
             }
         }
-        
-        var uiPolygon = [[CGPoint]]()
-        for var x = 0; x < polygons.count; x++ {
-            uiPolygon.append([CGPoint]())
-            for var y = 0; y < polygons[x].count; y++ {
-                uiPolygon[x].append(polygons[x][y].view.center)
-            }
-        }
-
-        
-        let updatedAreas = updateArea(uiPolygon)
-        recalculateScore()
-        for fence in fences{
-            fence.exploreFlag = false
-        }
-        
-        totalStep++
-        
-        let c = playerFence[1].count + playerFence[0].count + neutralFence.count
-        print(c)
-        
-        return updatedAreas
-    }
-    
-    func recalculateScore(){
-        playerScore = [Int](count: playerNum, repeatedValue: 0)
-        for var player = 0; player < playerNum; player++ {
-            for land in playerLand[player]{
-                playerScore[player] += land.score
-            }
-        }
+        return polygons
     }
     
     func updateArea(polygons: [[CGPoint]])->[Land]{
@@ -157,16 +157,15 @@ class EnclosureGame: NSObject {
     }
     
     func checkEnd()->Bool{
+        
         var end = false
+        
+//        let polygon = searchPolygon(neutralFence[0].nodes[1], good: [-1, currentPlayer()])
+        
         for neutral in neutralLand{
             
         }
         
-        let shouldCheck1 = Double(totalStep) * 3 > 0.7 * Double(boardSize * (boardSize - 1) * 2)
-        let shouldCheck2 = Double(neutralLand.count) < Double((boardSize - 1) * (boardSize - 1)) * 0.5
-        if shouldCheck1 || shouldCheck2 {
-            
-        }
         return end
     }
     
