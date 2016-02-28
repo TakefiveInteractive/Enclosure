@@ -56,19 +56,30 @@ class AI: NSObject {
             for b in self.aiBoardsDone{
                 let polygons = b.searchPolygon(b.playerFence[b.otherPlayer()])
                 let result = b.updateArea(polygons)
-                print(result.count)
             }
             
             toDepth(2)
 
+            var playerDistinct = [(Set<Set<Int>>):[AIBoard]]()
+            for b in self.aiBoardsDone{
+                var arr = playerDistinct[b.playerFence[b.otherPlayer()]]
+                if arr == nil{
+                    playerDistinct[b.playerFence[b.otherPlayer()]] = [b]
+                }else{
+                    playerDistinct[b.playerFence[b.otherPlayer()]]!.append(b)
+                }
+            }
+            print(playerDistinct.count)
+            for p in playerDistinct.keys{
+                let startB = playerDistinct[p]?.first!
+                let polygons = startB!.searchPolygon(startB!.playerFence[startB!.otherPlayer()])
+                let result = startB!.updateArea(polygons)
+                print(result.count)
+                for b in playerDistinct[p]!{
+                    b.identicalUpdate(result)
+                }
+            }
 //
-//            var playerDistinct = Set<Set<Set<Int>>>()
-//            for b in self.aiBoardsDone{
-//                playerDistinct.insert(b.playerFence[b.otherPlayer()])
-//            }
-//            
-//            print(playerDistinct.count)
-//            
 //            print(aiBoardsDone.count)
 //            Tool.profile({ () -> () in
 //                for p in playerDistinct{
@@ -355,6 +366,13 @@ class AIBoard: NSObject {
         playerLand[otherPlayer()] = Array(Tool.mergeSet(set1, smallset: set2))
         playerGain[otherPlayer()] = Tool.mergeSet(playerGain[otherPlayer()], smallset: Set(increaseList))
         return Set(increaseList)
+    }
+    
+    func identicalUpdate(increase: Set<Int>){
+        let set1 = Set(neutralLand)
+        neutralLand = Array(Tool.subtractSet(set1, subset: increase))
+        playerLand[otherPlayer()] = Array(Tool.mergeSet(set1, smallset: increase))
+        playerGain[otherPlayer()] = Tool.mergeSet(playerGain[otherPlayer()], smallset: increase)
     }
     
     func searchPolygon(fence: Set<Set<Int>>)->[[CGPoint]]{
