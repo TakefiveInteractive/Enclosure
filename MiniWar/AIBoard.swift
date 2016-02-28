@@ -236,11 +236,10 @@ class AIBoard: NSObject {
         return Set(increaseList)
     }
     
-    func identicalUpdate(increase: Set<Int>){
-        let set1 = Set(neutralLand)
-        neutralLand = Array(Tool.subtractSet(set1, subset: increase))
-        playerLand[otherPlayer()] = Array(Tool.mergeSet(set1, smallset: increase))
-        playerGain[otherPlayer()] = Tool.mergeSet(playerGain[otherPlayer()], smallset: increase)
+    func identicalUpdate(otherBoard: AIBoard){
+        self.neutralLand = otherBoard.neutralLand
+        self.playerGain = otherBoard.playerGain
+        self.playerLand = otherBoard.playerLand
     }
     
     func searchPolygon(fence: Set<Set<Int>>)->[[CGPoint]]{

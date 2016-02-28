@@ -75,7 +75,7 @@ class AI: NSObject {
                 let polygons = startB!.searchPolygon(startB!.playerFence[startB!.otherPlayer()])
                 let result = startB!.updateArea(polygons)
                 for b in playerDistinct[p]!{
-                    b.identicalUpdate(result)
+                    b.identicalUpdate(startB!)
                 }
             }
             let r = determineAction()
