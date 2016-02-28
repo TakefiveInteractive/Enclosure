@@ -13,7 +13,7 @@ import UIKit
 class EnclosureGame: NSObject {
 
     let playerNum = 2
-    let boardSize = 7
+    let boardSize = 9
     var firstMove = false
     
     var totalStep = 0
