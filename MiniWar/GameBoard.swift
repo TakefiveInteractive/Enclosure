@@ -16,6 +16,7 @@ protocol GameBoardDelegate{
     func setTotalRow(player:Int, row: Int)
     func showTotalRow(player:Int, row: Int)
     func updateScoreLabel(player: Int)
+    func endGame(winPlayer: Int)
 }
 
 class GameBoard: UIView {
@@ -46,6 +47,7 @@ class GameBoard: UIView {
     }
     
     func buildGame(game: EnclosureGame){
+        
         
         self.game = game
         
@@ -130,8 +132,10 @@ class GameBoard: UIView {
             self.bringSubviewToFront(node)
         }
         
-
-        
+        let ai = AI(game: game)
+        print(Tool.profile({ () -> () in
+            ai.calculateNextStep()
+        }))
     }
     
     // redraw all the element on the board according to the game
@@ -209,7 +213,14 @@ class GameBoard: UIView {
                 self.delegate?.showTotalRow(game.currentPlayer(), row: 0)
                 
                 // move to next step
-                var areaChanged = game.updateMove(fences, nodes: nodes)
+                let areaChanged = game.updateMove(fences, nodes: nodes)
+                if game.checkEnd(){
+                    var winner = 1
+                    if game.playerScore[0] > game.playerScore[1]{
+                        winner = 0
+                    }
+                    delegate?.endGame(winner)
+                }
                 for land in areaChanged{
                     self.delegate?.animateScore(land.view as! Area, score: land.score, player: (game.currentPlayer()+1)%2)
                 }
@@ -217,8 +228,11 @@ class GameBoard: UIView {
                     self.delegate?.updateScoreLabel((game.currentPlayer()+1)%2)
                 }
                 
-                let ai = AI(game: game, lastSteps: nodes)
-                ai.calculateNextStep()
+                let ai = AI(game: game)
+                
+                print(Tool.profile({ () -> () in
+                    ai.calculateNextStep()
+                }))
                 
                 drawBoard()
                 self.delegate?.showTotalRow(game.currentPlayer(), row: game.playerFencesNum[game.currentPlayer()])

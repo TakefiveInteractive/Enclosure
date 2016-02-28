@@ -20,6 +20,10 @@ class Game2ViewController: UIViewController, GameBoardDelegate {
 
     var game = EnclosureGame()
 
+    func endGame(winPlayer: Int) {
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         board.layer.shadowOpacity = 0.3

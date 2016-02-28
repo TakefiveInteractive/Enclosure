@@ -18,9 +18,12 @@ class EnclosureGame: NSObject {
     
     var totalStep = 0
     
+    
     var nodes = [[FenceNode]]()
     var fences = [Fence]()
     var lands = [[Land]]()
+    
+    var prevMovesByUser = [[[FenceNode]]]()
     
     var playerScore = [Int]()
     var playerFencesNum = [Int]()
@@ -42,18 +45,18 @@ class EnclosureGame: NSObject {
         }
         let set1 = Set(neutralFence)
         let set2 = Set(fs)
-        neutralFence = Array(set1.subtract(set2))
+        neutralFence = Array(Tool.subtractSet(set1, subset: set2))
         
         if !firstMove {
             firstMove = true
             playerFencesNum[currentPlayer()]++
         }
         
-        var polygons = searchPolygon(nodes[0], good: [currentPlayer()])
+        let polygons = searchPolygon(nodes[0], good: [currentPlayer()])
         let updatedAreas = updateArea(polygons)
         recalculateScore()
-        print(checkEnd())
         
+        prevMovesByUser[currentPlayer()].append(nodes)
         totalStep++
 //        let c = playerFence[1].count + playerFence[0].count + neutralFence.count
 //        print(c)
@@ -132,9 +135,10 @@ class EnclosureGame: NSObject {
             }
         }
         
+
         let set1 = Set(neutralLand)
         let set2 = Set(updatedList)
-        neutralLand = Array(set1.subtract(set2))
+        neutralLand = Array(Tool.subtractSet(set1, subset: set2))
         return updatedList
     }
     
@@ -193,6 +197,7 @@ class EnclosureGame: NSObject {
     override init() {
         super.init()
         
+        prevMovesByUser = [[[FenceNode]]](count: playerNum, repeatedValue: [[FenceNode]]())
         neutralLand = [Land]()
         playerLand = [[Land]](count: playerNum, repeatedValue: [Land]())
         playerScore = [Int](count: playerNum, repeatedValue: 0)

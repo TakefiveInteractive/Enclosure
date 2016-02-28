@@ -27,7 +27,8 @@ class Game1ViewController: UIViewController, GameBoardDelegate {
         board.layer.shadowOpacity = 0.3
         board.layer.shadowRadius = 1.5
         board.delegate = self
-        
+        player0Score.text = "0"
+        player1Score.text = "0"
         player0row.color = player0Score.textColor
         player1row.color = player1Score.textColor
         
@@ -46,7 +47,7 @@ class Game1ViewController: UIViewController, GameBoardDelegate {
         lab.font = UIFont(name: "Avenir-Light", size: 30.0)
         lab.text = "+\(score)"
         self.view.addSubview(lab)
-        let duration = Double(arc4random_uniform(10)) * 0.02 + 1
+        let duration = Double(arc4random_uniform(10)) * 0.08 + 1
         UIView.animateWithDuration(duration, animations: { () -> Void in
             lab.alpha = 0
             if player == 0{
@@ -61,8 +62,20 @@ class Game1ViewController: UIViewController, GameBoardDelegate {
     }
     
     func replay(but: UIButton){
+        board.userInteractionEnabled = true
+        board.alpha = 1
         game = EnclosureGame()
         board.buildGame(game)
+    }
+    
+    func endGame(winPlayer: Int) {
+        if winPlayer == 1{
+            player1Score.text = "WIN"
+        }else{
+            player0Score.text = "WIN"
+        }
+        board.userInteractionEnabled = false
+        board.alpha = 0.7
     }
     
     func updateScoreLabel(player: Int) {

@@ -17,16 +17,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
-        let game = EnclosureGame()
+//        let game = EnclosureGame()
 
-//        for n in game.nodes{
-//            for nn in n{
-//                print("\(nn.fences.count)  x:\(nn.x)  y:\(nn.y)")
-//                //print("\(f.nodes.count == 2)")
+        var set1 = Set([1,2,4,7,3,5,4,7,2,7,53,56,43,76,87,43,56,234,45,56,76,78,345,76,345,12,4567,26,35,47,46345,1334,609,890,920,857,384,659,187,3461,23,478,1029,348,701,934,8,56])
+        let set2 = Set([384,659,187,1,2,40])
+//        print(Tool.profile { () -> () in
+//            set1 = set1.union(set2)
+//        })
+//        print(Tool.profile { () -> () in
+//            for s in set2{
+//                if set1.contains(s){
+//                    
+//                }
 //            }
-//        }
+//            })
+//
+        print(Tool.profile { () -> () in
+                set1.subtract(set2)
+        })
         
-//        print(game.fences)
+        print(Tool.profile { () -> () in
+                set1.intersect(set2)
+        })
+        
+        print(Tool.profile { () -> () in
+            for s in set2{
+                set1.remove(s)
+            }
+        })
+//
+//        print(Tool.profile { () -> () in
+//            for index in 1...5000 {
+//                set1.insert(49)
+//            }
+//            })
         
         return true
     }
