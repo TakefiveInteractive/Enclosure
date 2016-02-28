@@ -13,7 +13,7 @@ import UIKit
 class EnclosureGame: NSObject {
 
     let playerNum = 2
-    let boardSize = 9
+    let boardSize = 7
     var firstMove = false
     
     var totalStep = 0
@@ -155,7 +155,6 @@ class EnclosureGame: NSObject {
         for index in 1...polygon.count-1 {
             p.addLineToPoint(polygon[index] as CGPoint)
         }
-        
         p.closePath()
         
         return p.containsPoint(test)

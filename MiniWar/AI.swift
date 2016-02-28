@@ -45,40 +45,37 @@ class AI: NSObject {
             }
             
             for way in ways{
-                var tempBoard = AIBoard(copy: self.rootBoard)
+                let tempBoard = AIBoard(copy: self.rootBoard)
                 tempBoard.playerMove(way)
                 tempBoard.originalMoves = way
-                aiBoardsProcessing.append(tempBoard)
+                aiBoardsDone.append(tempBoard)
             }
             
-            var indexer = 0
+            toDepth(1)
             
-            while aiBoardsProcessing.count > 0{
-                let lastBoard = aiBoardsProcessing[indexer]
-                if lastBoard.depth < 2{
-                    var ways = Set<Set<Set<Int>>>()
-                    for lastMoveDot in lastBoard.playerLastMoves[lastBoard.otherPlayer()].last!{
-                        ways = Tool.mergeSet(ways, smallset: lastBoard.getAllWaysWithoutEmpty(lastMoveDot))
-                    }
-                    for lastMoveDot in lastBoard.playerLastMoves[lastBoard.playerToGo].last!{
-                        ways = Tool.mergeSet(ways, smallset: lastBoard.getAllWaysWithoutEmpty(lastMoveDot))
-                    }
-                    for w in ways{
-                        let newBoard = AIBoard(copy: lastBoard)
-                        newBoard.playerMove(w)
-                        aiBoardsProcessing.append(newBoard)
-                    }
-                }else{
-                    aiBoardsDone.append(aiBoardsProcessing[indexer])
-                }
-                aiBoardsProcessing.removeAtIndex(indexer)
-                indexer++
-                if indexer > aiBoardsProcessing.count - 1{
-                    indexer = 0
-                }
+            for b in self.aiBoardsDone{
+                let polygons = b.searchPolygon(b.playerFence[b.otherPlayer()])
+                let result = b.updateArea(polygons)
+                print(result.count)
             }
-            print(aiBoardsDone.count)
+            
+            toDepth(2)
 
+//
+//            var playerDistinct = Set<Set<Set<Int>>>()
+//            for b in self.aiBoardsDone{
+//                playerDistinct.insert(b.playerFence[b.otherPlayer()])
+//            }
+//            
+//            print(playerDistinct.count)
+//            
+//            print(aiBoardsDone.count)
+//            Tool.profile({ () -> () in
+//                for p in playerDistinct{
+//                    let polygons = self.rootBoard.searchPolygon(p)
+//                    let result = self.rootBoard.updateArea(polygons)
+//                }
+//            })
         }
 
     }
@@ -87,36 +84,39 @@ class AI: NSObject {
     
     var aiBoardsProcessing = [AIBoard]()
     var aiBoardsDone = [AIBoard]()
-
-    func investigateMove(lastBoard: AIBoard, depth: Int, actualMove: Set<Set<Int>>){
-
-        if depth == 0{
-            // judge the gain of the current display
-        }else{
-            // investigate based on last movement
-            var ways = Set<Set<Set<Int>>>()
-            for lastMoveDot in lastBoard.playerLastMoves[lastBoard.otherPlayer()].last!{
-                ways = Tool.mergeSet(ways, smallset: lastBoard.getAllWays(lastMoveDot))
-            }
-            if lastBoard.playerLastMoves[lastBoard.playerToGo].count > 0{
-                for lastMoveDot in lastBoard.playerLastMoves[lastBoard.playerToGo].last!{
-                    ways = Tool.mergeSet(ways, smallset: lastBoard.getAllWays(lastMoveDot))
+    
+    func toDepth(depth: Int){
+        
+        aiBoardsProcessing = aiBoardsDone
+        aiBoardsDone = [AIBoard]()
+        
+        var indexer = 0
+        while aiBoardsProcessing.count > 0{
+            let lastBoard = aiBoardsProcessing[indexer]
+            if lastBoard.depth < depth{
+                var ways = Set<Set<Set<Int>>>()
+                for lastMoveDot in lastBoard.playerLastMoves[lastBoard.otherPlayer()].last!{
+                    ways = Tool.mergeSet(ways, smallset: lastBoard.getAllWaysWithoutEmpty(lastMoveDot))
                 }
+                for lastMoveDot in lastBoard.playerLastMoves[lastBoard.playerToGo].last!{
+                    ways = Tool.mergeSet(ways, smallset: lastBoard.getAllWaysWithoutEmpty(lastMoveDot))
+                }
+                for w in ways{
+                    let newBoard = AIBoard(copy: lastBoard)
+                    newBoard.playerMove(w)
+                    aiBoardsProcessing.append(newBoard)
+                }
+            }else{
+                aiBoardsDone.append(aiBoardsProcessing[indexer])
             }
-            var wayList = Array(ways)
-            var totalTry = Int(proportion * Double(ways.count))
-            while totalTry > 0{
-                let m = Int(arc4random_uniform(UInt32(wayList.count)))
-                var tempBoard = AIBoard(copy: lastBoard)
-                tempBoard.playerMove(wayList[m])
-                wayList.removeAtIndex(m)
-                investigateMove(tempBoard, depth: depth - 1, actualMove: actualMove)
-                totalTry--
+            aiBoardsProcessing.removeAtIndex(indexer)
+            indexer++
+            if indexer > aiBoardsProcessing.count - 1{
+                indexer = 0
             }
         }
     }
     
-
     
     func getAllPossibleMove(){
         
@@ -141,21 +141,20 @@ class AIBoard: NSObject {
 
     var playerToGo: Int
     
-    var nodes = [[[Int]]]() //[[(Int,Int)]]()
     var fences = [Set<Int>]() //[((Int,Int),(Int,Int))]()
-    var lands = [[[Int]]]()
     
-    var playerScore = [Int]()
     var playerFencesNum = [Int]()
-    
-    var neutralLand = [[Int]]()
-    var playerLand = [[[Int]]]()
     
     var neutralFence = Set<Set<Int>>()
     var playerFence = [Set<Set<Int>>]()
     
     var playerLastMoves = [[[[Int]]]]()
     var canReachList = [Int:Set<Set<Set<Int>>>]()
+    
+    var neutralLand = [Int]()
+    var playerLand = [[Int]]()
+    
+    var playerGain = [Set<Int>]()
     
     func otherPlayer()->Int{
         return (playerToGo+1)%2
@@ -302,23 +301,130 @@ class AIBoard: NSObject {
         
     }
     
+    func getPossibleFences(node: Int)->[Int]{
+        let x = node / 10
+        let y = node % 10
+        var result = [Int]()
+        if x > 0{
+            result.append(node - 10)
+        }
+        if y > 0{
+            result.append(node - 1)
+        }
+        if x < boardSize - 1{
+            result.append(node + 10)
+        }
+        if y < boardSize - 1{
+            result.append(node + 1)
+        }
+        return result
+    }
+    
+    func containPolygon(polygon: [CGPoint], test: CGPoint) -> Bool {
+        if polygon.count <= 1 {
+            return false //or if first point = test -> return true
+        }
+        
+        let p = UIBezierPath()
+        let firstPoint = polygon[0] as CGPoint
+        
+        p.moveToPoint(firstPoint)
+        
+        for index in 1...polygon.count-1 {
+            p.addLineToPoint(polygon[index] as CGPoint)
+        }
+        p.closePath()
+        
+        return p.containsPoint(test)
+    }
+    
+    func updateArea(polygons: [[CGPoint]])->Set<Int>{
+        var increaseList = [Int]()
+        for land in neutralLand{
+            for p in polygons{
+                if containPolygon(p, test: CGPoint(x: Double(land / 10) + 0.5, y: Double(land % 10) + 0.5)){
+                    increaseList.append(land)
+                    break
+                }
+            }
+        }
+        
+        let set1 = Set(neutralLand)
+        let set2 = Set(increaseList)
+        neutralLand = Array(Tool.subtractSet(set1, subset: set2))
+        playerLand[otherPlayer()] = Array(Tool.mergeSet(set1, smallset: set2))
+        playerGain[otherPlayer()] = Tool.mergeSet(playerGain[otherPlayer()], smallset: Set(increaseList))
+        return Set(increaseList)
+    }
+    
+    func searchPolygon(fence: Set<Set<Int>>)->[[CGPoint]]{
+        
+        var unreachedFences = fence
+        
+        var tempPathes = [[Int]]()
+        var polygons = [[Int]]()
+        
+        while unreachedFences.count > 0{
+        
+            while tempPathes.count > 0{
+                for var path = tempPathes.count-1 ; path >= 0 ; path-- {
+                    let toExpand = tempPathes[path].last
+                    
+                    let f = getPossibleFences(toExpand!)
+                    
+                    for n in f{
+                        if fence.contains(Set([toExpand!, n])) && unreachedFences.contains(Set([toExpand!, n])){
+                            unreachedFences.remove(Set([toExpand!, n]))
+                            var mergePath:[Int]!
+                            // check if meet with the head of another search path
+                            for p in tempPathes{
+                                if n == p.last && p.last != toExpand{
+                                    mergePath = p
+                                    break
+                                }
+                            }
+                            
+                            if mergePath != nil{
+                                polygons.append(tempPathes[path] + mergePath.reverse())
+                            }else{
+                                var newP = tempPathes[path]
+                                newP.append(n)
+                                tempPathes.append(newP)
+                            }
+                            
+                        }
+                    }
+                    tempPathes.removeAtIndex(path)
+                }
+            }
+            if unreachedFences.count > 0{
+                let newseed = unreachedFences.first!.first!
+                tempPathes.append([newseed])
+            }
+        }
+        
+        var uiPolygon = [[CGPoint]]()
+        for var x = 0; x < polygons.count; x++ {
+            uiPolygon.append([CGPoint]())
+            for var y = 0; y < polygons[x].count; y++ {
+                uiPolygon[x].append(CGPoint(x: CGFloat(polygons[x][y] / 10), y: CGFloat(polygons[x][y] % 10)))
+            }
+        }
+        return uiPolygon
+    }
+
+    
     
     init(copy: AIBoard) {
         self.playerNum = copy.playerNum
         self.boardSize = copy.boardSize
-        self.playerToGo = (copy.playerToGo + 1) % 2
+        self.playerToGo = copy.playerToGo
         self.depth = copy.depth + 1
         super.init()
         
-        self.nodes = copy.nodes
         self.fences = copy.fences
-        self.lands = copy.lands
-        
-        self.playerScore = copy.playerScore
+
         self.playerFencesNum = copy.playerFencesNum
-        
-        self.neutralLand = copy.neutralLand
-        self.playerLand = copy.playerLand
         
         self.neutralFence = copy.neutralFence
         self.playerFence = copy.playerFence
@@ -327,6 +433,11 @@ class AIBoard: NSObject {
         self.canReachList = copy.canReachList
         
         self.originalMoves = copy.originalMoves
+        
+        self.neutralLand = copy.neutralLand
+        self.playerLand = copy.playerLand
+
+        self.playerGain = copy.playerGain
     }
     
     init(bigGame: EnclosureGame) {
@@ -335,6 +446,8 @@ class AIBoard: NSObject {
         self.playerToGo = bigGame.currentPlayer()
         self.depth = 0
         super.init()
+        
+        playerGain = [Set<Int>](count: playerNum, repeatedValue: Set<Int>())
         
         playerLastMoves = [[[[Int]]]](count: playerNum, repeatedValue: [[[Int]]]())
         for var p = 0; p < bigGame.prevMovesByUser.count; p++ {
@@ -346,22 +459,13 @@ class AIBoard: NSObject {
                 playerLastMoves[p].append(move)
             }
         }
-        
-        neutralLand = [[Int]]()
-        playerLand = [[[Int]]](count: playerNum, repeatedValue: [[Int]]())
+
         neutralFence = Set<Set<Int>>()
         playerFence = [Set<Set<Int>>](count: playerNum, repeatedValue: Set<Set<Int>>())
         playerFencesNum = bigGame.playerFencesNum
-        playerScore = bigGame.playerScore
         
-        //create nodees
-        for var x = 0; x < boardSize; x++ {
-            nodes.append([[Int]]())
-            for var y = 0; y < boardSize; y++ {
-                nodes[x].append([x, y])
-            }
-        }
-        
+        playerLand = [[Int]](count: playerNum, repeatedValue: [Int]())
+        neutralLand = [Int]()
         //create fences
         for var x = 0; x <  boardSize; x++ {
             for var y = 0; y < boardSize; y++ {
@@ -390,23 +494,18 @@ class AIBoard: NSObject {
         }
         
         //create lands
-        for var x = 0; x <  boardSize; x++ {
-            if x < boardSize - 1{
-                lands.append([[Int]]())
-                for var y = 0; y < boardSize; y++ {
-                    if x < boardSize - 1 && y < boardSize - 1{
-                        let land = [x,y]
-                        lands[x].append(land)
-                        if bigGame.lands[x][y].player == -1{
-                            neutralLand.append(land)
-                        }else{
-                            playerLand[bigGame.lands[x][y].player].append(land)
-                        }
+        for var x = 0; x <  boardSize - 1; x++ {
+            for var y = 0; y < boardSize; y++ {
+                if x < boardSize - 1 && y < boardSize - 1{
+                    let land = x * 10 + y
+                    if bigGame.lands[x][y].player == -1{
+                        neutralLand.append(land)
+                    }else{
+                        playerLand[bigGame.lands[x][y].player].append(land)
                     }
                 }
             }
         }
-        
     }
     
 }
