@@ -175,7 +175,6 @@ class AIBoard: NSObject {
             getAllWaysBranch(startPoint, path: Set<Set<Int>>())
         }
         canReachList[transform] = tempPath
-        print("eeeeeeee")
         return tempPath
         
     }

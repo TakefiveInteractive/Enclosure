@@ -61,21 +61,15 @@ class AI: NSObject {
             
             toDepth(2)
 
-            var playerDistinct = [(Set<Set<Int>>):[AIBoard]]()
+            var playerDistinct = [(Set<Set<Int>>):AIBoard]()
             for b in self.aiBoardsDone{
-                var arr = playerDistinct[b.playerFence[b.otherPlayer()]]
-                if arr == nil{
-                    playerDistinct[b.playerFence[b.otherPlayer()]] = [b]
+                let pFence = b.playerFence[b.otherPlayer()]
+                if let val = playerDistinct[pFence]{
+                    b.identicalUpdate(val)
                 }else{
-                    playerDistinct[b.playerFence[b.otherPlayer()]]!.append(b)
-                }
-            }
-            for p in playerDistinct.keys{
-                let startB = playerDistinct[p]?.first!
-                let polygons = startB!.searchPolygon(startB!.playerFence[startB!.otherPlayer()])
-                let result = startB!.updateArea(polygons)
-                for b in playerDistinct[p]!{
-                    b.identicalUpdate(startB!)
+                    let polygons = b.searchPolygon(b.playerFence[b.otherPlayer()])
+                    b.updateArea(polygons)
+                    playerDistinct[pFence] = b
                 }
             }
             let r = determineAction()
