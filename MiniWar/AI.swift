@@ -28,14 +28,14 @@ class AI: NSObject {
             //first player first move
             let x = Int(arc4random_uniform(UInt32(rootBoard.boardSize) - 4)) + 2
             let y = Int(arc4random_uniform(UInt32(rootBoard.boardSize) - 4)) + 2
-            let possibleMoves = rootBoard.getAllWays([x,y])
+            let possibleMoves = rootBoard.getAllWaysWithoutEmpty([x,y])
             return Tool.randomElementFromSet(possibleMoves)
             
         }else if rootBoard.playerLastMoves[rootBoard.playerToGo].count == 0{
             //second player first move
             let x = Int(arc4random_uniform(UInt32(rootBoard.boardSize) - 4)) + 2
             let y = Int(arc4random_uniform(UInt32(rootBoard.boardSize) - 4)) + 2
-            let possibleMoves = rootBoard.getAllWays([x,y])
+            let possibleMoves = rootBoard.getAllWaysWithoutEmpty([x,y])
             return Tool.randomElementFromSet(possibleMoves)
             
         }else{
@@ -45,7 +45,6 @@ class AI: NSObject {
                 let maxScore = sortedResults[0].1
                 var bestResults = [AIBoard]()
                 for r in sortedResults{
-                    print(r.1)
                     if r.1 == maxScore{
                         bestResults.append(r.0)
                     }else{
@@ -67,7 +66,6 @@ class AI: NSObject {
                     let maxScore = sortedBestSelfMove[0].1
                     var bestResults = [AIBoard]()
                     for r in sortedBestSelfMove{
-                        print(r.1)
                         if r.1 == maxScore{
                             bestResults.append(r.0)
                         }else{
@@ -81,7 +79,6 @@ class AI: NSObject {
                     let maxScore = sortedBestEnemyMove[0].1
                     var bestResults = [AIBoard]()
                     for r in sortedBestEnemyMove{
-                        print(r.1)
                         if r.1 == maxScore{
                             bestResults.append(r.0)
                         }else{
@@ -97,7 +94,6 @@ class AI: NSObject {
                         bestPoints.insert(Array(move)[0])
                         bestPoints.insert(Array(move)[1])
                     }
-                    print(bestPoints)
                     var combinedWays = Set<Set<Set<Int>>>()
                     for lastMoveDot in bestPoints{
                         combinedWays = Tool.mergeSet(combinedWays, smallset: self.rootBoard.getAllWaysWithoutEmpty([lastMoveDot / 10,lastMoveDot % 10]))
@@ -106,7 +102,6 @@ class AI: NSObject {
                     let maxCombinedScore = sortedBestCombineMove[0].1
                     var bestCombinedResults = [AIBoard]()
                     for r in sortedBestCombineMove{
-                        print(r.1)
                         if r.1 == maxCombinedScore{
                             bestCombinedResults.append(r.0)
                         }else{
@@ -131,6 +126,7 @@ class AI: NSObject {
                 dots.insert(lastMoveDot[0] * 10 + lastMoveDot[1])
             }
         }
+        print(dots)
         var ways = Set<Set<Set<Int>>>()
         for dot in dots{
             ways = Tool.mergeSet(ways, smallset: startBoard.getAllWaysWithoutEmpty([dot/10,dot%10]))
