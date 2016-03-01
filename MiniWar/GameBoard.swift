@@ -199,6 +199,7 @@ class GameBoard: UIView {
                 drawBoard()
                 drawPath()
             }else{
+
                 // update current step
                 var fences = [Fence]()
                 var nodes = [FenceNode]()
@@ -209,33 +210,37 @@ class GameBoard: UIView {
                         fences.append(elem.gameElement.fences[self.tempPath[index! + 1].gameElement]!)
                     }
                 }
+                print(nodes.count)
                 tempPath.removeAll()
-                self.delegate?.showTotalRow(game.currentPlayer(), row: 0)
                 
-                // move to next step
-                let areaChanged = game.updateMove(fences, nodes: nodes)
-                if game.checkEnd(){
-                    var winner = 1
-                    if game.playerScore[0] > game.playerScore[1]{
-                        winner = 0
-                    }
-                    delegate?.endGame(winner)
+                moveToNextStep(fences, nodes: nodes)
+
+                if game.currentPlayer() == 1{
+                    self.userInteractionEnabled = false
+                    self.alpha = 0.65
+                    let ai = AI(game: game)
+                    let qualityOfServiceClass = QOS_CLASS_BACKGROUND
+                    let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
+                    dispatch_async(backgroundQueue, {
+                        let moves = ai.calculateNextStep()
+                        var fences = [Fence]()
+                        var setofNodes = Set<FenceNode>()
+                        for fence in Array(moves){
+                            let fenceArr = Array(fence)
+                            let node1 = self.game.nodes[fenceArr[0]/10][fenceArr[0]%10]
+                            let node2 = self.game.nodes[fenceArr[1]/10][fenceArr[1]%10]
+                            setofNodes.insert(node1)
+                            setofNodes.insert(node2)
+                            fences.append(node1.fences[node2]!)
+                        }
+                        
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            self.moveToNextStep(fences, nodes: Array(setofNodes))
+                            self.alpha = 1
+                            self.userInteractionEnabled = true
+                        })
+                    })
                 }
-                for land in areaChanged{
-                    self.delegate?.animateScore(land.view as! Area, score: land.score, player: (game.currentPlayer()+1)%2)
-                }
-                if areaChanged.count > 0{
-                    self.delegate?.updateScoreLabel((game.currentPlayer()+1)%2)
-                }
-                
-                let ai = AI(game: game)
-                
-                print(Tool.profile({ () -> () in
-                    ai.calculateNextStep()
-                }))
-                
-                drawBoard()
-                self.delegate?.showTotalRow(game.currentPlayer(), row: game.playerFencesNum[game.currentPlayer()])
             }
             
             lineLayer.lineWidth = 0
@@ -249,6 +254,30 @@ class GameBoard: UIView {
             lineLayer.lineWidth = edgeWidth
         }
         
+    }
+    
+    func moveToNextStep(fences: [Fence], nodes:[FenceNode]){
+
+        self.delegate?.showTotalRow(game.currentPlayer(), row: 0)
+
+        // move to next step
+        let areaChanged = game.updateMove(fences, nodes: nodes)
+        if game.checkEnd(){
+            var winner = 1
+            if game.playerScore[0] > game.playerScore[1]{
+                winner = 0
+            }
+            delegate?.endGame(winner)
+        }
+        for land in areaChanged{
+            self.delegate?.animateScore(land.view as! Area, score: land.score, player: (game.currentPlayer()+1)%2)
+        }
+        if areaChanged.count > 0{
+            self.delegate?.updateScoreLabel((game.currentPlayer()+1)%2)
+        }
+        drawBoard()
+        self.delegate?.showTotalRow(game.currentPlayer(), row: game.playerFencesNum[game.currentPlayer()])
+
     }
 
     func getCorrespondingGrid(p: CGPoint)->Grid{

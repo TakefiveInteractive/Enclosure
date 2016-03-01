@@ -18,64 +18,124 @@ class AI: NSObject {
         super.init()
     }
     
-    func calculateNextStep(){
+    func calculateNextStep()->Set<Set<Int>>{
         getAllPossibleMove()
-        if rootBoard.playerLastMoves[(rootBoard.playerToGo+1)%2].count == 0{
+
+        if rootBoard.playerLastMoves[rootBoard.otherPlayer()].count == 0{
             //first player first move
             let x = Int(arc4random_uniform(UInt32(rootBoard.boardSize) - 4)) + 2
             let y = Int(arc4random_uniform(UInt32(rootBoard.boardSize) - 4)) + 2
             let possibleMoves = rootBoard.getAllWays([x,y])
+            return Tool.randomElementFromSet(possibleMoves)
             
         }else if rootBoard.playerLastMoves[rootBoard.playerToGo].count == 0{
             //second player first move
-//            var ways = Set<Set<Set<Int>>>()
-//            for lastMoveDot in rootBoard.playerLastMoves[rootBoard.otherPlayer()].last!{
-//                ways = Tool.mergeSet(ways, smallset: self.rootBoard.getAllWays(lastMoveDot))
-//            }
-//            print(Array(rootBoard.canReachList.keys))
-
+            let x = Int(arc4random_uniform(UInt32(rootBoard.boardSize) - 4)) + 2
+            let y = Int(arc4random_uniform(UInt32(rootBoard.boardSize) - 4)) + 2
+            let possibleMoves = rootBoard.getAllWays([x,y])
+            return Tool.randomElementFromSet(possibleMoves)
+            
         }else{
             
-            var ways = Set<Set<Set<Int>>>()
-            for lastMoveDot in rootBoard.playerLastMoves[rootBoard.otherPlayer()].last!{
-                ways = Tool.mergeSet(ways, smallset: self.rootBoard.getAllWaysWithoutEmpty(lastMoveDot))
+            if rootBoard.playerLastMoves[rootBoard.otherPlayer()].count == 1{
+                let sortedResults = twoStepEmptySearch(self.rootBoard)
+                let maxScore = sortedResults[0].1
+                var bestResults = [AIBoard]()
+                for r in sortedResults{
+                    print(r.1)
+                    if r.1 == maxScore{
+                        bestResults.append(r.0)
+                    }else{
+                        break
+                    }
+                }
+                return Tool.randomElementFromArray(bestResults).originalMoves
+
+            }else{
+                // have more prev move
+
+                let sortedBestMove = searchAllPossibleRoutes(rootBoard)
+                let maxScore = sortedBestMove[0].1
+                var bestResults = [AIBoard]()
+                for r in sortedBestMove{
+                    print(r.1)
+                    if r.1 == maxScore{
+                        bestResults.append(r.0)
+                    }else{
+                        break
+                    }
+                }
+                return Tool.randomElementFromArray(bestResults).originalMoves
             }
-            for lastMoveDot in rootBoard.playerLastMoves[rootBoard.playerToGo].last!{
-                ways = Tool.mergeSet(ways, smallset: self.rootBoard.getAllWaysWithoutEmpty(lastMoveDot))
+        }
+    }
+    
+    func searchAllPossibleRoutes(startBoard: AIBoard)->[(AIBoard, Int)]{
+        var dots = Set<Int>()
+        for lastMove in startBoard.playerLastMoves[startBoard.playerToGo]{
+            for lastMoveDot in lastMove{
+                dots.insert(lastMoveDot[0] * 10 + lastMoveDot[1])
             }
-            
-            for way in ways{
-                let tempBoard = AIBoard(copy: self.rootBoard)
-                tempBoard.playerMove(way)
-                tempBoard.originalMoves = way
-                rootBoard.gameTree.append(tempBoard)
-                aiBoardsDone.append(tempBoard)
-            }
-            
-            toDepth(1)
-            
-            for b in self.aiBoardsDone{
+        }
+        var ways = Set<Set<Set<Int>>>()
+        for dot in dots{
+            ways = Tool.mergeSet(ways, smallset: startBoard.getAllWaysWithoutEmpty([dot/10,dot%10]))
+        }
+        for way in ways{
+            let tempBoard = AIBoard(copy: startBoard)
+            tempBoard.playerMove(way)
+            tempBoard.originalMoves = way
+            rootBoard.gameTree.append(tempBoard)
+            aiBoardsDone.append(tempBoard)
+        }
+        toDepth(1)
+        for b in self.aiBoardsDone{
+            let polygons = b.searchPolygon(b.playerFence[b.otherPlayer()])
+            b.updateArea(polygons)
+        }
+        return determineAction().sort{$0.1 > $1.1}
+
+    }
+    
+    func twoStepEmptySearch(startBoard: AIBoard)->[(AIBoard, Int)]{
+        
+        var ways = Set<Set<Set<Int>>>()
+        for lastMoveDot in rootBoard.playerLastMoves[rootBoard.otherPlayer()].last!{
+            ways = Tool.mergeSet(ways, smallset: self.rootBoard.getAllWaysWithoutEmpty(lastMoveDot))
+        }
+        for lastMoveDot in rootBoard.playerLastMoves[rootBoard.playerToGo].last!{
+            ways = Tool.mergeSet(ways, smallset: self.rootBoard.getAllWaysWithoutEmpty(lastMoveDot))
+        }
+        
+        for way in ways{
+            let tempBoard = AIBoard(copy: startBoard)
+            tempBoard.playerMove(way)
+            tempBoard.originalMoves = way
+            rootBoard.gameTree.append(tempBoard)
+            aiBoardsDone.append(tempBoard)
+        }
+        
+        toDepth(1)
+        
+        for b in self.aiBoardsDone{
+            let polygons = b.searchPolygon(b.playerFence[b.otherPlayer()])
+            b.updateArea(polygons)
+        }
+        
+        toDepth(2)
+        
+        var playerDistinct = [(Set<Set<Int>>):AIBoard]()
+        for b in self.aiBoardsDone{
+            let pFence = b.playerFence[b.otherPlayer()]
+            if let val = playerDistinct[pFence]{
+                b.identicalUpdate(val)
+            }else{
                 let polygons = b.searchPolygon(b.playerFence[b.otherPlayer()])
                 b.updateArea(polygons)
+                playerDistinct[pFence] = b
             }
-            
-            toDepth(2)
-
-            var playerDistinct = [(Set<Set<Int>>):AIBoard]()
-            for b in self.aiBoardsDone{
-                let pFence = b.playerFence[b.otherPlayer()]
-                if let val = playerDistinct[pFence]{
-                    b.identicalUpdate(val)
-                }else{
-                    let polygons = b.searchPolygon(b.playerFence[b.otherPlayer()])
-                    b.updateArea(polygons)
-                    playerDistinct[pFence] = b
-                }
-            }
-            let r = determineAction()
-            let sortedResult =  r.sort {$0.1 > $1.1}
-            print(sortedResult.first!.0.originalMoves)
         }
+        return determineAction().sort{$0.1 > $1.1}
 
     }
     
@@ -116,14 +176,13 @@ class AI: NSObject {
     }
     
     func getAllPossibleMove(){
-        
-        print(Tool.profile { () -> () in
-            for var x = 0; x < self.rootBoard.boardSize; x++ {
-                for var y = 0; y < self.rootBoard.boardSize; y++ {
-                    self.rootBoard.getAllWays([x,y])
-                }
+        var total = 0
+        for var x = 0; x < self.rootBoard.boardSize; x++ {
+            for var y = 0; y < self.rootBoard.boardSize; y++ {
+                total = total + self.rootBoard.getAllWaysWithoutEmpty([x,y]).count
             }
-        })
+        }
+//        print(total)
     }
     
     func determineAction()->[(AIBoard, Int)]{
@@ -151,7 +210,6 @@ class AI: NSObject {
             }
         }
         calculateScore(rootBoard, previousVal: 0)
-        
         return possibilities
     }
 }

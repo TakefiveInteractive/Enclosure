@@ -226,7 +226,6 @@ class AIBoard: NSObject {
                 }
             }
         }
-        
         let set1 = Set(neutralLand)
         let set2 = Set(increaseList)
         neutralLand = Array(Tool.subtractSet(set1, subset: set2))
