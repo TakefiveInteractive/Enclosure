@@ -18,6 +18,8 @@ class AI: NSObject {
         super.init()
     }
     
+    let performance = 3
+    
     var aiBoardsProcessing = [AIBoard]()
     var aiBoardsDone = [AIBoard]()
     
@@ -61,6 +63,7 @@ class AI: NSObject {
                 let sortedBestEnemyMove = searchAllPossibleRoutes(enemyBoard)
                 let sortedBestSelfMove = searchAllPossibleRoutes(rootBoard)
                 
+                
                 if sortedBestSelfMove[0].1 >= sortedBestEnemyMove[0].1{
                     // bigger advantage advance self
                     let maxScore = sortedBestSelfMove[0].1
@@ -76,26 +79,38 @@ class AI: NSObject {
                 }else{
                     //enemy has bigger advantage
                     print("enemy has bigger advantage")
-                    let maxScore = sortedBestEnemyMove[0].1
-                    var bestResults = [AIBoard]()
+                    var commonEnemyBoard = [(Set<Int>):[AIBoard]]()
                     for r in sortedBestEnemyMove{
-                        if r.1 == maxScore{
-                            bestResults.append(r.0)
+                        let tempSet = Set(r.0.playerLand[r.0.otherPlayer()])
+                        if commonEnemyBoard[tempSet] != nil{
+                            commonEnemyBoard[tempSet]!.append(r.0)
                         }else{
+                            commonEnemyBoard[tempSet] = [r.0]
+                        }
+                        if commonEnemyBoard.count > performance{
                             break
                         }
                     }
-                    var bestMoves = Set<Set<Int>>()
-                    for res in bestResults{
-                        bestMoves = Tool.mergeSet(bestMoves, smallset: res.originalMoves)
+                    var allBestPoints = Set<Int>()
+                    for commonArea in commonEnemyBoard.keys{
+                        var commonSet = Set<Int>()
+                        for board in commonEnemyBoard[commonArea]!{
+                            var bestPoints = Set<Int>()
+                            for move in Array(board.originalMoves){
+                                bestPoints.insert(Array(move)[0])
+                                bestPoints.insert(Array(move)[1])
+                            }
+                            if commonSet.count == 0{
+                                commonSet = bestPoints
+                            }else{
+                                commonSet = commonSet.intersect(bestPoints)
+                            }
+                        }
+                        allBestPoints = Tool.mergeSet(allBestPoints, smallset: commonSet)
                     }
-                    var bestPoints = Set<Int>()
-                    for move in bestMoves{
-                        bestPoints.insert(Array(move)[0])
-                        bestPoints.insert(Array(move)[1])
-                    }
+                    print(allBestPoints)
                     var combinedWays = Set<Set<Set<Int>>>()
-                    for lastMoveDot in bestPoints{
+                    for lastMoveDot in allBestPoints{
                         combinedWays = Tool.mergeSet(combinedWays, smallset: self.rootBoard.getAllWaysWithoutEmpty([lastMoveDot / 10,lastMoveDot % 10]))
                     }
                     let sortedBestCombineMove = twoStepEmptySearch(rootBoard, ways: combinedWays)
@@ -126,7 +141,6 @@ class AI: NSObject {
                 dots.insert(lastMoveDot[0] * 10 + lastMoveDot[1])
             }
         }
-        print(dots)
         var ways = Set<Set<Set<Int>>>()
         for dot in dots{
             ways = Tool.mergeSet(ways, smallset: startBoard.getAllWaysWithoutEmpty([dot/10,dot%10]))

@@ -12,7 +12,6 @@ class AIBoard: NSObject {
     
     var gameTree = [AIBoard]()
     
-    
     let playerNum: Int
     let boardSize: Int
     var originalMoves = Set<Set<Int>>()
@@ -227,10 +226,9 @@ class AIBoard: NSObject {
                 }
             }
         }
-        let set1 = Set(neutralLand)
-        let set2 = Set(increaseList)
-        neutralLand = Array(Tool.subtractSet(set1, subset: set2))
-        playerLand[otherPlayer()] = Array(Tool.mergeSet(set1, smallset: set2))
+        let increasedSet = Set(increaseList)
+        neutralLand = Array(Tool.subtractSet(Set(neutralLand), subset: increasedSet))
+        playerLand[otherPlayer()] = Array(Tool.mergeSet(Set(playerLand[otherPlayer()]), smallset: increasedSet))
         playerGain[otherPlayer()] = Tool.mergeSet(playerGain[otherPlayer()], smallset: Set(increaseList))
         return Set(increaseList)
     }
