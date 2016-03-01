@@ -26,8 +26,8 @@ class AIBoard: NSObject {
     
     var neutralFence = Set<Set<Int>>()
     var playerFence = [Set<Set<Int>>]()
-    
-    var playerLastMoves = [[[[Int]]]]()
+
+    var playerLastMoves = [[Set<Int>]]()
     var canReachList = [Int:Set<Set<Set<Int>>>]()
     
     var neutralLand = [Int]()
@@ -42,16 +42,11 @@ class AIBoard: NSObject {
     func playerMove(move: Set<Set<Int>>){
         neutralFence = Tool.subtractSet(neutralFence, subset: move)
         playerFence[playerToGo] = Tool.mergeSet(playerFence[playerToGo], smallset: move)
-        
-        var steps = Set<Int>()
-        for f in move{
-            steps = Tool.mergeSet(steps, smallset: f)
+        var dots = Set<Int>()
+        for fence in move{
+            dots = Tool.mergeSet(dots, smallset: fence)
         }
-        var arr = [[Int]]()
-        for s in steps{
-            arr.append([s/10,s%10])
-        }
-        playerLastMoves[playerToGo].append(arr)
+        playerLastMoves[playerToGo].append(dots)
         playerToGo = (playerToGo + 1)%2
     }
     
@@ -66,7 +61,7 @@ class AIBoard: NSObject {
             var toRemove = Set<Set<Set<Int>>>()
             for path in canReachList[transform]!{
                 for step in path{
-                    if !neutralFence.contains(step){
+                    if playerFence[otherPlayer()].contains(step){
                         toRemove.insert(path)
                         break
                     }
@@ -295,8 +290,6 @@ class AIBoard: NSObject {
         return uiPolygon
     }
     
-    
-    
     init(copy: AIBoard) {
         self.playerNum = copy.playerNum
         self.boardSize = copy.boardSize
@@ -331,12 +324,12 @@ class AIBoard: NSObject {
         
         playerGain = [Set<Int>](count: playerNum, repeatedValue: Set<Int>())
         
-        playerLastMoves = [[[[Int]]]](count: playerNum, repeatedValue: [[[Int]]]())
-        for var p = 0; p < bigGame.prevMovesByUser.count; p++ {
+        playerLastMoves = [[Set<Int>]](count: bigGame.playerNum, repeatedValue:[Set<Int>]())
+        for var p = 0; p < bigGame.playerNum; p++ {
             for m in bigGame.prevMovesByUser[p]{
-                var move = [[Int]]()
+                var move = Set<Int>()
                 for n in m{
-                    move.append([n.x, n.y])
+                    move.insert(n.x * 10 + n.y)
                 }
                 playerLastMoves[p].append(move)
             }

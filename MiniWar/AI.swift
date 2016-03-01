@@ -62,10 +62,11 @@ class AI: NSObject {
                 enemyBoard.playerToGo = (enemyBoard.playerToGo+1) % 2
                 let sortedBestEnemyMove = searchAllPossibleRoutes(enemyBoard)
                 let sortedBestSelfMove = searchAllPossibleRoutes(rootBoard)
-                
-                
+                print("enemy")
+                print(sortedBestEnemyMove[0].1)
                 if sortedBestSelfMove[0].1 >= sortedBestEnemyMove[0].1{
                     // bigger advantage advance self
+                    print("self has bigger advantage")
                     let maxScore = sortedBestSelfMove[0].1
                     var bestResults = [AIBoard]()
                     for r in sortedBestSelfMove{
@@ -108,12 +109,16 @@ class AI: NSObject {
                         }
                         allBestPoints = Tool.mergeSet(allBestPoints, smallset: commonSet)
                     }
-                    print(allBestPoints)
-                    var combinedWays = Set<Set<Set<Int>>>()
-                    for lastMoveDot in allBestPoints{
-                        combinedWays = Tool.mergeSet(combinedWays, smallset: self.rootBoard.getAllWaysWithoutEmpty([lastMoveDot / 10,lastMoveDot % 10]))
+                    
+                    var moveCombine = Set<Int>()
+                    for dot in rootBoard.playerLastMoves[rootBoard.otherPlayer()]{
+                        moveCombine = Tool.mergeSet(moveCombine, smallset: dot)
                     }
-                    let sortedBestCombineMove = twoStepEmptySearch(rootBoard, ways: combinedWays)
+                    allBestPoints = allBestPoints.intersect(moveCombine)
+                    print(allBestPoints)
+
+                    let sortedBestCombineMove = twoStepSpecificSearch(rootBoard, points: allBestPoints)
+                    
                     let maxCombinedScore = sortedBestCombineMove[0].1
                     var bestCombinedResults = [AIBoard]()
                     for r in sortedBestCombineMove{
@@ -137,9 +142,7 @@ class AI: NSObject {
         
         var dots = Set<Int>()
         for lastMove in startBoard.playerLastMoves[startBoard.playerToGo]{
-            for lastMoveDot in lastMove{
-                dots.insert(lastMoveDot[0] * 10 + lastMoveDot[1])
-            }
+            dots = Tool.mergeSet(dots, smallset: lastMove)
         }
         var ways = Set<Set<Set<Int>>>()
         for dot in dots{
@@ -169,10 +172,10 @@ class AI: NSObject {
 
         if ways.count == 0{
             for lastMoveDot in rootBoard.playerLastMoves[rootBoard.otherPlayer()].last!{
-                ways = Tool.mergeSet(ways, smallset: startBoard.getAllWaysWithoutEmpty(lastMoveDot))
+                ways = Tool.mergeSet(ways, smallset: startBoard.getAllWaysWithoutEmpty([lastMoveDot/10, lastMoveDot%10]))
             }
             for lastMoveDot in rootBoard.playerLastMoves[rootBoard.playerToGo].last!{
-                ways = Tool.mergeSet(ways, smallset: startBoard.getAllWaysWithoutEmpty(lastMoveDot))
+                ways = Tool.mergeSet(ways, smallset: startBoard.getAllWaysWithoutEmpty([lastMoveDot/10, lastMoveDot%10]))
             }
         }
         
@@ -207,6 +210,79 @@ class AI: NSObject {
         }
         return determineAction(startBoard).sort{$0.1 > $1.1}
     }
+
+    func twoStepSpecificSearch(startBoard: AIBoard, points: Set<Int>)->[(AIBoard, Int)]{
+        
+        aiBoardsProcessing = [AIBoard]()
+        aiBoardsDone = [AIBoard]()
+        startBoard.gameTree = [AIBoard]()
+        
+        var ways = Set<Set<Set<Int>>>()
+        for lastMoveDot in points{
+            ways = Tool.mergeSet(ways, smallset: startBoard.getAllWaysWithoutEmpty([lastMoveDot / 10,lastMoveDot % 10]))
+        }
+        for way in ways{
+            let tempBoard = AIBoard(copy: startBoard)
+            tempBoard.depth++
+            tempBoard.playerMove(way)
+            tempBoard.originalMoves = way
+            startBoard.gameTree.append(tempBoard)
+            aiBoardsDone.append(tempBoard)
+        }
+        
+        toDepthSpecificPoints(1, points: points)
+        
+        for b in aiBoardsDone{
+            let polygons = b.searchPolygon(b.playerFence[b.otherPlayer()])
+            b.updateArea(polygons)
+        }
+        
+        toDepthSpecificPoints(2, points: points)
+        
+        var playerDistinct = [(Set<Set<Int>>):AIBoard]()
+        for b in aiBoardsDone{
+            let pFence = b.playerFence[b.otherPlayer()]
+            if playerDistinct[pFence] != nil{
+                b.identicalUpdate(playerDistinct[pFence]!)
+            }else{
+                let polygons = b.searchPolygon(b.playerFence[b.otherPlayer()])
+                b.updateArea(polygons)
+                playerDistinct[pFence] = b
+            }
+        }
+        return determineAction(startBoard).sort{$0.1 > $1.1}
+    }
+    
+    func toDepthSpecificPoints(depth: Int, points: Set<Int>){
+        
+        aiBoardsProcessing = aiBoardsDone
+        aiBoardsDone = [AIBoard]()
+        
+        var indexer = 0
+        while aiBoardsProcessing.count > 0{
+            let lastBoard = aiBoardsProcessing[indexer]
+            if lastBoard.depth < depth{
+                var ways = Set<Set<Set<Int>>>()
+                for dot in points{
+                    ways = Tool.mergeSet(ways, smallset: lastBoard.getAllWaysWithoutEmpty([dot/10, dot%10]))
+                }
+                for w in ways{
+                    let newBoard = AIBoard(copy: lastBoard)
+                    newBoard.depth++
+                    newBoard.playerMove(w)
+                    lastBoard.gameTree.append(newBoard)
+                    aiBoardsProcessing.append(newBoard)
+                }
+            }else{
+                aiBoardsDone.append(aiBoardsProcessing[indexer])
+            }
+            aiBoardsProcessing.removeAtIndex(indexer)
+            indexer++
+            if indexer > aiBoardsProcessing.count - 1{
+                indexer = 0
+            }
+        }
+    }
     
     func toDepth(depth: Int){
         
@@ -219,10 +295,10 @@ class AI: NSObject {
             if lastBoard.depth < depth{
                 var ways = Set<Set<Set<Int>>>()
                 for lastMoveDot in lastBoard.playerLastMoves[lastBoard.otherPlayer()].last!{
-                    ways = Tool.mergeSet(ways, smallset: lastBoard.getAllWaysWithoutEmpty(lastMoveDot))
+                    ways = Tool.mergeSet(ways, smallset: lastBoard.getAllWaysWithoutEmpty([lastMoveDot/10, lastMoveDot%10]))
                 }
                 for lastMoveDot in lastBoard.playerLastMoves[lastBoard.playerToGo].last!{
-                    ways = Tool.mergeSet(ways, smallset: lastBoard.getAllWaysWithoutEmpty(lastMoveDot))
+                    ways = Tool.mergeSet(ways, smallset: lastBoard.getAllWaysWithoutEmpty([lastMoveDot/10, lastMoveDot%10]))
                 }
                 for w in ways{
                     let newBoard = AIBoard(copy: lastBoard)
@@ -265,8 +341,9 @@ class AI: NSObject {
                         results.append((child, child.playerGain[child.otherPlayer()].count))
                     }
                     let sortedResult =  results.sort {$0.1 < $1.1}
+                    print(sortedResult.last!.1)
                     let total = previousVal + board.playerGain[board.otherPlayer()].count - sortedResult.last!.1
-                    
+
                     if sortedResult.last!.0.gameTree.count > 0{
                         //more to explore
                         calculateScore(sortedResult.last!.0, previousVal: total)
