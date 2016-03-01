@@ -12,12 +12,13 @@ class AIBoard: NSObject {
     
     var gameTree = [AIBoard]()
     
-    let depth: Int
     
     let playerNum: Int
     let boardSize: Int
     var originalMoves = Set<Set<Int>>()
     
+    var depth: Int
+
     var playerToGo: Int
     
     var fences = [Set<Int>]() //[((Int,Int),(Int,Int))]()
@@ -302,7 +303,7 @@ class AIBoard: NSObject {
         self.playerNum = copy.playerNum
         self.boardSize = copy.boardSize
         self.playerToGo = copy.playerToGo
-        self.depth = copy.depth + 1
+        self.depth = copy.depth
         super.init()
         
         self.fences = copy.fences

@@ -131,11 +131,6 @@ class GameBoard: UIView {
         for node in grids{
             self.bringSubviewToFront(node)
         }
-        
-        let ai = AI(game: game)
-        print(Tool.profile({ () -> () in
-            ai.calculateNextStep()
-        }))
     }
     
     // redraw all the element on the board according to the game
@@ -210,7 +205,6 @@ class GameBoard: UIView {
                         fences.append(elem.gameElement.fences[self.tempPath[index! + 1].gameElement]!)
                     }
                 }
-                print(nodes.count)
                 tempPath.removeAll()
                 
                 moveToNextStep(fences, nodes: nodes)

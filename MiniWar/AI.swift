@@ -18,6 +18,9 @@ class AI: NSObject {
         super.init()
     }
     
+    var aiBoardsProcessing = [AIBoard]()
+    var aiBoardsDone = [AIBoard]()
+    
     func calculateNextStep()->Set<Set<Int>>{
         getAllPossibleMove()
 
@@ -53,16 +56,21 @@ class AI: NSObject {
 
             }else{
                 // have more prev move
-
-                let sortedBestMove = searchAllPossibleRoutes(rootBoard)
-                let maxScore = sortedBestMove[0].1
+                
+                let enemyBoard = AIBoard(copy: rootBoard)
+                enemyBoard.playerToGo = (enemyBoard.playerToGo+1) % 2
+                let sortedBestEnemyMove = searchAllPossibleRoutes(enemyBoard)
+                
+                let sortedBestSelfMove = searchAllPossibleRoutes(rootBoard)
+                
+                let maxScore = sortedBestSelfMove[0].1
                 var bestResults = [AIBoard]()
-                for r in sortedBestMove{
+                for r in sortedBestSelfMove{
                     print(r.1)
                     if r.1 == maxScore{
                         bestResults.append(r.0)
                     }else{
-                        break
+//                        break
                     }
                 }
                 return Tool.randomElementFromArray(bestResults).originalMoves
@@ -71,6 +79,10 @@ class AI: NSObject {
     }
     
     func searchAllPossibleRoutes(startBoard: AIBoard)->[(AIBoard, Int)]{
+        
+        aiBoardsProcessing = [AIBoard]()
+        aiBoardsDone = [AIBoard]()
+        
         var dots = Set<Int>()
         for lastMove in startBoard.playerLastMoves[startBoard.playerToGo]{
             for lastMoveDot in lastMove{
@@ -83,21 +95,24 @@ class AI: NSObject {
         }
         for way in ways{
             let tempBoard = AIBoard(copy: startBoard)
+            tempBoard.depth++
             tempBoard.playerMove(way)
             tempBoard.originalMoves = way
-            rootBoard.gameTree.append(tempBoard)
+            startBoard.gameTree.append(tempBoard)
             aiBoardsDone.append(tempBoard)
         }
         toDepth(1)
-        for b in self.aiBoardsDone{
+        for b in aiBoardsDone{
             let polygons = b.searchPolygon(b.playerFence[b.otherPlayer()])
             b.updateArea(polygons)
         }
         return determineAction().sort{$0.1 > $1.1}
-
     }
     
     func twoStepEmptySearch(startBoard: AIBoard)->[(AIBoard, Int)]{
+        
+        aiBoardsProcessing = [AIBoard]()
+        aiBoardsDone = [AIBoard]()
         
         var ways = Set<Set<Set<Int>>>()
         for lastMoveDot in rootBoard.playerLastMoves[rootBoard.otherPlayer()].last!{
@@ -109,15 +124,16 @@ class AI: NSObject {
         
         for way in ways{
             let tempBoard = AIBoard(copy: startBoard)
+            tempBoard.depth++
             tempBoard.playerMove(way)
             tempBoard.originalMoves = way
-            rootBoard.gameTree.append(tempBoard)
+            startBoard.gameTree.append(tempBoard)
             aiBoardsDone.append(tempBoard)
         }
         
         toDepth(1)
         
-        for b in self.aiBoardsDone{
+        for b in aiBoardsDone{
             let polygons = b.searchPolygon(b.playerFence[b.otherPlayer()])
             b.updateArea(polygons)
         }
@@ -125,7 +141,7 @@ class AI: NSObject {
         toDepth(2)
         
         var playerDistinct = [(Set<Set<Int>>):AIBoard]()
-        for b in self.aiBoardsDone{
+        for b in aiBoardsDone{
             let pFence = b.playerFence[b.otherPlayer()]
             if let val = playerDistinct[pFence]{
                 b.identicalUpdate(val)
@@ -138,9 +154,6 @@ class AI: NSObject {
         return determineAction().sort{$0.1 > $1.1}
 
     }
-    
-    var aiBoardsProcessing = [AIBoard]()
-    var aiBoardsDone = [AIBoard]()
     
     func toDepth(depth: Int){
         
@@ -160,6 +173,7 @@ class AI: NSObject {
                 }
                 for w in ways{
                     let newBoard = AIBoard(copy: lastBoard)
+                    newBoard.depth++
                     newBoard.playerMove(w)
                     lastBoard.gameTree.append(newBoard)
                     aiBoardsProcessing.append(newBoard)
