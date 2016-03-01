@@ -41,7 +41,7 @@ class AI: NSObject {
         }else{
             
             if rootBoard.playerLastMoves[rootBoard.otherPlayer()].count == 1{
-                let sortedResults = twoStepEmptySearch(self.rootBoard)
+                let sortedResults = twoStepEmptySearch(self.rootBoard, ways: Set<Set<Set<Int>>>())
                 let maxScore = sortedResults[0].1
                 var bestResults = [AIBoard]()
                 for r in sortedResults{
@@ -60,20 +60,61 @@ class AI: NSObject {
                 let enemyBoard = AIBoard(copy: rootBoard)
                 enemyBoard.playerToGo = (enemyBoard.playerToGo+1) % 2
                 let sortedBestEnemyMove = searchAllPossibleRoutes(enemyBoard)
-                
                 let sortedBestSelfMove = searchAllPossibleRoutes(rootBoard)
                 
-                let maxScore = sortedBestSelfMove[0].1
-                var bestResults = [AIBoard]()
-                for r in sortedBestSelfMove{
-                    print(r.1)
-                    if r.1 == maxScore{
-                        bestResults.append(r.0)
-                    }else{
-//                        break
+                if sortedBestSelfMove[0].1 >= sortedBestEnemyMove[0].1{
+                    // bigger advantage advance self
+                    let maxScore = sortedBestSelfMove[0].1
+                    var bestResults = [AIBoard]()
+                    for r in sortedBestSelfMove{
+                        print(r.1)
+                        if r.1 == maxScore{
+                            bestResults.append(r.0)
+                        }else{
+                            break
+                        }
                     }
+                    return Tool.randomElementFromArray(bestResults).originalMoves
+                }else{
+                    //enemy has bigger advantage
+                    print("enemy has bigger advantage")
+                    let maxScore = sortedBestEnemyMove[0].1
+                    var bestResults = [AIBoard]()
+                    for r in sortedBestEnemyMove{
+                        print(r.1)
+                        if r.1 == maxScore{
+                            bestResults.append(r.0)
+                        }else{
+                            break
+                        }
+                    }
+                    var bestMoves = Set<Set<Int>>()
+                    for res in bestResults{
+                        bestMoves = Tool.mergeSet(bestMoves, smallset: res.originalMoves)
+                    }
+                    var bestPoints = Set<Int>()
+                    for move in bestMoves{
+                        bestPoints.insert(Array(move)[0])
+                        bestPoints.insert(Array(move)[1])
+                    }
+                    print(bestPoints)
+                    var combinedWays = Set<Set<Set<Int>>>()
+                    for lastMoveDot in bestPoints{
+                        combinedWays = Tool.mergeSet(combinedWays, smallset: self.rootBoard.getAllWaysWithoutEmpty([lastMoveDot / 10,lastMoveDot % 10]))
+                    }
+                    let sortedBestCombineMove = twoStepEmptySearch(rootBoard, ways: combinedWays)
+                    let maxCombinedScore = sortedBestCombineMove[0].1
+                    var bestCombinedResults = [AIBoard]()
+                    for r in sortedBestCombineMove{
+                        print(r.1)
+                        if r.1 == maxCombinedScore{
+                            bestCombinedResults.append(r.0)
+                        }else{
+                            break
+                        }
+                    }
+                    return Tool.randomElementFromArray(bestCombinedResults).originalMoves
                 }
-                return Tool.randomElementFromArray(bestResults).originalMoves
             }
         }
     }
@@ -82,6 +123,7 @@ class AI: NSObject {
         
         aiBoardsProcessing = [AIBoard]()
         aiBoardsDone = [AIBoard]()
+        startBoard.gameTree = [AIBoard]()
         
         var dots = Set<Int>()
         for lastMove in startBoard.playerLastMoves[startBoard.playerToGo]{
@@ -106,20 +148,22 @@ class AI: NSObject {
             let polygons = b.searchPolygon(b.playerFence[b.otherPlayer()])
             b.updateArea(polygons)
         }
-        return determineAction().sort{$0.1 > $1.1}
+        return determineAction(startBoard).sort{$0.1 > $1.1}
     }
     
-    func twoStepEmptySearch(startBoard: AIBoard)->[(AIBoard, Int)]{
+    func twoStepEmptySearch(startBoard: AIBoard, var ways: Set<Set<Set<Int>>>)->[(AIBoard, Int)]{
         
         aiBoardsProcessing = [AIBoard]()
         aiBoardsDone = [AIBoard]()
-        
-        var ways = Set<Set<Set<Int>>>()
-        for lastMoveDot in rootBoard.playerLastMoves[rootBoard.otherPlayer()].last!{
-            ways = Tool.mergeSet(ways, smallset: self.rootBoard.getAllWaysWithoutEmpty(lastMoveDot))
-        }
-        for lastMoveDot in rootBoard.playerLastMoves[rootBoard.playerToGo].last!{
-            ways = Tool.mergeSet(ways, smallset: self.rootBoard.getAllWaysWithoutEmpty(lastMoveDot))
+        startBoard.gameTree = [AIBoard]()
+
+        if ways.count == 0{
+            for lastMoveDot in rootBoard.playerLastMoves[rootBoard.otherPlayer()].last!{
+                ways = Tool.mergeSet(ways, smallset: startBoard.getAllWaysWithoutEmpty(lastMoveDot))
+            }
+            for lastMoveDot in rootBoard.playerLastMoves[rootBoard.playerToGo].last!{
+                ways = Tool.mergeSet(ways, smallset: startBoard.getAllWaysWithoutEmpty(lastMoveDot))
+            }
         }
         
         for way in ways{
@@ -151,8 +195,7 @@ class AI: NSObject {
                 playerDistinct[pFence] = b
             }
         }
-        return determineAction().sort{$0.1 > $1.1}
-
+        return determineAction(startBoard).sort{$0.1 > $1.1}
     }
     
     func toDepth(depth: Int){
@@ -199,7 +242,7 @@ class AI: NSObject {
 //        print(total)
     }
     
-    func determineAction()->[(AIBoard, Int)]{
+    func determineAction(board: AIBoard)->[(AIBoard, Int)]{
         var possibilities = [(AIBoard, Int)]()
         
         func calculateScore(bd: AIBoard , previousVal: Int){
@@ -223,7 +266,7 @@ class AI: NSObject {
                 }
             }
         }
-        calculateScore(rootBoard, previousVal: 0)
+        calculateScore(board, previousVal: 0)
         return possibilities
     }
 }
