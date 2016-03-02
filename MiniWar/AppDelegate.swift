@@ -19,11 +19,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
 //        let game = EnclosureGame()
 
-        var set1 = Set([1,2,4,7,3,5,4,7,2,7,53,56,43,76,87,43,56,234,45,56,76,78,345,76,345,12,4567,26,35,47,46345,1334,609,890,920,857,384,659,187,3461,23,478,1029,348,701,934,8,56])
-        let set2 = Set([384,659,187,1,2,40])
+        var set1 = ["1" : [1,2,4,7,3,5,4,7,2,7,53,56,43,76,87,43,56,234,45,56,76,78,345,76,345,12,4567,26,35,47,46345,1334,609,890,920,857,384,659,187,3461,23,478,1029,348,701,934,8,56] , "2456": [12,234,2344], "3542": [12,234,2344],"24536": [12,234,2344],"245": [12,234,2344],"2353": [12,234,2344], "32": [12,234,2344],"363452": [12,234,2344],"24566": [12,234,2344],"22345": [12,234,2344]]
+        
+//        let set2 = Set([384,659,187,1,2,40])
 //        print(Tool.profile { () -> () in
 //            set1 = set1.union(set2)
-//        })
+//        })6
 //        print(Tool.profile { () -> () in
 //            for s in set2{
 //                if set1.contains(s){
@@ -32,19 +33,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            }
 //            })
 //
-        print(Tool.profile { () -> () in
-                set1.subtract(set2)
-        })
-        
-        print(Tool.profile { () -> () in
-                set1.intersect(set2)
-        })
-        
-        print(Tool.profile { () -> () in
-            for s in set2{
-                set1.remove(s)
-            }
-        })
+//        print(Tool.profile { () -> () in
+//            let arr = set1["1"]
+//            for x in arr!{
+//                let e = 1+1
+//            }
+//        })
+//        
+//        print(Tool.profile { () -> () in
+//            for x in set1["1"]!{
+//                let e = 1+1
+//            }
+//        })
+
 //
 //        print(Tool.profile { () -> () in
 //            for index in 1...5000 {

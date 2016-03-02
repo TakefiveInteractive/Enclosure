@@ -12,12 +12,12 @@ class AIBoard: NSObject {
     
     var gameTree = [AIBoard]()
     
-    let depth: Int
-    
     let playerNum: Int
     let boardSize: Int
     var originalMoves = Set<Set<Int>>()
     
+    var depth: Int
+
     var playerToGo: Int
     
     var fences = [Set<Int>]() //[((Int,Int),(Int,Int))]()
@@ -26,8 +26,8 @@ class AIBoard: NSObject {
     
     var neutralFence = Set<Set<Int>>()
     var playerFence = [Set<Set<Int>>]()
-    
-    var playerLastMoves = [[[[Int]]]]()
+
+    var playerLastMoves = [[Set<Int>]]()
     var canReachList = [Int:Set<Set<Set<Int>>>]()
     
     var neutralLand = [Int]()
@@ -42,22 +42,17 @@ class AIBoard: NSObject {
     func playerMove(move: Set<Set<Int>>){
         neutralFence = Tool.subtractSet(neutralFence, subset: move)
         playerFence[playerToGo] = Tool.mergeSet(playerFence[playerToGo], smallset: move)
-        
-        var steps = Set<Int>()
-        for f in move{
-            steps = Tool.mergeSet(steps, smallset: f)
+        var dots = Set<Int>()
+        for fence in move{
+            dots = Tool.mergeSet(dots, smallset: fence)
         }
-        var arr = [[Int]]()
-        for s in steps{
-            arr.append([s/10,s%10])
-        }
-        playerLastMoves[playerToGo].append(arr)
+        playerLastMoves[playerToGo].append(dots)
         playerToGo = (playerToGo + 1)%2
     }
     
     // search all the connectable trace from a node
     
-    func getAllWays(startPoint:[Int])->Set<Set<Set<Int>>>{
+    func getAllWaysWithoutEmpty(startPoint:[Int])->Set<Set<Set<Int>>>{
         
         var tempPath = Set<Set<Set<Int>>>()
         
@@ -66,7 +61,7 @@ class AIBoard: NSObject {
             var toRemove = Set<Set<Set<Int>>>()
             for path in canReachList[transform]!{
                 for step in path{
-                    if !neutralFence.contains(step){
+                    if playerFence[otherPlayer()].contains(step){
                         toRemove.insert(path)
                         break
                     }
@@ -118,67 +113,66 @@ class AIBoard: NSObject {
         
     }
     
-    func getAllWaysWithoutEmpty(startPoint:[Int])->Set<Set<Set<Int>>>{
-        
-        var tempPath = Set<Set<Set<Int>>>()
-        
-        let transform = startPoint[0] * 10 + startPoint[1]
-        if canReachList[transform] != nil {
-            var toRemove = Set<Set<Set<Int>>>()
-            for path in canReachList[transform]!{
-                for step in path{
-                    if !neutralFence.contains(step){
-                        toRemove.insert(path)
-                        break
-                    }
-                }
-            }
-            canReachList[transform] = Tool.subtractSet(canReachList[transform]!, subset: toRemove)
-            return canReachList[transform]!
-        }else{
-            
-            func getAllWaysBranch(head:[Int], path: Set<Set<Int>>){
-                let raw = head[0] * 10 + head[1]
-                if path.count < playerFencesNum[playerToGo]{
-                    if head[0] - 1 >= 0{
-                        var tp = path
-                        if !tp.contains(Set([raw,raw - 10])) && neutralFence.contains(Set([raw,raw - 10])){
-                            tp.insert(Set([raw,raw - 10]))
-                            getAllWaysBranch([head[0] - 1, head[1]], path: tp)
-                        }
-                    }
-                    if head[0] + 1 < boardSize{
-                        var tp = path
-                        if !tp.contains(Set([raw,raw + 10])) && neutralFence.contains(Set([raw,raw + 10])){
-                            tp.insert(Set([raw,raw + 10]))
-                            getAllWaysBranch([head[0] + 1, head[1]], path: tp)
-                        }
-                    }
-                    if head[1] - 1 >= 0{
-                        var tp = path
-                        if !tp.contains(Set([raw, raw - 1])) && neutralFence.contains(Set([raw, raw - 1])){
-                            tp.insert(Set([raw,raw - 1]))
-                            getAllWaysBranch([head[0], head[1] - 1], path: tp)
-                        }
-                    }
-                    if head[1] + 1 < boardSize{
-                        var tp = path
-                        if !tp.contains(Set([raw, raw + 1])) && neutralFence.contains(Set([raw, raw + 1])){
-                            tp.insert(Set([raw,raw + 1]))
-                            getAllWaysBranch([head[0], head[1] + 1], path: tp)
-                        }
-                    }
-                }else{
-                    tempPath.insert(path)
-                }
-            }
-            getAllWaysBranch(startPoint, path: Set<Set<Int>>())
-        }
-        canReachList[transform] = tempPath
-        print("eeeeeeee")
-        return tempPath
-        
-    }
+//    func getAllWaysWithoutEmpty(startPoint:[Int])->Set<Set<Set<Int>>>{
+//        
+//        var tempPath = Set<Set<Set<Int>>>()
+//        
+//        let transform = startPoint[0] * 10 + startPoint[1]
+//        if canReachList[transform] != nil {
+//            var toRemove = Set<Set<Set<Int>>>()
+//            for path in canReachList[transform]!{
+//                for step in path{
+//                    if !neutralFence.contains(step){
+//                        toRemove.insert(path)
+//                        break
+//                    }
+//                }
+//            }
+//            canReachList[transform] = Tool.subtractSet(canReachList[transform]!, subset: toRemove)
+//            return canReachList[transform]!
+//        }else{
+//            
+//            func getAllWaysBranch(head:[Int], path: Set<Set<Int>>){
+//                let raw = head[0] * 10 + head[1]
+//                if path.count < playerFencesNum[playerToGo]{
+//                    if head[0] - 1 >= 0{
+//                        var tp = path
+//                        if !tp.contains(Set([raw,raw - 10])) && neutralFence.contains(Set([raw,raw - 10])){
+//                            tp.insert(Set([raw,raw - 10]))
+//                            getAllWaysBranch([head[0] - 1, head[1]], path: tp)
+//                        }
+//                    }
+//                    if head[0] + 1 < boardSize{
+//                        var tp = path
+//                        if !tp.contains(Set([raw,raw + 10])) && neutralFence.contains(Set([raw,raw + 10])){
+//                            tp.insert(Set([raw,raw + 10]))
+//                            getAllWaysBranch([head[0] + 1, head[1]], path: tp)
+//                        }
+//                    }
+//                    if head[1] - 1 >= 0{
+//                        var tp = path
+//                        if !tp.contains(Set([raw, raw - 1])) && neutralFence.contains(Set([raw, raw - 1])){
+//                            tp.insert(Set([raw,raw - 1]))
+//                            getAllWaysBranch([head[0], head[1] - 1], path: tp)
+//                        }
+//                    }
+//                    if head[1] + 1 < boardSize{
+//                        var tp = path
+//                        if !tp.contains(Set([raw, raw + 1])) && neutralFence.contains(Set([raw, raw + 1])){
+//                            tp.insert(Set([raw,raw + 1]))
+//                            getAllWaysBranch([head[0], head[1] + 1], path: tp)
+//                        }
+//                    }
+//                }else{
+//                    tempPath.insert(path)
+//                }
+//            }
+//            getAllWaysBranch(startPoint, path: Set<Set<Int>>())
+//        }
+//        canReachList[transform] = tempPath
+//        return tempPath
+//        
+//    }
     
     func getPossibleFences(node: Int)->[Int]{
         let x = node / 10
@@ -227,20 +221,17 @@ class AIBoard: NSObject {
                 }
             }
         }
-        
-        let set1 = Set(neutralLand)
-        let set2 = Set(increaseList)
-        neutralLand = Array(Tool.subtractSet(set1, subset: set2))
-        playerLand[otherPlayer()] = Array(Tool.mergeSet(set1, smallset: set2))
+        let increasedSet = Set(increaseList)
+        neutralLand = Array(Tool.subtractSet(Set(neutralLand), subset: increasedSet))
+        playerLand[otherPlayer()] = Array(Tool.mergeSet(Set(playerLand[otherPlayer()]), smallset: increasedSet))
         playerGain[otherPlayer()] = Tool.mergeSet(playerGain[otherPlayer()], smallset: Set(increaseList))
         return Set(increaseList)
     }
     
-    func identicalUpdate(increase: Set<Int>){
-        let set1 = Set(neutralLand)
-        neutralLand = Array(Tool.subtractSet(set1, subset: increase))
-        playerLand[otherPlayer()] = Array(Tool.mergeSet(set1, smallset: increase))
-        playerGain[otherPlayer()] = Tool.mergeSet(playerGain[otherPlayer()], smallset: increase)
+    func identicalUpdate(otherBoard: AIBoard){
+        self.neutralLand = otherBoard.neutralLand
+        self.playerGain = otherBoard.playerGain
+        self.playerLand = otherBoard.playerLand
     }
     
     func searchPolygon(fence: Set<Set<Int>>)->[[CGPoint]]{
@@ -299,13 +290,11 @@ class AIBoard: NSObject {
         return uiPolygon
     }
     
-    
-    
     init(copy: AIBoard) {
         self.playerNum = copy.playerNum
         self.boardSize = copy.boardSize
         self.playerToGo = copy.playerToGo
-        self.depth = copy.depth + 1
+        self.depth = copy.depth
         super.init()
         
         self.fences = copy.fences
@@ -335,12 +324,12 @@ class AIBoard: NSObject {
         
         playerGain = [Set<Int>](count: playerNum, repeatedValue: Set<Int>())
         
-        playerLastMoves = [[[[Int]]]](count: playerNum, repeatedValue: [[[Int]]]())
-        for var p = 0; p < bigGame.prevMovesByUser.count; p++ {
+        playerLastMoves = [[Set<Int>]](count: bigGame.playerNum, repeatedValue:[Set<Int>]())
+        for var p = 0; p < bigGame.playerNum; p++ {
             for m in bigGame.prevMovesByUser[p]{
-                var move = [[Int]]()
+                var move = Set<Int>()
                 for n in m{
-                    move.append([n.x, n.y])
+                    move.insert(n.x * 10 + n.y)
                 }
                 playerLastMoves[p].append(move)
             }

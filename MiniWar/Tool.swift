@@ -26,6 +26,11 @@ class Tool: NSObject {
         let l = Array(s)
         return l[n]
     }
+
+    class func randomElementFromArray<T>(l: Array<T>) -> T {
+        let n = Int(arc4random_uniform(UInt32(l.count)))
+        return l[n]
+    }
     
     class func mergeSet<T>(bigset: Set<T>, smallset: Set<T>) -> Set<T> {
         var result = bigset
