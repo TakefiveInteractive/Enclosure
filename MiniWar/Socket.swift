@@ -7,7 +7,7 @@ public class Socket: NSObject {
     
     let socket:SocketIOClient
     var isCreator = false
-    var roomNumber = "325879943"
+    var roomNumber = "369831017"
     
     override init() {
         socket = SocketIOClient(socketURL: NSURL(string: "http://o.hl0.co:3000")!, options: [.Log(false), .ForcePolling(true)])
@@ -43,7 +43,7 @@ public class Socket: NSObject {
         }
         
         self.socket.on("roomError") { (data, ack) -> Void in
-            
+            print(data)
         }
         // Using a shorthand parameter name for closures
         self.socket.on("roomCreated") { (data, ack) -> Void in
@@ -52,28 +52,13 @@ public class Socket: NSObject {
         
         self.socket.on("gameCanStart") { (data, ack) -> Void in
             print(data)
+            print("data")
         }
         
         self.socket.onAny {
             print("test \($0.event)  \($0.items)")
         }
         
-        self.socket.on("connect") {data, ack in
-            print("socket connected")
-        }
-        
-        self.socket.on("startGame") {[weak self] data, ack in
-            self?.handleStart()
-            return
-        }
-        
-        self.socket.on("win") {[weak self] data, ack in
-            if let name = data[0] as? String {                self?.handleWin(name)
-            }//TODO
-        }
-        self.socket.on("gameReset") {data, ack in
-            
-        }
     }
     
     func handleStart() {
