@@ -74,7 +74,6 @@ public class Socket: NSObject {
         
     }
     
-
     func sendRestrat() {
         
         self.socket.emit("restart", [])

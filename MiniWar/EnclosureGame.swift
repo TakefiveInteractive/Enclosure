@@ -24,6 +24,8 @@ class EnclosureGame: NSObject {
     var lands = [[Land]]()
     
     var prevMovesByUser = [[[FenceNode]]]()
+    var userLastEdges = [[[Fence]]]()
+    
     
     var playerScore = [Int]()
     var playerFencesNum = [Int]()
@@ -56,6 +58,7 @@ class EnclosureGame: NSObject {
         let updatedAreas = updateArea(polygons)
         recalculateScore()
         
+        userLastEdges[currentPlayer()].append(fs)
         prevMovesByUser[currentPlayer()].append(nodes)
         totalStep++
 //        let c = playerFence[1].count + playerFence[0].count + neutralFence.count
@@ -197,6 +200,7 @@ class EnclosureGame: NSObject {
         super.init()
         
         prevMovesByUser = [[[FenceNode]]](count: playerNum, repeatedValue: [[FenceNode]]())
+        userLastEdges = [[[Fence]]](count: playerNum, repeatedValue: [[Fence]]())
         neutralLand = [Land]()
         playerLand = [[Land]](count: playerNum, repeatedValue: [Land]())
         playerScore = [Int](count: playerNum, repeatedValue: 0)
