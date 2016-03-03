@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		107EE37B1986C9B911A41FF9 /* Pods_Enclosure.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FDF6B9C43FF0722F64A3577 /* Pods_Enclosure.framework */; };
+		4260A0B31C87CF4800116F8E /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4260A0B21C87CF4800116F8E /* Socket.swift */; };
 		42627FE01C783E0700DC69EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42627FDF1C783E0700DC69EC /* AppDelegate.swift */; };
 		42627FE21C783E0700DC69EC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42627FE11C783E0700DC69EC /* ViewController.swift */; };
 		42627FE51C783E0700DC69EC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42627FE31C783E0700DC69EC /* Main.storyboard */; };
@@ -34,6 +35,7 @@
 		0C0293DDB018C9E49E18FA83 /* Pods-Enclosure.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Enclosure.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Enclosure/Pods-Enclosure.debug.xcconfig"; sourceTree = "<group>"; };
 		20D8FAF0367CD33306C7BA45 /* Pods-MiniWar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MiniWar.release.xcconfig"; path = "Pods/Target Support Files/Pods-MiniWar/Pods-MiniWar.release.xcconfig"; sourceTree = "<group>"; };
 		3FDF6B9C43FF0722F64A3577 /* Pods_Enclosure.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Enclosure.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4260A0B21C87CF4800116F8E /* Socket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Socket.swift; sourceTree = "<group>"; };
 		42627FDC1C783E0700DC69EC /* Enclosure.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Enclosure.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42627FDF1C783E0700DC69EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42627FE11C783E0700DC69EC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				B5D624E71C79A5C60072A98C /* 2.png */,
 				B5D624EB1C79ABC30072A98C /* 3.png */,
 				42627FE31C783E0700DC69EC /* Main.storyboard */,
+				4260A0B21C87CF4800116F8E /* Socket.swift */,
 				42627FF11C78445A00DC69EC /* GameBoard.swift */,
 				4265F7551C8001540000BCD7 /* EnclosureGame.swift */,
 				4265F7591C81587D0000BCD7 /* AI.swift */,
@@ -266,6 +269,7 @@
 				42627FF21C78445A00DC69EC /* GameBoard.swift in Sources */,
 				4265F7561C8001540000BCD7 /* EnclosureGame.swift in Sources */,
 				42627FF41C790D5600DC69EC /* Game2ViewController.swift in Sources */,
+				4260A0B31C87CF4800116F8E /* Socket.swift in Sources */,
 				426280021C7976FE00DC69EC /* Game1ViewController.swift in Sources */,
 				42627FE01C783E0700DC69EC /* AppDelegate.swift in Sources */,
 				4265F7581C80029B0000BCD7 /* Enumerations.swift in Sources */,
