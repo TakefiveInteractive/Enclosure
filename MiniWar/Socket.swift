@@ -7,7 +7,7 @@ public class Socket: NSObject {
     
     let socket:SocketIOClient
     var isCreator = false
-    var roomNumber = "369831017"
+    var roomNumber = "507279678"
     
     override init() {
         socket = SocketIOClient(socketURL: NSURL(string: "http://o.hl0.co:3000")!, options: [.Log(false), .ForcePolling(true)])
@@ -58,6 +58,11 @@ public class Socket: NSObject {
         self.socket.onAny {
             print("test \($0.event)  \($0.items)")
         }
+        //gameReset
+        
+        //gameDisconnect
+        
+        //gameMove
         
     }
     
