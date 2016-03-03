@@ -103,6 +103,7 @@
 			children = (
 				42627FDF1C783E0700DC69EC /* AppDelegate.swift */,
 				42627FE11C783E0700DC69EC /* ViewController.swift */,
+				4260A0B21C87CF4800116F8E /* Socket.swift */,
 				426280031C797DB400DC69EC /* Game3ViewController.swift */,
 				42627FF31C790D5600DC69EC /* Game2ViewController.swift */,
 				426280011C7976FE00DC69EC /* Game1ViewController.swift */,
@@ -110,7 +111,6 @@
 				B5D624E71C79A5C60072A98C /* 2.png */,
 				B5D624EB1C79ABC30072A98C /* 3.png */,
 				42627FE31C783E0700DC69EC /* Main.storyboard */,
-				4260A0B21C87CF4800116F8E /* Socket.swift */,
 				42627FF11C78445A00DC69EC /* GameBoard.swift */,
 				4265F7551C8001540000BCD7 /* EnclosureGame.swift */,
 				4265F7591C81587D0000BCD7 /* AI.swift */,
