@@ -66,22 +66,21 @@ class AI: NSObject {
                     // explore when both have under 2
                     print("explore when both have under 2")
                     let bestCombinedMoves = freeSearch(rootBoard)
-                    let maxScore = bestCombinedMoves[0].1
-                    var bestResults = [AIBoard]()
-                    for r in bestCombinedMoves{
-                        if r.1 == maxScore{
-                            bestResults.append(r.0)
-                        }else{
-                            break
+                    
+                    if bestCombinedMoves[0].1 >= sortedBestSelfMove[0].1 * 2{
+                        let maxScore = bestCombinedMoves[0].1
+                        var bestResults = [AIBoard]()
+                        for r in bestCombinedMoves{
+                            if r.1 == maxScore{
+                                bestResults.append(r.0)
+                            }else{
+                                break
+                            }
                         }
-                    }
-                    return Tool.randomElementFromArray(bestResults).originalMoves
-
-                }else{
-                    if sortedBestSelfMove[0].1 >= sortedBestEnemyMove[0].1{
-                        // bigger advantage advance self
-                        print("self has bigger advantage")
+                        return Tool.randomElementFromArray(bestResults).originalMoves
+                    }else{
                         let maxScore = sortedBestSelfMove[0].1
+                        
                         var bestResults = [AIBoard]()
                         for r in sortedBestSelfMove{
                             if r.1 == maxScore{
@@ -91,6 +90,24 @@ class AI: NSObject {
                             }
                         }
                         return Tool.randomElementFromArray(bestResults).originalMoves
+                    }
+
+                }else{
+                    if sortedBestSelfMove[0].1 >= sortedBestEnemyMove[0].1{
+                        // bigger advantage advance self
+                        print("self has bigger advantage")
+                        let maxScore = sortedBestSelfMove[0].1
+                        
+                        var bestResults = [AIBoard]()
+                        for r in sortedBestSelfMove{
+                            if r.1 == maxScore{
+                                bestResults.append(r.0)
+                            }else{
+                                break
+                            }
+                        }
+                        return Tool.randomElementFromArray(bestResults).originalMoves
+                        
                     }else{
                         //enemy has bigger advantage
                         print("enemy has bigger advantage")
@@ -358,6 +375,13 @@ class AI: NSObject {
                         }
                     }
                 }
+                if ways.count == 0{
+                    for lastMoveDot in lastBoard.playerLastMoves[lastBoard.playerToGo].last!{
+                        if lastBoard.explorableEdgeFromPoint(lastMoveDot) == 1 {
+                            ways = Tool.mergeSet(ways, smallset: lastBoard.getAllWaysWithoutEmpty([lastMoveDot/10, lastMoveDot%10]))
+                        }
+                    }
+                }
                 for w in ways{
                     let newBoard = AIBoard(copy: lastBoard)
                     newBoard.depth++
@@ -435,7 +459,7 @@ class AI: NSObject {
                     let sortedResult =  results.sort {$0.1 < $1.1}
                     var total = previousVal + board.playerGain[board.otherPlayer()].count - sortedResult.last!.1
                     if incremental{
-                        total = previousVal + board.playerGain[board.otherPlayer()].count * 2 + sortedResult.last!.1
+                        total = previousVal + board.playerGain[board.otherPlayer()].count + sortedResult.last!.1
                     }
                     print(total)
                     if sortedResult.last!.0.gameTree.count > 0{

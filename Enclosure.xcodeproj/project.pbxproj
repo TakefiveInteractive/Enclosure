@@ -25,6 +25,9 @@
 		4265F75A1C81587D0000BCD7 /* AI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4265F7591C81587D0000BCD7 /* AI.swift */; };
 		4265F75C1C8207800000BCD7 /* Tool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4265F75B1C8207800000BCD7 /* Tool.swift */; };
 		42A5D15A1C7A0B5000C0AAC8 /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 42A5D1591C7A0B5000C0AAC8 /* 1.jpg */; };
+		42CAFABA1C893B4100AE6BE9 /* MPGame1ViewController copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CAFAB91C893B4100AE6BE9 /* MPGame1ViewController copy.swift */; };
+		42CAFABC1C893CBA00AE6BE9 /* MultiplePlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CAFABB1C893CBA00AE6BE9 /* MultiplePlayerController.swift */; };
+		42CAFABE1C8943A400AE6BE9 /* MPGameBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CAFABD1C8943A400AE6BE9 /* MPGameBoard.swift */; };
 		42D7A2961C836DC200633D80 /* AIBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D7A2951C836DC200633D80 /* AIBoard.swift */; };
 		6204250E972F9D33F452A800 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		B5D624E81C79A5C60072A98C /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = B5D624E71C79A5C60072A98C /* 2.png */; };
@@ -54,6 +57,9 @@
 		4265F7591C81587D0000BCD7 /* AI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AI.swift; sourceTree = "<group>"; };
 		4265F75B1C8207800000BCD7 /* Tool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tool.swift; sourceTree = "<group>"; };
 		42A5D1591C7A0B5000C0AAC8 /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
+		42CAFAB91C893B4100AE6BE9 /* MPGame1ViewController copy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MPGame1ViewController copy.swift"; sourceTree = "<group>"; };
+		42CAFABB1C893CBA00AE6BE9 /* MultiplePlayerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiplePlayerController.swift; sourceTree = "<group>"; };
+		42CAFABD1C8943A400AE6BE9 /* MPGameBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPGameBoard.swift; sourceTree = "<group>"; };
 		42D7A2951C836DC200633D80 /* AIBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AIBoard.swift; sourceTree = "<group>"; };
 		B5D624E71C79A5C60072A98C /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
 		B5D624EB1C79ABC30072A98C /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
@@ -103,6 +109,9 @@
 			children = (
 				42627FDF1C783E0700DC69EC /* AppDelegate.swift */,
 				42627FE11C783E0700DC69EC /* ViewController.swift */,
+				42CAFABB1C893CBA00AE6BE9 /* MultiplePlayerController.swift */,
+				42CAFAB91C893B4100AE6BE9 /* MPGame1ViewController copy.swift */,
+				42CAFABD1C8943A400AE6BE9 /* MPGameBoard.swift */,
 				4260A0B21C87CF4800116F8E /* Socket.swift */,
 				426280031C797DB400DC69EC /* Game3ViewController.swift */,
 				42627FF31C790D5600DC69EC /* Game2ViewController.swift */,
@@ -267,10 +276,13 @@
 				4265F75C1C8207800000BCD7 /* Tool.swift in Sources */,
 				426280001C7974CE00DC69EC /* GameBoard2.swift in Sources */,
 				42627FF21C78445A00DC69EC /* GameBoard.swift in Sources */,
+				42CAFABC1C893CBA00AE6BE9 /* MultiplePlayerController.swift in Sources */,
 				4265F7561C8001540000BCD7 /* EnclosureGame.swift in Sources */,
 				42627FF41C790D5600DC69EC /* Game2ViewController.swift in Sources */,
 				4260A0B31C87CF4800116F8E /* Socket.swift in Sources */,
+				42CAFABE1C8943A400AE6BE9 /* MPGameBoard.swift in Sources */,
 				426280021C7976FE00DC69EC /* Game1ViewController.swift in Sources */,
+				42CAFABA1C893B4100AE6BE9 /* MPGame1ViewController copy.swift in Sources */,
 				42627FE01C783E0700DC69EC /* AppDelegate.swift in Sources */,
 				4265F7581C80029B0000BCD7 /* Enumerations.swift in Sources */,
 				426280041C797DB400DC69EC /* Game3ViewController.swift in Sources */,

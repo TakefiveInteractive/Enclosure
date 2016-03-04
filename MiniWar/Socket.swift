@@ -3,26 +3,33 @@ import Foundation
 import SocketIOClientSwift
 
 
+protocol SocketSuccessDelegate{
+    func joinSuccess(success: Bool)
+    func gotRoomNumber(number: String)
+}
+
 public class Socket: NSObject {
     
-    let socket:SocketIOClient
-    var isCreator = false
-    var roomNumber = "507279678"
+    let socketClient:SocketIOClient
+    var roomNumber = ""
     
-    override init() {
-        socket = SocketIOClient(socketURL: NSURL(string: "http://o.hl0.co:3000")!, options: [.Log(false), .ForcePolling(true)])
+    var startDelegate: SocketSuccessDelegate?
+    
+    init(roomNumber: String) {
+        self.roomNumber = roomNumber
+        socketClient = SocketIOClient(socketURL: NSURL(string: "http://o.hl0.co:3000")!, options: [.Log(false), .ForcePolling(true)])
         super.init()
         self.addHandlers()
-        socket.connect()
+        socketClient.connect()
         print("init new sockect")
     }
     
     func createRoom() {
-        self.socket.emit("createRoom","")
+        self.socketClient.emit("createRoom","")
     }
     
     func searchRoom() {
-        self.socket.emit("joinRoom", roomNumber)
+        self.socketClient.emit("joinRoom", roomNumber)
     }
     
     func roomNotExist(){
@@ -34,28 +41,33 @@ public class Socket: NSObject {
         // Our socket handlers go here
         
         //connected
-        self.socket.on("connect") { (data, ack) -> Void in
-            if self.isCreator{
+        self.socketClient.on("connect") { (data, ack) -> Void in
+            if self.roomNumber == ""{
                 self.createRoom()
             }else{
                 self.searchRoom()
             }
         }
         
-        self.socket.on("roomError") { (data, ack) -> Void in
+        self.socketClient.on("roomNotFound") { (data, ack) -> Void in
             print(data)
-        }
-        // Using a shorthand parameter name for closures
-        self.socket.on("roomCreated") { (data, ack) -> Void in
-            print(data)
+            self.startDelegate?.joinSuccess(false)
         }
         
-        self.socket.on("gameCanStart") { (data, ack) -> Void in
+        // Using a shorthand parameter name for closures
+        self.socketClient.on("roomCreated") { (data, ack) -> Void in
+            print(data)
+            self.roomNumber = String(data)
+            self.startDelegate?.gotRoomNumber(String(data))
+        }
+        
+        self.socketClient.on("gameCanStart") { (data, ack) -> Void in
+            self.startDelegate?.joinSuccess(true)
             print(data)
             print("data")
         }
         
-        self.socket.onAny {
+        self.socketClient.onAny {
             print("test \($0.event)  \($0.items)")
         }
         //gameReset
@@ -76,7 +88,7 @@ public class Socket: NSObject {
     
     func sendRestrat() {
         
-        self.socket.emit("restart", [])
+        self.socketClient.emit("restart", [])
     }
     
 }
