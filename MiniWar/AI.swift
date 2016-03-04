@@ -344,10 +344,19 @@ class AI: NSObject {
         while aiBoardsProcessing.count > 0{
             let lastBoard = aiBoardsProcessing[indexer]
             if lastBoard.depth < depth{
-                var ways = Set<Set<Set<Int>>>()
-
+                
+                var ways =  Set<Set<Set<Int>>>()
                 for lastMoveDot in lastBoard.playerLastMoves[lastBoard.playerToGo].last!{
-                    ways = Tool.mergeSet(ways, smallset: lastBoard.getAllWaysWithoutEmpty([lastMoveDot/10, lastMoveDot%10]))
+                    if lastBoard.explorableEdgeFromPoint(lastMoveDot) == 3 {
+                        ways = Tool.mergeSet(ways, smallset: lastBoard.getAllWaysWithoutEmpty([lastMoveDot/10, lastMoveDot%10]))
+                    }
+                }
+                if ways.count == 0{
+                    for lastMoveDot in lastBoard.playerLastMoves[lastBoard.playerToGo].last!{
+                        if lastBoard.explorableEdgeFromPoint(lastMoveDot) == 2 {
+                            ways = Tool.mergeSet(ways, smallset: lastBoard.getAllWaysWithoutEmpty([lastMoveDot/10, lastMoveDot%10]))
+                        }
+                    }
                 }
                 for w in ways{
                     let newBoard = AIBoard(copy: lastBoard)
@@ -424,11 +433,11 @@ class AI: NSObject {
                         results.append((child, child.playerGain[child.otherPlayer()].count))
                     }
                     let sortedResult =  results.sort {$0.1 < $1.1}
-                    print(sortedResult.last!.1)
                     var total = previousVal + board.playerGain[board.otherPlayer()].count - sortedResult.last!.1
                     if incremental{
-                        total = previousVal + board.playerGain[board.otherPlayer()].count + sortedResult.last!.1
+                        total = previousVal + board.playerGain[board.otherPlayer()].count * 2 + sortedResult.last!.1
                     }
+                    print(total)
                     if sortedResult.last!.0.gameTree.count > 0{
                         //more to explore
                         calculateScore(sortedResult.last!.0, previousVal: total)

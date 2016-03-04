@@ -27,6 +27,7 @@ class AIBoard: NSObject {
     var neutralFence = Set<Set<Int>>()
     var playerFence = [Set<Set<Int>>]()
 
+    var playerLastDot: Int = 0
     var playerLastMoves = [[Set<Int>]]()
     var canReachList = [Int:Set<Set<Set<Int>>>]()
     
@@ -48,6 +49,31 @@ class AIBoard: NSObject {
         }
         playerLastMoves[playerToGo].append(dots)
         playerToGo = (playerToGo + 1)%2
+    }
+    
+    func explorableEdgeFromPoint(searchPoint: Int)->Int{
+        var total = 0
+        if searchPoint / 10 - 1 >= 0{
+            if neutralFence.contains(Set([searchPoint - 10, searchPoint])){
+                total++
+            }
+        }
+        if searchPoint / 10 + 1 < boardSize{
+            if neutralFence.contains(Set([searchPoint + 10, searchPoint])){
+                total++
+            }
+        }
+        if searchPoint % 10 - 1 >= 0{
+            if neutralFence.contains(Set([searchPoint - 1, searchPoint])){
+                total++
+            }
+        }
+        if searchPoint % 10 + 1 < boardSize{
+            if neutralFence.contains(Set([searchPoint + 1, searchPoint])){
+                total++
+            }
+        }
+        return total
     }
     
     // search all the connectable trace from a node
