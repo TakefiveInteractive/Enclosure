@@ -16,7 +16,9 @@ class MultiplePlayerController: UIViewController, SocketSuccessDelegate{
     @IBOutlet var createRoom: UIButton!
     @IBOutlet var searchRoom: UIButton!
     @IBOutlet var searchText: UITextField!
-
+    
+    var player = 0
+    
     override func viewDidLoad() {
         createRoom.addTarget(self, action: "createGameRoom:", forControlEvents: UIControlEvents.TouchUpInside)
         searchRoom.addTarget(self, action: "searchGameRoom:", forControlEvents: UIControlEvents.TouchUpInside)
@@ -38,9 +40,20 @@ class MultiplePlayerController: UIViewController, SocketSuccessDelegate{
         searchText.text = number
     }
     
+    func playerSequence(player: Int) {
+        self.player = player
+    }
+    
     func joinSuccess(success: Bool) {
         print("can starttttttttttTTTTT")
         self.performSegueWithIdentifier("startMPGame", sender: self)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        
+        // Create a new variable to store the instance of PlayerTableViewController
+        let destinationVC = segue.destinationViewController as! MPGame1ViewController
+        destinationVC.currentPlayer = self.player
     }
     
 }

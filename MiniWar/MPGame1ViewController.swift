@@ -8,14 +8,16 @@
 
 import UIKit
 
-class MPGame1ViewController: UIViewController, GameBoardDelegate {
+class MPGame1ViewController: UIViewController, GameBoardDelegate{
     
     var game = EnclosureGame()
+    var currentPlayer: Int = 0
     
     @IBOutlet var board: MPGameBoard!
     @IBOutlet var player1Score: UILabel!
     @IBOutlet var player0Score: UILabel!
-    
+    @IBOutlet var waiting: UIButton!
+
     @IBOutlet var player1row: Rows!
     @IBOutlet var player0row: Rows!
     
@@ -23,6 +25,8 @@ class MPGame1ViewController: UIViewController, GameBoardDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+                
+        board.onlineCurrentPlayer = currentPlayer
         board.layer.shadowOpacity = 0.3
         board.layer.shadowRadius = 1.5
         board.delegate = self
@@ -32,9 +36,9 @@ class MPGame1ViewController: UIViewController, GameBoardDelegate {
         player1row.color = player1Score.textColor
         
         restart.addTarget(self, action: "replay:", forControlEvents: UIControlEvents.TouchUpInside)
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
-    
     
     func animateScore(area: Area, score: Int, player: Int){
         
@@ -75,6 +79,8 @@ class MPGame1ViewController: UIViewController, GameBoardDelegate {
         }
         board.userInteractionEnabled = false
         board.alpha = 0.7
+        
+        mpSocket.gameEnd()
     }
     
     func updateScoreLabel(player: Int) {
@@ -121,8 +127,7 @@ class MPGame1ViewController: UIViewController, GameBoardDelegate {
     }
     
     override func viewDidAppear(animated: Bool) {
-        board.buildGame(game)
-        
+        board.buildGame(game, player: currentPlayer, parent: self)
     }
     
     override func didReceiveMemoryWarning() {

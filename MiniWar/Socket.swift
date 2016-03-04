@@ -3,9 +3,14 @@ import Foundation
 import SocketIOClientSwift
 
 
+protocol SocketGameDelegate{
+    func gotMove(move: String)
+}
+
 protocol SocketSuccessDelegate{
     func joinSuccess(success: Bool)
     func gotRoomNumber(number: String)
+    func playerSequence(player: Int)
 }
 
 public class Socket: NSObject {
@@ -14,6 +19,7 @@ public class Socket: NSObject {
     var roomNumber = ""
     
     var startDelegate: SocketSuccessDelegate?
+    var gameDelegate: SocketGameDelegate?
     
     init(roomNumber: String) {
         self.roomNumber = roomNumber
@@ -27,14 +33,17 @@ public class Socket: NSObject {
     func createRoom() {
         self.socketClient.emit("createRoom","")
     }
+
+    func gameEnd() {
+        self.socketClient.emit("gameEnd","")
+    }
     
     func searchRoom() {
         self.socketClient.emit("joinRoom", roomNumber)
     }
     
-    func roomNotExist(){
-        // delegate
-        print("roomNotExist")
+    func playerMove(move: String) {
+        self.socketClient.emit("gameMove", move)
     }
     
     func addHandlers() {
@@ -57,38 +66,25 @@ public class Socket: NSObject {
         // Using a shorthand parameter name for closures
         self.socketClient.on("roomCreated") { (data, ack) -> Void in
             print(data)
-            self.roomNumber = String(data)
-            self.startDelegate?.gotRoomNumber(String(data))
+            self.roomNumber = String(data[0])
+            self.startDelegate?.gotRoomNumber(String(data[0]))
         }
         
         self.socketClient.on("gameCanStart") { (data, ack) -> Void in
-            self.startDelegate?.joinSuccess(true)
             print(data)
-            print("data")
+            self.startDelegate?.playerSequence(Int(data[0] as! NSNumber))
+            self.startDelegate?.joinSuccess(true)
+        }
+        
+        self.socketClient.on("gameMove") { (data, ack) -> Void in
+            print(data)
+            self.gameDelegate?.gotMove(String(data[0]))
         }
         
         self.socketClient.onAny {
             print("test \($0.event)  \($0.items)")
         }
-        //gameReset
         
-        //gameDisconnect
-        
-        //gameMove
-        
-    }
-    
-    func handleStart() {
-        
-    }
-    
-    func handleWin(name:String) {
-        
-    }
-    
-    func sendRestrat() {
-        
-        self.socketClient.emit("restart", [])
     }
     
 }

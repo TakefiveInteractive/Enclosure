@@ -25,7 +25,7 @@
 		4265F75A1C81587D0000BCD7 /* AI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4265F7591C81587D0000BCD7 /* AI.swift */; };
 		4265F75C1C8207800000BCD7 /* Tool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4265F75B1C8207800000BCD7 /* Tool.swift */; };
 		42A5D15A1C7A0B5000C0AAC8 /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 42A5D1591C7A0B5000C0AAC8 /* 1.jpg */; };
-		42CAFABA1C893B4100AE6BE9 /* MPGame1ViewController copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CAFAB91C893B4100AE6BE9 /* MPGame1ViewController copy.swift */; };
+		42CAFABA1C893B4100AE6BE9 /* MPGame1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CAFAB91C893B4100AE6BE9 /* MPGame1ViewController.swift */; };
 		42CAFABC1C893CBA00AE6BE9 /* MultiplePlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CAFABB1C893CBA00AE6BE9 /* MultiplePlayerController.swift */; };
 		42CAFABE1C8943A400AE6BE9 /* MPGameBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CAFABD1C8943A400AE6BE9 /* MPGameBoard.swift */; };
 		42D7A2961C836DC200633D80 /* AIBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D7A2951C836DC200633D80 /* AIBoard.swift */; };
@@ -57,7 +57,7 @@
 		4265F7591C81587D0000BCD7 /* AI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AI.swift; sourceTree = "<group>"; };
 		4265F75B1C8207800000BCD7 /* Tool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tool.swift; sourceTree = "<group>"; };
 		42A5D1591C7A0B5000C0AAC8 /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
-		42CAFAB91C893B4100AE6BE9 /* MPGame1ViewController copy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MPGame1ViewController copy.swift"; sourceTree = "<group>"; };
+		42CAFAB91C893B4100AE6BE9 /* MPGame1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPGame1ViewController.swift; sourceTree = "<group>"; };
 		42CAFABB1C893CBA00AE6BE9 /* MultiplePlayerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiplePlayerController.swift; sourceTree = "<group>"; };
 		42CAFABD1C8943A400AE6BE9 /* MPGameBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPGameBoard.swift; sourceTree = "<group>"; };
 		42D7A2951C836DC200633D80 /* AIBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AIBoard.swift; sourceTree = "<group>"; };
@@ -110,7 +110,7 @@
 				42627FDF1C783E0700DC69EC /* AppDelegate.swift */,
 				42627FE11C783E0700DC69EC /* ViewController.swift */,
 				42CAFABB1C893CBA00AE6BE9 /* MultiplePlayerController.swift */,
-				42CAFAB91C893B4100AE6BE9 /* MPGame1ViewController copy.swift */,
+				42CAFAB91C893B4100AE6BE9 /* MPGame1ViewController.swift */,
 				42CAFABD1C8943A400AE6BE9 /* MPGameBoard.swift */,
 				4260A0B21C87CF4800116F8E /* Socket.swift */,
 				426280031C797DB400DC69EC /* Game3ViewController.swift */,
@@ -282,7 +282,7 @@
 				4260A0B31C87CF4800116F8E /* Socket.swift in Sources */,
 				42CAFABE1C8943A400AE6BE9 /* MPGameBoard.swift in Sources */,
 				426280021C7976FE00DC69EC /* Game1ViewController.swift in Sources */,
-				42CAFABA1C893B4100AE6BE9 /* MPGame1ViewController copy.swift in Sources */,
+				42CAFABA1C893B4100AE6BE9 /* MPGame1ViewController.swift in Sources */,
 				42627FE01C783E0700DC69EC /* AppDelegate.swift in Sources */,
 				4265F7581C80029B0000BCD7 /* Enumerations.swift in Sources */,
 				426280041C797DB400DC69EC /* Game3ViewController.swift in Sources */,
