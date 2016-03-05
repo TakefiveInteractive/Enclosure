@@ -8,11 +8,12 @@
 
 import UIKit
 
-class Game2ViewController: UIViewController, GameBoardDelegate {
+class AIGame1ViewController: UIViewController, GameBoardDelegate {
     
-    var game = EnclosureGame2()
     
-    @IBOutlet var board: GameBoard2!
+    var game = EnclosureGame()
+    
+    @IBOutlet var board: AIGameBoard!
     @IBOutlet var player1Score: UILabel!
     @IBOutlet var player0Score: UILabel!
     
@@ -63,7 +64,7 @@ class Game2ViewController: UIViewController, GameBoardDelegate {
     func replay(but: UIButton){
         board.userInteractionEnabled = true
         board.alpha = 1
-        game = EnclosureGame2()
+        game = EnclosureGame()
         board.buildGame(game)
     }
     
@@ -83,13 +84,13 @@ class Game2ViewController: UIViewController, GameBoardDelegate {
             UIView.animateWithDuration(0.3, delay: 0.8, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
                 self.player0Score.transform = CGAffineTransformMakeScale(1.5, 1.5)
                 }, completion: { (finish) -> Void in
-                    UIView.animateWithDuration(0.3, animations: { () -> Void in
-                        self.player0Score.transform = CGAffineTransformMakeScale(1, 1)
-                        }, completion: { (finish) -> Void in
-                            self.player0Score.tag = -2
-                    })
+                UIView.animateWithDuration(0.3, animations: { () -> Void in
+                    self.player0Score.transform = CGAffineTransformMakeScale(1, 1)
+                    }, completion: { (finish) -> Void in
+                        self.player0Score.tag = -2
+                })
             })
-            
+
         }else{
             player1Score.text = String(game.playerScore[player])
             UIView.animateWithDuration(0.3, delay: 0.8, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
@@ -129,5 +130,5 @@ class Game2ViewController: UIViewController, GameBoardDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
 }

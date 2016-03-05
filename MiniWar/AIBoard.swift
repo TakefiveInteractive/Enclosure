@@ -16,6 +16,8 @@ class AIBoard: NSObject {
     let boardSize: Int
     var originalMoves = Set<Set<Int>>()
     
+    var concurrent = 0
+    
     var depth: Int
 
     var playerToGo: Int
@@ -139,66 +141,7 @@ class AIBoard: NSObject {
         
     }
     
-//    func getAllWaysWithoutEmpty(startPoint:[Int])->Set<Set<Set<Int>>>{
-//        
-//        var tempPath = Set<Set<Set<Int>>>()
-//        
-//        let transform = startPoint[0] * 10 + startPoint[1]
-//        if canReachList[transform] != nil {
-//            var toRemove = Set<Set<Set<Int>>>()
-//            for path in canReachList[transform]!{
-//                for step in path{
-//                    if !neutralFence.contains(step){
-//                        toRemove.insert(path)
-//                        break
-//                    }
-//                }
-//            }
-//            canReachList[transform] = Tool.subtractSet(canReachList[transform]!, subset: toRemove)
-//            return canReachList[transform]!
-//        }else{
-//            
-//            func getAllWaysBranch(head:[Int], path: Set<Set<Int>>){
-//                let raw = head[0] * 10 + head[1]
-//                if path.count < playerFencesNum[playerToGo]{
-//                    if head[0] - 1 >= 0{
-//                        var tp = path
-//                        if !tp.contains(Set([raw,raw - 10])) && neutralFence.contains(Set([raw,raw - 10])){
-//                            tp.insert(Set([raw,raw - 10]))
-//                            getAllWaysBranch([head[0] - 1, head[1]], path: tp)
-//                        }
-//                    }
-//                    if head[0] + 1 < boardSize{
-//                        var tp = path
-//                        if !tp.contains(Set([raw,raw + 10])) && neutralFence.contains(Set([raw,raw + 10])){
-//                            tp.insert(Set([raw,raw + 10]))
-//                            getAllWaysBranch([head[0] + 1, head[1]], path: tp)
-//                        }
-//                    }
-//                    if head[1] - 1 >= 0{
-//                        var tp = path
-//                        if !tp.contains(Set([raw, raw - 1])) && neutralFence.contains(Set([raw, raw - 1])){
-//                            tp.insert(Set([raw,raw - 1]))
-//                            getAllWaysBranch([head[0], head[1] - 1], path: tp)
-//                        }
-//                    }
-//                    if head[1] + 1 < boardSize{
-//                        var tp = path
-//                        if !tp.contains(Set([raw, raw + 1])) && neutralFence.contains(Set([raw, raw + 1])){
-//                            tp.insert(Set([raw,raw + 1]))
-//                            getAllWaysBranch([head[0], head[1] + 1], path: tp)
-//                        }
-//                    }
-//                }else{
-//                    tempPath.insert(path)
-//                }
-//            }
-//            getAllWaysBranch(startPoint, path: Set<Set<Int>>())
-//        }
-//        canReachList[transform] = tempPath
-//        return tempPath
-//        
-//    }
+
     
     func getPossibleFences(node: Int)->[Int]{
         let x = node / 10
@@ -276,7 +219,7 @@ class AIBoard: NSObject {
                     let f = getPossibleFences(toExpand!)
                     
                     for n in f{
-                        if fence.contains(Set([toExpand!, n])) && unreachedFences.contains(Set([toExpand!, n])){
+                        if unreachedFences.contains(Set([toExpand!, n])){
                             unreachedFences.remove(Set([toExpand!, n]))
                             var mergePath:[Int]!
                             // check if meet with the head of another search path

@@ -65,19 +65,24 @@ class AI: NSObject {
                 if sortedBestEnemyMove[0].1 <= 2 && sortedBestSelfMove[0].1 <= 2{
                     // explore when both have under 2
                     print("explore when both have under 2")
-                    let bestCombinedMoves = freeSearch(rootBoard)
+                    var bestCombinedMoves = [(AIBoard, Int)]()
+                    print(Tool.profile({ () -> () in
+                        bestCombinedMoves = self.freeSearch(self.rootBoard)
+                    }))
                     
-                    if bestCombinedMoves[0].1 >= sortedBestSelfMove[0].1 * 2{
+                    
+                    if bestCombinedMoves[0].1 > sortedBestSelfMove[0].1 * 2{
                         let maxScore = bestCombinedMoves[0].1
-                        var bestResults = [AIBoard]()
+                        var bestResults = [(AIBoard, Int)]()
                         for r in bestCombinedMoves{
                             if r.1 == maxScore{
-                                bestResults.append(r.0)
+                                bestResults.append((r.0, r.0.concurrent))
                             }else{
                                 break
                             }
                         }
-                        return Tool.randomElementFromArray(bestResults).originalMoves
+                        bestResults = bestResults.sort{$0.1 > $1.1}
+                        return bestResults[0].0.originalMoves
                     }else{
                         let maxScore = sortedBestSelfMove[0].1
                         
@@ -151,6 +156,7 @@ class AI: NSObject {
                         let sortedBestCombineMove = twoStepSpecificSearch(rootBoard, points: allBestPoints)
                         
                         let maxCombinedScore = sortedBestCombineMove[0].1
+                        if maxCombinedScore + sortedBestEnemyMove[0].1 >= sortedBestSelfMove[0].1{
                         var bestCombinedResults = [AIBoard]()
                         for r in sortedBestCombineMove{
                             if r.1 == maxCombinedScore{
@@ -160,6 +166,20 @@ class AI: NSObject {
                             }
                         }
                         return Tool.randomElementFromArray(bestCombinedResults).originalMoves
+                        }else{
+                            let maxScore = sortedBestSelfMove[0].1
+                            
+                            var bestResults = [AIBoard]()
+                            for r in sortedBestSelfMove{
+                                if r.1 == maxScore{
+                                    bestResults.append(r.0)
+                                }else{
+                                    break
+                                }
+                            }
+                            return Tool.randomElementFromArray(bestResults).originalMoves
+                            
+                        }
                     }
                 }
             }
@@ -246,17 +266,25 @@ class AI: NSObject {
     func freeSearch(startBoard: AIBoard)->[(AIBoard, Int)]{
         
         print(aiBoardsDone.count)
-        var distinceBoard = Set<Set<Set<Int>>>()
+        var distinceBoard = [(Set<Set<Int>>): AIBoard]()
         for var index = 0; index < startBoard.gameTree.count; index++ {
             let b = startBoard.gameTree[index]
             let current = (b.playerToGo + 1) % 2
             b.playerToGo = current
-            if !distinceBoard.contains(b.playerFence[current]){
+            let identicalB = distinceBoard[b.playerFence[current]]
+            if identicalB == nil {
                 aiBoardsProcessing.append(b)
-                distinceBoard.insert(b.playerFence[b.playerToGo])
+                 distinceBoard[b.playerFence[current]] = b
             }else{
                 startBoard.gameTree.removeAtIndex(index)
             }
+        }
+        
+        let limit = 30
+        
+        while aiBoardsProcessing.count > limit{
+            let randIndex = Int(arc4random_uniform(UInt32(aiBoardsProcessing.count) - 1))
+            aiBoardsProcessing.removeAtIndex(randIndex)
         }
 
         aiBoardsDone = aiBoardsProcessing
@@ -270,6 +298,9 @@ class AI: NSObject {
             let pFence = b.playerFence[b.otherPlayer()]
             if let val = playerDistinct[pFence]{
                 b.identicalUpdate(val)
+                val.concurrent++
+                b.concurrent = val.concurrent
+
             }else{
                 let polygons = b.searchPolygon(b.playerFence[b.otherPlayer()])
                 b.updateArea(polygons)
@@ -461,7 +492,6 @@ class AI: NSObject {
                     if incremental{
                         total = previousVal + board.playerGain[board.otherPlayer()].count + sortedResult.last!.1
                     }
-                    print(total)
                     if sortedResult.last!.0.gameTree.count > 0{
                         //more to explore
                         calculateScore(sortedResult.last!.0, previousVal: total)

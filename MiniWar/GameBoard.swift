@@ -122,7 +122,10 @@ class GameBoard: UIView {
                 }
             }
         }
-        
+        liftElements()
+    }
+    
+    func liftElements(){
         lineLayer.backgroundColor = UIColor.clearColor().CGColor
         self.layer.addSublayer(lineLayer)
         
@@ -131,7 +134,6 @@ class GameBoard: UIView {
             self.bringSubviewToFront(node)
         }
     }
-    
     // redraw all the element on the board according to the game
     func drawBoard(){
         for node in grids{
@@ -223,31 +225,7 @@ class GameBoard: UIView {
     }
     
     func afterPlayerMove(){
-        if game.currentPlayer() == 1{
-            self.userInteractionEnabled = false
-            self.alpha = 0.65
-            let ai = AI(game: game)
-            let qualityOfServiceClass = QOS_CLASS_BACKGROUND
-            let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
-            dispatch_async(backgroundQueue, {
-                let moves = ai.calculateNextStep()
-                var fences = [Fence]()
-                var setofNodes = Set<FenceNode>()
-                for fence in Array(moves){
-                    let fenceArr = Array(fence)
-                    let node1 = self.game.nodes[fenceArr[0]/10][fenceArr[0]%10]
-                    let node2 = self.game.nodes[fenceArr[1]/10][fenceArr[1]%10]
-                    setofNodes.insert(node1)
-                    setofNodes.insert(node2)
-                    fences.append(node1.fences[node2]!)
-                }
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    self.moveToNextStep(fences, nodes: Array(setofNodes))
-                    self.alpha = 1
-                    self.userInteractionEnabled = true
-                })
-            })
-        }
+
     }
     
     func moveToNextStep(fences: [Fence], nodes:[FenceNode]){
@@ -256,18 +234,18 @@ class GameBoard: UIView {
 
         // move to next step
         let areaChanged = game.updateMove(fences, nodes: nodes)
+        for land in areaChanged{
+            self.delegate?.animateScore(land.view as! Area, score: land.score, player: (game.currentPlayer()+1)%2)
+        }
+        if areaChanged.count > 0{
+            self.delegate?.updateScoreLabel((game.currentPlayer()+1)%2)
+        }
         if game.checkEnd(){
             var winner = 1
             if game.playerScore[0] > game.playerScore[1]{
                 winner = 0
             }
             delegate?.endGame(winner)
-        }
-        for land in areaChanged{
-            self.delegate?.animateScore(land.view as! Area, score: land.score, player: (game.currentPlayer()+1)%2)
-        }
-        if areaChanged.count > 0{
-            self.delegate?.updateScoreLabel((game.currentPlayer()+1)%2)
         }
         drawBoard()
         self.delegate?.showTotalRow(game.currentPlayer(), row: game.playerFencesNum[game.currentPlayer()])
