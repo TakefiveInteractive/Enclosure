@@ -495,6 +495,14 @@
                                 <color key="textColor" red="0.47058823529999999" green="0.70588235290000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4lN-12-c8e">
+                                <rect key="frame" x="534" y="557" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="46" id="XX5-c7-gls"/>
+                                    <constraint firstAttribute="height" constant="30" id="c2Y-Jt-oxU"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -509,9 +517,11 @@
                             <constraint firstItem="a14-Ao-8mz" firstAttribute="top" secondItem="VrO-81-4Be" secondAttribute="bottom" constant="-15" id="Ses-y6-f22"/>
                             <constraint firstItem="grs-Pd-agP" firstAttribute="trailing" secondItem="U9K-en-ckw" secondAttribute="trailing" id="b9Y-H8-3YQ"/>
                             <constraint firstItem="hOR-TM-dwv" firstAttribute="centerX" secondItem="dTA-1T-7W1" secondAttribute="centerX" id="e9V-lZ-hBp"/>
+                            <constraint firstItem="TDX-oP-eJR" firstAttribute="top" secondItem="4lN-12-c8e" secondAttribute="bottom" constant="13" id="eh4-HS-etm"/>
                             <constraint firstItem="grs-Pd-agP" firstAttribute="centerY" secondItem="dTA-1T-7W1" secondAttribute="centerY" id="fpG-K1-qyR"/>
                             <constraint firstItem="Q60-Hq-ZeS" firstAttribute="trailing" secondItem="grs-Pd-agP" secondAttribute="trailing" id="gYk-89-dkj"/>
                             <constraint firstItem="grs-Pd-agP" firstAttribute="leading" secondItem="dTA-1T-7W1" secondAttribute="leading" constant="10" id="hgz-n3-SNt"/>
+                            <constraint firstAttribute="trailing" secondItem="4lN-12-c8e" secondAttribute="trailing" constant="20" id="lH7-zR-kr2"/>
                             <constraint firstItem="a14-Ao-8mz" firstAttribute="centerX" secondItem="dTA-1T-7W1" secondAttribute="centerX" id="lc4-0u-ecw"/>
                             <constraint firstItem="Q60-Hq-ZeS" firstAttribute="leading" secondItem="grs-Pd-agP" secondAttribute="leading" id="plN-UV-sDp"/>
                             <constraint firstItem="TDX-oP-eJR" firstAttribute="top" secondItem="hOR-TM-dwv" secondAttribute="bottom" constant="10" id="rt7-1M-5dC"/>
@@ -527,6 +537,7 @@
                     </view>
                     <connections>
                         <outlet property="board" destination="grs-Pd-agP" id="tzd-lu-oDw"/>
+                        <outlet property="gameEnd" destination="4lN-12-c8e" id="WEN-HJ-RWE"/>
                         <outlet property="player0Score" destination="a14-Ao-8mz" id="Zf2-Jj-FKh"/>
                         <outlet property="player0row" destination="U9K-en-ckw" id="rpl-7a-u0q"/>
                         <outlet property="player1Score" destination="nPF-hE-zWc" id="RYJ-eB-a7R"/>
@@ -678,7 +689,7 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qiA-e4-4HS">
                                 <rect key="frame" x="48" y="195" width="97" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sBN-aC-grs">
                                 <rect key="frame" x="39" y="129" width="115" height="30"/>

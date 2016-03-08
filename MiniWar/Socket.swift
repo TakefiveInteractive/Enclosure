@@ -5,6 +5,8 @@ import SocketIOClientSwift
 
 protocol SocketGameDelegate{
     func gotMove(move: String)
+    func restartGame(player: Int)
+    func requestRestart()
 }
 
 protocol SocketSuccessDelegate{
@@ -31,7 +33,7 @@ public class Socket: NSObject {
     }
     
     func createRoom() {
-        self.socketClient.emit("createRoom","")
+        self.socketClient.emit("createRoom","1")
     }
 
     func gameEnd() {
@@ -44,6 +46,14 @@ public class Socket: NSObject {
     
     func playerMove(move: String) {
         self.socketClient.emit("gameMove", move)
+    }
+    
+    func requestRestart(){
+        self.socketClient.emit("gameRestart","")
+    }
+
+    func refuseRestart(){
+        self.socketClient.emit("refuseRestart","")
     }
     
     func addHandlers() {
@@ -74,6 +84,16 @@ public class Socket: NSObject {
             print(data)
             self.startDelegate?.playerSequence(Int(data[0] as! NSNumber))
             self.startDelegate?.joinSuccess(true)
+        }
+
+        self.socketClient.on("inviteToRestart") { (data, ack) -> Void in
+            print(data)
+            self.gameDelegate?.requestRestart()
+        }
+        
+        self.socketClient.on("gameCanRestart") { (data, ack) -> Void in
+            print(data)
+            self.gameDelegate?.restartGame(Int(data[0] as! NSNumber))
         }
         
         self.socketClient.on("gameMove") { (data, ack) -> Void in

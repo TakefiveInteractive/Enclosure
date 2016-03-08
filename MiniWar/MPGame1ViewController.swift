@@ -17,6 +17,7 @@ class MPGame1ViewController: UIViewController, GameBoardDelegate{
     @IBOutlet var player1Score: UILabel!
     @IBOutlet var player0Score: UILabel!
     @IBOutlet var waiting: UIButton!
+    @IBOutlet var gameEnd: UIButton!
 
     @IBOutlet var player1row: Rows!
     @IBOutlet var player0row: Rows!
@@ -36,8 +37,12 @@ class MPGame1ViewController: UIViewController, GameBoardDelegate{
         player1row.color = player1Score.textColor
         
         restart.addTarget(self, action: "replay:", forControlEvents: UIControlEvents.TouchUpInside)
-        
+        gameEnd.addTarget(self, action: "end:", forControlEvents: UIControlEvents.TouchUpInside)
         // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    func end(button: UIButton){
+        mpSocket.gameEnd()
     }
     
     func animateScore(area: Area, score: Int, player: Int){
@@ -65,10 +70,37 @@ class MPGame1ViewController: UIViewController, GameBoardDelegate{
     }
     
     func replay(but: UIButton){
-        board.userInteractionEnabled = true
-        board.alpha = 1
-        game = EnclosureGame()
-        board.buildGame(game)
+        mpSocket.requestRestart()
+    }
+    
+    func requestedRestart(){
+        let createAccountErrorAlert: UIAlertView = UIAlertView()
+        
+        createAccountErrorAlert.delegate = self
+        
+        createAccountErrorAlert.title = "Restart Request"
+        createAccountErrorAlert.message = "your opponent ask to restart the game!"
+        createAccountErrorAlert.addButtonWithTitle("Restart")
+        createAccountErrorAlert.addButtonWithTitle("Refuse")
+        
+        createAccountErrorAlert.show()
+    }
+    
+    func alertView(View: UIAlertView!, clickedButtonAtIndex buttonIndex: Int){
+        
+        switch buttonIndex{
+        case 1:
+            print("refuse")
+            mpSocket.refuseRestart()
+            break
+        case 0:
+            print("restart")
+            mpSocket.requestRestart()
+            break
+        default:
+            break
+            //Some code here..
+        }
     }
     
     func endGame(winPlayer: Int) {
