@@ -9,154 +9,138 @@
 import UIKit
 
 class AI: NSObject {
-
+    
     let currentConfiguration: EnclosureGame
-    let rootBoard: AIBoard
+    var rootBoard: AIBoard
     init(game: EnclosureGame) {
         currentConfiguration = game
         self.rootBoard = AIBoard(bigGame: currentConfiguration)
         super.init()
+        if rootBoard.neutralLand.count < (rootBoard.boardSize - 1) * (rootBoard.boardSize - 1) / 3{
+            minToExplore = 1
+        }
     }
     
     let performance = 3
+    var minToExplore = 2
     
     var aiBoardsProcessing = [AIBoard]()
     var aiBoardsDone = [AIBoard]()
     
+    func firstPlayerFirstMove()->Set<Set<Int>>{
+        //first player first move
+        let x = Int(arc4random_uniform(UInt32(rootBoard.boardSize) - 4)) + 2
+        let y = Int(arc4random_uniform(UInt32(rootBoard.boardSize) - 4)) + 2
+        let possibleMoves = rootBoard.getAllWaysWithoutEmpty([x,y])
+        return Tool.randomElementFromSet(possibleMoves)
+    }
+    
+    func secondPlayerFirstMove()->Set<Set<Int>>{
+        //second player first move
+        let x = Int(arc4random_uniform(UInt32(rootBoard.boardSize) - 4)) + 2
+        let y = Int(arc4random_uniform(UInt32(rootBoard.boardSize) - 4)) + 2
+        let possibleMoves = rootBoard.getAllWaysWithoutEmpty([x,y])
+        return Tool.randomElementFromSet(possibleMoves)
+    }
+    
+    func useBestMove(sortedBestMove: [(AIBoard, Int)])->Set<Set<Int>>{
+        let maxScore = sortedBestMove[0].1
+        var bestResults = [AIBoard]()
+        for r in sortedBestMove{
+            if r.1 == maxScore{
+                bestResults.append(r.0)
+            }else{
+                break
+            }
+        }
+        return Tool.randomElementFromArray(bestResults).originalMoves
+    }
+    
+    
     func calculateNextStep()->Set<Set<Int>>{
         getAllPossibleMove()
-
+        
         if rootBoard.playerLastMoves[rootBoard.otherPlayer()].count == 0{
-            //first player first move
-            let x = Int(arc4random_uniform(UInt32(rootBoard.boardSize) - 4)) + 2
-            let y = Int(arc4random_uniform(UInt32(rootBoard.boardSize) - 4)) + 2
-            let possibleMoves = rootBoard.getAllWaysWithoutEmpty([x,y])
-            return Tool.randomElementFromSet(possibleMoves)
-            
+            return firstPlayerFirstMove()
         }else if rootBoard.playerLastMoves[rootBoard.playerToGo].count == 0{
-            //second player first move
-            let x = Int(arc4random_uniform(UInt32(rootBoard.boardSize) - 4)) + 2
-            let y = Int(arc4random_uniform(UInt32(rootBoard.boardSize) - 4)) + 2
-            let possibleMoves = rootBoard.getAllWaysWithoutEmpty([x,y])
-            return Tool.randomElementFromSet(possibleMoves)
-            
+            return secondPlayerFirstMove()
         }else{
             
-            if rootBoard.playerLastMoves[rootBoard.otherPlayer()].count == 1{
-                let sortedResults = twoStepEmptySearch(self.rootBoard, ways: Set<Set<Set<Int>>>())
-                let maxScore = sortedResults[0].1
-                var bestResults = [AIBoard]()
-                for r in sortedResults{
-                    if r.1 == maxScore{
-                        bestResults.append(r.0)
-                    }else{
-                        break
-                    }
-                }
-                return Tool.randomElementFromArray(bestResults).originalMoves
-
-            }else{
-                // have more prev move
+            let enemyBoard = AIBoard(copy: rootBoard)
+            enemyBoard.playerToGo = (enemyBoard.playerToGo+1) % 2
+            let sortedBestEnemyMove = searchAllPossibleRoutes(enemyBoard)
+            let sortedBestSelfMove = searchAllPossibleRoutes(rootBoard)
+            if sortedBestEnemyMove[0].1 <= minToExplore && sortedBestSelfMove[0].1 <= minToExplore{
+                // explore when both have under minToExplore
+                print("explore when both have under 2")
+                var bestCombinedMoves = self.freeSearch(self.rootBoard)
                 
-                let enemyBoard = AIBoard(copy: rootBoard)
-                enemyBoard.playerToGo = (enemyBoard.playerToGo+1) % 2
-                let sortedBestEnemyMove = searchAllPossibleRoutes(enemyBoard)
-                let sortedBestSelfMove = searchAllPossibleRoutes(rootBoard)
-                if sortedBestEnemyMove[0].1 <= 2 && sortedBestSelfMove[0].1 <= 2{
-                    // explore when both have under 2
-                    print("explore when both have under 2")
-                    var bestCombinedMoves = [(AIBoard, Int)]()
-                    print(Tool.profile({ () -> () in
-                        bestCombinedMoves = self.freeSearch(self.rootBoard)
-                    }))
-                    
-                    
-                    if bestCombinedMoves[0].1 > sortedBestSelfMove[0].1 * 2{
-                        let maxScore = bestCombinedMoves[0].1
-                        var bestResults = [(AIBoard, Int)]()
-                        for r in bestCombinedMoves{
-                            if r.1 == maxScore{
-                                bestResults.append((r.0, r.0.concurrent))
-                            }else{
-                                break
-                            }
+                if bestCombinedMoves[0].1 > sortedBestSelfMove[0].1 * 2{
+                    let maxScore = bestCombinedMoves[0].1
+                    var bestResults = [(AIBoard, Int)]()
+                    for r in bestCombinedMoves{
+                        if r.1 == maxScore{
+                            bestResults.append((r.0, r.0.concurrent))
+                        }else{
+                            break
                         }
-                        bestResults = bestResults.sort{$0.1 > $1.1}
-                        return bestResults[0].0.originalMoves
-                    }else{
-                        let maxScore = sortedBestSelfMove[0].1
-                        
-                        var bestResults = [AIBoard]()
-                        for r in sortedBestSelfMove{
-                            if r.1 == maxScore{
-                                bestResults.append(r.0)
-                            }else{
-                                break
-                            }
-                        }
-                        return Tool.randomElementFromArray(bestResults).originalMoves
                     }
-
+                    //use most concurent
+                    bestResults = bestResults.sort{$0.1 > $1.1}
+                    return bestResults[0].0.originalMoves
                 }else{
-                    if sortedBestSelfMove[0].1 >= sortedBestEnemyMove[0].1{
-                        // bigger advantage advance self
-                        print("self has bigger advantage")
-                        let maxScore = sortedBestSelfMove[0].1
-                        
-                        var bestResults = [AIBoard]()
-                        for r in sortedBestSelfMove{
-                            if r.1 == maxScore{
-                                bestResults.append(r.0)
+                    return useBestMove(sortedBestSelfMove)
+                }
+                
+            }else{
+                if sortedBestSelfMove[0].1 >= sortedBestEnemyMove[0].1{
+                    // bigger advantage advance self
+                    print("self has bigger advantage")
+                    return useBestMove(sortedBestSelfMove)
+                    
+                }else{
+                    //enemy has bigger advantage
+                    print("enemy has bigger advantage")
+                    var commonEnemyBoard = [(Set<Int>):[AIBoard]]()
+                    for r in sortedBestEnemyMove{
+                        let tempSet = Set(r.0.playerLand[r.0.otherPlayer()])
+                        if commonEnemyBoard[tempSet] != nil{
+                            commonEnemyBoard[tempSet]!.append(r.0)
+                        }else{
+                            commonEnemyBoard[tempSet] = [r.0]
+                        }
+                        if commonEnemyBoard.count > performance{
+                            break
+                        }
+                    }
+                    var allBestPoints = Set<Int>()
+                    for commonArea in commonEnemyBoard.keys{
+                        var commonSet = Set<Int>()
+                        for board in commonEnemyBoard[commonArea]!{
+                            var bestPoints = Set<Int>()
+                            for move in Array(board.originalMoves){
+                                bestPoints.insert(Array(move)[0])
+                                bestPoints.insert(Array(move)[1])
+                            }
+                            if commonSet.count == 0{
+                                commonSet = bestPoints
                             }else{
-                                break
+                                commonSet = commonSet.intersect(bestPoints)
                             }
                         }
-                        return Tool.randomElementFromArray(bestResults).originalMoves
-                        
-                    }else{
-                        //enemy has bigger advantage
-                        print("enemy has bigger advantage")
-                        var commonEnemyBoard = [(Set<Int>):[AIBoard]]()
-                        for r in sortedBestEnemyMove{
-                            let tempSet = Set(r.0.playerLand[r.0.otherPlayer()])
-                            if commonEnemyBoard[tempSet] != nil{
-                                commonEnemyBoard[tempSet]!.append(r.0)
-                            }else{
-                                commonEnemyBoard[tempSet] = [r.0]
-                            }
-                            if commonEnemyBoard.count > performance{
-                                break
-                            }
-                        }
-                        var allBestPoints = Set<Int>()
-                        for commonArea in commonEnemyBoard.keys{
-                            var commonSet = Set<Int>()
-                            for board in commonEnemyBoard[commonArea]!{
-                                var bestPoints = Set<Int>()
-                                for move in Array(board.originalMoves){
-                                    bestPoints.insert(Array(move)[0])
-                                    bestPoints.insert(Array(move)[1])
-                                }
-                                if commonSet.count == 0{
-                                    commonSet = bestPoints
-                                }else{
-                                    commonSet = commonSet.intersect(bestPoints)
-                                }
-                            }
-                            allBestPoints = Tool.mergeSet(allBestPoints, smallset: commonSet)
-                        }
-                        
-                        var moveCombine = Set<Int>()
-                        for dot in rootBoard.playerLastMoves[rootBoard.otherPlayer()]{
-                            moveCombine = Tool.mergeSet(moveCombine, smallset: dot)
-                        }
-                        allBestPoints = allBestPoints.intersect(moveCombine)
-                        print(allBestPoints)
-                        
-                        let sortedBestCombineMove = twoStepSpecificSearch(rootBoard, points: allBestPoints)
-                        
-                        let maxCombinedScore = sortedBestCombineMove[0].1
-                        if maxCombinedScore + sortedBestEnemyMove[0].1 >= sortedBestSelfMove[0].1{
+                        allBestPoints = Tool.mergeSet(allBestPoints, smallset: commonSet)
+                    }
+                    
+                    var moveCombine = Set<Int>()
+                    for dot in rootBoard.playerLastMoves[rootBoard.otherPlayer()]{
+                        moveCombine = Tool.mergeSet(moveCombine, smallset: dot)
+                    }
+                    allBestPoints = allBestPoints.intersect(moveCombine)
+                    print(allBestPoints)
+                    let sortedBestCombineMove = twoStepSpecificSearch(rootBoard, points: allBestPoints)
+                    
+                    let maxCombinedScore = sortedBestCombineMove[0].1
+                    if maxCombinedScore + sortedBestEnemyMove[0].1 >= sortedBestSelfMove[0].1{
                         var bestCombinedResults = [AIBoard]()
                         for r in sortedBestCombineMove{
                             if r.1 == maxCombinedScore{
@@ -166,20 +150,9 @@ class AI: NSObject {
                             }
                         }
                         return Tool.randomElementFromArray(bestCombinedResults).originalMoves
-                        }else{
-                            let maxScore = sortedBestSelfMove[0].1
-                            
-                            var bestResults = [AIBoard]()
-                            for r in sortedBestSelfMove{
-                                if r.1 == maxScore{
-                                    bestResults.append(r.0)
-                                }else{
-                                    break
-                                }
-                            }
-                            return Tool.randomElementFromArray(bestResults).originalMoves
-                            
-                        }
+                    }else{
+                        
+                        return useBestMove(sortedBestSelfMove)
                     }
                 }
             }
@@ -200,6 +173,7 @@ class AI: NSObject {
         for dot in dots{
             ways = Tool.mergeSet(ways, smallset: startBoard.getAllWaysWithoutEmpty([dot/10,dot%10]))
         }
+        print(dots)
         for way in ways{
             let tempBoard = AIBoard(copy: startBoard)
             tempBoard.depth++
@@ -221,7 +195,7 @@ class AI: NSObject {
         aiBoardsProcessing = [AIBoard]()
         aiBoardsDone = [AIBoard]()
         startBoard.gameTree = [AIBoard]()
-
+        
         if ways.count == 0{
             for lastMoveDot in rootBoard.playerLastMoves[rootBoard.otherPlayer()].last!{
                 ways = Tool.mergeSet(ways, smallset: startBoard.getAllWaysWithoutEmpty([lastMoveDot/10, lastMoveDot%10]))
@@ -262,7 +236,7 @@ class AI: NSObject {
         }
         return determineAction(startBoard, incremental: false).sort{$0.1 > $1.1}
     }
-
+    
     func freeSearch(startBoard: AIBoard)->[(AIBoard, Int)]{
         
         print(aiBoardsDone.count)
@@ -274,7 +248,7 @@ class AI: NSObject {
             let identicalB = distinceBoard[b.playerFence[current]]
             if identicalB == nil {
                 aiBoardsProcessing.append(b)
-                 distinceBoard[b.playerFence[current]] = b
+                distinceBoard[b.playerFence[current]] = b
             }else{
                 startBoard.gameTree.removeAtIndex(index)
             }
@@ -286,11 +260,11 @@ class AI: NSObject {
             let randIndex = Int(arc4random_uniform(UInt32(aiBoardsProcessing.count) - 1))
             aiBoardsProcessing.removeAtIndex(randIndex)
         }
-
+        
         aiBoardsDone = aiBoardsProcessing
         aiBoardsProcessing = [AIBoard]()
         print(aiBoardsDone.count)
- 
+        
         toDepthTruncate(2)
         
         var playerDistinct = [(Set<Set<Int>>):AIBoard]()
@@ -300,7 +274,7 @@ class AI: NSObject {
                 b.identicalUpdate(val)
                 val.concurrent++
                 b.concurrent = val.concurrent
-
+                
             }else{
                 let polygons = b.searchPolygon(b.playerFence[b.otherPlayer()])
                 b.updateArea(polygons)
@@ -309,7 +283,7 @@ class AI: NSObject {
         }
         return determineAction(startBoard, incremental: true).sort{$0.1 > $1.1}
     }
-
+    
     func twoStepSpecificSearch(startBoard: AIBoard, points: Set<Int>)->[(AIBoard, Int)]{
         
         aiBoardsProcessing = [AIBoard]()
@@ -472,36 +446,35 @@ class AI: NSObject {
                 total = total + self.rootBoard.getAllWaysWithoutEmpty([x,y]).count
             }
         }
-//        print(total)
     }
     
-    func determineAction(board: AIBoard, incremental: Bool)->[(AIBoard, Int)]{
-        var possibilities = [(AIBoard, Int)]()
-        
-        func calculateScore(bd: AIBoard , previousVal: Int){
-            for board in bd.gameTree{
-                if board.gameTree.count == 0{
-                    possibilities.append((board, board.playerGain[board.otherPlayer()].count + previousVal))
+    func calculateScore(bd: AIBoard , previousVal: Int, incremental: Bool){
+        for board in bd.gameTree{
+            if board.gameTree.count == 0{
+                possibilities.append((board, board.playerGain[board.otherPlayer()].count + previousVal))
+            }else{
+                var results = [(AIBoard, Int)]()
+                for child in board.gameTree{
+                    results.append((child, child.playerGain[child.otherPlayer()].count))
+                }
+                let sortedResult =  results.sort {$0.1 < $1.1}
+                var total = previousVal + board.playerGain[board.otherPlayer()].count - sortedResult.last!.1
+                if incremental{
+                    total = previousVal + board.playerGain[board.otherPlayer()].count + sortedResult.last!.1
+                }
+                if sortedResult.last!.0.gameTree.count > 0{
+                    //more to explore
+                    calculateScore(sortedResult.last!.0, previousVal: total, incremental: incremental)
                 }else{
-                    var results = [(AIBoard, Int)]()
-                    for child in board.gameTree{
-                        results.append((child, child.playerGain[child.otherPlayer()].count))
-                    }
-                    let sortedResult =  results.sort {$0.1 < $1.1}
-                    var total = previousVal + board.playerGain[board.otherPlayer()].count - sortedResult.last!.1
-                    if incremental{
-                        total = previousVal + board.playerGain[board.otherPlayer()].count + sortedResult.last!.1
-                    }
-                    if sortedResult.last!.0.gameTree.count > 0{
-                        //more to explore
-                        calculateScore(sortedResult.last!.0, previousVal: total)
-                    }else{
-                        possibilities.append((sortedResult.last!.0, total))
-                    }
+                    possibilities.append((sortedResult.last!.0, total))
                 }
             }
         }
-        calculateScore(board, previousVal: 0)
+    }
+    var possibilities = [(AIBoard, Int)]()
+    func determineAction(board: AIBoard, incremental: Bool)->[(AIBoard, Int)]{
+        possibilities = [(AIBoard, Int)]()
+        calculateScore(board, previousVal: 0, incremental:  incremental)
         return possibilities
     }
     

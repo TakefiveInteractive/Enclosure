@@ -48,6 +48,9 @@ class GameBoard: UIView {
     
     func buildGame(game: EnclosureGame){
         
+        self.delegate?.updateScoreLabel(0)
+        self.delegate?.updateScoreLabel(1)
+
         self.game = game
         
         for v in self.subviews{
