@@ -100,6 +100,13 @@ public class Socket: NSObject {
             print(data)
             self.gameDelegate?.gotMove(String(data[0]))
         }
+        self.socketClient.on("mapUpdate") { (data, ack) -> Void in
+            print(data)
+//            self.gameDelegate?.gotMove(String(data[0]))
+        }
+        self.socketClient.on("userDisconnect") { (data, ack) -> Void in
+            print(data)
+        }
         
         self.socketClient.onAny {
             print("test \($0.event)  \($0.items)")
