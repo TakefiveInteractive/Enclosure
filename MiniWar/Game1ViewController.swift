@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ChameleonFramework
 
 class Game1ViewController: UIViewController, GameBoardDelegate {
     
@@ -33,6 +34,12 @@ class Game1ViewController: UIViewController, GameBoardDelegate {
         player1row.color = player1Score.textColor
         
         restart.addTarget(self, action: "replay:", forControlEvents: UIControlEvents.TouchUpInside)
+        
+//        let backgroundView = UIView(frame: view.bounds)
+//        backgroundView.backgroundColor = UIColor(gradientStyle:UIGradientStyle.LeftToRight, withFrame:view.bounds, andColors:[UIColor(hexString: "F7959D"), UIColor(hexString: "78B4FF")])
+//        backgroundView.alpha = 0.4
+//        view.addSubview(backgroundView)
+//        view.sendSubviewToBack(backgroundView)
         // Do any additional setup after loading the view, typically from a nib.
     }
     

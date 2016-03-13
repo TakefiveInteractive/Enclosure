@@ -46,6 +46,15 @@ class MPGameBoard: GameBoard, SocketGameDelegate{
         changeBoardAvailabiliity()
     }
     
+    func restartGame(player: Int) {
+        parent.game = EnclosureGame()
+        buildGame(parent.game, player: player, parent: parent)
+    }
+    
+    func requestRestart(){
+        parent.requestedRestart()
+    }
+    
     func changeBoardAvailabiliity(){
         if game.currentPlayer() != onlineCurrentPlayer{
             self.userInteractionEnabled = false

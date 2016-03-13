@@ -137,7 +137,6 @@ class EnclosureGame: NSObject {
                 }
             }
         }
-        
 
         let set1 = Set(neutralLand)
         let set2 = Set(updatedList)
@@ -166,7 +165,9 @@ class EnclosureGame: NSObject {
     func checkEnd()->Bool{
         
         var end = true
-        
+        if neutralFence.count == 0{
+            return true
+        }
         var polygon = searchPolygon(neutralFence[0].nodes[1], good: [-1, currentPlayer()])
         for neutral in neutralLand{
             for p in polygon{
@@ -286,14 +287,16 @@ class Fence: NSObject {
 }
 
 class Land: NSObject {
+
     
-    let score = 1
+    var score: Int
     var player: Int
     let x:Int
     let y:Int
     var view:UIView!
     
     init(player: Int, x:Int, y:Int) {
+        score = 1
         self.x = x
         self.y = y
         self.player = player

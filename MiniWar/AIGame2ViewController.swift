@@ -1,45 +1,84 @@
 //
-//  Game1ViewController.swift
-//  MiniWar
+//  AIGame2ViewController.swift
+//  Enclosure
 //
-//  Created by Kedan Li on 2/20/16.
+//  Created by Kedan Li on 3/7/16.
 //  Copyright © 2016 TakeFive Interactive. All rights reserved.
 //
 
 import UIKit
 
-class Game3ViewController: UIViewController, GameBoardDelegate {
+class AIGame2ViewController: UIViewController, GameBoardDelegate {
+    var game = EnclosureGame2()
     
-    @IBOutlet var board: GameBoard!
+    @IBOutlet var board: AIGameBoard2!
     @IBOutlet var player1Score: UILabel!
     @IBOutlet var player0Score: UILabel!
-
+    
     @IBOutlet var player1row: Rows!
     @IBOutlet var player0row: Rows!
+    
     @IBOutlet var restart: UIButton!
-
-    var game = EnclosureGame()
-
-    func endGame(winPlayer: Int) {
-        
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         board.layer.shadowOpacity = 0.3
         board.layer.shadowRadius = 1.5
         board.delegate = self
-        
+        player0Score.text = "0"
+        player1Score.text = "0"
         player0row.color = player0Score.textColor
         player1row.color = player1Score.textColor
+        
         restart.addTarget(self, action: "replay:", forControlEvents: UIControlEvents.TouchUpInside)
-
         // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    
+    func animateScore(area: Area, score: Int, player: Int){
+        
+        let lab = UILabel(frame: CGRect(x: 0, y: 0, width: board.unitWidth * 1.5, height: board.unitWidth * 1.5))
+        lab.center = self.view.convertPoint(area.center, fromView: board)
+        lab.textColor = board.playerColors[player]
+        lab.alpha = 1
+        lab.textAlignment = NSTextAlignment.Center
+        lab.font = UIFont(name: "Avenir-Light", size: 30.0)
+        lab.text = "+\(score)"
+        self.view.addSubview(lab)
+        let duration = Double(arc4random_uniform(10)) * 0.08 + 1
+        UIView.animateWithDuration(duration, animations: { () -> Void in
+            lab.alpha = 0
+            if player == 0{
+                lab.transform = CGAffineTransformMakeTranslation(self.player0Score.center.x - lab.center.x, self.player0Score.center.y - lab.center.y)
+                
+            }else{
+                lab.transform = CGAffineTransformMakeTranslation(self.player1Score.center.x - lab.center.x, self.player1Score.center.y - lab.center.y)
+            }
+            }) { (haha) -> Void in
+                lab.removeFromSuperview()
+        }
+    }
+    
+    func replay(but: UIButton){
+        board.userInteractionEnabled = true
+        board.alpha = 1
+        game = EnclosureGame2()
+        board.buildGame(game)
+    }
+    
+    func endGame(winPlayer: Int) {
+        if winPlayer == 1{
+            player1Score.text = "WIN"
+        }else{
+            player0Score.text = "WIN"
+        }
+        board.userInteractionEnabled = false
+        board.alpha = 0.7
     }
     
     func updateScoreLabel(player: Int) {
         if player == 0{
-            player0Score.text = String(1)
+            player0Score.text = String(game.playerScore[player])
             UIView.animateWithDuration(0.3, delay: 0.8, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
                 self.player0Score.transform = CGAffineTransformMakeScale(1.5, 1.5)
                 }, completion: { (finish) -> Void in
@@ -51,7 +90,7 @@ class Game3ViewController: UIViewController, GameBoardDelegate {
             })
             
         }else{
-            player1Score.text = String(1)
+            player1Score.text = String(game.playerScore[player])
             UIView.animateWithDuration(0.3, delay: 0.8, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
                 self.player1Score.transform = CGAffineTransformMakeScale(1.5, 1.5)
                 }, completion: { (finish) -> Void in
@@ -62,37 +101,6 @@ class Game3ViewController: UIViewController, GameBoardDelegate {
                     })
             })
         }
-    }
-    
-    func animateScore(area: Area, score: Int, player: Int){
-        var lab = UILabel(frame: CGRect(x: 0, y: 0, width: board.unitWidth * 1.5, height: board.unitWidth * 1.5))
-        lab.center = lab.convertPoint(area.center, fromView: area)
-        lab.textColor = board.playerColors[game.currentPlayer()]
-        lab.alpha = 1
-        lab.textAlignment = NSTextAlignment.Center
-        lab.font = UIFont(name: "Avenir-Light", size: 20.0)
-        lab.text = "+\(score)"
-        self.view.addSubview(lab)
-        
-        UIView.animateWithDuration(0.3, animations: { () -> Void in
-            lab.alpha = 0
-            if player == 0{
-                lab.center == self.player0Score.center
-            }else{
-                lab.center == self.player1Score.center
-            }
-            }) { (haha) -> Void in
-                
-        }
-    }
-    
-    func replay(but: UIButton){
-        board.buildGame(game)
-    }
-    
-    func updateScore(playerscore: [Int]) {
-        player1Score.text = String(playerscore[1])
-        player0Score.text = String(playerscore[0])
     }
     
     func showTotalRow(player: Int, row: Int) {
