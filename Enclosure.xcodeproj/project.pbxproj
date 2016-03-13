@@ -24,7 +24,8 @@
 		4265F75C1C8207800000BCD7 /* Tool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4265F75B1C8207800000BCD7 /* Tool.swift */; };
 		427F5C371C952C03004EA629 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427F5C361C952C03004EA629 /* MainViewController.swift */; };
 		427F5C391C953344004EA629 /* AIChooseChapterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427F5C381C953344004EA629 /* AIChooseChapterViewController.swift */; };
-		427F5C3D1C953472004EA629 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427F5C3C1C953472004EA629 /* RegisterView.swift */; };
+		427F5C3D1C953472004EA629 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427F5C3C1C953472004EA629 /* RegisterViewController.swift */; };
+		427F5C431C95DA4D004EA629 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427F5C421C95DA4D004EA629 /* Connection.swift */; };
 		42A5D15A1C7A0B5000C0AAC8 /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 42A5D1591C7A0B5000C0AAC8 /* 1.jpg */; };
 		42CAFABA1C893B4100AE6BE9 /* MPGame1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CAFAB91C893B4100AE6BE9 /* MPGame1ViewController.swift */; };
 		42CAFABC1C893CBA00AE6BE9 /* MultiplePlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CAFABB1C893CBA00AE6BE9 /* MultiplePlayerController.swift */; };
@@ -63,7 +64,9 @@
 		4265F75B1C8207800000BCD7 /* Tool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tool.swift; sourceTree = "<group>"; };
 		427F5C361C952C03004EA629 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		427F5C381C953344004EA629 /* AIChooseChapterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AIChooseChapterViewController.swift; sourceTree = "<group>"; };
-		427F5C3C1C953472004EA629 /* RegisterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		427F5C3C1C953472004EA629 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		427F5C3E1C95D596004EA629 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		427F5C421C95DA4D004EA629 /* Connection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
 		42A5D1591C7A0B5000C0AAC8 /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
 		42CAFAB91C893B4100AE6BE9 /* MPGame1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPGame1ViewController.swift; sourceTree = "<group>"; };
 		42CAFABB1C893CBA00AE6BE9 /* MultiplePlayerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiplePlayerController.swift; sourceTree = "<group>"; };
@@ -95,6 +98,7 @@
 		239694A48C89AF62B7418150 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				427F5C3E1C95D596004EA629 /* Security.framework */,
 				3FDF6B9C43FF0722F64A3577 /* Pods_Enclosure.framework */,
 			);
 			name = Frameworks;
@@ -122,8 +126,9 @@
 			isa = PBXGroup;
 			children = (
 				42627FDF1C783E0700DC69EC /* AppDelegate.swift */,
-				427F5C3C1C953472004EA629 /* RegisterView.swift */,
+				427F5C3C1C953472004EA629 /* RegisterViewController.swift */,
 				427F5C361C952C03004EA629 /* MainViewController.swift */,
+				427F5C421C95DA4D004EA629 /* Connection.swift */,
 				427F5C3B1C953443004EA629 /* RemoteGame */,
 				42627FF31C790D5600DC69EC /* Game2ViewController.swift */,
 				42627FFF1C7974CE00DC69EC /* GameBoard2.swift */,
@@ -319,6 +324,7 @@
 				4260A0B31C87CF4800116F8E /* Socket.swift in Sources */,
 				42F5F5951C8E0CD800C2771D /* AIGame2ViewController.swift in Sources */,
 				42CAFAC01C8A58E900AE6BE9 /* AIGameBoard.swift in Sources */,
+				427F5C431C95DA4D004EA629 /* Connection.swift in Sources */,
 				42CAFAC21C8A59E500AE6BE9 /* AIGame1ViewController.swift in Sources */,
 				42CAFABE1C8943A400AE6BE9 /* MPGameBoard.swift in Sources */,
 				427F5C371C952C03004EA629 /* MainViewController.swift in Sources */,
@@ -328,7 +334,7 @@
 				42CAFAC41C8A601D00AE6BE9 /* EnclosureGame2.swift in Sources */,
 				42627FE01C783E0700DC69EC /* AppDelegate.swift in Sources */,
 				4265F7581C80029B0000BCD7 /* Enumerations.swift in Sources */,
-				427F5C3D1C953472004EA629 /* RegisterView.swift in Sources */,
+				427F5C3D1C953472004EA629 /* RegisterViewController.swift in Sources */,
 				42D7A2961C836DC200633D80 /* AIBoard.swift in Sources */,
 				427F5C391C953344004EA629 /* AIChooseChapterViewController.swift in Sources */,
 			);

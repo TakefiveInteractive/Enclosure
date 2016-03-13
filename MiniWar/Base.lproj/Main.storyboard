@@ -707,10 +707,10 @@
             </objects>
             <point key="canvasLocation" x="-1530" y="-1023"/>
         </scene>
-        <!--Register View-->
+        <!--Register View Controller-->
         <scene sceneID="vdw-gA-Z55">
             <objects>
-                <viewController id="0Gt-YU-kyX" customClass="RegisterView" customModule="Enclosure" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Register" id="0Gt-YU-kyX" customClass="RegisterViewController" customModule="Enclosure" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CP8-Ls-RbS"/>
                         <viewControllerLayoutGuide type="bottom" id="F6A-wu-WFW"/>
@@ -740,7 +740,7 @@
                     <connections>
                         <outlet property="done" destination="B51-HY-J9j" id="eY8-Ff-oSu"/>
                         <outlet property="nickNameText" destination="euv-fw-sHR" id="0vc-zY-BqL"/>
-                        <segue destination="pIg-8W-YRy" kind="presentation" identifier="toMainStart" id="6im-mW-mAE"/>
+                        <segue destination="pIg-8W-YRy" kind="presentation" identifier="toMainStart" modalTransitionStyle="crossDissolve" id="6im-mW-mAE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hue-dm-H0V" userLabel="First Responder" sceneMemberID="firstResponder"/>
