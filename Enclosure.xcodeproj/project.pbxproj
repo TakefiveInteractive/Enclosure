@@ -107,7 +107,7 @@
 		42627FD31C783E0700DC69EC = {
 			isa = PBXGroup;
 			children = (
-				42627FDE1C783E0700DC69EC /* MiniWar */,
+				42627FDE1C783E0700DC69EC /* Enclosure */,
 				42627FDD1C783E0700DC69EC /* Products */,
 				9F21061046FBDAA5E1531D81 /* Pods */,
 				239694A48C89AF62B7418150 /* Frameworks */,
@@ -122,7 +122,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		42627FDE1C783E0700DC69EC /* MiniWar */ = {
+		42627FDE1C783E0700DC69EC /* Enclosure */ = {
 			isa = PBXGroup;
 			children = (
 				42627FDF1C783E0700DC69EC /* AppDelegate.swift */,
@@ -148,6 +148,7 @@
 				42627FE81C783E0700DC69EC /* LaunchScreen.storyboard */,
 				42627FEB1C783E0700DC69EC /* Info.plist */,
 			);
+			name = Enclosure;
 			path = MiniWar;
 			sourceTree = "<group>";
 		};
