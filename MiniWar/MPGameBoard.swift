@@ -10,7 +10,7 @@ import UIKit
 
 class MPGameBoard: GameBoard, SocketGameDelegate{
     
-    var onlineCurrentPlayer = 0
+    var onlineCurrentPlayer: Int = 0
     var parent: MPGame1ViewController!
     override func afterPlayerMove(){
         

@@ -210,7 +210,7 @@ class GameBoard: UIView {
                     }
                 }
                 tempPath.removeAll()
-
+                moveToNextStep(fences, nodes: nodes)
                 afterPlayerMove()
             }
             
