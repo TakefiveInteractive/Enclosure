@@ -325,6 +325,7 @@ class Edge: UIView {
     }
     
     func update(){
+        self.alpha = 1
         var selectedColor = UIColor.clearColor()
         if gameElement.player != -1{
             selectedColor = game.playerColors[gameElement.player]
