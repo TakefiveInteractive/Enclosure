@@ -123,7 +123,6 @@ class AIGame1ViewController: UIViewController, GameBoardDelegate {
     
     override func viewDidAppear(animated: Bool) {
         board.buildGame(game)
-        
     }
     
     override func didReceiveMemoryWarning() {

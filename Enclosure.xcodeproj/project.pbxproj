@@ -10,7 +10,7 @@
 		107EE37B1986C9B911A41FF9 /* Pods_Enclosure.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FDF6B9C43FF0722F64A3577 /* Pods_Enclosure.framework */; };
 		4260A0B31C87CF4800116F8E /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4260A0B21C87CF4800116F8E /* Socket.swift */; };
 		42627FE01C783E0700DC69EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42627FDF1C783E0700DC69EC /* AppDelegate.swift */; };
-		42627FE21C783E0700DC69EC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42627FE11C783E0700DC69EC /* ViewController.swift */; };
+		42627FE21C783E0700DC69EC /* ChooseChapterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42627FE11C783E0700DC69EC /* ChooseChapterViewController.swift */; };
 		42627FE51C783E0700DC69EC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42627FE31C783E0700DC69EC /* Main.storyboard */; };
 		42627FE71C783E0700DC69EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42627FE61C783E0700DC69EC /* Assets.xcassets */; };
 		42627FEA1C783E0700DC69EC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42627FE81C783E0700DC69EC /* LaunchScreen.storyboard */; };
@@ -18,12 +18,13 @@
 		42627FF41C790D5600DC69EC /* Game2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42627FF31C790D5600DC69EC /* Game2ViewController.swift */; };
 		426280001C7974CE00DC69EC /* GameBoard2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42627FFF1C7974CE00DC69EC /* GameBoard2.swift */; };
 		426280021C7976FE00DC69EC /* Game1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426280011C7976FE00DC69EC /* Game1ViewController.swift */; };
-		426280041C797DB400DC69EC /* Game3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426280031C797DB400DC69EC /* Game3ViewController.swift */; };
-		426280061C797DCC00DC69EC /* GameBoard3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426280051C797DCC00DC69EC /* GameBoard3.swift */; };
 		4265F7561C8001540000BCD7 /* EnclosureGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4265F7551C8001540000BCD7 /* EnclosureGame.swift */; };
 		4265F7581C80029B0000BCD7 /* Enumerations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4265F7571C80029B0000BCD7 /* Enumerations.swift */; };
 		4265F75A1C81587D0000BCD7 /* AI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4265F7591C81587D0000BCD7 /* AI.swift */; };
 		4265F75C1C8207800000BCD7 /* Tool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4265F75B1C8207800000BCD7 /* Tool.swift */; };
+		427F5C371C952C03004EA629 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427F5C361C952C03004EA629 /* MainViewController.swift */; };
+		427F5C391C953344004EA629 /* AIChooseChapterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427F5C381C953344004EA629 /* AIChooseChapterViewController.swift */; };
+		427F5C3D1C953472004EA629 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427F5C3C1C953472004EA629 /* RegisterView.swift */; };
 		42A5D15A1C7A0B5000C0AAC8 /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 42A5D1591C7A0B5000C0AAC8 /* 1.jpg */; };
 		42CAFABA1C893B4100AE6BE9 /* MPGame1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CAFAB91C893B4100AE6BE9 /* MPGame1ViewController.swift */; };
 		42CAFABC1C893CBA00AE6BE9 /* MultiplePlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CAFABB1C893CBA00AE6BE9 /* MultiplePlayerController.swift */; };
@@ -47,7 +48,7 @@
 		4260A0B21C87CF4800116F8E /* Socket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Socket.swift; sourceTree = "<group>"; };
 		42627FDC1C783E0700DC69EC /* Enclosure.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Enclosure.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42627FDF1C783E0700DC69EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		42627FE11C783E0700DC69EC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		42627FE11C783E0700DC69EC /* ChooseChapterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseChapterViewController.swift; sourceTree = "<group>"; };
 		42627FE41C783E0700DC69EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		42627FE61C783E0700DC69EC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		42627FE91C783E0700DC69EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -56,12 +57,13 @@
 		42627FF31C790D5600DC69EC /* Game2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game2ViewController.swift; sourceTree = "<group>"; };
 		42627FFF1C7974CE00DC69EC /* GameBoard2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameBoard2.swift; sourceTree = "<group>"; };
 		426280011C7976FE00DC69EC /* Game1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game1ViewController.swift; sourceTree = "<group>"; };
-		426280031C797DB400DC69EC /* Game3ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game3ViewController.swift; sourceTree = "<group>"; };
-		426280051C797DCC00DC69EC /* GameBoard3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameBoard3.swift; sourceTree = "<group>"; };
 		4265F7551C8001540000BCD7 /* EnclosureGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnclosureGame.swift; sourceTree = "<group>"; };
 		4265F7571C80029B0000BCD7 /* Enumerations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enumerations.swift; sourceTree = "<group>"; };
 		4265F7591C81587D0000BCD7 /* AI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AI.swift; sourceTree = "<group>"; };
 		4265F75B1C8207800000BCD7 /* Tool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tool.swift; sourceTree = "<group>"; };
+		427F5C361C952C03004EA629 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		427F5C381C953344004EA629 /* AIChooseChapterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AIChooseChapterViewController.swift; sourceTree = "<group>"; };
+		427F5C3C1C953472004EA629 /* RegisterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		42A5D1591C7A0B5000C0AAC8 /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
 		42CAFAB91C893B4100AE6BE9 /* MPGame1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPGame1ViewController.swift; sourceTree = "<group>"; };
 		42CAFABB1C893CBA00AE6BE9 /* MultiplePlayerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiplePlayerController.swift; sourceTree = "<group>"; };
@@ -120,22 +122,34 @@
 			isa = PBXGroup;
 			children = (
 				42627FDF1C783E0700DC69EC /* AppDelegate.swift */,
-				42627FE11C783E0700DC69EC /* ViewController.swift */,
-				42CAFABB1C893CBA00AE6BE9 /* MultiplePlayerController.swift */,
-				42CAFAB91C893B4100AE6BE9 /* MPGame1ViewController.swift */,
-				42CAFABD1C8943A400AE6BE9 /* MPGameBoard.swift */,
-				4260A0B21C87CF4800116F8E /* Socket.swift */,
-				426280031C797DB400DC69EC /* Game3ViewController.swift */,
+				427F5C3C1C953472004EA629 /* RegisterView.swift */,
+				427F5C361C952C03004EA629 /* MainViewController.swift */,
+				427F5C3B1C953443004EA629 /* RemoteGame */,
 				42627FF31C790D5600DC69EC /* Game2ViewController.swift */,
 				42627FFF1C7974CE00DC69EC /* GameBoard2.swift */,
 				42CAFAC31C8A601D00AE6BE9 /* EnclosureGame2.swift */,
 				426280011C7976FE00DC69EC /* Game1ViewController.swift */,
+				42627FE11C783E0700DC69EC /* ChooseChapterViewController.swift */,
 				42627FF11C78445A00DC69EC /* GameBoard.swift */,
 				4265F7551C8001540000BCD7 /* EnclosureGame.swift */,
 				42A5D1591C7A0B5000C0AAC8 /* 1.jpg */,
 				B5D624E71C79A5C60072A98C /* 2.png */,
 				B5D624EB1C79ABC30072A98C /* 3.png */,
 				42627FE31C783E0700DC69EC /* Main.storyboard */,
+				427F5C3A1C953420004EA629 /* AI */,
+				4265F7571C80029B0000BCD7 /* Enumerations.swift */,
+				4265F75B1C8207800000BCD7 /* Tool.swift */,
+				42627FE61C783E0700DC69EC /* Assets.xcassets */,
+				42627FE81C783E0700DC69EC /* LaunchScreen.storyboard */,
+				42627FEB1C783E0700DC69EC /* Info.plist */,
+			);
+			path = MiniWar;
+			sourceTree = "<group>";
+		};
+		427F5C3A1C953420004EA629 /* AI */ = {
+			isa = PBXGroup;
+			children = (
+				427F5C381C953344004EA629 /* AIChooseChapterViewController.swift */,
 				42CAFAC11C8A59E500AE6BE9 /* AIGame1ViewController.swift */,
 				42CAFABF1C8A58E900AE6BE9 /* AIGameBoard.swift */,
 				4265F7591C81587D0000BCD7 /* AI.swift */,
@@ -143,14 +157,19 @@
 				42F5F5921C8E0C7C00C2771D /* AIGameBoard2.swift */,
 				42D7A2951C836DC200633D80 /* AIBoard.swift */,
 				42F5F5901C8DF75F00C2771D /* AI2.swift */,
-				4265F7571C80029B0000BCD7 /* Enumerations.swift */,
-				426280051C797DCC00DC69EC /* GameBoard3.swift */,
-				4265F75B1C8207800000BCD7 /* Tool.swift */,
-				42627FE61C783E0700DC69EC /* Assets.xcassets */,
-				42627FE81C783E0700DC69EC /* LaunchScreen.storyboard */,
-				42627FEB1C783E0700DC69EC /* Info.plist */,
 			);
-			path = MiniWar;
+			name = AI;
+			sourceTree = "<group>";
+		};
+		427F5C3B1C953443004EA629 /* RemoteGame */ = {
+			isa = PBXGroup;
+			children = (
+				42CAFABB1C893CBA00AE6BE9 /* MultiplePlayerController.swift */,
+				42CAFAB91C893B4100AE6BE9 /* MPGame1ViewController.swift */,
+				42CAFABD1C8943A400AE6BE9 /* MPGameBoard.swift */,
+				4260A0B21C87CF4800116F8E /* Socket.swift */,
+			);
+			name = RemoteGame;
 			sourceTree = "<group>";
 		};
 		9F21061046FBDAA5E1531D81 /* Pods */ = {
@@ -288,8 +307,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				426280061C797DCC00DC69EC /* GameBoard3.swift in Sources */,
-				42627FE21C783E0700DC69EC /* ViewController.swift in Sources */,
+				42627FE21C783E0700DC69EC /* ChooseChapterViewController.swift in Sources */,
 				42F5F5931C8E0C7C00C2771D /* AIGameBoard2.swift in Sources */,
 				4265F75A1C81587D0000BCD7 /* AI.swift in Sources */,
 				4265F75C1C8207800000BCD7 /* Tool.swift in Sources */,
@@ -303,14 +321,16 @@
 				42CAFAC01C8A58E900AE6BE9 /* AIGameBoard.swift in Sources */,
 				42CAFAC21C8A59E500AE6BE9 /* AIGame1ViewController.swift in Sources */,
 				42CAFABE1C8943A400AE6BE9 /* MPGameBoard.swift in Sources */,
+				427F5C371C952C03004EA629 /* MainViewController.swift in Sources */,
 				426280021C7976FE00DC69EC /* Game1ViewController.swift in Sources */,
 				42F5F5911C8DF75F00C2771D /* AI2.swift in Sources */,
 				42CAFABA1C893B4100AE6BE9 /* MPGame1ViewController.swift in Sources */,
 				42CAFAC41C8A601D00AE6BE9 /* EnclosureGame2.swift in Sources */,
 				42627FE01C783E0700DC69EC /* AppDelegate.swift in Sources */,
 				4265F7581C80029B0000BCD7 /* Enumerations.swift in Sources */,
-				426280041C797DB400DC69EC /* Game3ViewController.swift in Sources */,
+				427F5C3D1C953472004EA629 /* RegisterView.swift in Sources */,
 				42D7A2961C836DC200633D80 /* AIBoard.swift in Sources */,
+				427F5C391C953344004EA629 /* AIChooseChapterViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

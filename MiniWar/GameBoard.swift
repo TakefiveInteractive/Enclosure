@@ -373,10 +373,13 @@ class Rows: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = UIColor.clearColor()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        backgroundColor = UIColor.clearColor()
+        
     }
     
     let length:CGFloat = 60

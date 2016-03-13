@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ChooseChapterViewController: UIViewController {
     
     @IBOutlet var entry: UIScrollView!
     
