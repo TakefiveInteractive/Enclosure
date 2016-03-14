@@ -17,6 +17,8 @@ class Game1ViewController: UIViewController, GameBoardDelegate {
     @IBOutlet var board: GameBoard!
     @IBOutlet var player1Score: UILabel!
     @IBOutlet var player0Score: UILabel!
+    @IBOutlet var player1Name: UILabel!
+    @IBOutlet var player0Name: UILabel!
     @IBOutlet var pause: UIButton!
     @IBOutlet var timer: UIButton!
 
@@ -30,18 +32,17 @@ class Game1ViewController: UIViewController, GameBoardDelegate {
         board.delegate = self
         player0Score.text = "0"
         player1Score.text = "0"
-        playerRow.color = player0Score.textColor
         
-//        restart.addTarget(self, action: "replay:", forControlEvents: UIControlEvents.TouchUpInside)
-        
-//        let backgroundView = UIView(frame: view.bounds)
-//        backgroundView.backgroundColor = UIColor(gradientStyle:UIGradientStyle.LeftToRight, withFrame:view.bounds, andColors:[UIColor(hexString: "F7959D"), UIColor(hexString: "78B4FF")])
-//        backgroundView.alpha = 0.4
-//        view.addSubview(backgroundView)
-//        view.sendSubviewToBack(backgroundView)
-        // Do any additional setup after loading the view, typically from a nib.
     }
     
+    //        restart.addTarget(self, action: "replay:", forControlEvents: UIControlEvents.TouchUpInside)
+    
+    //        let backgroundView = UIView(frame: view.bounds)
+    //        backgroundView.backgroundColor = UIColor(gradientStyle:UIGradientStyle.LeftToRight, withFrame:view.bounds, andColors:[UIColor(hexString: "F7959D"), UIColor(hexString: "78B4FF")])
+    //        backgroundView.alpha = 0.4
+    //        view.addSubview(backgroundView)
+    //        view.sendSubviewToBack(backgroundView)
+    // Do any additional setup after loading the view, typically from a nib.
     
     func animateScore(area: Area, score: Int, player: Int){
         
@@ -112,11 +113,11 @@ class Game1ViewController: UIViewController, GameBoardDelegate {
     }
     
     func showTotalRow(player: Int, row: Int) {
-        playerRow.changeBarNum(row)
-    }
-    
-    func setTotalRow(player: Int, row: Int) {
-        playerRow.changeBarNum(row)
+        if player == 0{
+            playerRow.changeBarNum(row, color: player0Score.textColor)
+        }else{
+            playerRow.changeBarNum(row, color: player1Score.textColor)
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -129,4 +130,36 @@ class Game1ViewController: UIViewController, GameBoardDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+}
+
+class Rows: UIView {
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        backgroundColor = UIColor.clearColor()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        backgroundColor = UIColor.clearColor()
+    }
+    
+    let length:CGFloat = 60
+    var views = [UIView]()
+    
+    func changeBarNum(num : Int, color: UIColor){
+        
+        for v in views{
+            v.removeFromSuperview()
+        }
+        views = [UIView]()
+        let startIndex: CGFloat = (self.frame.width - (length * CGFloat(num) + 10 * CGFloat(num - 1))) / 2
+        for var index = 0; index < num; index++ {
+            let v = UIView(frame: CGRect(x: startIndex + (10.0 + length) * CGFloat(index), y: 0, width: length, height: 6))
+            v.backgroundColor = color
+            views.append(v)
+            self.addSubview(v)
+        }
+    }
+
 }

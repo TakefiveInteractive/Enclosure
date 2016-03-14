@@ -15,11 +15,13 @@ class Game2ViewController: UIViewController, GameBoardDelegate {
     @IBOutlet var board: GameBoard2!
     @IBOutlet var player1Score: UILabel!
     @IBOutlet var player0Score: UILabel!
+    @IBOutlet var player1Name: UILabel!
+    @IBOutlet var player0Name: UILabel!
+    @IBOutlet var pause: UIButton!
+    @IBOutlet var timer: UIButton!
     
-    @IBOutlet var player1row: Rows!
-    @IBOutlet var player0row: Rows!
+    @IBOutlet var playerRow: Rows!
     
-    @IBOutlet var restart: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,11 +30,7 @@ class Game2ViewController: UIViewController, GameBoardDelegate {
         board.delegate = self
         player0Score.text = "0"
         player1Score.text = "0"
-        player0row.color = player0Score.textColor
-        player1row.color = player1Score.textColor
         
-        restart.addTarget(self, action: "replay:", forControlEvents: UIControlEvents.TouchUpInside)
-        // Do any additional setup after loading the view, typically from a nib.
     }
     
     
@@ -106,17 +104,9 @@ class Game2ViewController: UIViewController, GameBoardDelegate {
     
     func showTotalRow(player: Int, row: Int) {
         if player == 0{
-            player0row.changeBarNum(row)
-        }else if player == 1{
-            player1row.changeBarNum(row)
-        }
-    }
-    
-    func setTotalRow(player: Int, row: Int) {
-        if player == 0{
-            player0row.changeBarNum(row)
-        }else if player == 1{
-            player1row.changeBarNum(row)
+            playerRow.changeBarNum(row, color: player0Score.textColor)
+        }else{
+            playerRow.changeBarNum(row, color: player1Score.textColor)
         }
     }
     

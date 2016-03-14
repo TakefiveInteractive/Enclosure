@@ -13,36 +13,28 @@ class MPGame1ViewController: UIViewController, GameBoardDelegate{
     var game = EnclosureGame()
     var currentPlayer: Int = 0
     
+    @IBOutlet var waiting: UIButton!
+
     @IBOutlet var board: MPGameBoard!
     @IBOutlet var player1Score: UILabel!
     @IBOutlet var player0Score: UILabel!
-    @IBOutlet var waiting: UIButton!
-    @IBOutlet var gameEnd: UIButton!
-
-    @IBOutlet var player1row: Rows!
-    @IBOutlet var player0row: Rows!
+    @IBOutlet var player1Name: UILabel!
+    @IBOutlet var player0Name: UILabel!
+    @IBOutlet var pause: UIButton!
+    @IBOutlet var timer: UIButton!
     
-    @IBOutlet var restart: UIButton!
+    @IBOutlet var playerRow: Rows!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                
         board.onlineCurrentPlayer = currentPlayer
         board.layer.shadowOpacity = 0.3
         board.layer.shadowRadius = 1.5
         board.delegate = self
         player0Score.text = "0"
         player1Score.text = "0"
-        player0row.color = player0Score.textColor
-        player1row.color = player1Score.textColor
         
-        restart.addTarget(self, action: "replay:", forControlEvents: UIControlEvents.TouchUpInside)
-        gameEnd.addTarget(self, action: "end:", forControlEvents: UIControlEvents.TouchUpInside)
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-    
-    func end(button: UIButton){
-        mpSocket.gameEnd()
     }
     
     func animateScore(area: Area, score: Int, player: Int){
@@ -144,17 +136,9 @@ class MPGame1ViewController: UIViewController, GameBoardDelegate{
     
     func showTotalRow(player: Int, row: Int) {
         if player == 0{
-            player0row.changeBarNum(row)
-        }else if player == 1{
-            player1row.changeBarNum(row)
-        }
-    }
-    
-    func setTotalRow(player: Int, row: Int) {
-        if player == 0{
-            player0row.changeBarNum(row)
-        }else if player == 1{
-            player1row.changeBarNum(row)
+            playerRow.changeBarNum(row, color: player0Score.textColor)
+        }else{
+            playerRow.changeBarNum(row, color: player1Score.textColor)
         }
     }
     

@@ -13,7 +13,6 @@ let edgeWidth: CGFloat = 4
 
 protocol GameBoardDelegate{
     func animateScore(area: Area, score: Int, player: Int)
-    func setTotalRow(player:Int, row: Int)
     func showTotalRow(player:Int, row: Int)
     func updateScoreLabel(player: Int)
     func endGame(winPlayer: Int)
@@ -62,9 +61,7 @@ class GameBoard: UIView {
         areas = [Area]()
         tempPath = [Grid]()
         
-        self.delegate?.setTotalRow(0, row: 2)
-        self.delegate?.setTotalRow(1, row: 3)
-        self.delegate?.showTotalRow(1, row: 0)
+        self.delegate?.showTotalRow(0, row: 2)
         
         unitWidth = self.frame.width / CGFloat(game.boardSize)
         
@@ -370,47 +367,5 @@ class Area: UIView {
     }
 }
 
-class Rows: UIView {
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        backgroundColor = UIColor.clearColor()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        backgroundColor = UIColor.clearColor()
-        
-    }
-    
-    let length:CGFloat = 60
-    var color: UIColor!
-    var views = [UIView]()
-    
-    func changeBarNum(num : Int){
-        
-        for v in views{
-            v.removeFromSuperview()
-        }
-        views = [UIView]()
-        let startIndex: CGFloat = (self.frame.width - (length * CGFloat(num) + 10 * CGFloat(num - 1))) / 2
-        for var index = 0; index < num; index++ {
-            let v = UIView(frame: CGRect(x: startIndex + (10.0 + length) * CGFloat(index), y: 0, width: length, height: 6))
-            v.backgroundColor = color
-            views.append(v)
-            self.addSubview(v)
-        }
-    }
-    
-    func displayNum(num : Int){
-        for var index = 0; index < views.count; index++ {
-            if index < num{
-                views[index].alpha = 1
-            }else{
-                views[index].alpha = 0
-            }
-        }
-    }
-    
-}
+
 
