@@ -17,7 +17,6 @@ class PauseViewController: UIViewController {
         resume.addTarget(self, action: "removePause:", forControlEvents: UIControlEvents.TouchUpInside)
         restart.addTarget(self, action: "restart:", forControlEvents: UIControlEvents.TouchUpInside)
         exit.addTarget(self, action: "exit:", forControlEvents: UIControlEvents.TouchUpInside)
-
     }
     
     func exit(but: UIButton){
@@ -35,6 +34,7 @@ class PauseViewController: UIViewController {
     }
     
     func removeView(){
+        (parentViewController as! GameViewController).isPaused = false
         self.view.userInteractionEnabled = false
         UIView.animateWithDuration(0.3, animations: { () -> Void in
             self.view.alpha = 0

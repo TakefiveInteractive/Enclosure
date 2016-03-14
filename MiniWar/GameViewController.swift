@@ -10,8 +10,10 @@ import UIKit
 
 class GameViewController: UIViewController, GameBoardDelegate {
     
-    
+    var nstimer = NSTimer()
     var game: EnclosureGame!
+    var timePassed = 0
+    var isPaused = false
     
     @IBOutlet var board: GameBoard!
     @IBOutlet var player1Score: UILabel!
@@ -19,10 +21,9 @@ class GameViewController: UIViewController, GameBoardDelegate {
     @IBOutlet var player1Name: UILabel!
     @IBOutlet var player0Name: UILabel!
     @IBOutlet var pause: UIButton!
-    @IBOutlet var timer: UIButton!
+    @IBOutlet var timer: UILabel!
     
     @IBOutlet var playerRow: Rows!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +33,22 @@ class GameViewController: UIViewController, GameBoardDelegate {
         player0Score.text = "0"
         player1Score.text = "0"
         pause.addTarget(self, action: "pause:", forControlEvents: UIControlEvents.TouchUpInside)
-
+        timer.userInteractionEnabled = false
+        timer.text = "0s"
+        
+        nstimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "timing", userInfo: nil, repeats: true)
+    }
+    
+    func timing(){
+        if !isPaused{
+            timePassed++
+            dispatch_async(dispatch_get_main_queue(), {
+                self.timer.text = "\(self.timePassed)s"
+            })
+        }
+    }
+    func resetTimer(){
+        timePassed = 0
     }
     
     func pause(but: UIButton){
@@ -43,6 +59,7 @@ class GameViewController: UIViewController, GameBoardDelegate {
         UIView.animateWithDuration(0.4) { () -> Void in
             pauseContr.view.alpha = 1
         }
+        isPaused = true
     }
 
     func exit(){

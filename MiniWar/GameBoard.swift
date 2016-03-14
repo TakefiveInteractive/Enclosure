@@ -16,6 +16,7 @@ protocol GameBoardDelegate{
     func showTotalRow(player:Int, row: Int)
     func updateScoreLabel(player: Int)
     func endGame(winPlayer: Int)
+    func resetTimer()
 }
 
 class GameBoard: UIView {
@@ -225,7 +226,7 @@ class GameBoard: UIView {
     }
     
     func afterPlayerMove(){
-
+        self.delegate!.resetTimer()
     }
     
     func moveToNextStep(fences: [Fence], nodes:[FenceNode]){
