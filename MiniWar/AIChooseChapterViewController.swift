@@ -129,7 +129,7 @@ class AIChooseChapterViewController: UIViewController {
         
     }
     
-    @IBAction func backToMain(segue:UIStoryboardSegue) {
+    @IBAction func backToChapter(segue:UIStoryboardSegue) {
         
     }
     

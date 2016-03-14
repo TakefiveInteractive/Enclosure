@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ChameleonFramework
 
 class MainViewController: UIViewController {
     
@@ -15,4 +16,9 @@ class MainViewController: UIViewController {
     @IBOutlet var playWithPlayerLocal: UIButton!
     @IBOutlet var rankingTounament: UIButton!
     @IBOutlet var casualRemote: UIButton!
+    
+    override func viewDidLoad() {
+        //add gradient
+        self.view.backgroundColor = UIColor(gradientStyle:UIGradientStyle.LeftToRight, withFrame:self.view.bounds, andColors:[UIColor.redColor(), UIColor.blueColor()])
+    }
 }

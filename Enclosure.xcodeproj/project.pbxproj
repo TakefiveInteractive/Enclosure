@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		107EE37B1986C9B911A41FF9 /* Pods_Enclosure.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FDF6B9C43FF0722F64A3577 /* Pods_Enclosure.framework */; };
+		42384B0B1C96E6B500A02BC8 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42384B0A1C96E6B500A02BC8 /* GameViewController.swift */; };
+		42384B0D1C96EA2800A02BC8 /* PauseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42384B0C1C96EA2800A02BC8 /* PauseViewController.swift */; };
 		4260A0B31C87CF4800116F8E /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4260A0B21C87CF4800116F8E /* Socket.swift */; };
 		42627FE01C783E0700DC69EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42627FDF1C783E0700DC69EC /* AppDelegate.swift */; };
 		42627FE21C783E0700DC69EC /* ChooseChapterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42627FE11C783E0700DC69EC /* ChooseChapterViewController.swift */; };
@@ -46,6 +48,8 @@
 		0C0293DDB018C9E49E18FA83 /* Pods-Enclosure.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Enclosure.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Enclosure/Pods-Enclosure.debug.xcconfig"; sourceTree = "<group>"; };
 		20D8FAF0367CD33306C7BA45 /* Pods-MiniWar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MiniWar.release.xcconfig"; path = "Pods/Target Support Files/Pods-MiniWar/Pods-MiniWar.release.xcconfig"; sourceTree = "<group>"; };
 		3FDF6B9C43FF0722F64A3577 /* Pods_Enclosure.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Enclosure.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		42384B0A1C96E6B500A02BC8 /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		42384B0C1C96EA2800A02BC8 /* PauseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PauseViewController.swift; sourceTree = "<group>"; };
 		4260A0B21C87CF4800116F8E /* Socket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Socket.swift; sourceTree = "<group>"; };
 		42627FDC1C783E0700DC69EC /* Enclosure.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Enclosure.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42627FDF1C783E0700DC69EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -128,6 +132,8 @@
 				42627FDF1C783E0700DC69EC /* AppDelegate.swift */,
 				427F5C3C1C953472004EA629 /* RegisterViewController.swift */,
 				427F5C361C952C03004EA629 /* MainViewController.swift */,
+				42384B0A1C96E6B500A02BC8 /* GameViewController.swift */,
+				42384B0C1C96EA2800A02BC8 /* PauseViewController.swift */,
 				427F5C421C95DA4D004EA629 /* Connection.swift */,
 				427F5C3B1C953443004EA629 /* RemoteGame */,
 				42627FF31C790D5600DC69EC /* Game2ViewController.swift */,
@@ -317,6 +323,7 @@
 				42F5F5931C8E0C7C00C2771D /* AIGameBoard2.swift in Sources */,
 				4265F75A1C81587D0000BCD7 /* AI.swift in Sources */,
 				4265F75C1C8207800000BCD7 /* Tool.swift in Sources */,
+				42384B0B1C96E6B500A02BC8 /* GameViewController.swift in Sources */,
 				426280001C7974CE00DC69EC /* GameBoard2.swift in Sources */,
 				42627FF21C78445A00DC69EC /* GameBoard.swift in Sources */,
 				42CAFABC1C893CBA00AE6BE9 /* MultiplePlayerController.swift in Sources */,
@@ -338,6 +345,7 @@
 				427F5C3D1C953472004EA629 /* RegisterViewController.swift in Sources */,
 				42D7A2961C836DC200633D80 /* AIBoard.swift in Sources */,
 				427F5C391C953344004EA629 /* AIChooseChapterViewController.swift in Sources */,
+				42384B0D1C96EA2800A02BC8 /* PauseViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,6 +464,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.TakeFiveInteractive.com.MiniWar;
 				PRODUCT_NAME = Enclosure;
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -471,6 +480,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.TakeFiveInteractive.com.MiniWar;
 				PRODUCT_NAME = Enclosure;
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

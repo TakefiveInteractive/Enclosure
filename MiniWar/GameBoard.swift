@@ -9,18 +9,19 @@
 import UIKit
 
 
-let edgeWidth: CGFloat = 4
 
 protocol GameBoardDelegate{
     func animateScore(area: Area, score: Int, player: Int)
-    func setTotalRow(player:Int, row: Int)
     func showTotalRow(player:Int, row: Int)
     func updateScoreLabel(player: Int)
     func endGame(winPlayer: Int)
+    func resetTimer()
 }
 
 class GameBoard: UIView {
     
+    let edgeWidth: CGFloat
+
     var game: EnclosureGame!
     
     let playerColors = [UIColor(red: 247.0/255.0, green: 149.0/255.0, blue: 157.0/255.0, alpha: 1), UIColor(red: 140.0/255.0, green: 196.0/255.0, blue: 299.0/255.0, alpha: 1)]
@@ -41,6 +42,11 @@ class GameBoard: UIView {
     var unitWidth: CGFloat!
     
     override init(frame: CGRect) {
+        if UIDevice.currentDevice().userInterfaceIdiom == .Pad{
+            edgeWidth = 6
+        }else{
+            edgeWidth = 4
+        }
         super.init(frame: frame)
         gesture = UIPanGestureRecognizer(target: self, action: "dragged:")
         self.addGestureRecognizer(gesture)
@@ -62,9 +68,7 @@ class GameBoard: UIView {
         areas = [Area]()
         tempPath = [Grid]()
         
-        self.delegate?.setTotalRow(0, row: 2)
-        self.delegate?.setTotalRow(1, row: 3)
-        self.delegate?.showTotalRow(1, row: 0)
+        self.delegate?.showTotalRow(0, row: 2)
         
         unitWidth = self.frame.width / CGFloat(game.boardSize)
         
@@ -228,7 +232,7 @@ class GameBoard: UIView {
     }
     
     func afterPlayerMove(){
-
+        self.delegate!.resetTimer()
     }
     
     func moveToNextStep(fences: [Fence], nodes:[FenceNode]){
@@ -272,6 +276,11 @@ class GameBoard: UIView {
     }
     
     required init?(coder aDecoder: NSCoder) {
+        if UIDevice.currentDevice().userInterfaceIdiom == .Pad{
+            edgeWidth = 6
+        }else{
+            edgeWidth = 4
+        }
         super.init(coder: aDecoder)
         gesture = UIPanGestureRecognizer(target: self, action: "dragged:")
         self.addGestureRecognizer(gesture)
@@ -289,7 +298,7 @@ class Grid: UIView {
         self.gameElement = gameElement
         self.game = game
         super.init(frame: frame)
-        centerGrid = UIView(frame: CGRect(x: 0, y: 0, width: edgeWidth, height: edgeWidth))
+        centerGrid = UIView(frame: CGRect(x: 0, y: 0, width: game.edgeWidth, height: game.edgeWidth))
         centerGrid.backgroundColor = UIColor.blackColor()
         self.addSubview(centerGrid)
         centerGrid.center = CGPoint(x: self.bounds.width / 2, y: self.bounds.width / 2)
@@ -370,47 +379,5 @@ class Area: UIView {
     }
 }
 
-class Rows: UIView {
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        backgroundColor = UIColor.clearColor()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        backgroundColor = UIColor.clearColor()
-        
-    }
-    
-    let length:CGFloat = 60
-    var color: UIColor!
-    var views = [UIView]()
-    
-    func changeBarNum(num : Int){
-        
-        for v in views{
-            v.removeFromSuperview()
-        }
-        views = [UIView]()
-        let startIndex: CGFloat = (self.frame.width - (length * CGFloat(num) + 10 * CGFloat(num - 1))) / 2
-        for var index = 0; index < num; index++ {
-            let v = UIView(frame: CGRect(x: startIndex + (10.0 + length) * CGFloat(index), y: 0, width: length, height: 6))
-            v.backgroundColor = color
-            views.append(v)
-            self.addSubview(v)
-        }
-    }
-    
-    func displayNum(num : Int){
-        for var index = 0; index < views.count; index++ {
-            if index < num{
-                views[index].alpha = 1
-            }else{
-                views[index].alpha = 0
-            }
-        }
-    }
-    
-}
+
 
