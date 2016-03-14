@@ -10,7 +10,6 @@ import UIKit
 
 var mpSocket: Socket!
 
-
 class MultiplePlayerController: UIViewController, SocketSuccessDelegate{
  
     @IBOutlet var createRoom: UIButton!
