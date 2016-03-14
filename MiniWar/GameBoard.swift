@@ -9,7 +9,6 @@
 import UIKit
 
 
-let edgeWidth: CGFloat = 4
 
 protocol GameBoardDelegate{
     func animateScore(area: Area, score: Int, player: Int)
@@ -21,6 +20,8 @@ protocol GameBoardDelegate{
 
 class GameBoard: UIView {
     
+    let edgeWidth: CGFloat
+
     var game: EnclosureGame!
     
     let playerColors = [UIColor(red: 247.0/255.0, green: 149.0/255.0, blue: 157.0/255.0, alpha: 1), UIColor(red: 140.0/255.0, green: 196.0/255.0, blue: 299.0/255.0, alpha: 1)]
@@ -41,6 +42,11 @@ class GameBoard: UIView {
     var unitWidth: CGFloat!
     
     override init(frame: CGRect) {
+        if UIDevice.currentDevice().userInterfaceIdiom == .Pad{
+            edgeWidth = 6
+        }else{
+            edgeWidth = 4
+        }
         super.init(frame: frame)
         gesture = UIPanGestureRecognizer(target: self, action: "dragged:")
         self.addGestureRecognizer(gesture)
@@ -270,6 +276,11 @@ class GameBoard: UIView {
     }
     
     required init?(coder aDecoder: NSCoder) {
+        if UIDevice.currentDevice().userInterfaceIdiom == .Pad{
+            edgeWidth = 6
+        }else{
+            edgeWidth = 4
+        }
         super.init(coder: aDecoder)
         gesture = UIPanGestureRecognizer(target: self, action: "dragged:")
         self.addGestureRecognizer(gesture)
@@ -287,7 +298,7 @@ class Grid: UIView {
         self.gameElement = gameElement
         self.game = game
         super.init(frame: frame)
-        centerGrid = UIView(frame: CGRect(x: 0, y: 0, width: edgeWidth, height: edgeWidth))
+        centerGrid = UIView(frame: CGRect(x: 0, y: 0, width: game.edgeWidth, height: game.edgeWidth))
         centerGrid.backgroundColor = UIColor.blackColor()
         self.addSubview(centerGrid)
         centerGrid.center = CGPoint(x: self.bounds.width / 2, y: self.bounds.width / 2)
