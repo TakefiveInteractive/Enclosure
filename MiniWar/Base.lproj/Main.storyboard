@@ -898,7 +898,7 @@
                             <constraint firstAttribute="trailing" secondItem="VRt-Ct-Zgr" secondAttribute="trailing" constant="10" id="RWc-bs-cki"/>
                             <constraint firstItem="QJ8-hr-2AC" firstAttribute="bottom" secondItem="Pc3-rU-0jC" secondAttribute="bottom" constant="-20" id="TjG-Hh-bbo"/>
                             <constraint firstItem="VRt-Ct-Zgr" firstAttribute="top" secondItem="Pc3-rU-0jC" secondAttribute="bottom" constant="15" id="hh2-TR-jVO"/>
-                            <constraint firstItem="VRt-Ct-Zgr" firstAttribute="centerY" secondItem="byv-D5-w1W" secondAttribute="centerY" id="ryR-sW-3NI"/>
+                            <constraint firstItem="VRt-Ct-Zgr" firstAttribute="centerY" secondItem="byv-D5-w1W" secondAttribute="centerY" constant="40" id="ryR-sW-3NI"/>
                             <constraint firstItem="VRt-Ct-Zgr" firstAttribute="leading" secondItem="byv-D5-w1W" secondAttribute="leading" constant="10" id="yf0-9R-wdd"/>
                         </constraints>
                     </view>

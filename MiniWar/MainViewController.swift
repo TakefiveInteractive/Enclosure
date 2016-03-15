@@ -19,16 +19,22 @@ class MainViewController: UIViewController {
     var sudoGame = EnclosureGame()
     
     override func viewDidLoad() {
-        
+        if !Connection.hasRegistered() {
+            Connection.register(NSUserDefaults.standardUserDefaults().objectForKey("nickName") as! String)
+
+        }
         //add gradient
 //        self.view.backgroundColor = UIColor(gradientStyle:UIGradientStyle.LeftToRight, withFrame:self.view.bounds, andColors:[UIColor.redColor(), UIColor.blueColor()])
     }
     
     override func viewDidAppear(animated: Bool) {
+//        enclosure.layer.shadowRadius = 0.8
+//        enclosure.layer.shadowOpacity = 0.3
+//        beta.layer.shadowRadius = 0.01
+//        beta.layer.shadowOpacity = 0.05
         back.buildGame(sudoGame)
         board.board = back
         board.controller = self
-        
         board.drawMenu1()
     }
 }

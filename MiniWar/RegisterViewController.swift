@@ -19,10 +19,14 @@ class RegisterViewController: UIViewController {
         
         let userId = Connection.getUserId()
         NSUserDefaults.standardUserDefaults().setObject(userId, forKey: "userId")
+        NSUserDefaults.standardUserDefaults().setObject(false, forKey: "registered")
+
     }
     
     func finishInputing(button: UIButton){
         if nickNameText.text != ""{
+            NSUserDefaults.standardUserDefaults().setObject(nickNameText.text!, forKey: "nickName")
+            Connection.register(nickNameText.text!)
             self.performSegueWithIdentifier("toMainStart", sender: self)
         }else{
             //tell user text can't be empty
