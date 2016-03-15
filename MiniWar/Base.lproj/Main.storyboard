@@ -171,8 +171,8 @@
                                         <variation key="default">
                                             <mask key="constraints">
                                                 <exclude reference="AVl-Uf-OyI"/>
-                                                <exclude reference="s5L-KP-G7Q"/>
                                                 <exclude reference="lld-9O-f8o"/>
+                                                <exclude reference="s5L-KP-G7Q"/>
                                             </mask>
                                         </variation>
                                     </view>
