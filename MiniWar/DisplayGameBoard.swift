@@ -172,6 +172,7 @@ class BoardBack: UIView {
         width = board.game.nodes[4][1].fences[board.game.nodes[4][2]]!.view.frame.origin.x - x
         height = board.game.nodes[4][2].fences[board.game.nodes[5][2]]!.view.frame.origin.y - y
         let back = BoardButton(frame: CGRect(x: x, y: y, width: width, height: height), text: "Back", color: controller.beta.textColor, size: controller.view.frame.width)
+        back.alpha = 0
         back.addTarget(self, action: "back:", forControlEvents: UIControlEvents.TouchUpInside)
         self.addSubview(back)
         
@@ -180,6 +181,7 @@ class BoardBack: UIView {
         width = board.game.nodes[2][1].fences[board.game.nodes[2][2]]!.view.frame.origin.x - x
         height = board.game.nodes[1][2].fences[board.game.nodes[2][2]]!.view.frame.origin.y - y
         let B = BoardText(frame: CGRect(x: x, y: y, width: width, height: height), text: "B", color: controller.beta.textColor, size: controller.view.frame.width)
+        B.alpha = 0
         self.addSubview(B)
         
         board.game.nodes[1][1].fences[board.game.nodes[1][2]]?.player = 0
@@ -197,6 +199,9 @@ class BoardBack: UIView {
         UIView.animateWithDuration(0.5, animations: { () -> Void in
             chapter2.alpha = 1
             chapter1.alpha = 1
+            B.alpha = 1
+            back.alpha = 1
+            
             }) { (finish) -> Void in
                 
         }
@@ -210,6 +215,7 @@ class BoardBack: UIView {
         var height = board.game.nodes[3][2].fences[board.game.nodes[4][2]]!.view.frame.origin.y - y
         let classic = BoardButton(frame: CGRect(x: x, y: y, width: width, height: height), text: "Single Player", color: controller.beta.textColor, size: controller.view.frame.width)
         classic.tag = 0
+        classic.alpha = 0
         classic.addTarget(self, action: "play:", forControlEvents: UIControlEvents.TouchUpInside)
         self.addSubview(classic)
         
@@ -220,6 +226,7 @@ class BoardBack: UIView {
         let multiplayer = BoardButton(frame: CGRect(x: x, y: y, width: width, height: height), text: "Multi Player", color: controller.beta.textColor, size: controller.view.frame.width)
         multiplayer.tag = 1
         multiplayer.addTarget(self, action: "play:", forControlEvents: UIControlEvents.TouchUpInside)
+        multiplayer.alpha = 0
         self.addSubview(multiplayer)
         
         x = board.game.nodes[3][5].fences[board.game.nodes[4][5]]!.view.frame.origin.x
@@ -227,7 +234,7 @@ class BoardBack: UIView {
         width = board.game.nodes[8][5].fences[board.game.nodes[8][6]]!.view.frame.origin.x - x
         height = board.game.nodes[3][6].fences[board.game.nodes[4][6]]!.view.frame.origin.y - y
         let ranking = BoardButton(frame: CGRect(x: x, y: y, width: width, height: height), text: "Ranking Match", color: controller.enclosure.textColor, size: controller.view.frame.width)
-        
+        ranking.alpha = 0
         self.addSubview(ranking)
         
         x = board.game.nodes[2][7].fences[board.game.nodes[3][7]]!.view.frame.origin.x
@@ -236,6 +243,7 @@ class BoardBack: UIView {
         height = board.game.nodes[4][8].fences[board.game.nodes[5][8]]!.view.frame.origin.y - y
         let friend = BoardButton(frame: CGRect(x: x, y: y, width: width, height: height), text: "Play w/ Friends", color: controller.enclosure.textColor, size: controller.view.frame.width)
         friend.tag = 2
+        friend.alpha = 0
         self.addSubview(friend)
         
         x = board.game.nodes[2][1].fences[board.game.nodes[3][1]]!.view.frame.origin.x
@@ -243,6 +251,7 @@ class BoardBack: UIView {
         width = board.game.nodes[3][1].fences[board.game.nodes[3][2]]!.view.frame.origin.x - x
         height = board.game.nodes[2][2].fences[board.game.nodes[3][2]]!.view.frame.origin.y - y
         let I = BoardText(frame: CGRect(x: x, y: y, width: width, height: height), text: "1", color: controller.beta.textColor, size: controller.view.frame.width)
+        I.alpha = 0
         self.addSubview(I)
 
         x = board.game.nodes[1][3].fences[board.game.nodes[2][3]]!.view.frame.origin.x
@@ -250,6 +259,7 @@ class BoardBack: UIView {
         width = board.game.nodes[2][3].fences[board.game.nodes[2][4]]!.view.frame.origin.x - x
         height = board.game.nodes[1][4].fences[board.game.nodes[2][4]]!.view.frame.origin.y - y
         let II = BoardText(frame: CGRect(x: x, y: y, width: width, height: height), text: "2", color: controller.beta.textColor, size: controller.view.frame.width)
+        II.alpha = 0
         self.addSubview(II)
         
         x = board.game.nodes[2][5].fences[board.game.nodes[3][5]]!.view.frame.origin.x
@@ -257,6 +267,7 @@ class BoardBack: UIView {
         width = board.game.nodes[3][5].fences[board.game.nodes[3][6]]!.view.frame.origin.x - x
         height = board.game.nodes[2][6].fences[board.game.nodes[3][6]]!.view.frame.origin.y - y
         let III = BoardText(frame: CGRect(x: x, y: y, width: width, height: height), text: "3", color: controller.enclosure.textColor, size: controller.view.frame.width)
+        III.alpha = 0
         self.addSubview(III)
         
         x = board.game.nodes[1][7].fences[board.game.nodes[2][7]]!.view.frame.origin.x
@@ -264,6 +275,7 @@ class BoardBack: UIView {
         width = board.game.nodes[2][7].fences[board.game.nodes[2][8]]!.view.frame.origin.x - x
         height = board.game.nodes[1][8].fences[board.game.nodes[2][8]]!.view.frame.origin.y - y
         let IV = BoardText(frame: CGRect(x: x, y: y, width: width, height: height), text: "4", color: controller.enclosure.textColor,size: controller.view.frame.width)
+        IV.alpha = 0
         self.addSubview(IV)
         
         elements.append(I)
@@ -296,6 +308,15 @@ class BoardBack: UIView {
         board.game.nodes[2][8].fences[board.game.nodes[1][8]]?.player = 1
         
         board.drawBoard()
+        
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+            for elem in self.elements{
+                elem.alpha = 1
+            }
+            
+            }) { (finish) -> Void in
+                
+        }
     }
     
     

@@ -14,6 +14,7 @@ let blutOnBoard = UIColor(hexString: "78B4FF")
 
 class MainViewController: UIViewController {
     
+    @IBOutlet weak var titleWidth: NSLayoutConstraint!
     @IBOutlet var back: DisplayGameBoard!
     @IBOutlet var board: BoardBack!
     @IBOutlet var beta: UILabel!
@@ -31,6 +32,12 @@ class MainViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         
+        if view.frame.width < 350{
+            enclosure.font = UIFont(name: "AvenirNext-Regular", size: 50.0)
+            titleWidth.constant = 250
+        }
+        
+        
         print(self.view.frame.width)
 //        enclosure.layer.shadowRadius = 0.8
 //        enclosure.layer.shadowOpacity = 0.3
@@ -40,6 +47,8 @@ class MainViewController: UIViewController {
         board.board = back
         board.controller = self
         board.drawMenu1()
+        
+
     }
     
     @IBAction func backToMain(segue:UIStoryboardSegue) {

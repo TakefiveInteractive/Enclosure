@@ -693,7 +693,7 @@
                         <outlet property="player1Score" destination="dxV-kA-uiN" id="bqm-Tr-HVO"/>
                         <outlet property="playerRow" destination="cGL-wc-PgO" id="M6v-eF-t17"/>
                         <outlet property="timer" destination="drw-lM-NHY" id="zQh-Ry-ixx"/>
-                        <segue destination="mn9-vI-XcC" kind="unwind" identifier="exit" unwindAction="backToMain:" id="OZw-bb-Z3a"/>
+                        <segue destination="mn9-vI-XcC" kind="unwind" identifier="exit" unwindAction="backToChapter:" id="OZw-bb-Z3a"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lSe-Po-1VR" sceneMemberID="firstResponder"/>
@@ -873,10 +873,11 @@
                         <outlet property="beta" destination="QJ8-hr-2AC" id="36l-6k-tgl"/>
                         <outlet property="board" destination="VRt-Ct-Zgr" id="amd-VW-xG0"/>
                         <outlet property="enclosure" destination="Pc3-rU-0jC" id="0ZY-Nd-SZW"/>
+                        <outlet property="titleWidth" destination="VOV-b7-w5g" id="dUf-xB-fhC"/>
                         <segue destination="TNG-OT-gmg" kind="presentation" identifier="playAI1" modalTransitionStyle="crossDissolve" id="zLq-wp-rsx"/>
-                        <segue destination="W0P-NR-Pgy" kind="presentation" identifier="playAI2" modalTransitionStyle="crossDissolve" id="Y8J-L6-kTu"/>
+                        <segue destination="W0P-NR-Pgy" kind="presentation" identifier="playAI1" modalTransitionStyle="crossDissolve" id="Y8J-L6-kTu"/>
                         <segue destination="Ysi-Pd-sMV" kind="presentation" identifier="play1" modalTransitionStyle="crossDissolve" id="pt9-Tn-0VR"/>
-                        <segue destination="waq-4p-1lB" kind="presentation" identifier="play2" modalTransitionStyle="crossDissolve" id="32a-5F-XH3"/>
+                        <segue destination="waq-4p-1lB" kind="presentation" identifier="play2" id="32a-5F-XH3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IhR-Db-SJl" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1067,7 +1068,7 @@
                         <outlet property="player1Score" destination="abq-mX-vPR" id="UzC-8g-3Vp"/>
                         <outlet property="playerRow" destination="wIo-ST-Pxz" id="7pF-G8-VBb"/>
                         <outlet property="timer" destination="gCi-CH-LHW" id="LF5-dg-PE1"/>
-                        <segue destination="IHB-w0-Ftl" kind="unwind" identifier="exit" unwindAction="backToMain:" id="ANB-cy-5FR"/>
+                        <segue destination="IHB-w0-Ftl" kind="unwind" unwindAction="backToMain:" id="ANB-cy-5FR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lIP-Ej-M3Q" sceneMemberID="firstResponder"/>
