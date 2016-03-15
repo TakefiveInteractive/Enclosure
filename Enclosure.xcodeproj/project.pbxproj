@@ -10,6 +10,7 @@
 		107EE37B1986C9B911A41FF9 /* Pods_Enclosure.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FDF6B9C43FF0722F64A3577 /* Pods_Enclosure.framework */; };
 		42384B0B1C96E6B500A02BC8 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42384B0A1C96E6B500A02BC8 /* GameViewController.swift */; };
 		42384B0D1C96EA2800A02BC8 /* PauseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42384B0C1C96EA2800A02BC8 /* PauseViewController.swift */; };
+		42384B0F1C975CDE00A02BC8 /* DisplayGameBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42384B0E1C975CDE00A02BC8 /* DisplayGameBoard.swift */; };
 		4260A0B31C87CF4800116F8E /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4260A0B21C87CF4800116F8E /* Socket.swift */; };
 		42627FE01C783E0700DC69EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42627FDF1C783E0700DC69EC /* AppDelegate.swift */; };
 		42627FE21C783E0700DC69EC /* ChooseChapterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42627FE11C783E0700DC69EC /* ChooseChapterViewController.swift */; };
@@ -39,6 +40,7 @@
 		42F5F5911C8DF75F00C2771D /* AI2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F5F5901C8DF75F00C2771D /* AI2.swift */; };
 		42F5F5931C8E0C7C00C2771D /* AIGameBoard2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F5F5921C8E0C7C00C2771D /* AIGameBoard2.swift */; };
 		42F5F5951C8E0CD800C2771D /* AIGame2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F5F5941C8E0CD800C2771D /* AIGame2ViewController.swift */; };
+		42F7C7B31C97789B00D09BEE /* backBoard.png in Resources */ = {isa = PBXBuildFile; fileRef = 42F7C7B21C97789B00D09BEE /* backBoard.png */; };
 		6204250E972F9D33F452A800 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		B5D624E81C79A5C60072A98C /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = B5D624E71C79A5C60072A98C /* 2.png */; };
 		B5D624EC1C79ABC30072A98C /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = B5D624EB1C79ABC30072A98C /* 3.png */; };
@@ -50,6 +52,7 @@
 		3FDF6B9C43FF0722F64A3577 /* Pods_Enclosure.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Enclosure.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		42384B0A1C96E6B500A02BC8 /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		42384B0C1C96EA2800A02BC8 /* PauseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PauseViewController.swift; sourceTree = "<group>"; };
+		42384B0E1C975CDE00A02BC8 /* DisplayGameBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayGameBoard.swift; sourceTree = "<group>"; };
 		4260A0B21C87CF4800116F8E /* Socket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Socket.swift; sourceTree = "<group>"; };
 		42627FDC1C783E0700DC69EC /* Enclosure.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Enclosure.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42627FDF1C783E0700DC69EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -82,6 +85,7 @@
 		42F5F5901C8DF75F00C2771D /* AI2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AI2.swift; sourceTree = "<group>"; };
 		42F5F5921C8E0C7C00C2771D /* AIGameBoard2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AIGameBoard2.swift; sourceTree = "<group>"; };
 		42F5F5941C8E0CD800C2771D /* AIGame2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AIGame2ViewController.swift; sourceTree = "<group>"; };
+		42F7C7B21C97789B00D09BEE /* backBoard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backBoard.png; sourceTree = "<group>"; };
 		B5D624E71C79A5C60072A98C /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
 		B5D624EB1C79ABC30072A98C /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -132,6 +136,7 @@
 				42627FDF1C783E0700DC69EC /* AppDelegate.swift */,
 				427F5C3C1C953472004EA629 /* RegisterViewController.swift */,
 				427F5C361C952C03004EA629 /* MainViewController.swift */,
+				42384B0E1C975CDE00A02BC8 /* DisplayGameBoard.swift */,
 				42384B0A1C96E6B500A02BC8 /* GameViewController.swift */,
 				42384B0C1C96EA2800A02BC8 /* PauseViewController.swift */,
 				427F5C421C95DA4D004EA629 /* Connection.swift */,
@@ -146,6 +151,7 @@
 				42A5D1591C7A0B5000C0AAC8 /* 1.jpg */,
 				B5D624E71C79A5C60072A98C /* 2.png */,
 				B5D624EB1C79ABC30072A98C /* 3.png */,
+				42F7C7B21C97789B00D09BEE /* backBoard.png */,
 				42627FE31C783E0700DC69EC /* Main.storyboard */,
 				427F5C3A1C953420004EA629 /* AI */,
 				4265F7571C80029B0000BCD7 /* Enumerations.swift */,
@@ -257,6 +263,7 @@
 			files = (
 				42627FEA1C783E0700DC69EC /* LaunchScreen.storyboard in Resources */,
 				B5D624E81C79A5C60072A98C /* 2.png in Resources */,
+				42F7C7B31C97789B00D09BEE /* backBoard.png in Resources */,
 				B5D624EC1C79ABC30072A98C /* 3.png in Resources */,
 				42A5D15A1C7A0B5000C0AAC8 /* 1.jpg in Resources */,
 				42627FE71C783E0700DC69EC /* Assets.xcassets in Resources */,
@@ -344,6 +351,7 @@
 				4265F7581C80029B0000BCD7 /* Enumerations.swift in Sources */,
 				427F5C3D1C953472004EA629 /* RegisterViewController.swift in Sources */,
 				42D7A2961C836DC200633D80 /* AIBoard.swift in Sources */,
+				42384B0F1C975CDE00A02BC8 /* DisplayGameBoard.swift in Sources */,
 				427F5C391C953344004EA629 /* AIChooseChapterViewController.swift in Sources */,
 				42384B0D1C96EA2800A02BC8 /* PauseViewController.swift in Sources */,
 			);

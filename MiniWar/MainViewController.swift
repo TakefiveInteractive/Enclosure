@@ -11,14 +11,24 @@ import ChameleonFramework
 
 class MainViewController: UIViewController {
     
-    @IBOutlet var back: UIView!
-    @IBOutlet var playWithAI: UIButton!
-    @IBOutlet var playWithPlayerLocal: UIButton!
-    @IBOutlet var rankingTounament: UIButton!
-    @IBOutlet var casualRemote: UIButton!
+    @IBOutlet var back: DisplayGameBoard!
+    @IBOutlet var board: BoardBack!
+    @IBOutlet var beta: UILabel!
+    @IBOutlet var enclosure: UILabel!
+
+    var sudoGame = EnclosureGame()
     
     override func viewDidLoad() {
+        
         //add gradient
-        self.view.backgroundColor = UIColor(gradientStyle:UIGradientStyle.LeftToRight, withFrame:self.view.bounds, andColors:[UIColor.redColor(), UIColor.blueColor()])
+//        self.view.backgroundColor = UIColor(gradientStyle:UIGradientStyle.LeftToRight, withFrame:self.view.bounds, andColors:[UIColor.redColor(), UIColor.blueColor()])
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        back.buildGame(sudoGame)
+        board.board = back
+        board.controller = self
+        
+        board.drawMenu1()
     }
 }

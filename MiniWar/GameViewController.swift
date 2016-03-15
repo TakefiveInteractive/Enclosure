@@ -102,6 +102,7 @@ class GameViewController: UIViewController, GameBoardDelegate {
         board.alpha = 1
         game = EnclosureGame()
         board.buildGame(game)
+        resetTimer()
     }
     
     func endGame(winPlayer: Int) {

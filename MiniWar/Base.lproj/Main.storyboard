@@ -360,25 +360,6 @@
                                     <constraint firstAttribute="height" constant="15" id="eDD-YM-Svd"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0bo-UR-TCn">
-                                <rect key="frame" x="540" y="30" width="40" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="PIY-IT-Jjm"/>
-                                    <constraint firstAttribute="height" constant="40" id="UyE-0E-mDA"/>
-                                    <constraint firstAttribute="height" constant="40" id="ipc-zO-uP1"/>
-                                    <constraint firstAttribute="width" constant="40" id="z2p-aG-6Ng"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="AvenirNext-Heavy" family="Avenir Next" pointSize="30"/>
-                                <state key="normal" title="II">
-                                    <color key="titleColor" red="0.22352941179999999" green="0.22352941179999999" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="PIY-IT-Jjm"/>
-                                        <exclude reference="UyE-0E-mDA"/>
-                                    </mask>
-                                </variation>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="luV-GT-LBp">
                                 <rect key="frame" x="40" y="477" width="78" height="68"/>
                                 <constraints>
@@ -458,6 +439,25 @@
                                     <constraint firstAttribute="width" secondItem="Zph-ZM-gt5" secondAttribute="height" multiplier="1:1" id="dnI-SV-Cq8"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0bo-UR-TCn">
+                                <rect key="frame" x="540" y="28" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="PIY-IT-Jjm"/>
+                                    <constraint firstAttribute="height" constant="40" id="UyE-0E-mDA"/>
+                                    <constraint firstAttribute="height" constant="40" id="ipc-zO-uP1"/>
+                                    <constraint firstAttribute="width" constant="40" id="z2p-aG-6Ng"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Heavy" family="Avenir Next" pointSize="30"/>
+                                <state key="normal" title="II">
+                                    <color key="titleColor" red="0.22352941179999999" green="0.22352941179999999" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="PIY-IT-Jjm"/>
+                                        <exclude reference="UyE-0E-mDA"/>
+                                    </mask>
+                                </variation>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -826,54 +826,87 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VRt-Ct-Zgr">
-                                <rect key="frame" x="15" y="15" width="570" height="570"/>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VRt-Ct-Zgr" customClass="BoardBack" customModule="Enclosure" customModuleProvider="target">
+                                <rect key="frame" x="111" y="162" width="379" height="378"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UAc-Uj-VrA">
-                                        <rect key="frame" x="33" y="77" width="124" height="30"/>
-                                        <state key="normal" title="Player vs AI"/>
-                                        <connections>
-                                            <segue destination="8Q8-Xb-xbu" kind="presentation" modalTransitionStyle="crossDissolve" id="zz1-85-xn4"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pv4-X8-3mi">
-                                        <rect key="frame" x="240" y="77" width="124" height="30"/>
-                                        <state key="normal" title="Player vs Player"/>
-                                        <connections>
-                                            <segue destination="emQ-dB-4BZ" kind="presentation" modalTransitionStyle="crossDissolve" id="6cS-Uw-8Nd"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mc0-K5-ldh">
-                                        <rect key="frame" x="33" y="211" width="124" height="30"/>
-                                        <state key="normal" title="Ranking Game"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dVC-JW-sdL">
-                                        <rect key="frame" x="240" y="222" width="124" height="30"/>
-                                        <state key="normal" title="Player Remotely"/>
-                                        <connections>
-                                            <segue destination="oGt-sW-HcV" kind="presentation" modalTransitionStyle="crossDissolve" id="x6y-xS-0MC"/>
-                                        </connections>
-                                    </button>
+                                    <view alpha="0.65000000000000002" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Ch-p4-Lfo" customClass="DisplayGameBoard" customModule="Enclosure" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="379" height="378"/>
+                                        <color key="tintColor" red="0.98431372549019602" green="0.98431372549019602" blue="0.9882352941176471" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="VRt-Ct-Zgr" secondAttribute="height" id="3Va-m4-5jW"/>
+                                    <constraint firstItem="7Ch-p4-Lfo" firstAttribute="leading" secondItem="VRt-Ct-Zgr" secondAttribute="leading" id="MiC-Jf-7Pt"/>
+                                    <constraint firstAttribute="trailing" secondItem="7Ch-p4-Lfo" secondAttribute="trailing" id="cBw-H0-f0L"/>
+                                    <constraint firstItem="7Ch-p4-Lfo" firstAttribute="top" secondItem="VRt-Ct-Zgr" secondAttribute="top" id="gaj-T7-hN0"/>
+                                    <constraint firstAttribute="bottom" secondItem="7Ch-p4-Lfo" secondAttribute="bottom" id="thK-Se-vJs"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text=".Beta" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QJ8-hr-2AC">
+                                <rect key="frame" x="391" y="110" width="78" height="33"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="130" id="2VO-JQ-LrD"/>
+                                    <constraint firstAttribute="height" constant="33" id="5AW-Ng-N4f"/>
+                                    <constraint firstAttribute="width" constant="78" id="6FY-7f-a4q"/>
+                                    <constraint firstAttribute="width" constant="78" id="IZi-zM-s5n"/>
+                                    <constraint firstAttribute="width" constant="150" id="Oy0-d7-R4K"/>
+                                    <constraint firstAttribute="height" constant="68" id="Sjj-ZD-2rk"/>
+                                    <constraint firstAttribute="height" constant="68" id="eZU-0f-jJq"/>
+                                    <constraint firstAttribute="height" constant="30" id="q7H-be-ahi"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="27"/>
+                                <color key="textColor" red="0.96868525549999995" green="0.58464274770000002" blue="0.61445747009999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="2VO-JQ-LrD"/>
+                                        <exclude reference="IZi-zM-s5n"/>
+                                        <exclude reference="Oy0-d7-R4K"/>
+                                        <exclude reference="Sjj-ZD-2rk"/>
+                                        <exclude reference="eZU-0f-jJq"/>
+                                        <exclude reference="q7H-be-ahi"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Enclosure" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pc3-rU-0jC">
+                                <rect key="frame" x="103" y="80" width="280" height="68"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="68" id="78Y-ji-Zsx"/>
+                                    <constraint firstAttribute="width" constant="78" id="KG1-j1-8il"/>
+                                    <constraint firstAttribute="height" constant="60" id="QsW-Ec-6yx"/>
+                                    <constraint firstAttribute="width" constant="280" id="VOV-b7-w5g"/>
+                                    <constraint firstAttribute="height" constant="68" id="aei-ph-vFE"/>
+                                    <constraint firstAttribute="width" constant="150" id="btY-3Z-X2O"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="60"/>
+                                <color key="textColor" red="0.47058823529999999" green="0.70588235290000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="78Y-ji-Zsx"/>
+                                        <exclude reference="KG1-j1-8il"/>
+                                        <exclude reference="aei-ph-vFE"/>
+                                        <exclude reference="btY-3Z-X2O"/>
+                                    </mask>
+                                </variation>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="VRt-Ct-Zgr" secondAttribute="trailing" constant="15" id="RWc-bs-cki"/>
+                            <constraint firstItem="QJ8-hr-2AC" firstAttribute="leading" secondItem="Pc3-rU-0jC" secondAttribute="trailing" id="KJ2-Qm-bo4"/>
+                            <constraint firstItem="Pc3-rU-0jC" firstAttribute="centerX" secondItem="byv-D5-w1W" secondAttribute="centerX" constant="-30" id="N1w-jN-t67"/>
+                            <constraint firstAttribute="trailing" secondItem="VRt-Ct-Zgr" secondAttribute="trailing" constant="10" id="RWc-bs-cki"/>
+                            <constraint firstItem="QJ8-hr-2AC" firstAttribute="bottom" secondItem="Pc3-rU-0jC" secondAttribute="bottom" constant="-20" id="TjG-Hh-bbo"/>
+                            <constraint firstItem="VRt-Ct-Zgr" firstAttribute="top" secondItem="Pc3-rU-0jC" secondAttribute="bottom" constant="15" id="hh2-TR-jVO"/>
                             <constraint firstItem="VRt-Ct-Zgr" firstAttribute="centerY" secondItem="byv-D5-w1W" secondAttribute="centerY" id="ryR-sW-3NI"/>
-                            <constraint firstItem="VRt-Ct-Zgr" firstAttribute="leading" secondItem="byv-D5-w1W" secondAttribute="leading" constant="15" id="yf0-9R-wdd"/>
+                            <constraint firstItem="VRt-Ct-Zgr" firstAttribute="leading" secondItem="byv-D5-w1W" secondAttribute="leading" constant="10" id="yf0-9R-wdd"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="back" destination="VRt-Ct-Zgr" id="4rd-gY-Q8g"/>
-                        <outlet property="casualRemote" destination="dVC-JW-sdL" id="m7q-OC-NSa"/>
-                        <outlet property="playWithAI" destination="UAc-Uj-VrA" id="ckC-iv-iVB"/>
-                        <outlet property="playWithPlayerLocal" destination="Pv4-X8-3mi" id="6bN-m6-Sav"/>
-                        <outlet property="rankingTounament" destination="Mc0-K5-ldh" id="NZL-1V-QDX"/>
+                        <outlet property="back" destination="7Ch-p4-Lfo" id="Q9U-x0-5bD"/>
+                        <outlet property="beta" destination="QJ8-hr-2AC" id="36l-6k-tgl"/>
+                        <outlet property="board" destination="VRt-Ct-Zgr" id="amd-VW-xG0"/>
+                        <outlet property="enclosure" destination="Pc3-rU-0jC" id="0ZY-Nd-SZW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IhR-Db-SJl" userLabel="First Responder" sceneMemberID="firstResponder"/>
