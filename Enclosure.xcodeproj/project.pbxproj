@@ -42,6 +42,12 @@
 		6204250E972F9D33F452A800 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		B5D624E81C79A5C60072A98C /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = B5D624E71C79A5C60072A98C /* 2.png */; };
 		B5D624EC1C79ABC30072A98C /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = B5D624EB1C79ABC30072A98C /* 3.png */; };
+		DA44510B1C97C34D00AA106F /* board.png in Resources */ = {isa = PBXBuildFile; fileRef = DA44510A1C97C34D00AA106F /* board.png */; };
+		DA44510D1C97C35400AA106F /* classic_button.png in Resources */ = {isa = PBXBuildFile; fileRef = DA44510C1C97C35400AA106F /* classic_button.png */; };
+		DA44510F1C97C35A00AA106F /* enlosure_title.png in Resources */ = {isa = PBXBuildFile; fileRef = DA44510E1C97C35A00AA106F /* enlosure_title.png */; };
+		DA4451111C97C35F00AA106F /* multi_button.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4451101C97C35F00AA106F /* multi_button.png */; };
+		DA4451131C97C36400AA106F /* rank_button.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4451121C97C36400AA106F /* rank_button.png */; };
+		DA4451151C97C36B00AA106F /* remote_button.png in Resources */ = {isa = PBXBuildFile; fileRef = DA4451141C97C36B00AA106F /* remote_button.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +90,12 @@
 		42F5F5941C8E0CD800C2771D /* AIGame2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AIGame2ViewController.swift; sourceTree = "<group>"; };
 		B5D624E71C79A5C60072A98C /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
 		B5D624EB1C79ABC30072A98C /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
+		DA44510A1C97C34D00AA106F /* board.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = board.png; sourceTree = "<group>"; };
+		DA44510C1C97C35400AA106F /* classic_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = classic_button.png; sourceTree = "<group>"; };
+		DA44510E1C97C35A00AA106F /* enlosure_title.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enlosure_title.png; sourceTree = "<group>"; };
+		DA4451101C97C35F00AA106F /* multi_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = multi_button.png; sourceTree = "<group>"; };
+		DA4451121C97C36400AA106F /* rank_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rank_button.png; sourceTree = "<group>"; };
+		DA4451141C97C36B00AA106F /* remote_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = remote_button.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +163,7 @@
 				4265F7571C80029B0000BCD7 /* Enumerations.swift */,
 				4265F75B1C8207800000BCD7 /* Tool.swift */,
 				42627FE61C783E0700DC69EC /* Assets.xcassets */,
+				DA4451091C97C33800AA106F /* img */,
 				42627FE81C783E0700DC69EC /* LaunchScreen.storyboard */,
 				42627FEB1C783E0700DC69EC /* Info.plist */,
 			);
@@ -191,6 +204,19 @@
 				0C0293DDB018C9E49E18FA83 /* Pods-Enclosure.debug.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		DA4451091C97C33800AA106F /* img */ = {
+			isa = PBXGroup;
+			children = (
+				DA4451141C97C36B00AA106F /* remote_button.png */,
+				DA4451121C97C36400AA106F /* rank_button.png */,
+				DA4451101C97C35F00AA106F /* multi_button.png */,
+				DA44510E1C97C35A00AA106F /* enlosure_title.png */,
+				DA44510C1C97C35400AA106F /* classic_button.png */,
+				DA44510A1C97C34D00AA106F /* board.png */,
+			);
+			name = img;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -255,11 +281,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA44510B1C97C34D00AA106F /* board.png in Resources */,
+				DA4451111C97C35F00AA106F /* multi_button.png in Resources */,
 				42627FEA1C783E0700DC69EC /* LaunchScreen.storyboard in Resources */,
+				DA4451151C97C36B00AA106F /* remote_button.png in Resources */,
+				DA44510D1C97C35400AA106F /* classic_button.png in Resources */,
 				B5D624E81C79A5C60072A98C /* 2.png in Resources */,
+				DA4451131C97C36400AA106F /* rank_button.png in Resources */,
 				B5D624EC1C79ABC30072A98C /* 3.png in Resources */,
 				42A5D15A1C7A0B5000C0AAC8 /* 1.jpg in Resources */,
 				42627FE71C783E0700DC69EC /* Assets.xcassets in Resources */,
+				DA44510F1C97C35A00AA106F /* enlosure_title.png in Resources */,
 				42627FE51C783E0700DC69EC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
