@@ -78,6 +78,7 @@ class AIGameBoard: GameBoard {
                     if !self.highlighting{
                         self.highlighting = true
                         self.highlightLastAIMove()
+                        self.delegate?.resetTimer()
                     }
                 })
             })

@@ -33,7 +33,7 @@ class MainViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         
         if view.frame.width < 350{
-            enclosure.font = UIFont(name: "AvenirNext-Regular", size: 50.0)
+            enclosure.font = UIFont(name: "AvenirNext-Regular", size: 55.0)
             titleWidth.constant = 250
         }
         
