@@ -23,6 +23,10 @@ class GameViewController: UIViewController, GameBoardDelegate {
     @IBOutlet var pause: UIButton!
     @IBOutlet var timer: UILabel!
     
+    @IBOutlet var baseProgress: UIView!
+    @IBOutlet var p0Progress: UIView!
+    @IBOutlet var p1Progress: UIView!
+    
     @IBOutlet var playerRow: Rows!
     
     override func viewDidLoad() {
@@ -32,6 +36,16 @@ class GameViewController: UIViewController, GameBoardDelegate {
         board.delegate = self
         player0Score.text = "0"
         player1Score.text = "0"
+        
+        //progress bar
+        baseProgress.backgroundColor = UIColor.grayColor()
+        p0Progress.backgroundColor = player0Score.textColor
+        p1Progress.backgroundColor = player1Score.textColor
+		p0Progress.frame.size.width = 0
+        p1Progress.frame.size.width = 0
+
+        
+        
         pause.addTarget(self, action: "pause:", forControlEvents: UIControlEvents.TouchUpInside)
         timer.userInteractionEnabled = false
         timer.text = "0s"
@@ -49,6 +63,12 @@ class GameViewController: UIViewController, GameBoardDelegate {
     }
     func resetTimer(){
         timePassed = 0
+    }
+    
+    func resetProgress() {
+        print("resetProgress")
+        p0Progress.frame.size.width = 0
+        p1Progress.frame.size.width = 0
     }
     
     func pause(but: UIButton){
@@ -72,6 +92,8 @@ class GameViewController: UIViewController, GameBoardDelegate {
     //        view.addSubview(backgroundView)
     //        view.sendSubviewToBack(backgroundView)
     // Do any additional setup after loading the view, typically from a nib.
+    
+    
     
     func animateScore(area: Area, score: Int, player: Int){
         
@@ -103,13 +125,16 @@ class GameViewController: UIViewController, GameBoardDelegate {
         game = EnclosureGame()
         board.buildGame(game)
         resetTimer()
+        resetProgress()
     }
     
     func endGame(winPlayer: Int) {
         if winPlayer == 1{
             player1Score.text = "WIN"
+            p1Progress.frame.size.width = baseProgress.frame.width/2
         }else{
             player0Score.text = "WIN"
+            p0Progress.frame.size.width = baseProgress.frame.width/2
         }
         board.userInteractionEnabled = false
         board.alpha = 0.7
@@ -140,6 +165,18 @@ class GameViewController: UIViewController, GameBoardDelegate {
                     })
             })
         }
+    }
+    
+    func changeProgress(player: Int) {
+        print("!!!!!")
+        
+        if player == 0{
+            p0Progress.frame.size.width = baseProgress.frame.width / 64 * CGFloat(game.playerScore[player])
+        }
+        else {
+            p1Progress.frame.size.width = baseProgress.frame.width / 64 * CGFloat(game.playerScore[player])
+        }
+        
     }
     
     func showTotalRow(player: Int, row: Int) {

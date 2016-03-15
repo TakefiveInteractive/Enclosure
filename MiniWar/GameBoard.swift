@@ -16,6 +16,8 @@ protocol GameBoardDelegate{
     func updateScoreLabel(player: Int)
     func endGame(winPlayer: Int)
     func resetTimer()
+    func changeProgress(player: Int)
+    func resetProgress()
 }
 
 class GameBoard: UIView {
@@ -55,8 +57,11 @@ class GameBoard: UIView {
     func buildGame(game: EnclosureGame){
         
         self.delegate?.updateScoreLabel(0)
+        self.delegate?.changeProgress(0)
         self.delegate?.updateScoreLabel(1)
+        self.delegate?.changeProgress(1)
 
+        
         self.game = game
         
         for v in self.subviews{
@@ -246,6 +251,8 @@ class GameBoard: UIView {
         }
         if areaChanged.count > 0{
             self.delegate?.updateScoreLabel((game.currentPlayer()+1)%2)
+            self.delegate?.changeProgress((game.currentPlayer()+1)%2)
+
         }
         if game.checkEnd(){
             var winner = 1
