@@ -9,6 +9,9 @@
 import UIKit
 import ChameleonFramework
 
+let redOnBoard = UIColor(hexString: "F7959D")
+let blutOnBoard = UIColor(hexString: "78B4FF")
+
 class MainViewController: UIViewController {
     
     @IBOutlet var back: DisplayGameBoard!

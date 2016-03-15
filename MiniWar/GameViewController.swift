@@ -67,7 +67,7 @@ class GameViewController: UIViewController, GameBoardDelegate {
     }
     
     //        let backgroundView = UIView(frame: view.bounds)
-    //        backgroundView.backgroundColor = UIColor(gradientStyle:UIGradientStyle.LeftToRight, withFrame:view.bounds, andColors:[UIColor(hexString: "F7959D"), UIColor(hexString: "78B4FF")])
+    //        backgroundView.backgroundColor = UIColor(gradientStyle:UIGradientStyle.LeftToRight, withFrame:view.bounds, andColors:[, UIColor(hexString: "78B4FF")])
     //        backgroundView.alpha = 0.4
     //        view.addSubview(backgroundView)
     //        view.sendSubviewToBack(backgroundView)
