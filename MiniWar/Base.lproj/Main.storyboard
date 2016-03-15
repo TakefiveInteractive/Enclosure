@@ -1067,7 +1067,7 @@
                         <outlet property="player1Score" destination="abq-mX-vPR" id="UzC-8g-3Vp"/>
                         <outlet property="playerRow" destination="wIo-ST-Pxz" id="7pF-G8-VBb"/>
                         <outlet property="timer" destination="gCi-CH-LHW" id="LF5-dg-PE1"/>
-                        <segue destination="IHB-w0-Ftl" kind="unwind" unwindAction="backToMain:" id="ANB-cy-5FR"/>
+                        <segue destination="IHB-w0-Ftl" kind="unwind" identifier="exit" unwindAction="backToMain:" id="ANB-cy-5FR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lIP-Ej-M3Q" sceneMemberID="firstResponder"/>
