@@ -7,40 +7,6 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Choose Chapter View Controller-->
-        <scene sceneID="xle-fV-tmo">
-            <objects>
-                <viewController id="emQ-dB-4BZ" customClass="ChooseChapterViewController" customModule="Enclosure" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="fmg-k7-vWc"/>
-                        <viewControllerLayoutGuide type="bottom" id="Aq7-DX-xSp"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="T8B-cA-Pm5">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="136-em-Ico">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                            </scrollView>
-                        </subviews>
-                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="Aq7-DX-xSp" firstAttribute="top" secondItem="136-em-Ico" secondAttribute="bottom" id="2HO-b1-hJl"/>
-                            <constraint firstAttribute="trailing" secondItem="136-em-Ico" secondAttribute="trailing" id="CBE-kk-0az"/>
-                            <constraint firstItem="136-em-Ico" firstAttribute="top" secondItem="T8B-cA-Pm5" secondAttribute="top" id="KVX-RP-JN8"/>
-                            <constraint firstItem="136-em-Ico" firstAttribute="leading" secondItem="T8B-cA-Pm5" secondAttribute="leading" id="Os1-6A-TuD"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="entry" destination="136-em-Ico" id="rLQ-Od-vjo"/>
-                        <segue destination="Ysi-Pd-sMV" kind="presentation" identifier="tofirst" modalTransitionStyle="crossDissolve" id="xQs-9G-XeX"/>
-                        <segue destination="waq-4p-1lB" kind="presentation" identifier="tosecond" modalTransitionStyle="crossDissolve" id="det-71-pCL"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3s2-zA-0cm" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-65" y="297"/>
-        </scene>
         <!--Game1 View Controller-->
         <scene sceneID="gix-FD-hxH">
             <objects>
@@ -225,7 +191,7 @@
                         <outlet property="player1Score" destination="2Fv-p7-I7W" id="fZ9-Ze-6cg"/>
                         <outlet property="playerRow" destination="9zD-Tp-OV4" id="4e6-ze-HVn"/>
                         <outlet property="timer" destination="sws-Ub-1lj" id="V5u-mC-u5D"/>
-                        <segue destination="r3Y-ze-uQd" kind="unwind" identifier="exit" unwindAction="backToChapter:" id="Mp4-Ol-0As"/>
+                        <segue destination="r3Y-ze-uQd" kind="unwind" identifier="exit" unwindAction="backToMain:" id="Mp4-Ol-0As"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gd0-zb-DH6" sceneMemberID="firstResponder"/>
@@ -508,7 +474,7 @@
                         <outlet property="player1Score" destination="A4N-Kr-qP1" id="vfT-fV-miR"/>
                         <outlet property="playerRow" destination="A0Y-qN-39G" id="Nbg-Dc-hmJ"/>
                         <outlet property="timer" destination="HAi-7B-fGK" id="Ioj-Qy-cDl"/>
-                        <segue destination="Se1-1P-TDo" kind="unwind" identifier="exit" unwindAction="backToChapter:" id="wR0-Fs-Zca"/>
+                        <segue destination="Se1-1P-TDo" kind="unwind" identifier="exit" unwindAction="backToMain:" id="wR0-Fs-Zca"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8dW-Eg-bFY" sceneMemberID="firstResponder"/>
@@ -727,7 +693,7 @@
                         <outlet property="player1Score" destination="dxV-kA-uiN" id="bqm-Tr-HVO"/>
                         <outlet property="playerRow" destination="cGL-wc-PgO" id="M6v-eF-t17"/>
                         <outlet property="timer" destination="drw-lM-NHY" id="zQh-Ry-ixx"/>
-                        <segue destination="mn9-vI-XcC" kind="unwind" identifier="exit" unwindAction="backToChapter:" id="OZw-bb-Z3a"/>
+                        <segue destination="mn9-vI-XcC" kind="unwind" identifier="exit" unwindAction="backToMain:" id="OZw-bb-Z3a"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lSe-Po-1VR" sceneMemberID="firstResponder"/>
@@ -898,7 +864,7 @@
                             <constraint firstAttribute="trailing" secondItem="VRt-Ct-Zgr" secondAttribute="trailing" constant="10" id="RWc-bs-cki"/>
                             <constraint firstItem="QJ8-hr-2AC" firstAttribute="bottom" secondItem="Pc3-rU-0jC" secondAttribute="bottom" constant="-20" id="TjG-Hh-bbo"/>
                             <constraint firstItem="VRt-Ct-Zgr" firstAttribute="top" secondItem="Pc3-rU-0jC" secondAttribute="bottom" constant="15" id="hh2-TR-jVO"/>
-                            <constraint firstItem="VRt-Ct-Zgr" firstAttribute="centerY" secondItem="byv-D5-w1W" secondAttribute="centerY" constant="40" id="ryR-sW-3NI"/>
+                            <constraint firstItem="VRt-Ct-Zgr" firstAttribute="centerY" secondItem="byv-D5-w1W" secondAttribute="centerY" constant="-30" id="ryR-sW-3NI"/>
                             <constraint firstItem="VRt-Ct-Zgr" firstAttribute="leading" secondItem="byv-D5-w1W" secondAttribute="leading" constant="10" id="yf0-9R-wdd"/>
                         </constraints>
                     </view>
@@ -907,45 +873,15 @@
                         <outlet property="beta" destination="QJ8-hr-2AC" id="36l-6k-tgl"/>
                         <outlet property="board" destination="VRt-Ct-Zgr" id="amd-VW-xG0"/>
                         <outlet property="enclosure" destination="Pc3-rU-0jC" id="0ZY-Nd-SZW"/>
+                        <segue destination="TNG-OT-gmg" kind="presentation" identifier="playAI1" modalTransitionStyle="crossDissolve" id="zLq-wp-rsx"/>
+                        <segue destination="W0P-NR-Pgy" kind="presentation" identifier="playAI2" modalTransitionStyle="crossDissolve" id="Y8J-L6-kTu"/>
+                        <segue destination="Ysi-Pd-sMV" kind="presentation" identifier="play1" modalTransitionStyle="crossDissolve" id="pt9-Tn-0VR"/>
+                        <segue destination="waq-4p-1lB" kind="presentation" identifier="play2" modalTransitionStyle="crossDissolve" id="32a-5F-XH3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IhR-Db-SJl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1135" y="-171"/>
-        </scene>
-        <!--Choose Chapter View Controller-->
-        <scene sceneID="vUd-av-eS8">
-            <objects>
-                <viewController id="8Q8-Xb-xbu" customClass="AIChooseChapterViewController" customModule="Enclosure" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ZiF-ol-hqC"/>
-                        <viewControllerLayoutGuide type="bottom" id="lcD-go-T8S"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="qzx-gS-5fB">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ubE-37-LmY">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                            </scrollView>
-                        </subviews>
-                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="ubE-37-LmY" firstAttribute="leading" secondItem="qzx-gS-5fB" secondAttribute="leading" id="JEC-9B-q7q"/>
-                            <constraint firstAttribute="trailing" secondItem="ubE-37-LmY" secondAttribute="trailing" id="Q7C-T6-Nl5"/>
-                            <constraint firstItem="ubE-37-LmY" firstAttribute="top" secondItem="qzx-gS-5fB" secondAttribute="top" id="dS3-bt-WTP"/>
-                            <constraint firstItem="lcD-go-T8S" firstAttribute="top" secondItem="ubE-37-LmY" secondAttribute="bottom" id="mKp-Zt-EAE"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="entry" destination="ubE-37-LmY" id="w20-tS-E4K"/>
-                        <segue destination="TNG-OT-gmg" kind="presentation" identifier="tofirst" modalTransitionStyle="crossDissolve" id="7VD-rv-OZG"/>
-                        <segue destination="W0P-NR-Pgy" kind="presentation" identifier="tosecond" modalTransitionStyle="crossDissolve" id="aKI-rE-L79"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="CEY-VL-e3B" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-351" y="-761"/>
         </scene>
         <!--Game2 View Controller-->
         <scene sceneID="ZbO-Ke-9Dl">
@@ -1131,7 +1067,7 @@
                         <outlet property="player1Score" destination="abq-mX-vPR" id="UzC-8g-3Vp"/>
                         <outlet property="playerRow" destination="wIo-ST-Pxz" id="7pF-G8-VBb"/>
                         <outlet property="timer" destination="gCi-CH-LHW" id="LF5-dg-PE1"/>
-                        <segue destination="IHB-w0-Ftl" kind="unwind" unwindAction="backToChapter:" id="ANB-cy-5FR"/>
+                        <segue destination="IHB-w0-Ftl" kind="unwind" unwindAction="backToMain:" id="ANB-cy-5FR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lIP-Ej-M3Q" sceneMemberID="firstResponder"/>

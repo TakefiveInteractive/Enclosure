@@ -37,4 +37,9 @@ class MainViewController: UIViewController {
         board.controller = self
         board.drawMenu1()
     }
+    
+    @IBAction func backToMain(segue:UIStoryboardSegue) {
+        
+    }
+    
 }

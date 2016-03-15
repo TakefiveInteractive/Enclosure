@@ -129,9 +129,7 @@ class ChooseChapterViewController: UIViewController {
         
     }
     
-    @IBAction func backToChapter(segue:UIStoryboardSegue) {
-        
-    }
+
     
     func toFirst(but:UIButton){
         self.performSegueWithIdentifier("tofirst", sender: self)
