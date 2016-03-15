@@ -27,6 +27,8 @@ class MainViewController: UIViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
+        
+        print(self.view.frame.width)
 //        enclosure.layer.shadowRadius = 0.8
 //        enclosure.layer.shadowOpacity = 0.3
 //        beta.layer.shadowRadius = 0.01

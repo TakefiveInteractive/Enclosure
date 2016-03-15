@@ -19,11 +19,11 @@
 import UIKit
 
 class BoardText: UILabel {
-    init(frame: CGRect, text: String, color: UIColor) {
+    init(frame: CGRect, text: String, color: UIColor, size: CGFloat) {
         super.init(frame: frame)
         self.text = text
         self.textAlignment = NSTextAlignment.Center
-        self.font = UIFont(name: "Avenir-Heavy", size: 30.0)
+        self.font = UIFont(name: "Avenir-Heavy", size: 30.0 * size / 414.0)
         self.textColor = color
     }
     
@@ -33,10 +33,10 @@ class BoardText: UILabel {
 }
 
 class BoardButton: UIButton {
-    init(frame: CGRect, text: String, color: UIColor) {
+    init(frame: CGRect, text: String, color: UIColor, size: CGFloat) {
         super.init(frame: frame)
         self.setTitle(text, forState: UIControlState.Normal)
-        self.titleLabel?.font = UIFont(name: "Avenir-Medium", size: 25.0)
+        self.titleLabel?.font = UIFont(name: "Avenir-Medium", size: 25.0 * size / 414.0)
         self.titleLabel?.sizeToFit()
         self.backgroundColor = color
         self.setTitleColor(UIColor(hexString: "FBFBFC"), forState: UIControlState.Normal)
@@ -49,10 +49,10 @@ class BoardButton: UIButton {
 }
 
 class ChapterButton: UIButton {
-    init(frame: CGRect, text: String, color: UIColor) {
+    init(frame: CGRect, text: String, color: UIColor, size: CGFloat) {
         super.init(frame: frame)
         self.setTitle(text, forState: UIControlState.Normal)
-        self.titleLabel?.font = UIFont(name: "Avenir-Medium", size: 50.0)
+        self.titleLabel?.font = UIFont(name: "Avenir-Medium", size: 50.0 * size / 414.0)
         self.titleLabel?.sizeToFit()
         self.backgroundColor = color
         self.setTitleColor(UIColor(hexString: "FBFBFC"), forState: UIControlState.Normal)
@@ -151,7 +151,7 @@ class BoardBack: UIView {
         var y = board.game.nodes[5][3].fences[board.game.nodes[5][4]]!.view.frame.origin.y
         var width = board.game.nodes[7][3].fences[board.game.nodes[7][4]]!.view.frame.origin.x - x
         var height = board.game.nodes[4][5].fences[board.game.nodes[5][5]]!.view.frame.origin.y - y
-        let chapter1 = ChapterButton(frame: CGRect(x: x, y: y, width: width, height: height), text: "1", color: controller.beta.textColor)
+        let chapter1 = ChapterButton(frame: CGRect(x: x, y: y, width: width, height: height), text: "1", color: controller.beta.textColor, size: controller.view.frame.width)
         chapter1.alpha = 0
         chapter1.tag = 0
         chapter1.addTarget(self, action: "selectChap:", forControlEvents: UIControlEvents.TouchUpInside)
@@ -161,7 +161,7 @@ class BoardBack: UIView {
         y = board.game.nodes[2][5].fences[board.game.nodes[2][6]]!.view.frame.origin.y
         width = board.game.nodes[4][4].fences[board.game.nodes[4][5]]!.view.frame.origin.x - x
         height = board.game.nodes[4][7].fences[board.game.nodes[5][7]]!.view.frame.origin.y - y
-        let chapter2 = ChapterButton(frame: CGRect(x: x, y: y, width: width, height: height), text: "2", color: controller.enclosure.textColor)
+        let chapter2 = ChapterButton(frame: CGRect(x: x, y: y, width: width, height: height), text: "2", color: controller.enclosure.textColor, size: controller.view.frame.width)
         chapter2.tag = 1
         chapter2.alpha = 0
         chapter2.addTarget(self, action: "selectChap:", forControlEvents: UIControlEvents.TouchUpInside)
@@ -171,7 +171,7 @@ class BoardBack: UIView {
         y = board.game.nodes[2][1].fences[board.game.nodes[2][2]]!.view.frame.origin.y
         width = board.game.nodes[4][1].fences[board.game.nodes[4][2]]!.view.frame.origin.x - x
         height = board.game.nodes[4][2].fences[board.game.nodes[5][2]]!.view.frame.origin.y - y
-        let back = BoardButton(frame: CGRect(x: x, y: y, width: width, height: height), text: "Back", color: controller.beta.textColor)
+        let back = BoardButton(frame: CGRect(x: x, y: y, width: width, height: height), text: "Back", color: controller.beta.textColor, size: controller.view.frame.width)
         back.addTarget(self, action: "back:", forControlEvents: UIControlEvents.TouchUpInside)
         self.addSubview(back)
         
@@ -179,7 +179,7 @@ class BoardBack: UIView {
         y = board.game.nodes[1][1].fences[board.game.nodes[1][2]]!.view.frame.origin.y
         width = board.game.nodes[2][1].fences[board.game.nodes[2][2]]!.view.frame.origin.x - x
         height = board.game.nodes[1][2].fences[board.game.nodes[2][2]]!.view.frame.origin.y - y
-        let B = BoardText(frame: CGRect(x: x, y: y, width: width, height: height), text: "B", color: controller.beta.textColor)
+        let B = BoardText(frame: CGRect(x: x, y: y, width: width, height: height), text: "B", color: controller.beta.textColor, size: controller.view.frame.width)
         self.addSubview(B)
         
         board.game.nodes[1][1].fences[board.game.nodes[1][2]]?.player = 0
@@ -208,7 +208,7 @@ class BoardBack: UIView {
         var y = board.game.nodes[3][1].fences[board.game.nodes[3][2]]!.view.frame.origin.y
         var width = board.game.nodes[7][1].fences[board.game.nodes[7][2]]!.view.frame.origin.x - x
         var height = board.game.nodes[3][2].fences[board.game.nodes[4][2]]!.view.frame.origin.y - y
-        let classic = BoardButton(frame: CGRect(x: x, y: y, width: width, height: height), text: "Single Player", color: controller.beta.textColor)
+        let classic = BoardButton(frame: CGRect(x: x, y: y, width: width, height: height), text: "Single Player", color: controller.beta.textColor, size: controller.view.frame.width)
         classic.tag = 0
         classic.addTarget(self, action: "play:", forControlEvents: UIControlEvents.TouchUpInside)
         self.addSubview(classic)
@@ -217,7 +217,7 @@ class BoardBack: UIView {
         y = board.game.nodes[2][3].fences[board.game.nodes[2][4]]!.view.frame.origin.y
         width = board.game.nodes[6][3].fences[board.game.nodes[6][4]]!.view.frame.origin.x - x
         height = board.game.nodes[4][4].fences[board.game.nodes[5][4]]!.view.frame.origin.y - y
-        let multiplayer = BoardButton(frame: CGRect(x: x, y: y, width: width, height: height), text: "Multi Player", color: controller.beta.textColor)
+        let multiplayer = BoardButton(frame: CGRect(x: x, y: y, width: width, height: height), text: "Multi Player", color: controller.beta.textColor, size: controller.view.frame.width)
         multiplayer.tag = 1
         multiplayer.addTarget(self, action: "play:", forControlEvents: UIControlEvents.TouchUpInside)
         self.addSubview(multiplayer)
@@ -226,7 +226,7 @@ class BoardBack: UIView {
         y = board.game.nodes[3][5].fences[board.game.nodes[3][6]]!.view.frame.origin.y
         width = board.game.nodes[8][5].fences[board.game.nodes[8][6]]!.view.frame.origin.x - x
         height = board.game.nodes[3][6].fences[board.game.nodes[4][6]]!.view.frame.origin.y - y
-        let ranking = BoardButton(frame: CGRect(x: x, y: y, width: width, height: height), text: "Ranking Match", color: controller.enclosure.textColor)
+        let ranking = BoardButton(frame: CGRect(x: x, y: y, width: width, height: height), text: "Ranking Match", color: controller.enclosure.textColor, size: controller.view.frame.width)
         
         self.addSubview(ranking)
         
@@ -234,7 +234,7 @@ class BoardBack: UIView {
         y = board.game.nodes[2][7].fences[board.game.nodes[2][8]]!.view.frame.origin.y
         width = board.game.nodes[7][7].fences[board.game.nodes[7][8]]!.view.frame.origin.x - x
         height = board.game.nodes[4][8].fences[board.game.nodes[5][8]]!.view.frame.origin.y - y
-        let friend = BoardButton(frame: CGRect(x: x, y: y, width: width, height: height), text: "Play w/ Friends", color: controller.enclosure.textColor)
+        let friend = BoardButton(frame: CGRect(x: x, y: y, width: width, height: height), text: "Play w/ Friends", color: controller.enclosure.textColor, size: controller.view.frame.width)
         friend.tag = 2
         self.addSubview(friend)
         
@@ -242,28 +242,28 @@ class BoardBack: UIView {
         y = board.game.nodes[2][1].fences[board.game.nodes[2][2]]!.view.frame.origin.y
         width = board.game.nodes[3][1].fences[board.game.nodes[3][2]]!.view.frame.origin.x - x
         height = board.game.nodes[2][2].fences[board.game.nodes[3][2]]!.view.frame.origin.y - y
-        let I = BoardText(frame: CGRect(x: x, y: y, width: width, height: height), text: "1", color: controller.beta.textColor)
+        let I = BoardText(frame: CGRect(x: x, y: y, width: width, height: height), text: "1", color: controller.beta.textColor, size: controller.view.frame.width)
         self.addSubview(I)
 
         x = board.game.nodes[1][3].fences[board.game.nodes[2][3]]!.view.frame.origin.x
         y = board.game.nodes[1][3].fences[board.game.nodes[1][4]]!.view.frame.origin.y
         width = board.game.nodes[2][3].fences[board.game.nodes[2][4]]!.view.frame.origin.x - x
         height = board.game.nodes[1][4].fences[board.game.nodes[2][4]]!.view.frame.origin.y - y
-        let II = BoardText(frame: CGRect(x: x, y: y, width: width, height: height), text: "2", color: controller.beta.textColor)
+        let II = BoardText(frame: CGRect(x: x, y: y, width: width, height: height), text: "2", color: controller.beta.textColor, size: controller.view.frame.width)
         self.addSubview(II)
         
         x = board.game.nodes[2][5].fences[board.game.nodes[3][5]]!.view.frame.origin.x
         y = board.game.nodes[2][5].fences[board.game.nodes[2][6]]!.view.frame.origin.y
         width = board.game.nodes[3][5].fences[board.game.nodes[3][6]]!.view.frame.origin.x - x
         height = board.game.nodes[2][6].fences[board.game.nodes[3][6]]!.view.frame.origin.y - y
-        let III = BoardText(frame: CGRect(x: x, y: y, width: width, height: height), text: "3", color: controller.enclosure.textColor)
+        let III = BoardText(frame: CGRect(x: x, y: y, width: width, height: height), text: "3", color: controller.enclosure.textColor, size: controller.view.frame.width)
         self.addSubview(III)
         
         x = board.game.nodes[1][7].fences[board.game.nodes[2][7]]!.view.frame.origin.x
         y = board.game.nodes[1][7].fences[board.game.nodes[1][8]]!.view.frame.origin.y
         width = board.game.nodes[2][7].fences[board.game.nodes[2][8]]!.view.frame.origin.x - x
         height = board.game.nodes[1][8].fences[board.game.nodes[2][8]]!.view.frame.origin.y - y
-        let IV = BoardText(frame: CGRect(x: x, y: y, width: width, height: height), text: "4", color: controller.enclosure.textColor)
+        let IV = BoardText(frame: CGRect(x: x, y: y, width: width, height: height), text: "4", color: controller.enclosure.textColor,size: controller.view.frame.width)
         self.addSubview(IV)
         
         elements.append(I)
@@ -303,23 +303,6 @@ class BoardBack: UIView {
 }
 
 class DisplayGameBoard: GameBoard {
-    
-//    let edgeWidth: CGFloat
-//    
-//    var game: EnclosureGame!
-//    
-//    let playerColors = [UIColor(red: 247.0/255.0, green: 149.0/255.0, blue: 157.0/255.0, alpha: 1), UIColor(red: 140.0/255.0, green: 196.0/255.0, blue: 299.0/255.0, alpha: 1)]
-//    
-//    let drawAnimationTime = 0.5
-//    
-//    var tempPath = [Grid]()
-//    var lineLayer = CAShapeLayer()
-//
-//    var grids = [Grid]()
-//    var areas = [Area]()
-//    var edges = [Edge]()
-//    
-//    var unitWidth: CGFloat!
     
     override func buildGame(game: EnclosureGame){
         
