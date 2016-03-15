@@ -17,7 +17,11 @@ class Connection: NSObject {
     }
     
     class func hasRegistered()->Bool{
-        return NSUserDefaults.standardUserDefaults().objectForKey("registered")! as! Bool
+        if let registered = NSUserDefaults.standardUserDefaults().objectForKey("registered"){
+            return registered as! Bool
+        }else{
+            return false
+        }
     }
     
     class func register(name: String)->Bool{

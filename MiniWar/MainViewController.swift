@@ -21,7 +21,6 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         if !Connection.hasRegistered() {
             Connection.register(NSUserDefaults.standardUserDefaults().objectForKey("nickName") as! String)
-
         }
         //add gradient
 //        self.view.backgroundColor = UIColor(gradientStyle:UIGradientStyle.LeftToRight, withFrame:self.view.bounds, andColors:[UIColor.redColor(), UIColor.blueColor()])

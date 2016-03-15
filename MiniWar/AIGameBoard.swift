@@ -50,6 +50,9 @@ class AIGameBoard: GameBoard {
 
     
     override func afterPlayerMove(){
+        
+        super.afterPlayerMove()
+        
         if game.currentPlayer() == aiPlayer{
             self.userInteractionEnabled = false
             self.alpha = 0.65
