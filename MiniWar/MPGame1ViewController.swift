@@ -19,7 +19,6 @@ class MPGame1ViewController: GameViewController{
         (board as! MPGameBoard).onlineCurrentPlayer = currentPlayer
     }
     
-    
     override func replay(){
         mpSocket.requestRestart()
     }

@@ -11,7 +11,6 @@ import UIKit
 class GameBoard2: GameBoard {
     override func buildGame(game: EnclosureGame) {
         super.buildGame(game)
-        
         for v in areas
         {
             v.removeFromSuperview()

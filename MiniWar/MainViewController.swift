@@ -35,8 +35,8 @@ class MainViewController: UIViewController {
             titleWidth.constant = 250
         }
         
-        
-        print(self.view.frame.width)
+        sudoGame.boardSize = 10
+        sudoGame.buildGame()
         back.buildGame(sudoGame)
         board.board = back
         board.controller = self

@@ -9,5 +9,8 @@
 import UIKit
 
 class AIGame1ViewController: GameViewController {
-    
+    override func replay() {
+        (board as! AIGameBoard).hasRestart = true
+        super.replay()
+    }
 }

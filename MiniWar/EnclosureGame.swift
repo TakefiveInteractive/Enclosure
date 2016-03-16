@@ -13,7 +13,7 @@ import UIKit
 class EnclosureGame: NSObject {
 
     let playerNum = 2
-    var boardSize = 10
+    var boardSize = 9
     var firstMove = false
     
     var totalStep = 0
@@ -162,12 +162,22 @@ class EnclosureGame: NSObject {
         return p.containsPoint(test)
     }
     
-    func checkEnd()->Bool{
+    func checkEnd(board: GameBoard)->Bool{
         
         var end = true
+        
         if neutralFence.count == 0{
             return true
         }
+        
+        if CGFloat(playerScore[0]) / CGFloat(board.calculateTotalScore()) > 0.5{
+            return true
+        }
+        
+        if CGFloat(playerScore[1]) / CGFloat(board.calculateTotalScore()) > 0.5{
+            return true
+        }
+        
         var polygon = searchPolygon(neutralFence[0].nodes[1], good: [-1, currentPlayer()])
         for neutral in neutralLand{
             for p in polygon{
@@ -199,7 +209,10 @@ class EnclosureGame: NSObject {
     
     override init() {
         super.init()
-        
+        buildGame()
+    }
+    
+    func buildGame(){
         prevMovesByUser = [[[FenceNode]]](count: playerNum, repeatedValue: [[FenceNode]]())
         userLastEdges = [[[Fence]]](count: playerNum, repeatedValue: [[Fence]]())
         neutralLand = [Land]()
@@ -255,8 +268,8 @@ class EnclosureGame: NSObject {
                 }
             }
         }
+
     }
-    
 }
 
 class FenceNode: NSObject {

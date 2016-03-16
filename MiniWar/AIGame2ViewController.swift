@@ -13,6 +13,16 @@ class AIGame2ViewController: GameViewController {
     override func viewDidAppear(animated: Bool) {
         game = EnclosureGame2()
         board.buildGame(game)
+        baseProgress.build()
+    }
+    
+    override func replay() {
+        super.replay()
+    }
+    
+    override func buildGame() {
+        game = EnclosureGame2()
+        board.buildGame(game)
     }
     
     override func didReceiveMemoryWarning() {

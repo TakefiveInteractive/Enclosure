@@ -441,10 +441,18 @@
                                     </mask>
                                 </variation>
                             </button>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0hV-5A-1EN" customClass="ProgressView" customModule="Enclosure" customModuleProvider="target">
+                                <rect key="frame" x="88" y="52" width="424" height="15"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="15" id="NH0-Je-prX"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="8QR-46-1PT" secondAttribute="trailing" constant="20" id="0j6-5h-TB2"/>
+                            <constraint firstItem="0hV-5A-1EN" firstAttribute="centerY" secondItem="HAi-7B-fGK" secondAttribute="centerY" id="0m4-dX-zek"/>
                             <constraint firstItem="A0Y-qN-39G" firstAttribute="top" secondItem="Zph-ZM-gt5" secondAttribute="bottom" constant="30" id="2vT-9t-RgO"/>
                             <constraint firstAttribute="trailingMargin" secondItem="0bo-UR-TCn" secondAttribute="trailing" id="4PQ-Di-iaa"/>
                             <constraint firstItem="luV-GT-LBp" firstAttribute="top" secondItem="k34-PF-QTW" secondAttribute="bottom" constant="20" id="64O-eO-ahb"/>
@@ -456,12 +464,16 @@
                             <constraint firstItem="luV-GT-LBp" firstAttribute="top" secondItem="k34-PF-QTW" secondAttribute="bottom" constant="40" id="S9b-xs-1j4"/>
                             <constraint firstItem="luV-GT-LBp" firstAttribute="leading" secondItem="Tbs-Pv-fYd" secondAttribute="leading" constant="20" id="WMW-9h-K7J"/>
                             <constraint firstItem="A0Y-qN-39G" firstAttribute="leading" secondItem="Zph-ZM-gt5" secondAttribute="leading" id="Xr8-LR-OtZ"/>
+                            <constraint firstItem="0bo-UR-TCn" firstAttribute="leading" secondItem="0hV-5A-1EN" secondAttribute="trailing" constant="10" id="ZVS-iV-NfM"/>
                             <constraint firstAttribute="trailing" secondItem="Zph-ZM-gt5" secondAttribute="trailing" constant="10" id="aj5-zA-sBW"/>
                             <constraint firstItem="Zph-ZM-gt5" firstAttribute="top" secondItem="HAi-7B-fGK" secondAttribute="bottom" constant="20" id="b60-gx-1i6"/>
                             <constraint firstItem="Zph-ZM-gt5" firstAttribute="leading" secondItem="Tbs-Pv-fYd" secondAttribute="leading" constant="10" id="bbm-Qu-EMS"/>
                             <constraint firstItem="HAi-7B-fGK" firstAttribute="top" secondItem="k34-PF-QTW" secondAttribute="bottom" constant="20" id="e7C-ZN-05j"/>
                             <constraint firstItem="L07-So-tYf" firstAttribute="top" secondItem="A4N-Kr-qP1" secondAttribute="bottom" constant="55" id="f9S-U1-gMV"/>
+                            <constraint firstItem="0hV-5A-1EN" firstAttribute="centerX" secondItem="Tbs-Pv-fYd" secondAttribute="centerX" id="fRS-u2-2Dd"/>
                             <constraint firstAttribute="trailingMargin" secondItem="A4N-Kr-qP1" secondAttribute="trailing" constant="20" id="fqO-ZG-j48"/>
+                            <constraint firstItem="0bo-UR-TCn" firstAttribute="leading" secondItem="0hV-5A-1EN" secondAttribute="trailing" constant="10" id="gw6-2l-bpg"/>
+                            <constraint firstItem="0hV-5A-1EN" firstAttribute="leading" secondItem="Tbs-Pv-fYd" secondAttribute="leading" constant="10" id="hI0-wH-1Lu"/>
                             <constraint firstItem="HAi-7B-fGK" firstAttribute="leading" secondItem="Tbs-Pv-fYd" secondAttribute="leadingMargin" id="hZY-Us-ieC"/>
                             <constraint firstItem="C5E-hy-v8Q" firstAttribute="leading" secondItem="Tbs-Pv-fYd" secondAttribute="leadingMargin" constant="20" id="jgr-G6-cMg"/>
                             <constraint firstItem="0bo-UR-TCn" firstAttribute="bottom" secondItem="HAi-7B-fGK" secondAttribute="bottom" id="ltc-Gm-Yw3"/>
@@ -472,17 +484,20 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="hI0-wH-1Lu"/>
                                 <exclude reference="Edf-JT-F8Y"/>
                                 <exclude reference="wNN-Ix-XPl"/>
                                 <exclude reference="64O-eO-ahb"/>
                                 <exclude reference="PiS-Fq-aiD"/>
                                 <exclude reference="S9b-xs-1j4"/>
                                 <exclude reference="WMW-9h-K7J"/>
+                                <exclude reference="ZVS-iV-NfM"/>
                                 <exclude reference="zZp-Fo-6Oz"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="baseProgress" destination="0hV-5A-1EN" id="6sA-XW-coy"/>
                         <outlet property="board" destination="Zph-ZM-gt5" id="LaU-E0-joU"/>
                         <outlet property="pause" destination="0bo-UR-TCn" id="TQl-UN-bU7"/>
                         <outlet property="player0Name" destination="C5E-hy-v8Q" id="lfo-Ag-h1e"/>
@@ -653,6 +668,13 @@
                                     <constraint firstAttribute="width" secondItem="dQu-Th-2ti" secondAttribute="height" multiplier="1:1" id="Z0x-wM-GCa"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pUy-Ed-Y4I" customClass="ProgressView" customModule="Enclosure" customModuleProvider="target">
+                                <rect key="frame" x="96" y="46" width="424" height="15"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="15" id="86M-6v-iPf"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -660,8 +682,10 @@
                             <constraint firstAttribute="trailingMargin" secondItem="HKo-zF-Xsc" secondAttribute="trailing" id="3Em-ce-X5w"/>
                             <constraint firstItem="KHC-E5-LXR" firstAttribute="top" secondItem="dxV-kA-uiN" secondAttribute="bottom" constant="5" id="4Pe-CZ-d0d"/>
                             <constraint firstAttribute="trailing" secondItem="dQu-Th-2ti" secondAttribute="trailing" constant="10" id="61p-qh-cc8"/>
+                            <constraint firstItem="pUy-Ed-Y4I" firstAttribute="centerX" secondItem="hwH-SO-Mgn" secondAttribute="centerX" id="8MN-3a-7mO"/>
                             <constraint firstItem="cGL-wc-PgO" firstAttribute="leading" secondItem="dQu-Th-2ti" secondAttribute="leading" id="BWP-AW-tFb"/>
                             <constraint firstItem="F2G-xq-jvP" firstAttribute="leading" secondItem="hwH-SO-Mgn" secondAttribute="leadingMargin" constant="20" id="DiW-Wv-1vP"/>
+                            <constraint firstItem="HKo-zF-Xsc" firstAttribute="centerY" secondItem="pUy-Ed-Y4I" secondAttribute="centerY" id="GFQ-LJ-y6f"/>
                             <constraint firstItem="cGL-wc-PgO" firstAttribute="top" secondItem="dQu-Th-2ti" secondAttribute="bottom" constant="30" id="H2z-Nh-zNH"/>
                             <constraint firstItem="drw-lM-NHY" firstAttribute="leading" secondItem="hwH-SO-Mgn" secondAttribute="leadingMargin" id="Hp0-6H-ejT"/>
                             <constraint firstItem="cGL-wc-PgO" firstAttribute="trailing" secondItem="dQu-Th-2ti" secondAttribute="trailing" id="IJp-SI-mX2"/>
@@ -679,6 +703,7 @@
                             <constraint firstItem="dQu-Th-2ti" firstAttribute="centerY" secondItem="hwH-SO-Mgn" secondAttribute="centerY" id="lb1-UN-W9V"/>
                             <constraint firstAttribute="trailing" secondItem="a4j-Ux-vQW" secondAttribute="trailing" id="nRt-no-Wkz"/>
                             <constraint firstAttribute="trailingMargin" secondItem="dxV-kA-uiN" secondAttribute="trailing" constant="20" id="nmd-Fs-oUV"/>
+                            <constraint firstItem="HKo-zF-Xsc" firstAttribute="leading" secondItem="pUy-Ed-Y4I" secondAttribute="trailing" constant="10" id="of8-3c-6yW"/>
                             <constraint firstItem="dQu-Th-2ti" firstAttribute="top" secondItem="TpE-UW-RQG" secondAttribute="bottom" constant="15" id="qjX-0r-gfQ"/>
                             <constraint firstItem="drw-lM-NHY" firstAttribute="top" secondItem="TpE-UW-RQG" secondAttribute="bottom" constant="20" id="rSd-99-nfC"/>
                             <constraint firstItem="dxV-kA-uiN" firstAttribute="centerX" secondItem="hwH-SO-Mgn" secondAttribute="centerX" id="w90-lu-1HG"/>
@@ -702,6 +727,7 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="baseProgress" destination="pUy-Ed-Y4I" id="mcl-GW-fbW"/>
                         <outlet property="board" destination="dQu-Th-2ti" id="a9H-Qa-oJe"/>
                         <outlet property="pause" destination="HKo-zF-Xsc" id="PIq-JG-lhr"/>
                         <outlet property="player0Name" destination="F2G-xq-jvP" id="6X1-v0-MwU"/>
@@ -1035,6 +1061,13 @@
                                 <color key="textColor" red="0.22352941179999999" green="0.22352941179999999" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Evi-Lx-YSe" customClass="ProgressView" customModule="Enclosure" customModuleProvider="target">
+                                <rect key="frame" x="88" y="42" width="424" height="15"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="15" id="aa5-7Y-t5Q"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -1049,6 +1082,8 @@
                             <constraint firstItem="PVK-YG-hVg" firstAttribute="top" secondItem="11o-F0-8n8" secondAttribute="bottom" constant="15" id="SnM-uB-tsr"/>
                             <constraint firstItem="abq-mX-vPR" firstAttribute="centerX" secondItem="Udy-0q-d7w" secondAttribute="centerX" id="WK9-C5-SSh"/>
                             <constraint firstItem="99X-lH-sB2" firstAttribute="top" secondItem="abq-mX-vPR" secondAttribute="bottom" constant="55" id="aI3-Qu-WGf"/>
+                            <constraint firstItem="Evi-Lx-YSe" firstAttribute="centerX" secondItem="Udy-0q-d7w" secondAttribute="centerX" id="bRf-uB-8ny"/>
+                            <constraint firstItem="6Wz-vH-49E" firstAttribute="leading" secondItem="Evi-Lx-YSe" secondAttribute="trailing" constant="10" id="bWf-KN-PHo"/>
                             <constraint firstItem="gCi-CH-LHW" firstAttribute="leading" secondItem="Udy-0q-d7w" secondAttribute="leadingMargin" id="cOx-TO-7eE"/>
                             <constraint firstItem="wIo-ST-Pxz" firstAttribute="top" secondItem="PVK-YG-hVg" secondAttribute="bottom" constant="30" id="dE4-2W-Xyp"/>
                             <constraint firstItem="6Wz-vH-49E" firstAttribute="bottom" secondItem="gCi-CH-LHW" secondAttribute="bottom" id="dNJ-Wz-deN"/>
@@ -1060,6 +1095,7 @@
                             <constraint firstItem="grr-CR-ZRn" firstAttribute="top" secondItem="wb5-Gw-rji" secondAttribute="bottom" constant="5" id="giu-gF-Sge"/>
                             <constraint firstItem="wb5-Gw-rji" firstAttribute="top" secondItem="11o-F0-8n8" secondAttribute="bottom" constant="40" id="hg7-Qe-0dH"/>
                             <constraint firstItem="wb5-Gw-rji" firstAttribute="leading" secondItem="Udy-0q-d7w" secondAttribute="leading" constant="20" id="hjr-bW-wtF"/>
+                            <constraint firstItem="6Wz-vH-49E" firstAttribute="centerY" secondItem="Evi-Lx-YSe" secondAttribute="centerY" id="jJm-jA-xy5"/>
                             <constraint firstAttribute="trailing" secondItem="PVK-YG-hVg" secondAttribute="trailing" constant="10" id="m5t-Bn-zCY"/>
                             <constraint firstItem="wb5-Gw-rji" firstAttribute="leading" secondItem="Udy-0q-d7w" secondAttribute="leadingMargin" constant="20" id="n67-Ji-LUS"/>
                             <constraint firstItem="PVK-YG-hVg" firstAttribute="leading" secondItem="Udy-0q-d7w" secondAttribute="leading" constant="10" id="oyw-dy-1S3"/>
@@ -1077,6 +1113,7 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="baseProgress" destination="Evi-Lx-YSe" id="FCG-Lh-qIr"/>
                         <outlet property="board" destination="PVK-YG-hVg" id="GUY-HH-Y8q"/>
                         <outlet property="pause" destination="6Wz-vH-49E" id="3pI-Jh-nV3"/>
                         <outlet property="player0Name" destination="grr-CR-ZRn" id="FPK-9o-tjd"/>
@@ -1246,12 +1283,21 @@
                                     <constraint firstAttribute="width" secondItem="NW4-9j-Sn5" secondAttribute="height" multiplier="1:1" id="Lzc-BT-LU0"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Orc-rm-8Ke" customClass="ProgressView" customModule="Enclosure" customModuleProvider="target">
+                                <rect key="frame" x="88" y="42" width="424" height="15"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="15" id="lhs-95-TNP"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="cPk-nx-rOu" firstAttribute="leading" secondItem="O7c-ci-A0c" secondAttribute="leadingMargin" constant="20" id="29Y-31-qf2"/>
+                            <constraint firstItem="Orc-rm-8Ke" firstAttribute="centerY" secondItem="AeU-Vw-r0X" secondAttribute="centerY" id="2sm-mO-b3V"/>
                             <constraint firstItem="E4g-Kr-edq" firstAttribute="top" secondItem="y1v-0e-b6f" secondAttribute="bottom" constant="20" id="4y3-l7-Amc"/>
                             <constraint firstItem="AeU-Vw-r0X" firstAttribute="leading" secondItem="O7c-ci-A0c" secondAttribute="leadingMargin" id="6Og-CB-4Bg"/>
+                            <constraint firstItem="7ag-SF-UBQ" firstAttribute="leading" secondItem="Orc-rm-8Ke" secondAttribute="trailing" constant="10" id="Dxb-mj-A5R"/>
                             <constraint firstItem="E4g-Kr-edq" firstAttribute="leading" secondItem="O7c-ci-A0c" secondAttribute="leading" constant="20" id="G68-pj-qHN"/>
                             <constraint firstItem="NW4-9j-Sn5" firstAttribute="top" secondItem="y1v-0e-b6f" secondAttribute="bottom" constant="15" id="GIM-Yl-rTe"/>
                             <constraint firstItem="8DW-qV-rq9" firstAttribute="top" secondItem="E4g-Kr-edq" secondAttribute="bottom" constant="55" id="MbG-Uh-Is7"/>
@@ -1261,6 +1307,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="7ag-SF-UBQ" secondAttribute="trailing" id="XnJ-3r-fZO"/>
                             <constraint firstAttribute="trailingMargin" secondItem="PSq-uX-4C3" secondAttribute="trailing" constant="20" id="ZuH-88-jKa"/>
                             <constraint firstItem="TH2-2i-VIF" firstAttribute="top" secondItem="NW4-9j-Sn5" secondAttribute="bottom" constant="30" id="Zw9-6K-Xz2"/>
+                            <constraint firstItem="Orc-rm-8Ke" firstAttribute="centerX" secondItem="O7c-ci-A0c" secondAttribute="centerX" id="aS5-gT-nvd"/>
                             <constraint firstItem="7ag-SF-UBQ" firstAttribute="bottom" secondItem="AeU-Vw-r0X" secondAttribute="bottom" id="ciW-bb-0HA"/>
                             <constraint firstAttribute="trailingMargin" secondItem="EOm-bG-vRl" secondAttribute="trailing" constant="20" id="di7-dt-BrO"/>
                             <constraint firstItem="E4g-Kr-edq" firstAttribute="top" secondItem="y1v-0e-b6f" secondAttribute="bottom" constant="40" id="fwR-CN-7t6"/>

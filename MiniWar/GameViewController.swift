@@ -25,7 +25,6 @@ class GameViewController: UIViewController, GameBoardDelegate {
     
     @IBOutlet var baseProgress: ProgressView!
     
-    
     @IBOutlet var playerRow: Rows!
     
     override func viewDidLoad() {
@@ -76,7 +75,6 @@ class GameViewController: UIViewController, GameBoardDelegate {
         self.performSegueWithIdentifier("exit", sender: self)
     }
     
-    
     func animateScore(area: Area, score: Int, player: Int){
         
         let lab = UILabel(frame: CGRect(x: 0, y: 0, width: board.unitWidth * 1.5, height: board.unitWidth * 1.5))
@@ -104,10 +102,16 @@ class GameViewController: UIViewController, GameBoardDelegate {
     func replay(){
         board.userInteractionEnabled = true
         board.alpha = 1
-        game = EnclosureGame()
-        board.buildGame(game)
+        buildGame()
         resetTimer()
         baseProgress.resetProgress()
+        player0Score.text = "0"
+        player1Score.text = "0"
+    }
+    
+    func buildGame(){
+        game = EnclosureGame()
+        board.buildGame(game)
     }
     
     func endGame(winPlayer: Int) {
@@ -149,12 +153,9 @@ class GameViewController: UIViewController, GameBoardDelegate {
     }
     
     func changeProgress(player: Int){
-        print("!!!!!")
-        
         let rawTotal = board.calculateTotalScore()
         let percent = CGFloat(game.playerScore[player]) / CGFloat(rawTotal)
         baseProgress.updateProgress(player, percent: percent)
-        
     }
     
     func showTotalRow(player: Int, row: Int) {
@@ -165,7 +166,6 @@ class GameViewController: UIViewController, GameBoardDelegate {
         }
     }
     
-
 }
 
 class ProgressView: UIView{
@@ -175,25 +175,41 @@ class ProgressView: UIView{
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+
     }
     
     func updateProgress(player: Int, percent: CGFloat){
         
+        UIView.animateWithDuration(0.5) { () -> Void in
+            if player == 0{
+                self.p0Progress.frame = CGRect(x: 0, y: 0, width: self.frame.width * percent, height: self.frame.height)
+            }else{
+                self.p1Progress.frame = CGRect(x: self.frame.width * (1 - percent), y: 0, width: self.frame.width * percent, height: self.frame.height)
+            }
+        }
     }
     
     func build(){
         p0Progress = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: frame.height))
-        p0Progress = UIView(frame: CGRect(x: frame.width, y: 0, width: 0, height: frame.height))
+        p1Progress = UIView(frame: CGRect(x: frame.width, y: 0, width: 0, height: frame.height))
         p0Progress.backgroundColor = redOnBoard
         p1Progress.backgroundColor = blueOnBoard
-        
+        self.addSubview(p0Progress)
+        self.addSubview(p1Progress)
         layer.cornerRadius = frame.height/4
+        p0Progress.layer.cornerRadius = frame.height/4
+        p1Progress.layer.cornerRadius = frame.height/4
+        
+        let centralLine = UIView(frame: CGRect(x: 0, y: -2, width: 1, height: self.frame.height + 4))
+        centralLine.backgroundColor = UIColor.blackColor()
+        centralLine.center = CGPointMake(self.frame.width / 2, self.frame.height / 2)
+        self.addSubview(centralLine)
     }
     
     func resetProgress(){
         UIView.animateWithDuration(0.5) { () -> Void in
             self.p0Progress.frame = CGRect(x: 0, y: 0, width: 0, height: self.frame.height)
-            self.p0Progress.frame = CGRect(x: self.frame.width, y: 0, width: 0, height: self.frame.height)
+            self.p1Progress.frame = CGRect(x: self.frame.width, y: 0, width: 0, height: self.frame.height)
         }
     }
     

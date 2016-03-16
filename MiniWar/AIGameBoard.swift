@@ -12,6 +12,8 @@ class AIGameBoard: GameBoard {
     
     var aiPlayer = 0
     
+    var hasRestart = false
+    
     override func buildGame(game: EnclosureGame) {
         super.buildGame(game)
         
@@ -47,7 +49,6 @@ class AIGameBoard: GameBoard {
             })
         }
     }
-
     
     override func afterPlayerMove(){
         
@@ -60,6 +61,8 @@ class AIGameBoard: GameBoard {
             let qualityOfServiceClass = QOS_CLASS_BACKGROUND
             let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
             dispatch_async(backgroundQueue, {
+                
+                let currentState = AIBoard(bigGame: self.game)
                 let moves = ai.calculateNextStep()
                 var fences = [Fence]()
                 var setofNodes = Set<FenceNode>()
@@ -71,15 +74,23 @@ class AIGameBoard: GameBoard {
                     setofNodes.insert(node2)
                     fences.append(node1.fences[node2]!)
                 }
+                
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    self.moveToNextStep(fences, nodes: Array(setofNodes))
-                    self.alpha = 1
-                    self.userInteractionEnabled = true
-                    if !self.highlighting{
-                        self.highlighting = true
-                        self.highlightLastAIMove()
+                    
+                    let currentboard = AIBoard(bigGame: self.game)
+                    if currentState.playerFence == currentboard.playerFence{
+                        
+                        self.moveToNextStep(fences, nodes: Array(setofNodes))
+                        if !self.highlighting{
+                            self.highlighting = true
+                            self.highlightLastAIMove()
+                        }
                         self.delegate?.resetTimer()
                     }
+                })
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    self.alpha = 1
+                    self.userInteractionEnabled = true
                 })
             })
         }

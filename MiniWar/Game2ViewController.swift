@@ -9,10 +9,14 @@
 import UIKit
 
 class Game2ViewController: GameViewController {
-    
-
-    
+        
     override func viewDidAppear(animated: Bool) {
+        game = EnclosureGame2()
+        board.buildGame(game)
+        baseProgress.build()
+    }
+    
+    override func buildGame() {
         game = EnclosureGame2()
         board.buildGame(game)
     }

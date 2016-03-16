@@ -1,3 +1,4 @@
+
 //
 //  GameBoard.swift
 //  MiniWar
@@ -54,12 +55,6 @@ class GameBoard: UIView {
     }
     
     func buildGame(game: EnclosureGame){
-        
-        self.delegate?.updateScoreLabel(0)
-        self.delegate?.changeProgress(0)
-        self.delegate?.updateScoreLabel(1)
-        self.delegate?.changeProgress(1)
-
         
         self.game = game
         
@@ -133,6 +128,7 @@ class GameBoard: UIView {
                 }
             }
         }
+
         liftElements()
     }
     
@@ -253,7 +249,7 @@ class GameBoard: UIView {
             self.delegate?.changeProgress((game.currentPlayer()+1)%2)
 
         }
-        if game.checkEnd(){
+        if game.checkEnd(self){
             var winner = 1
             if game.playerScore[0] > game.playerScore[1]{
                 winner = 0
@@ -296,6 +292,7 @@ class GameBoard: UIView {
         var total = 0
         for area in areas{
             total = total + area.gameElement.score
+            print(total)
         }
         return total
     }
