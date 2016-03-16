@@ -23,9 +23,8 @@ class GameViewController: UIViewController, GameBoardDelegate {
     @IBOutlet var pause: UIButton!
     @IBOutlet var timer: UILabel!
     
-    @IBOutlet var baseProgress: UIView!
-    @IBOutlet var p0Progress: UIView!
-    @IBOutlet var p1Progress: UIView!
+    @IBOutlet var baseProgress: ProgressView!
+    
     
     @IBOutlet var playerRow: Rows!
     
@@ -37,20 +36,17 @@ class GameViewController: UIViewController, GameBoardDelegate {
         player0Score.text = "0"
         player1Score.text = "0"
         
-        //progress bar
-        baseProgress.backgroundColor = UIColor.grayColor()
-        p0Progress.backgroundColor = player0Score.textColor
-        p1Progress.backgroundColor = player1Score.textColor
-		p0Progress.frame.size.width = 0
-        p1Progress.frame.size.width = 0
-
-        
-        
         pause.addTarget(self, action: "pause:", forControlEvents: UIControlEvents.TouchUpInside)
         timer.userInteractionEnabled = false
         timer.text = "0s"
         
         nstimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "timing", userInfo: nil, repeats: true)
+    }
+
+    override func viewDidAppear(animated: Bool) {
+        game = EnclosureGame()
+        board.buildGame(game)
+        baseProgress.build()
     }
     
     func timing(){
@@ -65,12 +61,6 @@ class GameViewController: UIViewController, GameBoardDelegate {
         timePassed = 0
     }
     
-    func resetProgress() {
-        print("resetProgress")
-        p0Progress.frame.size.width = 0
-        p1Progress.frame.size.width = 0
-    }
-    
     func pause(but: UIButton){
         let pauseContr = self.storyboard?.instantiateViewControllerWithIdentifier("pauseView") as! PauseViewController
         pauseContr.view.alpha = 0
@@ -81,18 +71,10 @@ class GameViewController: UIViewController, GameBoardDelegate {
         }
         isPaused = true
     }
-
+    
     func exit(){
         self.performSegueWithIdentifier("exit", sender: self)
     }
-    
-    //        let backgroundView = UIView(frame: view.bounds)
-    //        backgroundView.backgroundColor = UIColor(gradientStyle:UIGradientStyle.LeftToRight, withFrame:view.bounds, andColors:[, UIColor(hexString: "78B4FF")])
-    //        backgroundView.alpha = 0.4
-    //        view.addSubview(backgroundView)
-    //        view.sendSubviewToBack(backgroundView)
-    // Do any additional setup after loading the view, typically from a nib.
-    
     
     
     func animateScore(area: Area, score: Int, player: Int){
@@ -125,17 +107,16 @@ class GameViewController: UIViewController, GameBoardDelegate {
         game = EnclosureGame()
         board.buildGame(game)
         resetTimer()
-        resetProgress()
+        baseProgress.resetProgress()
     }
     
     func endGame(winPlayer: Int) {
         if winPlayer == 1{
             player1Score.text = "WIN"
-            p1Progress.frame.size.width = baseProgress.frame.width/2
         }else{
             player0Score.text = "WIN"
-            p0Progress.frame.size.width = baseProgress.frame.width/2
         }
+        baseProgress.resetProgress()
         board.userInteractionEnabled = false
         board.alpha = 0.7
     }
@@ -167,15 +148,12 @@ class GameViewController: UIViewController, GameBoardDelegate {
         }
     }
     
-    func changeProgress(player: Int) {
+    func changeProgress(player: Int){
         print("!!!!!")
         
-        if player == 0{
-            p0Progress.frame.size.width = baseProgress.frame.width / 64 * CGFloat(game.playerScore[player])
-        }
-        else {
-            p1Progress.frame.size.width = baseProgress.frame.width / 64 * CGFloat(game.playerScore[player])
-        }
+        let rawTotal = board.calculateTotalScore()
+        let percent = CGFloat(game.playerScore[player]) / CGFloat(rawTotal)
+        baseProgress.updateProgress(player, percent: percent)
         
     }
     
@@ -187,13 +165,43 @@ class GameViewController: UIViewController, GameBoardDelegate {
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
-        game = EnclosureGame()
-        board.buildGame(game)
-    }
+
 }
 
-
+class ProgressView: UIView{
+    
+    var p0Progress = UIView()
+    var p1Progress = UIView()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    func updateProgress(player: Int, percent: CGFloat){
+        
+    }
+    
+    func build(){
+        p0Progress = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: frame.height))
+        p0Progress = UIView(frame: CGRect(x: frame.width, y: 0, width: 0, height: frame.height))
+        p0Progress.backgroundColor = redOnBoard
+        p1Progress.backgroundColor = blueOnBoard
+        
+        layer.cornerRadius = frame.height/4
+    }
+    
+    func resetProgress(){
+        UIView.animateWithDuration(0.5) { () -> Void in
+            self.p0Progress.frame = CGRect(x: 0, y: 0, width: 0, height: self.frame.height)
+            self.p0Progress.frame = CGRect(x: self.frame.width, y: 0, width: 0, height: self.frame.height)
+        }
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+}
 
 class Rows: UIView {
     

@@ -17,7 +17,6 @@ protocol GameBoardDelegate{
     func endGame(winPlayer: Int)
     func resetTimer()
     func changeProgress(player: Int)
-    func resetProgress()
 }
 
 class GameBoard: UIView {
@@ -291,6 +290,14 @@ class GameBoard: UIView {
         super.init(coder: aDecoder)
         gesture = UIPanGestureRecognizer(target: self, action: "dragged:")
         self.addGestureRecognizer(gesture)
+    }
+    
+    func calculateTotalScore()->Int{
+        var total = 0
+        for area in areas{
+            total = total + area.gameElement.score
+        }
+        return total
     }
     
 }

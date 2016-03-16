@@ -10,7 +10,7 @@ import UIKit
 import ChameleonFramework
 
 let redOnBoard = UIColor(hexString: "F7959D")
-let blutOnBoard = UIColor(hexString: "78B4FF")
+let blueOnBoard = UIColor(hexString: "78B4FF")
 
 class MainViewController: UIViewController {
     
@@ -26,8 +26,6 @@ class MainViewController: UIViewController {
         if !Connection.hasRegistered() {
             Connection.register(NSUserDefaults.standardUserDefaults().objectForKey("nickName") as! String)
         }
-        //add gradient
-//        self.view.backgroundColor = UIColor(gradientStyle:UIGradientStyle.LeftToRight, withFrame:self.view.bounds, andColors:[UIColor.redColor(), UIColor.blueColor()])
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -39,16 +37,10 @@ class MainViewController: UIViewController {
         
         
         print(self.view.frame.width)
-//        enclosure.layer.shadowRadius = 0.8
-//        enclosure.layer.shadowOpacity = 0.3
-//        beta.layer.shadowRadius = 0.01
-//        beta.layer.shadowOpacity = 0.05
         back.buildGame(sudoGame)
         board.board = back
         board.controller = self
         board.drawMenu1()
-        
-
     }
     
     @IBAction func backToMain(segue:UIStoryboardSegue) {

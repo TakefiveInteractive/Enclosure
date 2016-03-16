@@ -10,8 +10,4 @@ import UIKit
 
 class AIGame1ViewController: GameViewController {
     
-    override func viewDidAppear(animated: Bool) {
-        game = EnclosureGame()
-        board.buildGame(game)
-    }
 }

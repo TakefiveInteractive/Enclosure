@@ -141,58 +141,12 @@
                                 <color key="textColor" red="0.22352941179999999" green="0.22352941179999999" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="90I-L8-57Y">
-                                <rect key="frame" x="110" y="20" width="380" height="40"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u0T-d8-1LG">
-                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="0t3-tB-CCH"/>
-                                            <constraint firstAttribute="width" constant="40" id="1dz-a6-fsJ"/>
-                                            <constraint firstAttribute="height" constant="40" id="McG-pe-L5q"/>
-                                        </constraints>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="0t3-tB-CCH"/>
-                                                <exclude reference="1dz-a6-fsJ"/>
-                                                <exclude reference="McG-pe-L5q"/>
-                                            </mask>
-                                        </variation>
-                                    </view>
-                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lYe-50-C6U">
-                                        <rect key="frame" x="340" y="0.0" width="40" height="40"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="AVl-Uf-OyI"/>
-                                            <constraint firstAttribute="height" constant="40" id="lld-9O-f8o"/>
-                                            <constraint firstAttribute="width" constant="40" id="s5L-KP-G7Q"/>
-                                        </constraints>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="AVl-Uf-OyI"/>
-                                                <exclude reference="lld-9O-f8o"/>
-                                                <exclude reference="s5L-KP-G7Q"/>
-                                            </mask>
-                                        </variation>
-                                    </view>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="90I-L8-57Y" customClass="ProgressView" customModule="Enclosure" customModuleProvider="target">
+                                <rect key="frame" x="70" y="32.5" width="460" height="15"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstItem="u0T-d8-1LG" firstAttribute="width" secondItem="90I-L8-57Y" secondAttribute="height" multiplier="2:1" id="3oX-4I-Vey"/>
-                                    <constraint firstItem="u0T-d8-1LG" firstAttribute="leading" secondItem="90I-L8-57Y" secondAttribute="leading" id="5AH-4k-qDm"/>
-                                    <constraint firstItem="u0T-d8-1LG" firstAttribute="height" secondItem="90I-L8-57Y" secondAttribute="height" id="DFf-PB-0iY"/>
-                                    <constraint firstItem="lYe-50-C6U" firstAttribute="centerY" secondItem="90I-L8-57Y" secondAttribute="centerY" id="Job-t3-Voi"/>
-                                    <constraint firstItem="lYe-50-C6U" firstAttribute="height" secondItem="90I-L8-57Y" secondAttribute="height" id="aeL-2R-Fr0"/>
-                                    <constraint firstAttribute="height" constant="40" id="gSB-zV-GKl"/>
-                                    <constraint firstAttribute="trailing" secondItem="lYe-50-C6U" secondAttribute="trailing" id="jdt-hG-bJX"/>
-                                    <constraint firstItem="u0T-d8-1LG" firstAttribute="centerY" secondItem="90I-L8-57Y" secondAttribute="centerY" id="n2s-Bz-Fn7"/>
+                                    <constraint firstAttribute="height" constant="15" id="gSB-zV-GKl"/>
                                 </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="3oX-4I-Vey"/>
-                                    </mask>
-                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -202,8 +156,9 @@
                             <constraint firstItem="vuc-Jv-6lx" firstAttribute="centerX" secondItem="rIo-Hh-rgO" secondAttribute="centerX" id="98v-2Q-CPZ"/>
                             <constraint firstItem="sws-Ub-1lj" firstAttribute="top" secondItem="rIo-Hh-rgO" secondAttribute="topMargin" constant="20" id="BkD-kB-IGI"/>
                             <constraint firstItem="pzH-Cg-p22" firstAttribute="top" secondItem="vuc-Jv-6lx" secondAttribute="bottom" constant="5" id="D3U-aS-Z4w"/>
+                            <constraint firstItem="90I-L8-57Y" firstAttribute="centerY" secondItem="sws-Ub-1lj" secondAttribute="centerY" id="DGA-x8-sb5"/>
                             <constraint firstItem="9zD-Tp-OV4" firstAttribute="leading" secondItem="ocW-C6-oAG" secondAttribute="leading" id="FGe-GX-evw"/>
-                            <constraint firstItem="ypp-FF-d1i" firstAttribute="leading" secondItem="90I-L8-57Y" secondAttribute="trailing" constant="50" id="I8V-jh-PG4"/>
+                            <constraint firstItem="ypp-FF-d1i" firstAttribute="leading" secondItem="90I-L8-57Y" secondAttribute="trailing" constant="10" id="I8V-jh-PG4"/>
                             <constraint firstItem="vuc-Jv-6lx" firstAttribute="top" secondItem="754-C7-gYi" secondAttribute="bottom" constant="40" id="ICx-1Q-mRI"/>
                             <constraint firstItem="ocW-C6-oAG" firstAttribute="top" secondItem="754-C7-gYi" secondAttribute="bottom" constant="15" id="JpH-Vm-GzE"/>
                             <constraint firstItem="90I-L8-57Y" firstAttribute="top" secondItem="754-C7-gYi" secondAttribute="bottom" id="KX2-Kf-MO0"/>
@@ -230,6 +185,7 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="KX2-Kf-MO0"/>
                                 <exclude reference="yA6-ea-Ida"/>
                                 <exclude reference="JpH-Vm-GzE"/>
                                 <exclude reference="er2-l5-IF5"/>
@@ -243,10 +199,8 @@
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="baseProgress" destination="90I-L8-57Y" id="AWC-SO-rmY"/>
+                        <outlet property="baseProgress" destination="90I-L8-57Y" id="c2B-RP-3R3"/>
                         <outlet property="board" destination="ocW-C6-oAG" id="WGD-aO-wDd"/>
-                        <outlet property="p0Progress" destination="u0T-d8-1LG" id="YjV-Cv-gye"/>
-                        <outlet property="p1Progress" destination="lYe-50-C6U" id="Ra3-aL-xm6"/>
                         <outlet property="pause" destination="ypp-FF-d1i" id="war-bw-vmZ"/>
                         <outlet property="player0Name" destination="pzH-Cg-p22" id="8HB-U6-MtC"/>
                         <outlet property="player0Score" destination="vuc-Jv-6lx" id="cmZ-xM-0Uj"/>
