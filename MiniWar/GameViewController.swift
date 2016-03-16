@@ -120,7 +120,6 @@ class GameViewController: UIViewController, GameBoardDelegate {
         }else{
             player0Score.text = "WIN"
         }
-        baseProgress.resetProgress()
         board.userInteractionEnabled = false
         board.alpha = 0.7
     }
