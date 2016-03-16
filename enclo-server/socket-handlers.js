@@ -1,10 +1,23 @@
 'use strict'
 let models = require('./db')
-let Move = models.Move
+let Game = models.Game
 
 let randName = () => Math.floor(Math.random() * 100000).toString()
+let boardNumGen = () => {
+  let ans = Math.round((Math.floor(Math.random()*100) + 1) * (Math.floor(Math.random()*100) + 1) / 1500)
+  if (ans == 0)
+    ans = 1
+  return ans
+}
+
+let moves = {}
+let maps = {}
+let levels = {}
 
 let handlers = (conns, rooms, io) => {
+  const ifNotInGame = (personalSocket, roomNumber) => {
+    return !rooms[roomNumber] || rooms[roomNumber].indexOf(personalSocket) == -1
+  }
   const log = () => {
     //console.log('Conns : ' + JSON.stringify(conns.map((c) => c.id)))
     console.log('rooms : ' + JSON.stringify(Object.keys(rooms)))
@@ -13,12 +26,14 @@ let handlers = (conns, rooms, io) => {
   onJoinRoom: (socket) => function (roomNumber) {
     console.log('join ' + roomNumber)
     log()
-
     if (rooms[roomNumber] && rooms[roomNumber].length == 1) {
       let theRoom = rooms[roomNumber]
+      let requestedRestart = [false, false]
       theRoom.push(socket)
       socket.join(roomNumber)
       //io.to(roomNumber).emit('gameCanStart', '')
+      io.to(roomNumber).emit('mapUpdate', 
+        maps[roomNumber].join('|'))
       theRoom.sort(() => {
         Math.random() > 0.5
       })
@@ -26,43 +41,93 @@ let handlers = (conns, rooms, io) => {
         socket.emit('gameCanStart', index)
       })
       theRoom.forEach((socket, index) => {
-        socket.on('gameMove', methods.onMove(roomNumber, theRoom, index))
+        socket.on('gameMove', !ifNotInGame(socket, roomNumber) ? methods.onMove(roomNumber, theRoom, index) : () => {})
         socket.on('disconnect', () => {
-          io.of(roomNumber).emit('gameEnd')
+          io.to(roomNumber).emit('userDisconnect', '😲')
           delete rooms[roomNumber]
         })
         socket.on('gameEnd', () => {
+          if (!rooms[roomNumber])
+            return
+          let thisGame = new Game({
+            roomNumber : roomNumber,
+            players : rooms[roomNumber].map((socket) => socket.id),
+            moves : moves[roomNumber]
+          })
+          thisGame.save()
           delete rooms[roomNumber]
+        })
+        socket.on('gameRestart', () => {
+          if (!ifNotInGame(socket, roomNumber))
+            return
+          if (requestedRestart[theRoom.indexOf(socket)])
+            return
+          requestedRestart[theRoom.indexOf(socket)] = true
+          if (requestedRestart[0] && requestedRestart[1]) {
+            io.to(roomNumber).emit('mapUpdate', 
+              maps[roomNumber].join('|'))
+            requestedRestart = [false, false]
+            theRoom.sort(() => {
+              Math.random() > 0.5
+            })
+            theRoom.forEach((socket, index) => {
+              socket.emit('gameCanRestart', index)
+            })
+            methods.updateMap(roomNumber, levels[roomNumber])
+          } else {
+            theRoom[1 - theRoom.indexOf(socket)].emit('inviteToRestart')
+          }
+        })
+        socket.on('refuseRestart', () => {
+          if (!ifNotInGame(socket, roomNumber))
+            return
+          requestedRestart = [false, false]
         })
       })
     } else {
-      socket.emit('roomError', 'room not found or full')
+      socket.emit('roomError', 'room not found or full😲')
     }
   } ,
-  onCreateRoom : (socket) => function () {
-    let name = randName()
-    rooms[name] = [socket]
-    socket.join(name)
-    io.to(name).emit('roomCreated', name)
-
-    console.log('create ' + name)
+  onCreateRoom : (socket) => function (level) {
+    let roomNumber = randName()
+    rooms[roomNumber] = [socket]
+    socket.join(roomNumber)
+    io.to(roomNumber).emit('roomCreated', roomNumber)
+    levels[roomNumber] = level
+    methods.updateMap(roomNumber, levels[roomNumber])
+    console.log('create ' + roomNumber)
     log()
   } ,
   onMove : (roomNumber, theRoom, player) => function (rawMove) {
     console.log('move '+roomNumber+' '+player+' '+rawMove)
     theRoom[0].emit('gameMove', rawMove)
     theRoom[1].emit('gameMove', rawMove)
-    new Move({
-      roomNumber : roomNumber,
-      time : Date.now(),
-      player : rawMove.split(':')[0],
-      rawString : rawMove,
-      points : rawMove.split(':')[1].split('|').map((edgeStr) => {
-        return edgeStr.split('$').map((pointStr) => {
-          return pointStr.split(',').map((coordinate) => parseInt(coordinate))
-        })
-      })
-    })
+    if (!moves[roomNumber])
+      moves[roomNumber] = [[], []]
+    //1:3,7$3,8|3,6$3,7|3,5$3,6
+    moves[roomNumber][parseInt(rawMove.split(':')[0])].push(rawMove.split(':')[1]
+      .split('|').map((edgeStr) => 
+        edgeStr.split('$').map((pointStr) => 
+          pointStr.split(',').map((coordinate) => parseInt(coordinate)))))
+  } ,
+  updateMap : (roomNumber, level) => {
+    let room = rooms[roomNumber]
+    maps[roomNumber] = []
+    const size = 9
+    if (level == '1') {
+      for (let i = 0; i<=8; i++) {
+        maps[roomNumber][i] = []
+        for (let j = 0; j<=8; j++)
+          maps[roomNumber][i].push(1)
+      }
+    }
+    if (level == '2') {
+      for (let i = 0; i<=8; i++) {
+        maps[roomNumber][i] = []
+        for (let j = 0; j<=8; j++)
+          maps[roomNumber][i].push(boardNumGen())
+      }
+    }
   }
 }
 return methods
