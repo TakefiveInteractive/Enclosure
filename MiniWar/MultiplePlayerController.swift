@@ -39,8 +39,14 @@ class MultiplePlayerController: UIViewController, SocketSuccessDelegate{
         searchText.text = number
     }
     
-    func playerSequence(player: Int) {
+    func playerSequence(player: Int, names: [String]){
         self.player = player
+        var opponentName = ""
+        if names[0] == Connection.getUserNickName(){
+            opponentName = names[1]
+        }else{
+            opponentName = names[0]
+        }
     }
     
     func joinSuccess(success: Bool) {

@@ -23,9 +23,7 @@ class MainViewController: UIViewController {
     var sudoGame = EnclosureGame()
     
     override func viewDidLoad() {
-        if !Connection.hasRegistered() {
-            Connection.register(NSUserDefaults.standardUserDefaults().objectForKey("nickName") as! String)
-        }
+        !Connection.getInfo()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -40,7 +38,8 @@ class MainViewController: UIViewController {
         back.buildGame(sudoGame)
         board.board = back
         board.controller = self
-        board.drawMenu1()
+//        board.drawMenu1()
+        board.inputNickName()
     }
     
     @IBAction func backToMain(segue:UIStoryboardSegue) {

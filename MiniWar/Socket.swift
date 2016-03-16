@@ -1,7 +1,7 @@
 
 import Foundation
 import SocketIOClientSwift
-
+import SwiftyJSON
 
 protocol SocketGameDelegate{
     func gotMove(move: String)
@@ -12,7 +12,7 @@ protocol SocketGameDelegate{
 protocol SocketSuccessDelegate{
     func joinSuccess(success: Bool)
     func gotRoomNumber(number: String)
-    func playerSequence(player: Int)
+    func playerSequence(player: Int, names: [String])
 }
 
 public class Socket: NSObject {
@@ -33,15 +33,19 @@ public class Socket: NSObject {
     }
     
     func createRoom() {
-        self.socketClient.emit("createRoom","1")
-    }
+        let json: JSON = ["id":Connection.getUserId(), "level": "1"]
+        print(json.rawString()!)
 
-    func gameEnd() {
-        self.socketClient.emit("gameEnd","")
+        self.socketClient.emit("createRoom",json.rawString()!)
     }
     
     func searchRoom() {
-        self.socketClient.emit("joinRoom", roomNumber)
+        let json: JSON = ["id":Connection.getUserId(), "room": roomNumber]
+        self.socketClient.emit("joinRoom", json.rawString()!)
+    }
+    
+    func gameEnd() {
+        self.socketClient.emit("gameEnd","")
     }
     
     func playerMove(move: String) {
@@ -81,8 +85,23 @@ public class Socket: NSObject {
         }
         
         self.socketClient.on("gameCanStart") { (data, ack) -> Void in
-            print(data)
-            self.startDelegate?.playerSequence(Int(data[0] as! NSNumber))
+            let str = data[0]
+           
+            let data = str.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!
+            var namesArr = [String]()
+            var num = 0
+            do {
+                let json = try NSJSONSerialization.JSONObjectWithData(data, options: []) as! [String: AnyObject]
+                if let names = json["names"] as? [String] {
+                    namesArr = names
+                }
+                if let index = json["index"] as? Int {
+                    num = index
+                }
+            } catch let error as NSError {
+                print("Failed to load: \(error.localizedDescription)")
+            }
+            self.startDelegate?.playerSequence(num, names:[namesArr[0],namesArr[1]])
             self.startDelegate?.joinSuccess(true)
         }
 

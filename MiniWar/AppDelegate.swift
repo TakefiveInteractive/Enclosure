@@ -15,17 +15,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-
-        if NSUserDefaults.standardUserDefaults().objectForKey("userId") == nil{
-            self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-            
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            
-            let initialViewController = storyboard.instantiateViewControllerWithIdentifier("Register")
-            
-            self.window?.rootViewController = initialViewController
-            self.window?.makeKeyAndVisible()
-        }
+        NSUserDefaults.standardUserDefaults().setObject("hahahaha", forKey: "nickName")
+        Connection.setName()
+        Connection.getInfo()
+        
+//        if NSUserDefaults.standardUserDefaults().objectForKey("userId") == nil{
+//            self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+//            
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            
+//            let initialViewController = storyboard.instantiateViewControllerWithIdentifier("Register")
+//            
+//            self.window?.rootViewController = initialViewController
+//            self.window?.makeKeyAndVisible()
+//        }
         return true
     }
 

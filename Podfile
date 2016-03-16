@@ -11,6 +11,7 @@ target ‘Enclosure’ do
 pod 'ChameleonFramework/Swift'
 pod 'Socket.IO-Client-Swift', '~> 5.4.1' # Or latest version
 pod 'Alamofire'
+pod 'SwiftyJSON'
 
 end
 

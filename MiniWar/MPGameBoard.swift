@@ -13,7 +13,7 @@ class MPGameBoard: GameBoard, SocketGameDelegate{
     var onlineCurrentPlayer: Int = 0
     var parent: MPGame1ViewController!
     override func afterPlayerMove(){
-        
+        super.afterPlayerMove()
         var fencess = game.userLastEdges[onlineCurrentPlayer].last!
         var sendData = ""
         if fencess.count == 3 {
@@ -29,6 +29,7 @@ class MPGameBoard: GameBoard, SocketGameDelegate{
     func gotMove(move: String) {
         let splitData = move.componentsSeparatedByString(":")
         print(splitData)
+        
         if Int(splitData[0]) == game.currentPlayer(){
             let fs = splitData[1].componentsSeparatedByString("|")
             var fences = [Fence]()

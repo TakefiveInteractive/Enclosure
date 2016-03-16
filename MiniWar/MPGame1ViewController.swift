@@ -16,7 +16,15 @@ class MPGame1ViewController: GameViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        (board as! MPGameBoard).parent = self
         (board as! MPGameBoard).onlineCurrentPlayer = currentPlayer
+
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        buildGame()
+        (board as! MPGameBoard).changeBoardAvailabiliity()
     }
     
     override func replay(){
@@ -36,6 +44,18 @@ class MPGame1ViewController: GameViewController{
         createAccountErrorAlert.show()
     }
     
+    
+    override func endGame(winPlayer: Int) {
+        if winPlayer == 1{
+            player1Score.text = "WIN"
+        }else{
+            player0Score.text = "WIN"
+        }
+        mpSocket.gameEnd()
+        board.userInteractionEnabled = false
+        board.alpha = 0.7
+    }
+    
     func alertView(View: UIAlertView!, clickedButtonAtIndex buttonIndex: Int){
         
         switch buttonIndex{
@@ -53,7 +73,7 @@ class MPGame1ViewController: GameViewController{
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func buildGame() {
         game = EnclosureGame()
         (board as! MPGameBoard).buildGame(game, player: currentPlayer, parent: self)
     }

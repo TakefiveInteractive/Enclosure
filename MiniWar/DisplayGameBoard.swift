@@ -32,6 +32,21 @@ class BoardText: UILabel {
     }
 }
 
+class InputText: UITextField {
+    init(frame: CGRect, text: String, color: UIColor, size: CGFloat) {
+        super.init(frame: frame)
+        self.text = text
+        self.textAlignment = NSTextAlignment.Center
+        self.font = UIFont(name: "Avenir-Heavy", size: 30.0 * size / 414.0)
+        self.textColor = color
+        self.backgroundColor = UIColor(hexString: "FBFBFC")
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
 class BoardButton: UIButton {
     init(frame: CGRect, text: String, color: UIColor, size: CGFloat) {
         super.init(frame: frame)
@@ -64,7 +79,7 @@ class ChapterButton: UIButton {
     }
 }
 
-class BoardBack: UIView {
+class BoardBack: UIView , UITextFieldDelegate{
     
     var board: DisplayGameBoard!
     var controller: MainViewController!
@@ -102,29 +117,77 @@ class BoardBack: UIView {
     }
     
     func play(but: UIButton){
-        
         firstSelection = but.tag
-        
-        for fence in board.game.fences{
-            fence.player = -1
-        }
-        
-        board.drawBoard()
-        
-        UIView.animateWithDuration(0.4, animations: { () -> Void in
-            for element in self.elements{
-                element.alpha = 0
-            }
-            }) { (finish) -> Void in
-                for element in self.elements{
-                    element.removeFromSuperview()
-                }
-                self.elements = [UIView]()
-                self.drawTwoMode()
-        }
+        cleanBoard(drawTwoMode)
     }
     
     func back(but: UIButton){
+       cleanBoard(drawMenu1)
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func inputNickName(){
+        var x = board.game.nodes[1][1].fences[board.game.nodes[2][1]]!.view.frame.origin.x
+        var y = board.game.nodes[1][1].fences[board.game.nodes[1][2]]!.view.frame.origin.y
+        var width = board.game.nodes[7][1].fences[board.game.nodes[7][2]]!.view.frame.origin.x - x
+        var height = board.game.nodes[3][2].fences[board.game.nodes[4][2]]!.view.frame.origin.y - y
+        let nickname = BoardText(frame: CGRect(x: x, y: y, width: width, height: height), text: "Your Nickname:", color: controller.beta.textColor, size: controller.view.frame.width)
+        nickname.alpha = 0
+        self.addSubview(nickname)
+        
+        x = board.game.nodes[2][3].fences[board.game.nodes[3][3]]!.view.frame.origin.x
+        y = board.game.nodes[2][3].fences[board.game.nodes[2][4]]!.view.frame.origin.y
+        width = board.game.nodes[7][1].fences[board.game.nodes[7][2]]!.view.frame.origin.x - x
+        height = board.game.nodes[4][4].fences[board.game.nodes[5][4]]!.view.frame.origin.y - y
+        let input = InputText(frame: CGRect(x: x, y: y, width: width, height: height), text: "", color: controller.enclosure.textColor, size: controller.view.frame.width)
+        input.alpha = 0
+        self.addSubview(input)
+        
+        x = board.game.nodes[5][3].fences[board.game.nodes[6][3]]!.view.frame.origin.x
+        y = board.game.nodes[5][3].fences[board.game.nodes[5][4]]!.view.frame.origin.y
+        width = board.game.nodes[7][3].fences[board.game.nodes[7][4]]!.view.frame.origin.x - x
+        height = board.game.nodes[4][5].fences[board.game.nodes[5][5]]!.view.frame.origin.y - y
+        let submit = ChapterButton(frame: CGRect(x: x, y: y, width: width, height: height), text: "1", color: controller.beta.textColor, size: controller.view.frame.width)
+        submit.alpha = 0
+        submit.addTarget(self, action: "submit:", forControlEvents: UIControlEvents.TouchUpInside)
+        self.addSubview(submit)
+        
+        input.delegate = self
+        elements.append(nickname)
+        elements.append(input)
+        elements.append(submit)
+        
+        board.game.nodes[3][4].fences[board.game.nodes[2][4]]?.player = 1
+        board.game.nodes[4][4].fences[board.game.nodes[3][4]]?.player = 1
+        board.game.nodes[5][4].fences[board.game.nodes[4][4]]?.player = 1
+        board.game.nodes[6][4].fences[board.game.nodes[5][4]]?.player = 1
+        board.game.nodes[7][4].fences[board.game.nodes[6][4]]?.player = 1
+
+        board.game.nodes[2][4].fences[board.game.nodes[2][3]]?.player = 1
+        board.game.nodes[7][4].fences[board.game.nodes[7][3]]?.player = 1
+
+        board.game.nodes[3][3].fences[board.game.nodes[2][3]]?.player = 1
+        board.game.nodes[4][3].fences[board.game.nodes[3][3]]?.player = 1
+        board.game.nodes[5][3].fences[board.game.nodes[4][3]]?.player = 1
+        board.game.nodes[6][3].fences[board.game.nodes[5][3]]?.player = 1
+        board.game.nodes[7][3].fences[board.game.nodes[6][3]]?.player = 1
+        
+        board.drawBoard()
+        
+        UIView.animateWithDuration(0.5) { () -> Void in
+            nickname.alpha = 1
+            input.alpha = 1
+            submit.alpha = 1
+        }
+        input.becomeFirstResponder()
+
+    }
+    
+    func cleanBoard(action:()->()){
         
         for fence in board.game.fences{
             fence.player = -1
@@ -141,7 +204,7 @@ class BoardBack: UIView {
                     element.removeFromSuperview()
                 }
                 self.elements = [UIView]()
-                self.drawMenu1()
+                action()
         }
     }
     
@@ -207,6 +270,10 @@ class BoardBack: UIView {
         }
     }
     
+    func mp(but:UIButton){
+        self.controller.performSegueWithIdentifier("mp", sender: self.controller)
+    }
+    
     func drawMenu1(){
         
         var x = board.game.nodes[3][1].fences[board.game.nodes[4][1]]!.view.frame.origin.x
@@ -242,6 +309,7 @@ class BoardBack: UIView {
         width = board.game.nodes[7][7].fences[board.game.nodes[7][8]]!.view.frame.origin.x - x
         height = board.game.nodes[4][8].fences[board.game.nodes[5][8]]!.view.frame.origin.y - y
         let friend = BoardButton(frame: CGRect(x: x, y: y, width: width, height: height), text: "Play w/ Friends", color: controller.enclosure.textColor, size: controller.view.frame.width)
+        friend.addTarget(self, action: "mp:", forControlEvents: UIControlEvents.TouchUpInside)
         friend.tag = 2
         friend.alpha = 0
         self.addSubview(friend)
@@ -317,9 +385,7 @@ class BoardBack: UIView {
             }) { (finish) -> Void in
                 
         }
-    }
-    
-    
+    }    
     
 }
 

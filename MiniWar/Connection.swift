@@ -13,20 +13,24 @@ class Connection: NSObject {
     
     //request for the user id with UDID
     class func getUserId()->String{
-        return NSUUID().UUIDString
+        return UIDevice.currentDevice().identifierForVendor!.UUIDString
     }
     
-    class func hasRegistered()->Bool{
-        if let registered = NSUserDefaults.standardUserDefaults().objectForKey("registered"){
-            return registered as! Bool
+    class func hasUserName()->Bool{
+        if let name = NSUserDefaults.standardUserDefaults().objectForKey("nickName"){
+            return true
         }else{
             return false
         }
     }
     
-    class func register(name: String)->Bool{
+    class func getUserNickName()->String{
+        return NSUserDefaults.standardUserDefaults().objectForKey("nickName") as! String
+    }
+    
+    class func getInfo()->Bool{
         
-        Alamofire.request(.POST, "http://o.hl0.co:3000/register", parameters: ["userId": Connection.getUserId(), "nickName": name])
+        Alamofire.request(.POST, "http://o.hl0.co:3000/getInfo", parameters: ["userId": Connection.getUserId()])
             .responseJSON { response in
                 print(response.request)  // original URL request
                 print(response.response) // URL response
@@ -34,11 +38,28 @@ class Connection: NSObject {
                 print(response.result)   // result of response serialization
 
                 if let JSON = response.result.value {
+                    if JSON["name"] as! String != ""{
+                        NSUserDefaults.standardUserDefaults().setObject(JSON["name"], forKey: "nickName")
+                    }
                     print("JSON: \(JSON)")
-                    NSUserDefaults.standardUserDefaults().setObject(true, forKey: "registered")
                 }
         }
         return true
     }
+    
+    class func setName(){
+        Alamofire.request(.POST, "http://o.hl0.co:3000/setName", parameters: ["userId": Connection.getUserId(), "name": Connection.getUserNickName()])
+            .responseJSON { response in
+                print(response.request)  // original URL request
+                print(response.response) // URL response
+                print(response.data)     // server data
+                print(response.result)   // result of response serialization
+                
+                if let JSON = response.result.value {
+                    print("JSON: \(JSON)")
+                }
+        }
+    }
+    
     
 }

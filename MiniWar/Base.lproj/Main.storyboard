@@ -921,6 +921,7 @@
                         <segue destination="W0P-NR-Pgy" kind="presentation" identifier="playAI2" modalTransitionStyle="crossDissolve" id="Y8J-L6-kTu"/>
                         <segue destination="Ysi-Pd-sMV" kind="presentation" identifier="play1" modalTransitionStyle="crossDissolve" id="pt9-Tn-0VR"/>
                         <segue destination="waq-4p-1lB" kind="presentation" identifier="play2" modalTransitionStyle="crossDissolve" id="32a-5F-XH3"/>
+                        <segue destination="oGt-sW-HcV" kind="presentation" identifier="mp" id="5wx-nm-Dvq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IhR-Db-SJl" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1256,7 +1257,7 @@
                                     <constraint firstAttribute="width" constant="163" id="lrL-U5-0it"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
-                                <state key="normal" title="Wait for your opponent...">
+                                <state key="normal" title="Wait for opponent...">
                                     <color key="titleColor" red="0.22352941179999999" green="0.22352941179999999" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <variation key="default">
@@ -1276,18 +1277,18 @@
                                 <color key="textColor" red="0.22352941179999999" green="0.22352941179999999" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NW4-9j-Sn5" customClass="MPGameBoard" customModule="Enclosure" customModuleProvider="target">
-                                <rect key="frame" x="86" y="113" width="388" height="387"/>
-                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="NW4-9j-Sn5" secondAttribute="height" multiplier="1:1" id="Lzc-BT-LU0"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Orc-rm-8Ke" customClass="ProgressView" customModule="Enclosure" customModuleProvider="target">
                                 <rect key="frame" x="88" y="42" width="424" height="15"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15" id="lhs-95-TNP"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NW4-9j-Sn5" customClass="MPGameBoard" customModule="Enclosure" customModuleProvider="target">
+                                <rect key="frame" x="86" y="113" width="388" height="387"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="NW4-9j-Sn5" secondAttribute="height" multiplier="1:1" id="Lzc-BT-LU0"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -1337,6 +1338,7 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="baseProgress" destination="Orc-rm-8Ke" id="UCD-FD-u6r"/>
                         <outlet property="board" destination="NW4-9j-Sn5" id="PIp-Ie-ESp"/>
                         <outlet property="pause" destination="7ag-SF-UBQ" id="BnK-O4-6U7"/>
                         <outlet property="player0Name" destination="cPk-nx-rOu" id="Opa-Zi-vO2"/>
@@ -1345,6 +1347,7 @@
                         <outlet property="player1Score" destination="PSq-uX-4C3" id="3T4-M8-IMt"/>
                         <outlet property="playerRow" destination="TH2-2i-VIF" id="oXx-0t-Xcz"/>
                         <outlet property="timer" destination="AeU-Vw-r0X" id="1SH-or-EIN"/>
+                        <outlet property="waiting" destination="tzP-ka-YYn" id="xsg-ki-aEV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OD3-zq-Kl3" sceneMemberID="firstResponder"/>
