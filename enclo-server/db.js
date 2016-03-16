@@ -1,26 +1,47 @@
 'use strict'
 
 let mongoose = require('mongoose')
+let mongoosePaginate = require('mongoose-paginate')
+
 mongoose.connect('mongodb://localhost/enclosure-game')
 
-let moveSchema = new mongoose.Schema({
+let gameSchema = new mongoose.Schema({
   roomNumber : String,
   time : {
     type : Date,
     default : Date.now()
   },
-  player : String,
-  rawString : String,
-  points : {
-    type : [{
-      type : Number
-    }, {
-      type : Number
-    }]
+  players : [String],
+  move: []
+}, {
+  strict: false
+})
+
+let playerSchema = new mongoose.Schema({
+  createAt : {
+    type: Date,
+    default: Date.now()
+  },
+  name : {
+    type:String,
+    default : '',
+  },
+  elo : {
+    type:Number,
+    default:1000,
+  },
+  deviceId : {
+    type : String
   }
 })
 
-let Move = mongoose.model('game-move', moveSchema)
+gameSchema.plugin(mongoosePaginate)
+playerSchema.plugin(mongoosePaginate)
+
+let Game = mongoose.model('record', gameSchema)
+let Player = mongoose.model('player', playerSchema)
+
 module.exports = {
-  Move : Move,
+  Game : Game,
+  Player : Player,
 }
