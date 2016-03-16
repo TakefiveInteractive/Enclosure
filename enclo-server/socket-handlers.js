@@ -1,4 +1,7 @@
 'use strict'
+const l = (obj) => console.log('log : ' + JSON.stringify(obj))
+const errorHandler = (err) => console.log('error : ' + JSON.stringify(err))
+
 let models = require('./db')
 let Game = models.Game
 
@@ -13,6 +16,7 @@ let boardNumGen = () => {
 let moves = {}
 let maps = {}
 let levels = {}
+let ids = {}
 
 let handlers = (conns, rooms, io) => {
   const ifNotInGame = (personalSocket, roomNumber) => {
@@ -23,7 +27,11 @@ let handlers = (conns, rooms, io) => {
     console.log('rooms : ' + JSON.stringify(Object.keys(rooms)))
   }
   let methods = {
-  onJoinRoom: (socket) => function (roomNumber) {
+  onJoinRoom: (socket) => function (req) {
+    req = JSON.parse(req)
+    let id = req.id
+    let roomNumber = req.room
+
     console.log('join ' + roomNumber)
     log()
     if (rooms[roomNumber] && rooms[roomNumber].length == 1) {
@@ -31,20 +39,33 @@ let handlers = (conns, rooms, io) => {
       let requestedRestart = [false, false]
       theRoom.push(socket)
       socket.join(roomNumber)
+      ids[roomNumber].push(id)
       //io.to(roomNumber).emit('gameCanStart', '')
       io.to(roomNumber).emit('mapUpdate', 
         maps[roomNumber].join('|'))
       theRoom.sort(() => {
         Math.random() > 0.5
       })
-      theRoom.forEach((socket, index) => {
-        socket.emit('gameCanStart', index)
+      Promise.all(ids[roomNumber].map((id) => {
+        return models.Player.findOne({deviceId : id})
+      }))
+      .then(docs => {
+        l(docs)
+        let names = docs.map((doc) => doc.name)
+        theRoom.forEach((socket, index) => {
+          socket.emit('gameCanStart', JSON.stringify({
+            index : index,
+            names : names
+          }))
+        })
       })
       theRoom.forEach((socket, index) => {
         socket.on('gameMove', !ifNotInGame(socket, roomNumber) ? methods.onMove(roomNumber, theRoom, index) : () => {})
         socket.on('disconnect', () => {
           io.to(roomNumber).emit('userDisconnect', '😲')
           delete rooms[roomNumber]
+          delete moves[roomNumber]
+          delete ids[roomNumber]
         })
         socket.on('gameEnd', () => {
           if (!rooms[roomNumber])
@@ -52,16 +73,18 @@ let handlers = (conns, rooms, io) => {
           let thisGame = new Game({
             roomNumber : roomNumber,
             players : rooms[roomNumber].map((socket) => socket.id),
-            moves : moves[roomNumber]
+            move : moves[roomNumber]
           })
           thisGame.save()
-          delete rooms[roomNumber]
         })
         socket.on('gameRestart', () => {
-          if (!ifNotInGame(socket, roomNumber))
+          l('1')
+          if (ifNotInGame(socket, roomNumber))
             return
+          l('2')
           if (requestedRestart[theRoom.indexOf(socket)])
             return
+          l('3')
           requestedRestart[theRoom.indexOf(socket)] = true
           if (requestedRestart[0] && requestedRestart[1]) {
             io.to(roomNumber).emit('mapUpdate', 
@@ -79,7 +102,7 @@ let handlers = (conns, rooms, io) => {
           }
         })
         socket.on('refuseRestart', () => {
-          if (!ifNotInGame(socket, roomNumber))
+          if (ifNotInGame(socket, roomNumber))
             return
           requestedRestart = [false, false]
         })
@@ -88,9 +111,14 @@ let handlers = (conns, rooms, io) => {
       socket.emit('roomError', 'room not found or full😲')
     }
   } ,
-  onCreateRoom : (socket) => function (level) {
+  onCreateRoom : (socket) => function (req) {
+    req = JSON.parse(req)
+    let id = req.id
+    let level = req.level
+
     let roomNumber = randName()
     rooms[roomNumber] = [socket]
+    ids[roomNumber] = [id]
     socket.join(roomNumber)
     io.to(roomNumber).emit('roomCreated', roomNumber)
     levels[roomNumber] = level

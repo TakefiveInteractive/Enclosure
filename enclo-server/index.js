@@ -64,7 +64,7 @@ app.post('/setName', (req, res) => {
     deviceId : req.body.userId
   }
   models.Player.update(user, {
-    username : req.body.name
+    name : req.body.name
   })
   .then((dbResult) => res.end(dbResult))
 })
