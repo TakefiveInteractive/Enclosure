@@ -21,15 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if NSUserDefaults.standardUserDefaults().objectForKey("nickName") == nil{
             Connection.setName("NOName")
         }
-//            self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-//            
-//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//            
-//            let initialViewController = storyboard.instantiateViewControllerWithIdentifier("Register")
-//            
-//            self.window?.rootViewController = initialViewController
-//            self.window?.makeKeyAndVisible()
-//        }
+        
         return true
     }
 

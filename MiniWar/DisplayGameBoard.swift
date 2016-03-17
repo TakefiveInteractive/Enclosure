@@ -112,6 +112,9 @@ class BoardBack: UIView , UITextFieldDelegate{
                     self.controller.performSegueWithIdentifier("play1", sender: self.controller)
                 }else if but.tag == 1 && self.firstSelection == 1{
                     self.controller.performSegueWithIdentifier("play2", sender: self.controller)
+                }else if but.tag == 0 && self.firstSelection == 2{
+                    self.controller.createGameRoom("1")
+                    self.waitRoom()
                 }
         }
     }
@@ -134,6 +137,59 @@ class BoardBack: UIView , UITextFieldDelegate{
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    
+    var roomNum: BoardText!
+    
+    func waitRoom(){
+        var x = board.game.nodes[1][3].fences[board.game.nodes[2][3]]!.view.frame.origin.x
+        var y = board.game.nodes[1][3].fences[board.game.nodes[1][4]]!.view.frame.origin.y
+        var width = board.game.nodes[8][3].fences[board.game.nodes[8][4]]!.view.frame.origin.x - x
+        var height = board.game.nodes[3][4].fences[board.game.nodes[4][4]]!.view.frame.origin.y - y
+        let roomNumLab = BoardText(frame: CGRect(x: x, y: y, width: width, height: height), text: "Room Number:", color: controller.beta.textColor, size: controller.view.frame.width)
+        roomNumLab.alpha = 0
+        self.addSubview(roomNumLab)
+        
+        x = board.game.nodes[2][1].fences[board.game.nodes[3][1]]!.view.frame.origin.x
+        y = board.game.nodes[2][1].fences[board.game.nodes[2][2]]!.view.frame.origin.y
+        width = board.game.nodes[4][1].fences[board.game.nodes[4][2]]!.view.frame.origin.x - x
+        height = board.game.nodes[4][2].fences[board.game.nodes[5][2]]!.view.frame.origin.y - y
+        let back = BoardButton(frame: CGRect(x: x, y: y, width: width, height: height), text: "Back", color: controller.beta.textColor, size: controller.view.frame.width)
+        back.alpha = 0
+        back.addTarget(self, action: "back:", forControlEvents: UIControlEvents.TouchUpInside)
+        self.addSubview(back)
+        
+        
+        x = board.game.nodes[1][1].fences[board.game.nodes[2][1]]!.view.frame.origin.x
+        y = board.game.nodes[1][1].fences[board.game.nodes[1][2]]!.view.frame.origin.y
+        width = board.game.nodes[2][1].fences[board.game.nodes[2][2]]!.view.frame.origin.x - x
+        height = board.game.nodes[1][2].fences[board.game.nodes[2][2]]!.view.frame.origin.y - y
+        let B = BoardText(frame: CGRect(x: x, y: y, width: width, height: height), text: "B", color: controller.beta.textColor, size: controller.view.frame.width)
+        B.alpha = 0
+        self.addSubview(B)
+        
+        x = board.game.nodes[3][5].fences[board.game.nodes[4][5]]!.view.frame.origin.x
+        y = board.game.nodes[3][5].fences[board.game.nodes[3][6]]!.view.frame.origin.y
+        width = board.game.nodes[8][5].fences[board.game.nodes[8][6]]!.view.frame.origin.x - x
+        height = board.game.nodes[3][6].fences[board.game.nodes[4][6]]!.view.frame.origin.y - y
+        roomNum = BoardText(frame: CGRect(x: x, y: y, width: width, height: height), text: "", color: controller.enclosure.textColor, size: controller.view.frame.width)
+        roomNum.alpha = 0
+        self.addSubview(roomNum)
+
+        board.game.nodes[1][1].fences[board.game.nodes[1][2]]?.player = 0
+        board.game.nodes[1][1].fences[board.game.nodes[2][1]]?.player = 0
+        board.game.nodes[2][1].fences[board.game.nodes[2][2]]?.player = 0
+        board.game.nodes[1][2].fences[board.game.nodes[2][2]]?.player = 0
+        
+        self.addSubview(B)
+
+        elements.append(roomNum)
+        elements.append(B)
+        elements.append(back)
+        elements.append(roomNumLab)
+        
+        showElements()
+
     }
     
     func inputNickName(){
@@ -192,14 +248,8 @@ class BoardBack: UIView , UITextFieldDelegate{
         board.game.nodes[6][3].fences[board.game.nodes[5][3]]?.player = 1
         board.game.nodes[7][3].fences[board.game.nodes[6][3]]?.player = 1
         
-        board.drawBoard()
-        
-        UIView.animateWithDuration(0.5) { () -> Void in
-            nickname.alpha = 1
-            input.alpha = 1
-            submit.alpha = 1
-            back.alpha = 1
-        }
+        showElements()
+
         input.becomeFirstResponder()
 
     }
@@ -269,28 +319,23 @@ class BoardBack: UIView , UITextFieldDelegate{
         board.game.nodes[2][1].fences[board.game.nodes[2][2]]?.player = 0
         board.game.nodes[1][2].fences[board.game.nodes[2][2]]?.player = 0
         
-        board.drawBoard()
-        
         elements.append(chapter2)
         elements.append(chapter1)
         elements.append(B)
         elements.append(back)
         
-        UIView.animateWithDuration(0.5, animations: { () -> Void in
-            chapter2.alpha = 1
-            chapter1.alpha = 1
-            B.alpha = 1
-            back.alpha = 1
-            
-            }) { (finish) -> Void in
-                
-        }
+        showElements()
     }
     
     func mp(but:UIButton){
-        firstSelection = but.tag
         cleanBoard(multiPlayerGame)
     }
+    
+    func createGame(but:UIButton){
+        firstSelection = but.tag
+        cleanBoard(drawTwoMode)
+    }
+    
     
     func multiPlayerGame(){
         var x = board.game.nodes[3][3].fences[board.game.nodes[4][3]]!.view.frame.origin.x
@@ -298,7 +343,7 @@ class BoardBack: UIView , UITextFieldDelegate{
         var width = board.game.nodes[7][3].fences[board.game.nodes[7][4]]!.view.frame.origin.x - x
         var height = board.game.nodes[3][4].fences[board.game.nodes[4][4]]!.view.frame.origin.y - y
         let createRoom = BoardButton(frame: CGRect(x: x, y: y, width: width, height: height), text: "Create Room", color: controller.beta.textColor, size: controller.view.frame.width)
-        createRoom.tag = 0
+        createRoom.tag = 2
         createRoom.alpha = 0
         createRoom.addTarget(self, action: "createGame:", forControlEvents: UIControlEvents.TouchUpInside)
         self.addSubview(createRoom)
@@ -396,9 +441,13 @@ class BoardBack: UIView , UITextFieldDelegate{
         board.game.nodes[7][7].fences[board.game.nodes[7][8]]?.player = 0
         board.game.nodes[6][7].fences[board.game.nodes[7][7]]?.player = 0
         board.game.nodes[6][7].fences[board.game.nodes[5][7]]?.player = 0
-
+        
+        showElements()
+    }
+    
+    func showElements(){
         board.drawBoard()
-
+        
         UIView.animateWithDuration(0.5, animations: { () -> Void in
             for elem in self.elements{
                 elem.alpha = 1
@@ -509,16 +558,8 @@ class BoardBack: UIView , UITextFieldDelegate{
         board.game.nodes[2][8].fences[board.game.nodes[2][7]]?.player = 1
         board.game.nodes[2][8].fences[board.game.nodes[1][8]]?.player = 1
         
-        board.drawBoard()
-        
-        UIView.animateWithDuration(0.5, animations: { () -> Void in
-            for elem in self.elements{
-                elem.alpha = 1
-            }
-            
-            }) { (finish) -> Void in
-                
-        }
+        showElements()
+
     }    
     
 }

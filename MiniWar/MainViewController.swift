@@ -13,7 +13,9 @@ import ChameleonFramework
 let redOnBoard = UIColor(hexString: "F7959D")
 let blueOnBoard = UIColor(hexString: "78B4FF")
 
-class MainViewController: UIViewController, UserDataDelegate, MFMailComposeViewControllerDelegate{
+var mpSocket: Socket!
+
+class MainViewController: UIViewController, UserDataDelegate, MFMailComposeViewControllerDelegate, SocketSuccessDelegate{
     
     @IBOutlet weak var titleWidth: NSLayoutConstraint!
     @IBOutlet var back: DisplayGameBoard!
@@ -83,6 +85,40 @@ class MainViewController: UIViewController, UserDataDelegate, MFMailComposeViewC
             board.drawMenu1()
         }
         
+    }
+    
+    var onlinePlayer = 0
+    
+    func createGameRoom(level: String){
+        mpSocket = Socket(roomNumber: "", level: level)
+        mpSocket.startDelegate = self
+    }
+    
+    func searchGameRoom(room: String){
+        if room != "" {
+            mpSocket = Socket(roomNumber: room, level: "")
+            mpSocket.startDelegate = self
+        }
+    }
+    
+    func gotRoomNumber(number: String) {
+        
+        board.roomNum.text = number
+        
+    }
+    
+    func playerSequence(player: Int, names: [String]){
+        self.onlinePlayer = player
+        var opponentName = ""
+        if names[0] == Connection.getUserNickName(){
+            opponentName = names[1]
+        }else{
+            opponentName = names[0]
+        }
+    }
+    
+    func joinSuccess(success: Bool) {
+        self.performSegueWithIdentifier("startMPGame", sender: self)
     }
     
     func configuredMailComposeViewController() -> MFMailComposeViewController {

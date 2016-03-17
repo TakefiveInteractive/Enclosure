@@ -19,12 +19,14 @@ public class Socket: NSObject {
     
     let socketClient:SocketIOClient
     var roomNumber = ""
+    var level = ""
     
     var startDelegate: SocketSuccessDelegate?
     var gameDelegate: SocketGameDelegate?
     
-    init(roomNumber: String) {
+    init(roomNumber: String, level: String) {
         self.roomNumber = roomNumber
+        self.level = level
         socketClient = SocketIOClient(socketURL: NSURL(string: "http://o.hl0.co:3000")!, options: [.Log(false), .ForcePolling(true)])
         super.init()
         self.addHandlers()
@@ -33,9 +35,7 @@ public class Socket: NSObject {
     }
     
     func createRoom() {
-        let json: JSON = ["id":Connection.getUserId(), "level": "1"]
-        print(json.rawString()!)
-
+        let json: JSON = ["id":Connection.getUserId(), "level": level]
         self.socketClient.emit("createRoom",json.rawString()!)
     }
     
@@ -101,6 +101,7 @@ public class Socket: NSObject {
             } catch let error as NSError {
                 print("Failed to load: \(error.localizedDescription)")
             }
+            self.level = "1"
             self.startDelegate?.playerSequence(num, names:[namesArr[0],namesArr[1]])
             self.startDelegate?.joinSuccess(true)
         }
