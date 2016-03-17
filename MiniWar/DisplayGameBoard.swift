@@ -116,6 +116,12 @@ class BoardBack: UIView , UITextFieldDelegate{
         }
     }
     
+    func submit(but: UIButton){
+        Connection.setName((elements[0] as! UITextField).text!)
+        cleanBoard(drawMenu1)
+    }
+
+    
     func play(but: UIButton){
         firstSelection = but.tag
         cleanBoard(drawTwoMode)
@@ -135,7 +141,7 @@ class BoardBack: UIView , UITextFieldDelegate{
         var y = board.game.nodes[1][1].fences[board.game.nodes[1][2]]!.view.frame.origin.y
         var width = board.game.nodes[7][1].fences[board.game.nodes[7][2]]!.view.frame.origin.x - x
         var height = board.game.nodes[3][2].fences[board.game.nodes[4][2]]!.view.frame.origin.y - y
-        let nickname = BoardText(frame: CGRect(x: x, y: y, width: width, height: height), text: "Your Nickname:", color: controller.beta.textColor, size: controller.view.frame.width)
+        let nickname = BoardText(frame: CGRect(x: x, y: y, width: width, height: height), text: "Your Nickname:", color: controller.enclosure.textColor, size: controller.view.frame.width)
         nickname.alpha = 0
         self.addSubview(nickname)
         
@@ -147,18 +153,18 @@ class BoardBack: UIView , UITextFieldDelegate{
         input.alpha = 0
         self.addSubview(input)
         
-        x = board.game.nodes[5][3].fences[board.game.nodes[6][3]]!.view.frame.origin.x
-        y = board.game.nodes[5][3].fences[board.game.nodes[5][4]]!.view.frame.origin.y
+        x = board.game.nodes[4][5].fences[board.game.nodes[5][5]]!.view.frame.origin.x
+        y = board.game.nodes[4][5].fences[board.game.nodes[4][6]]!.view.frame.origin.y
         width = board.game.nodes[7][3].fences[board.game.nodes[7][4]]!.view.frame.origin.x - x
-        height = board.game.nodes[4][5].fences[board.game.nodes[5][5]]!.view.frame.origin.y - y
-        let submit = ChapterButton(frame: CGRect(x: x, y: y, width: width, height: height), text: "1", color: controller.beta.textColor, size: controller.view.frame.width)
+        height = board.game.nodes[4][6].fences[board.game.nodes[5][6]]!.view.frame.origin.y - y
+        let submit = BoardButton(frame: CGRect(x: x, y: y, width: width, height: height), text: "Submit", color: controller.beta.textColor, size: controller.view.frame.width)
         submit.alpha = 0
         submit.addTarget(self, action: "submit:", forControlEvents: UIControlEvents.TouchUpInside)
         self.addSubview(submit)
         
         input.delegate = self
-        elements.append(nickname)
         elements.append(input)
+        elements.append(nickname)
         elements.append(submit)
         
         board.game.nodes[3][4].fences[board.game.nodes[2][4]]?.player = 1

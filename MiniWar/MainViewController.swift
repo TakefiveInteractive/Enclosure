@@ -12,18 +12,31 @@ import ChameleonFramework
 let redOnBoard = UIColor(hexString: "F7959D")
 let blueOnBoard = UIColor(hexString: "78B4FF")
 
-class MainViewController: UIViewController {
+class MainViewController: UIViewController, UserDataDelegate{
     
     @IBOutlet weak var titleWidth: NSLayoutConstraint!
     @IBOutlet var back: DisplayGameBoard!
     @IBOutlet var board: BoardBack!
     @IBOutlet var beta: UILabel!
     @IBOutlet var enclosure: UILabel!
+    @IBOutlet var rank: UIButton!
+    @IBOutlet var nickname: UIButton!
 
     var sudoGame = EnclosureGame()
     
     override func viewDidLoad() {
-        !Connection.getInfo()
+        Connection.delegate = self
+        Connection.getInfo()
+        self.rankUpdate(Connection.getUserRank())
+        self.nicknameUpdate(Connection.getUserNickName())
+    }
+    
+    func rankUpdate(rank: String){
+        self.rank.setTitle("World Rank: \(rank)", forState: UIControlState.Normal)
+    }
+    
+    func nicknameUpdate(name: String){
+        nickname.setTitle(name, forState: UIControlState.Normal)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -38,8 +51,13 @@ class MainViewController: UIViewController {
         back.buildGame(sudoGame)
         board.board = back
         board.controller = self
-//        board.drawMenu1()
-        board.inputNickName()
+        
+        if Connection.getUserNickName() == "NOName"{
+            board.inputNickName()
+        }else{
+            board.drawMenu1()
+        }
+        
     }
     
     @IBAction func backToMain(segue:UIStoryboardSegue) {

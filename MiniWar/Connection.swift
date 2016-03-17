@@ -9,37 +9,47 @@
 import UIKit
 import Alamofire
 
-class Connection: NSObject {
+let Connection = UserData()
+
+protocol UserDataDelegate{
+    func rankUpdate(rank: String)
+    func nicknameUpdate(name: String)
+}
+
+class UserData: NSObject {
+    
+    var delegate: UserDataDelegate?
     
     //request for the user id with UDID
-    class func getUserId()->String{
+    func getUserId()->String{
         return UIDevice.currentDevice().identifierForVendor!.UUIDString
     }
     
-    class func hasUserName()->Bool{
-        if let name = NSUserDefaults.standardUserDefaults().objectForKey("nickName"){
-            return true
+    func getUserRank()->String{
+        if let rank = NSUserDefaults.standardUserDefaults().objectForKey("rank"){
+            return "\(rank)"
         }else{
-            return false
+            return "-"
         }
     }
     
-    class func getUserNickName()->String{
+    func getUserNickName()->String{
         return NSUserDefaults.standardUserDefaults().objectForKey("nickName") as! String
     }
     
-    class func getInfo()->Bool{
+    //getrank
+    
+    func getInfo()->Bool{
         
         Alamofire.request(.POST, "http://o.hl0.co:3000/getInfo", parameters: ["userId": Connection.getUserId()])
             .responseJSON { response in
-                print(response.request)  // original URL request
-                print(response.response) // URL response
-                print(response.data)     // server data
-                print(response.result)   // result of response serialization
 
                 if let JSON = response.result.value {
                     if JSON["name"] as! String != ""{
                         NSUserDefaults.standardUserDefaults().setObject(JSON["name"], forKey: "nickName")
+                        NSUserDefaults.standardUserDefaults().setObject(JSON["rank"], forKey: "rank")
+                        self.delegate?.rankUpdate(self.getUserRank())
+                        self.delegate?.nicknameUpdate(self.getUserNickName())
                     }
                     print("JSON: \(JSON)")
                 }
@@ -47,7 +57,9 @@ class Connection: NSObject {
         return true
     }
     
-    class func setName(){
+    func setName(name: String){
+        NSUserDefaults.standardUserDefaults().setObject(name, forKey: "nickName")
+        self.delegate?.nicknameUpdate(name)
         Alamofire.request(.POST, "http://o.hl0.co:3000/setName", parameters: ["userId": Connection.getUserId(), "name": Connection.getUserNickName()])
             .responseJSON { response in
                 print(response.request)  // original URL request

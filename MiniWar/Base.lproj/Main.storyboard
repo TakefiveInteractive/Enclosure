@@ -899,23 +899,91 @@
                                     </mask>
                                 </variation>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xta-kl-1Np">
+                                <rect key="frame" x="306" y="540" width="274" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="796-7U-kxK"/>
+                                    <constraint firstAttribute="height" constant="40" id="7hK-L7-co4"/>
+                                    <constraint firstAttribute="width" constant="60" id="AGa-Um-K20"/>
+                                    <constraint firstAttribute="height" constant="40" id="QTm-OM-Mpj"/>
+                                    <constraint firstAttribute="width" constant="250" id="SFA-cQ-wTv"/>
+                                    <constraint firstAttribute="width" constant="40" id="TAu-rn-iHW"/>
+                                    <constraint firstAttribute="height" constant="40" id="UkC-aY-XZZ"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="dN5-Ue-UdX"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-LightOblique" family="Avenir" pointSize="28"/>
+                                <state key="normal" title="World Rank:149th">
+                                    <color key="titleColor" red="0.22352941179999999" green="0.22352941179999999" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="796-7U-kxK"/>
+                                        <exclude reference="7hK-L7-co4"/>
+                                        <exclude reference="AGa-Um-K20"/>
+                                        <exclude reference="TAu-rn-iHW"/>
+                                        <exclude reference="UkC-aY-XZZ"/>
+                                        <exclude reference="dN5-Ue-UdX"/>
+                                    </mask>
+                                </variation>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="phn-17-geP">
+                                <rect key="frame" x="372" y="482" width="200" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="0Ha-GQ-Rrr"/>
+                                    <constraint firstAttribute="height" constant="50" id="9H0-5n-i5f"/>
+                                    <constraint firstAttribute="width" constant="200" id="Bx9-Xu-Aqx"/>
+                                    <constraint firstAttribute="height" constant="40" id="VCO-sd-0Px"/>
+                                    <constraint firstAttribute="width" constant="40" id="Wu1-Lh-mmQ"/>
+                                    <constraint firstAttribute="height" constant="40" id="YEM-vX-7OS"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="32"/>
+                                <state key="normal" title="Kedan">
+                                    <color key="titleColor" red="0.22352941179999999" green="0.22352941179999999" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="0Ha-GQ-Rrr"/>
+                                        <exclude reference="VCO-sd-0Px"/>
+                                        <exclude reference="Wu1-Lh-mmQ"/>
+                                        <exclude reference="YEM-vX-7OS"/>
+                                    </mask>
+                                </variation>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="QJ8-hr-2AC" firstAttribute="leading" secondItem="Pc3-rU-0jC" secondAttribute="trailing" id="KJ2-Qm-bo4"/>
+                            <constraint firstItem="xta-kl-1Np" firstAttribute="leading" secondItem="byv-D5-w1W" secondAttribute="leadingMargin" id="L6M-9Z-r2J"/>
                             <constraint firstItem="Pc3-rU-0jC" firstAttribute="centerX" secondItem="byv-D5-w1W" secondAttribute="centerX" constant="-30" id="N1w-jN-t67"/>
+                            <constraint firstItem="xta-kl-1Np" firstAttribute="trailing" secondItem="byv-D5-w1W" secondAttribute="trailingMargin" id="OdR-XA-1wL"/>
                             <constraint firstAttribute="trailing" secondItem="VRt-Ct-Zgr" secondAttribute="trailing" constant="10" id="RWc-bs-cki"/>
+                            <constraint firstItem="ZFI-e5-kE0" firstAttribute="top" secondItem="xta-kl-1Np" secondAttribute="bottom" constant="100" id="TZZ-AU-rjm"/>
                             <constraint firstItem="QJ8-hr-2AC" firstAttribute="bottom" secondItem="Pc3-rU-0jC" secondAttribute="bottom" constant="-20" id="TjG-Hh-bbo"/>
+                            <constraint firstItem="phn-17-geP" firstAttribute="trailing" secondItem="byv-D5-w1W" secondAttribute="trailingMargin" id="WuX-5N-zCq"/>
+                            <constraint firstItem="ZFI-e5-kE0" firstAttribute="top" secondItem="xta-kl-1Np" secondAttribute="bottom" constant="20" id="d6l-Xl-edg"/>
                             <constraint firstItem="VRt-Ct-Zgr" firstAttribute="top" secondItem="Pc3-rU-0jC" secondAttribute="bottom" constant="15" id="hh2-TR-jVO"/>
-                            <constraint firstItem="VRt-Ct-Zgr" firstAttribute="centerY" secondItem="byv-D5-w1W" secondAttribute="centerY" constant="-30" id="ryR-sW-3NI"/>
+                            <constraint firstItem="xta-kl-1Np" firstAttribute="trailing" secondItem="phn-17-geP" secondAttribute="trailing" id="hkp-0b-BwE"/>
+                            <constraint firstItem="ZFI-e5-kE0" firstAttribute="top" secondItem="phn-17-geP" secondAttribute="bottom" constant="10" id="nvg-Y8-2cd"/>
+                            <constraint firstItem="VRt-Ct-Zgr" firstAttribute="centerY" secondItem="byv-D5-w1W" secondAttribute="centerY" constant="10" id="ryR-sW-3NI"/>
+                            <constraint firstItem="xta-kl-1Np" firstAttribute="top" secondItem="phn-17-geP" secondAttribute="bottom" constant="8" id="xVU-ok-aTL"/>
                             <constraint firstItem="VRt-Ct-Zgr" firstAttribute="leading" secondItem="byv-D5-w1W" secondAttribute="leading" constant="10" id="yf0-9R-wdd"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="TZZ-AU-rjm"/>
+                                <exclude reference="nvg-Y8-2cd"/>
+                                <exclude reference="L6M-9Z-r2J"/>
+                                <exclude reference="hkp-0b-BwE"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="back" destination="7Ch-p4-Lfo" id="Q9U-x0-5bD"/>
                         <outlet property="beta" destination="QJ8-hr-2AC" id="36l-6k-tgl"/>
                         <outlet property="board" destination="VRt-Ct-Zgr" id="amd-VW-xG0"/>
                         <outlet property="enclosure" destination="Pc3-rU-0jC" id="0ZY-Nd-SZW"/>
+                        <outlet property="nickname" destination="phn-17-geP" id="h7y-hO-Mmh"/>
+                        <outlet property="rank" destination="xta-kl-1Np" id="nXe-vX-8Gd"/>
                         <outlet property="titleWidth" destination="VOV-b7-w5g" id="dUf-xB-fhC"/>
                         <segue destination="TNG-OT-gmg" kind="presentation" identifier="playAI1" modalTransitionStyle="crossDissolve" id="zLq-wp-rsx"/>
                         <segue destination="W0P-NR-Pgy" kind="presentation" identifier="playAI2" modalTransitionStyle="crossDissolve" id="Y8J-L6-kTu"/>

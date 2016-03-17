@@ -15,11 +15,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        NSUserDefaults.standardUserDefaults().setObject("hahahaha", forKey: "nickName")
-        Connection.setName()
         Connection.getInfo()
         
-//        if NSUserDefaults.standardUserDefaults().objectForKey("userId") == nil{
+        
+        if NSUserDefaults.standardUserDefaults().objectForKey("nickName") == nil{
+            Connection.setName("NOName")
+        }
 //            self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
 //            
 //            let storyboard = UIStoryboard(name: "Main", bundle: nil)
