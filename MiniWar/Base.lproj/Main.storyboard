@@ -143,7 +143,7 @@
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="90I-L8-57Y" customClass="ProgressView" customModule="Enclosure" customModuleProvider="target">
                                 <rect key="frame" x="70" y="32.5" width="460" height="15"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15" id="gSB-zV-GKl"/>
                                 </constraints>
@@ -443,7 +443,7 @@
                             </button>
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0hV-5A-1EN" customClass="ProgressView" customModule="Enclosure" customModuleProvider="target">
                                 <rect key="frame" x="88" y="52" width="424" height="15"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15" id="NH0-Je-prX"/>
                                 </constraints>
@@ -670,7 +670,7 @@
                             </view>
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pUy-Ed-Y4I" customClass="ProgressView" customModule="Enclosure" customModuleProvider="target">
                                 <rect key="frame" x="96" y="46" width="424" height="15"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15" id="86M-6v-iPf"/>
                                 </constraints>
@@ -911,7 +911,7 @@
                                     <constraint firstAttribute="height" constant="40" id="UkC-aY-XZZ"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="dN5-Ue-UdX"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Avenir-LightOblique" family="Avenir" pointSize="28"/>
+                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="28"/>
                                 <state key="normal" title="World Rank:149th">
                                     <color key="titleColor" red="0.22352941179999999" green="0.22352941179999999" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -939,7 +939,7 @@
                                     <constraint firstAttribute="width" constant="40" id="Wu1-Lh-mmQ"/>
                                     <constraint firstAttribute="height" constant="40" id="YEM-vX-7OS"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Avenir-MediumOblique" family="Avenir" pointSize="32"/>
+                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="32"/>
                                 <state key="normal" title="Kedan">
                                     <color key="titleColor" red="0.22352941179999999" green="0.22352941179999999" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -1212,7 +1212,7 @@
                             </label>
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Evi-Lx-YSe" customClass="ProgressView" customModule="Enclosure" customModuleProvider="target">
                                 <rect key="frame" x="88" y="42" width="424" height="15"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15" id="aa5-7Y-t5Q"/>
                                 </constraints>
@@ -1427,7 +1427,7 @@
                             </label>
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Orc-rm-8Ke" customClass="ProgressView" customModule="Enclosure" customModuleProvider="target">
                                 <rect key="frame" x="88" y="42" width="424" height="15"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15" id="lhs-95-TNP"/>
                                 </constraints>
