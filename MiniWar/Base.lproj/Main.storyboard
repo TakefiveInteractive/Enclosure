@@ -915,6 +915,9 @@
                                 <state key="normal" title="World Rank:149th">
                                     <color key="titleColor" red="0.22352941179999999" green="0.22352941179999999" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="796-7U-kxK"/>
@@ -936,9 +939,12 @@
                                     <constraint firstAttribute="width" constant="40" id="Wu1-Lh-mmQ"/>
                                     <constraint firstAttribute="height" constant="40" id="YEM-vX-7OS"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="32"/>
+                                <fontDescription key="fontDescription" name="Avenir-MediumOblique" family="Avenir" pointSize="32"/>
                                 <state key="normal" title="Kedan">
                                     <color key="titleColor" red="0.22352941179999999" green="0.22352941179999999" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -949,18 +955,89 @@
                                     </mask>
                                 </variation>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aLj-s6-3Xe">
+                                <rect key="frame" x="415" y="20" width="165" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="2k4-K6-Ca1"/>
+                                    <constraint firstAttribute="width" constant="200" id="4gh-gh-REa"/>
+                                    <constraint firstAttribute="height" constant="40" id="DER-kS-hQv"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="45" id="Dg5-cD-OYh"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="165" id="jdx-B0-qXn"/>
+                                    <constraint firstAttribute="width" constant="60" id="lyg-Tg-zP2"/>
+                                    <constraint firstAttribute="width" constant="40" id="rsT-4D-RK1"/>
+                                    <constraint firstAttribute="height" constant="40" id="tZf-X6-v6K"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="20"/>
+                                <state key="normal" title="about  us">
+                                    <color key="titleColor" red="0.22352941179999999" green="0.22352941179999999" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="2k4-K6-Ca1"/>
+                                        <exclude reference="DER-kS-hQv"/>
+                                        <exclude reference="Dg5-cD-OYh"/>
+                                        <exclude reference="jdx-B0-qXn"/>
+                                        <exclude reference="lyg-Tg-zP2"/>
+                                        <exclude reference="rsT-4D-RK1"/>
+                                        <exclude reference="tZf-X6-v6K"/>
+                                    </mask>
+                                </variation>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oMh-7A-MbE">
+                                <rect key="frame" x="5" y="6" width="165" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="FVC-3w-Re7"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="45" id="Gb3-W1-ZFN"/>
+                                    <constraint firstAttribute="height" constant="50" id="Kg6-ix-26m"/>
+                                    <constraint firstAttribute="width" constant="60" id="NVv-G7-1RU"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="45" id="Q34-2M-hpC"/>
+                                    <constraint firstAttribute="width" constant="200" id="QXY-Ud-jAS"/>
+                                    <constraint firstAttribute="width" constant="40" id="fmt-qi-xaN"/>
+                                    <constraint firstAttribute="height" constant="40" id="luu-zI-qc3"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="165" id="oNN-UN-jEk"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="165" id="yGH-at-bjZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="20"/>
+                                <state key="normal" title="feedback">
+                                    <color key="titleColor" red="0.22352941179999999" green="0.22352941179999999" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="FVC-3w-Re7"/>
+                                        <exclude reference="Gb3-W1-ZFN"/>
+                                        <exclude reference="NVv-G7-1RU"/>
+                                        <exclude reference="Q34-2M-hpC"/>
+                                        <exclude reference="fmt-qi-xaN"/>
+                                        <exclude reference="luu-zI-qc3"/>
+                                        <exclude reference="oNN-UN-jEk"/>
+                                        <exclude reference="yGH-at-bjZ"/>
+                                    </mask>
+                                </variation>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="aLj-s6-3Xe" firstAttribute="trailing" secondItem="byv-D5-w1W" secondAttribute="trailingMargin" id="11o-ot-3jK"/>
+                            <constraint firstItem="aLj-s6-3Xe" firstAttribute="bottom" secondItem="oMh-7A-MbE" secondAttribute="bottom" id="3dj-HM-cuK"/>
+                            <constraint firstItem="oMh-7A-MbE" firstAttribute="leading" secondItem="byv-D5-w1W" secondAttribute="leadingMargin" id="Df2-jY-62g"/>
+                            <constraint firstItem="oMh-7A-MbE" firstAttribute="top" secondItem="byv-D5-w1W" secondAttribute="topMargin" constant="5" id="Gc1-2m-NZd"/>
                             <constraint firstItem="QJ8-hr-2AC" firstAttribute="leading" secondItem="Pc3-rU-0jC" secondAttribute="trailing" id="KJ2-Qm-bo4"/>
                             <constraint firstItem="xta-kl-1Np" firstAttribute="leading" secondItem="byv-D5-w1W" secondAttribute="leadingMargin" id="L6M-9Z-r2J"/>
                             <constraint firstItem="Pc3-rU-0jC" firstAttribute="centerX" secondItem="byv-D5-w1W" secondAttribute="centerX" constant="-30" id="N1w-jN-t67"/>
                             <constraint firstItem="xta-kl-1Np" firstAttribute="trailing" secondItem="byv-D5-w1W" secondAttribute="trailingMargin" id="OdR-XA-1wL"/>
+                            <constraint firstItem="aLj-s6-3Xe" firstAttribute="top" secondItem="oMh-7A-MbE" secondAttribute="top" id="Q7u-nf-dAW"/>
                             <constraint firstAttribute="trailing" secondItem="VRt-Ct-Zgr" secondAttribute="trailing" constant="10" id="RWc-bs-cki"/>
                             <constraint firstItem="ZFI-e5-kE0" firstAttribute="top" secondItem="xta-kl-1Np" secondAttribute="bottom" constant="100" id="TZZ-AU-rjm"/>
                             <constraint firstItem="QJ8-hr-2AC" firstAttribute="bottom" secondItem="Pc3-rU-0jC" secondAttribute="bottom" constant="-20" id="TjG-Hh-bbo"/>
                             <constraint firstItem="phn-17-geP" firstAttribute="trailing" secondItem="byv-D5-w1W" secondAttribute="trailingMargin" id="WuX-5N-zCq"/>
                             <constraint firstItem="ZFI-e5-kE0" firstAttribute="top" secondItem="xta-kl-1Np" secondAttribute="bottom" constant="20" id="d6l-Xl-edg"/>
+                            <constraint firstItem="aLj-s6-3Xe" firstAttribute="top" secondItem="9yD-mm-dyq" secondAttribute="bottom" constant="5" id="gf9-ot-Ae6"/>
                             <constraint firstItem="VRt-Ct-Zgr" firstAttribute="top" secondItem="Pc3-rU-0jC" secondAttribute="bottom" constant="15" id="hh2-TR-jVO"/>
                             <constraint firstItem="xta-kl-1Np" firstAttribute="trailing" secondItem="phn-17-geP" secondAttribute="trailing" id="hkp-0b-BwE"/>
                             <constraint firstItem="ZFI-e5-kE0" firstAttribute="top" secondItem="phn-17-geP" secondAttribute="bottom" constant="10" id="nvg-Y8-2cd"/>
@@ -970,6 +1047,7 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="gf9-ot-Ae6"/>
                                 <exclude reference="TZZ-AU-rjm"/>
                                 <exclude reference="nvg-Y8-2cd"/>
                                 <exclude reference="L6M-9Z-r2J"/>
@@ -978,10 +1056,12 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="aboutus" destination="aLj-s6-3Xe" id="X4b-KU-cph"/>
                         <outlet property="back" destination="7Ch-p4-Lfo" id="Q9U-x0-5bD"/>
                         <outlet property="beta" destination="QJ8-hr-2AC" id="36l-6k-tgl"/>
                         <outlet property="board" destination="VRt-Ct-Zgr" id="amd-VW-xG0"/>
                         <outlet property="enclosure" destination="Pc3-rU-0jC" id="0ZY-Nd-SZW"/>
+                        <outlet property="feedback" destination="oMh-7A-MbE" id="KCh-Or-x2K"/>
                         <outlet property="nickname" destination="phn-17-geP" id="h7y-hO-Mmh"/>
                         <outlet property="rank" destination="xta-kl-1Np" id="nXe-vX-8Gd"/>
                         <outlet property="titleWidth" destination="VOV-b7-w5g" id="dUf-xB-fhC"/>

@@ -162,10 +162,20 @@ class BoardBack: UIView , UITextFieldDelegate{
         submit.addTarget(self, action: "submit:", forControlEvents: UIControlEvents.TouchUpInside)
         self.addSubview(submit)
         
+        x = board.game.nodes[1][5].fences[board.game.nodes[2][5]]!.view.frame.origin.x
+        y = board.game.nodes[1][5].fences[board.game.nodes[1][6]]!.view.frame.origin.y
+        width = board.game.nodes[3][3].fences[board.game.nodes[3][4]]!.view.frame.origin.x - x
+        height = board.game.nodes[4][6].fences[board.game.nodes[5][6]]!.view.frame.origin.y - y
+        let back = BoardButton(frame: CGRect(x: x, y: y, width: width, height: height), text: "Back", color: controller.beta.textColor, size: controller.view.frame.width)
+        back.addTarget(self, action: "back:", forControlEvents: UIControlEvents.TouchUpInside)
+        back.alpha = 0
+        self.addSubview(back)
+        
         input.delegate = self
         elements.append(input)
         elements.append(nickname)
         elements.append(submit)
+        elements.append(back)
         
         board.game.nodes[3][4].fences[board.game.nodes[2][4]]?.player = 1
         board.game.nodes[4][4].fences[board.game.nodes[3][4]]?.player = 1
@@ -188,6 +198,7 @@ class BoardBack: UIView , UITextFieldDelegate{
             nickname.alpha = 1
             input.alpha = 1
             submit.alpha = 1
+            back.alpha = 1
         }
         input.becomeFirstResponder()
 

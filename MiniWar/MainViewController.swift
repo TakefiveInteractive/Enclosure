@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import MessageUI
 import ChameleonFramework
 
 let redOnBoard = UIColor(hexString: "F7959D")
 let blueOnBoard = UIColor(hexString: "78B4FF")
 
-class MainViewController: UIViewController, UserDataDelegate{
+class MainViewController: UIViewController, UserDataDelegate, MFMailComposeViewControllerDelegate{
     
     @IBOutlet weak var titleWidth: NSLayoutConstraint!
     @IBOutlet var back: DisplayGameBoard!
@@ -21,14 +22,38 @@ class MainViewController: UIViewController, UserDataDelegate{
     @IBOutlet var enclosure: UILabel!
     @IBOutlet var rank: UIButton!
     @IBOutlet var nickname: UIButton!
+    @IBOutlet var feedback: UIButton!
+    @IBOutlet var aboutus: UIButton!
 
     var sudoGame = EnclosureGame()
     
     override func viewDidLoad() {
+        nickname.addTarget(self, action: "changeNickName:", forControlEvents: UIControlEvents.TouchUpInside)
+        feedback.addTarget(self, action: "feedback:", forControlEvents: UIControlEvents.TouchUpInside)
+        aboutus.addTarget(self, action: "aboutus:", forControlEvents: UIControlEvents.TouchUpInside)
+
         Connection.delegate = self
         Connection.getInfo()
         self.rankUpdate(Connection.getUserRank())
         self.nicknameUpdate(Connection.getUserNickName())
+
+    }
+   
+    func feedback(but: UIButton){
+        let mailComposeViewController = configuredMailComposeViewController()
+        if MFMailComposeViewController.canSendMail() {
+            self.presentViewController(mailComposeViewController, animated: true, completion: nil)
+        } else {
+            self.showSendMailErrorAlert()
+        }
+    }
+    
+    func aboutus(but: UIButton){
+        UIApplication.sharedApplication().openURL(NSURL(string: "http://takefiveinteractive.com")!)
+    }
+    
+    func changeNickName(but: UIButton){
+        board.cleanBoard(board.inputNickName)
     }
     
     func rankUpdate(rank: String){
@@ -57,6 +82,29 @@ class MainViewController: UIViewController, UserDataDelegate{
         }else{
             board.drawMenu1()
         }
+        
+    }
+    
+    func configuredMailComposeViewController() -> MFMailComposeViewController {
+        let mailComposerVC = MFMailComposeViewController()
+        mailComposerVC.mailComposeDelegate = self // Extremely important to set the --mailComposeDelegate-- property, NOT the --delegate-- property
+        
+        mailComposerVC.setToRecipients(["likedan5@icloud.com"])
+        mailComposerVC.setSubject("Feedback for Enclosure")
+        mailComposerVC.setMessageBody("Tell us your thoughts about the game! Enclosure is still in developement and your feedback is valuable for us.", isHTML: false)
+        
+        return mailComposerVC
+    }
+    
+    func showSendMailErrorAlert() {
+        let sendMailErrorAlert = UIAlertView(title: "Could Not Send Email", message: "Your device could not send e-mail.  Please check e-mail configuration and try again.", delegate: self, cancelButtonTitle: "OK")
+        sendMailErrorAlert.show()
+    }
+    
+    // MARK: MFMailComposeViewControllerDelegate
+    
+    func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
+        controller.dismissViewControllerAnimated(true, completion: nil)
         
     }
     
