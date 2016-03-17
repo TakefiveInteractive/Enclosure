@@ -41,6 +41,12 @@ class MainViewController: UIViewController, UserDataDelegate, MFMailComposeViewC
 
     }
    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        if board.input != nil{
+            board.input.resignFirstResponder()
+        }
+    }
+    
     func feedback(but: UIButton){
         let mailComposeViewController = configuredMailComposeViewController()
         if MFMailComposeViewController.canSendMail() {
@@ -118,7 +124,18 @@ class MainViewController: UIViewController, UserDataDelegate, MFMailComposeViewC
     }
     
     func joinSuccess(success: Bool) {
-        self.performSegueWithIdentifier("startMPGame", sender: self)
+        if success{
+            self.performSegueWithIdentifier("startMPGame", sender: self)
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+            // Create a new variable to store the instance of PlayerTableViewController
+        board.cleanBoard(board.drawMenu1)
+        if segue.identifier == "startMPGame"{
+            let destinationVC = segue.destinationViewController as! MPGame1ViewController
+            destinationVC.currentPlayer = self.onlinePlayer
+        }
     }
     
     func configuredMailComposeViewController() -> MFMailComposeViewController {
@@ -134,6 +151,7 @@ class MainViewController: UIViewController, UserDataDelegate, MFMailComposeViewC
     
     func showSendMailErrorAlert() {
         let sendMailErrorAlert = UIAlertView(title: "Could Not Send Email", message: "Your device could not send e-mail.  Please check e-mail configuration and try again.", delegate: self, cancelButtonTitle: "OK")
+        board.cleanBoard(board.drawMenu1)
         sendMailErrorAlert.show()
     }
     
@@ -141,11 +159,11 @@ class MainViewController: UIViewController, UserDataDelegate, MFMailComposeViewC
     
     func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
         controller.dismissViewControllerAnimated(true, completion: nil)
-        
+        board.cleanBoard(board.drawMenu1)
     }
     
     @IBAction func backToMain(segue:UIStoryboardSegue) {
-        
+        board.cleanBoard(board.drawMenu1)
     }
     
 }

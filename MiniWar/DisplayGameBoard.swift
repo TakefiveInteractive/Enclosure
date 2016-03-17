@@ -83,6 +83,8 @@ class BoardBack: UIView , UITextFieldDelegate{
     
     var board: DisplayGameBoard!
     var controller: MainViewController!
+    var input: InputText!
+    var roomNum: BoardText!
     
     var firstSelection = 0
     
@@ -139,7 +141,6 @@ class BoardBack: UIView , UITextFieldDelegate{
         return true
     }
     
-    var roomNum: BoardText!
     
     func waitRoom(){
         var x = board.game.nodes[1][3].fences[board.game.nodes[2][3]]!.view.frame.origin.x
@@ -205,7 +206,7 @@ class BoardBack: UIView , UITextFieldDelegate{
         y = board.game.nodes[2][3].fences[board.game.nodes[2][4]]!.view.frame.origin.y
         width = board.game.nodes[7][1].fences[board.game.nodes[7][2]]!.view.frame.origin.x - x
         height = board.game.nodes[4][4].fences[board.game.nodes[5][4]]!.view.frame.origin.y - y
-        let input = InputText(frame: CGRect(x: x, y: y, width: width, height: height), text: "", color: controller.enclosure.textColor, size: controller.view.frame.width)
+        input = InputText(frame: CGRect(x: x, y: y, width: width, height: height), text: "", color: controller.enclosure.textColor, size: controller.view.frame.width)
         input.alpha = 0
         self.addSubview(input)
         
@@ -337,6 +338,12 @@ class BoardBack: UIView , UITextFieldDelegate{
     }
     
     
+    func joinGame(but:UIButton){
+        if input.text != nil && input.text != "" {
+            controller.searchGameRoom(input.text!)
+        }
+    }
+    
     func multiPlayerGame(){
         var x = board.game.nodes[3][3].fences[board.game.nodes[4][3]]!.view.frame.origin.x
         var y = board.game.nodes[3][3].fences[board.game.nodes[3][4]]!.view.frame.origin.y
@@ -379,10 +386,10 @@ class BoardBack: UIView , UITextFieldDelegate{
         y = board.game.nodes[4][7].fences[board.game.nodes[4][8]]!.view.frame.origin.y
         width = board.game.nodes[7][1].fences[board.game.nodes[7][2]]!.view.frame.origin.x - x
         height = board.game.nodes[4][8].fences[board.game.nodes[5][8]]!.view.frame.origin.y - y
-        let input = InputText(frame: CGRect(x: x, y: y, width: width, height: height), text: "", color: controller.beta.textColor, size: controller.view.frame.width)
+        input = InputText(frame: CGRect(x: x, y: y, width: width, height: height), text: "", color: controller.beta.textColor, size: controller.view.frame.width)
+        input.keyboardType = UIKeyboardType.NumberPad
         input.alpha = 0
         self.addSubview(input)
-        
         
         x = board.game.nodes[2][3].fences[board.game.nodes[3][3]]!.view.frame.origin.x
         y = board.game.nodes[2][3].fences[board.game.nodes[2][4]]!.view.frame.origin.y

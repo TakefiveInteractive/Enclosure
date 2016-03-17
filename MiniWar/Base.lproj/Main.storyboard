@@ -744,45 +744,6 @@
             </objects>
             <point key="canvasLocation" x="899" y="699"/>
         </scene>
-        <!--Multiple Player Controller-->
-        <scene sceneID="XdR-Fk-xcm">
-            <objects>
-                <viewController id="oGt-sW-HcV" customClass="MultiplePlayerController" customModule="Enclosure" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="C16-QE-IUK"/>
-                        <viewControllerLayoutGuide type="bottom" id="cCb-51-i5V"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="IJa-iM-miD">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8KH-RA-C1e">
-                                <rect key="frame" x="39" y="76" width="141" height="30"/>
-                                <state key="normal" title="Create Room"/>
-                            </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qiA-e4-4HS">
-                                <rect key="frame" x="48" y="195" width="97" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sBN-aC-grs">
-                                <rect key="frame" x="39" y="129" width="115" height="30"/>
-                                <state key="normal" title="Join Room"/>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <connections>
-                        <outlet property="createRoom" destination="8KH-RA-C1e" id="0Vc-dB-fzy"/>
-                        <outlet property="searchRoom" destination="sBN-aC-grs" id="bdS-WY-zed"/>
-                        <outlet property="searchText" destination="qiA-e4-4HS" id="e6C-DF-zoT"/>
-                        <segue destination="ND5-Yv-F8f" kind="presentation" identifier="startMPGame" modalTransitionStyle="crossDissolve" id="ghl-9o-xwc"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="HTV-hC-Opl" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1458" y="-1619"/>
-        </scene>
         <!--Register View Controller-->
         <scene sceneID="vdw-gA-Z55">
             <objects>
@@ -1069,7 +1030,7 @@
                         <segue destination="W0P-NR-Pgy" kind="presentation" identifier="playAI2" modalTransitionStyle="crossDissolve" id="Y8J-L6-kTu"/>
                         <segue destination="Ysi-Pd-sMV" kind="presentation" identifier="play1" modalTransitionStyle="crossDissolve" id="pt9-Tn-0VR"/>
                         <segue destination="waq-4p-1lB" kind="presentation" identifier="play2" modalTransitionStyle="crossDissolve" id="32a-5F-XH3"/>
-                        <segue destination="oGt-sW-HcV" kind="presentation" identifier="mp" id="5wx-nm-Dvq"/>
+                        <segue destination="ND5-Yv-F8f" kind="presentation" identifier="startMPGame" modalTransitionStyle="crossDissolve" id="2Rg-ye-rw4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IhR-Db-SJl" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1496,9 +1457,11 @@
                         <outlet property="playerRow" destination="TH2-2i-VIF" id="oXx-0t-Xcz"/>
                         <outlet property="timer" destination="AeU-Vw-r0X" id="1SH-or-EIN"/>
                         <outlet property="waiting" destination="tzP-ka-YYn" id="xsg-ki-aEV"/>
+                        <segue destination="RP5-HY-she" kind="unwind" identifier="exit" unwindAction="backToMain:" id="pjL-ux-vYk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OD3-zq-Kl3" sceneMemberID="firstResponder"/>
+                <exit id="RP5-HY-she" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-587" y="-2450"/>
         </scene>
