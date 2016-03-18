@@ -114,9 +114,10 @@ class MainViewController: UIViewController, UserDataDelegate, MFMailComposeViewC
         
     }
     
+    var opponentName = ""
+    
     func playerSequence(player: Int, names: [String]){
         self.onlinePlayer = player
-        var opponentName = ""
         if names[0] == Connection.getUserNickName(){
             opponentName = names[1]
         }else{
@@ -136,6 +137,7 @@ class MainViewController: UIViewController, UserDataDelegate, MFMailComposeViewC
         if segue.identifier == "startMPGame"{
             let destinationVC = segue.destinationViewController as! MPGame1ViewController
             destinationVC.currentPlayer = self.onlinePlayer
+            destinationVC.opponentName = self.opponentName
         }
     }
     

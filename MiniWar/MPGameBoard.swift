@@ -26,6 +26,10 @@ class MPGameBoard: GameBoard, SocketGameDelegate{
         changeBoardAvailabiliity()
     }
     
+    func playerDisconnect(){
+        parent.waiting.setTitle("opponent disconnected", forState: UIControlState.Normal)
+    }
+    
     func gotMove(move: String) {
         let splitData = move.componentsSeparatedByString(":")
         print(splitData)

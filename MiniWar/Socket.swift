@@ -7,6 +7,7 @@ protocol SocketGameDelegate{
     func gotMove(move: String)
     func restartGame(player: Int)
     func requestRestart()
+    func playerDisconnect()
 }
 
 protocol SocketSuccessDelegate{
@@ -35,7 +36,7 @@ public class Socket: NSObject {
     }
     
     func createRoom() {
-        let json: JSON = ["id":Connection.getUserId(), "level": level]
+        let json: JSON = ["id": Connection.getUserId(), "level": level]
         self.socketClient.emit("createRoom",json.rawString()!)
     }
     

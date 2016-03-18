@@ -11,6 +11,7 @@ import UIKit
 class MPGame1ViewController: GameViewController{
     
     var currentPlayer: Int = 0
+    var opponentName = ""
     
     @IBOutlet var waiting: UIButton!
     
@@ -18,7 +19,6 @@ class MPGame1ViewController: GameViewController{
         super.viewDidLoad()
         (board as! MPGameBoard).parent = self
         (board as! MPGameBoard).onlineCurrentPlayer = currentPlayer
-
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -40,10 +40,18 @@ class MPGame1ViewController: GameViewController{
         createAccountErrorAlert.message = "your opponent ask to restart the game!"
         createAccountErrorAlert.addButtonWithTitle("Restart")
         createAccountErrorAlert.addButtonWithTitle("Refuse")
-        
         createAccountErrorAlert.show()
     }
     
+    override func setPlayerNames() {
+        if currentPlayer == 0{
+            player0Name.text = Connection.getUserNickName()
+            player1Name.text = opponentName
+        }else{
+            player0Name.text = opponentName
+            player1Name.text = Connection.getUserNickName()
+        }
+    }
     
     override func endGame(winPlayer: Int) {
         if winPlayer == 1{
