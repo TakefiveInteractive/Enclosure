@@ -12,6 +12,7 @@ class MPGame1ViewController: GameViewController{
     
     var currentPlayer: Int = 0
     var opponentName = ""
+    var opponentId = ""
     
     @IBOutlet var waiting: UIButton!
     

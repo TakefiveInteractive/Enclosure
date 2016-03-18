@@ -44,7 +44,7 @@ class Area2: Area {
         lab.textColor = UIColor.grayColor()
         lab.alpha = 0.6
         lab.textAlignment = NSTextAlignment.Center
-        lab.font = UIFont(name: "Avenir-Light", size: 15.0)
+        lab.font = UIFont(name: "Avenir-Light", size: game.frame.width / 400 * 20.0)
         if gameElement.score != 1{
             lab.text = "\(gameElement.score)"
             lab.alpha = 1
