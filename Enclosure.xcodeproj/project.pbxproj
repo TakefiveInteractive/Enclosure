@@ -25,7 +25,6 @@
 		4265F75A1C81587D0000BCD7 /* AI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4265F7591C81587D0000BCD7 /* AI.swift */; };
 		4265F75C1C8207800000BCD7 /* Tool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4265F75B1C8207800000BCD7 /* Tool.swift */; };
 		427F5C371C952C03004EA629 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427F5C361C952C03004EA629 /* MainViewController.swift */; };
-		427F5C3D1C953472004EA629 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427F5C3C1C953472004EA629 /* RegisterViewController.swift */; };
 		427F5C431C95DA4D004EA629 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427F5C421C95DA4D004EA629 /* Connection.swift */; };
 		42A5D15A1C7A0B5000C0AAC8 /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 42A5D1591C7A0B5000C0AAC8 /* 1.jpg */; };
 		42CAFABA1C893B4100AE6BE9 /* MPGame1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CAFAB91C893B4100AE6BE9 /* MPGame1ViewController.swift */; };
@@ -69,7 +68,6 @@
 		4265F7591C81587D0000BCD7 /* AI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AI.swift; sourceTree = "<group>"; };
 		4265F75B1C8207800000BCD7 /* Tool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tool.swift; sourceTree = "<group>"; };
 		427F5C361C952C03004EA629 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		427F5C3C1C953472004EA629 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		427F5C3E1C95D596004EA629 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		427F5C421C95DA4D004EA629 /* Connection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
 		42A5D1591C7A0B5000C0AAC8 /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
@@ -134,7 +132,6 @@
 			isa = PBXGroup;
 			children = (
 				42627FDF1C783E0700DC69EC /* AppDelegate.swift */,
-				427F5C3C1C953472004EA629 /* RegisterViewController.swift */,
 				427F5C361C952C03004EA629 /* MainViewController.swift */,
 				42384B0E1C975CDE00A02BC8 /* DisplayGameBoard.swift */,
 				42384B0A1C96E6B500A02BC8 /* GameViewController.swift */,
@@ -350,7 +347,6 @@
 				42CAFAC41C8A601D00AE6BE9 /* EnclosureGame2.swift in Sources */,
 				42627FE01C783E0700DC69EC /* AppDelegate.swift in Sources */,
 				4265F7581C80029B0000BCD7 /* Enumerations.swift in Sources */,
-				427F5C3D1C953472004EA629 /* RegisterViewController.swift in Sources */,
 				42D7A2961C836DC200633D80 /* AIBoard.swift in Sources */,
 				42384B0F1C975CDE00A02BC8 /* DisplayGameBoard.swift in Sources */,
 				42384B0D1C96EA2800A02BC8 /* PauseViewController.swift in Sources */,

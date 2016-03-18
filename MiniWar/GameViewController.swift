@@ -133,14 +133,25 @@ class GameViewController: UIViewController, GameBoardDelegate {
             endContr.view.alpha = 0.9
         }
         if winPlayer == 1{
-            player1Score.text = "WIN"
             endContr.showWin(winPlayer, name: player1Name.text!)
         }else{
-            player0Score.text = "WIN"
             endContr.showWin(winPlayer, name: player0Name.text!)
         }
         board.userInteractionEnabled = false
         board.alpha = 0.7
+        
+        if self.isKindOfClass(MPGame1ViewController){
+            let cont = self as! MPGame1ViewController
+            var winID = cont.opponentId
+            if winPlayer == cont.currentPlayer{
+                winID = Connection.getUserId()
+            }
+            Connection.uploadGame([Connection.getUserNickName(), cont.opponentName], playerIds: [Connection.getUserId(),cont.opponentId], roomNumber: mpSocket.roomNumber, move: AIBoard(bigGame: cont.game).playerLastMoves, winId: winID)
+        }else{
+            Connection.uploadGame([Connection.getUserNickName()], playerIds: [Connection.getUserId()], roomNumber: "", move: AIBoard(bigGame: self.game).playerLastMoves, winId: Connection.getUserId())
+
+        }
+        mpSocket = nil
         
     }
     
