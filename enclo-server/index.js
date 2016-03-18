@@ -115,10 +115,11 @@ app.post('/report', (req, res) => {
 app.get('/top100', (req, res) => {
   models.Player.find({
     elo : {
-      $gt : -1
+      $ne : -1
     }
   }).sort({
-    elo: -1
+    elo : -1,
+    _id : -1
   }).limit(100)
   .then((users) => {
     res.json(users.map((u) => u.name))
