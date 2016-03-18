@@ -93,16 +93,15 @@ app.post('/report', (req, res) => {
       let gameDoc = new models.Game(body)
       gameDoc.save().then((result) => {
         res.json(result)
-      })
-      Promise.all(body.ranks.map((rank, index) => {
+        return Promise.all(body.ranks.map((rank, index) => {
         if (userInfoArray[index].elo == -1)
           userInfoArray[index].elo = 1000
-        userInfoArray[index].elo = userInfoArray[index].elo + rank
-        return Promise.all([
-          userInfoArray[index].save(),
-          redisClient.zaddAsync('playerRank', userInfoArray[index].elo, userInfoArray[index]._id.toString()),
-        ])
-      })).then(() => {
+          userInfoArray[index].elo = userInfoArray[index].elo + rank
+          return Promise.all([
+            userInfoArray[index].save(),
+            redisClient.zaddAsync('playerRank', userInfoArray[index].elo, userInfoArray[index]._id.toString()),
+          ])
+        }))
       })
     }).catch(errorHandler) 
   } else {
