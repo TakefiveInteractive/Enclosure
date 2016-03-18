@@ -115,13 +115,25 @@ class GameViewController: UIViewController, GameBoardDelegate {
     }
     
     func endGame(winPlayer: Int) {
+        let endContr = self.storyboard?.instantiateViewControllerWithIdentifier("endGame") as! EndGameViewController
+        endContr.view.alpha = 0
+        endContr.modalPresentationStyle = .OverCurrentContext
+        self.addChildViewController(endContr)
+        view.addSubview(endContr.view)
+        endContr.view.alpha = 0
+        UIView.animateWithDuration(0.4) { () -> Void in
+            endContr.view.alpha = 0.9
+        }
         if winPlayer == 1{
             player1Score.text = "WIN"
+            endContr.showWin(winPlayer, name: player1Name.text!)
         }else{
             player0Score.text = "WIN"
+            endContr.showWin(winPlayer, name: player0Name.text!)
         }
         board.userInteractionEnabled = false
         board.alpha = 0.7
+        
     }
     
     func updateScoreLabel(player: Int) {

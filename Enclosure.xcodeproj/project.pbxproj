@@ -39,6 +39,7 @@
 		42F5F5931C8E0C7C00C2771D /* AIGameBoard2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F5F5921C8E0C7C00C2771D /* AIGameBoard2.swift */; };
 		42F5F5951C8E0CD800C2771D /* AIGame2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F5F5941C8E0CD800C2771D /* AIGame2ViewController.swift */; };
 		6204250E972F9D33F452A800 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
+		88E975EF1C9BA6C200186588 /* EndGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E975EE1C9BA6C200186588 /* EndGameViewController.swift */; };
 		B5D624E81C79A5C60072A98C /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = B5D624E71C79A5C60072A98C /* 2.png */; };
 		B5D624EC1C79ABC30072A98C /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = B5D624EB1C79ABC30072A98C /* 3.png */; };
 /* End PBXBuildFile section */
@@ -80,6 +81,7 @@
 		42F5F5901C8DF75F00C2771D /* AI2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AI2.swift; sourceTree = "<group>"; };
 		42F5F5921C8E0C7C00C2771D /* AIGameBoard2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AIGameBoard2.swift; sourceTree = "<group>"; };
 		42F5F5941C8E0CD800C2771D /* AIGame2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AIGame2ViewController.swift; sourceTree = "<group>"; };
+		88E975EE1C9BA6C200186588 /* EndGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndGameViewController.swift; sourceTree = "<group>"; };
 		B5D624E71C79A5C60072A98C /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
 		B5D624EB1C79ABC30072A98C /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -133,6 +135,7 @@
 				42384B0E1C975CDE00A02BC8 /* DisplayGameBoard.swift */,
 				42384B0A1C96E6B500A02BC8 /* GameViewController.swift */,
 				42384B0C1C96EA2800A02BC8 /* PauseViewController.swift */,
+				88E975EE1C9BA6C200186588 /* EndGameViewController.swift */,
 				427F5C421C95DA4D004EA629 /* Connection.swift */,
 				427F5C3B1C953443004EA629 /* RemoteGame */,
 				42627FF31C790D5600DC69EC /* Game2ViewController.swift */,
@@ -333,6 +336,7 @@
 				42CAFABE1C8943A400AE6BE9 /* MPGameBoard.swift in Sources */,
 				427F5C371C952C03004EA629 /* MainViewController.swift in Sources */,
 				426280021C7976FE00DC69EC /* Game1ViewController.swift in Sources */,
+				88E975EF1C9BA6C200186588 /* EndGameViewController.swift in Sources */,
 				42F5F5911C8DF75F00C2771D /* AI2.swift in Sources */,
 				42CAFABA1C893B4100AE6BE9 /* MPGame1ViewController.swift in Sources */,
 				42CAFAC41C8A601D00AE6BE9 /* EnclosureGame2.swift in Sources */,
