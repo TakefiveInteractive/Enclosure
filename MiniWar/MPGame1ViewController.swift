@@ -32,6 +32,10 @@ class MPGame1ViewController: GameViewController{
         mpSocket.requestRestart()
     }
     
+    func actualReplay(){
+        super.replay()
+    }
+    
     func requestedRestart(){
         let createAccountErrorAlert: UIAlertView = UIAlertView()
         
@@ -55,14 +59,8 @@ class MPGame1ViewController: GameViewController{
     }
     
     override func endGame(winPlayer: Int) {
-        if winPlayer == 1{
-            player1Score.text = "WIN"
-        }else{
-            player0Score.text = "WIN"
-        }
+        super.endGame(winPlayer)
         mpSocket.gameEnd()
-        board.userInteractionEnabled = false
-        board.alpha = 0.7
     }
     
     func alertView(View: UIAlertView!, clickedButtonAtIndex buttonIndex: Int){

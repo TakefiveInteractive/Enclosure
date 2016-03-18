@@ -52,8 +52,7 @@ class MPGameBoard: GameBoard, SocketGameDelegate{
     }
     
     func restartGame(player: Int) {
-        parent.game = EnclosureGame()
-        buildGame(parent.game, player: player, parent: parent)
+        parent.actualReplay()
     }
     
     func requestRestart(){

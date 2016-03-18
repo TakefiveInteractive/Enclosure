@@ -140,15 +140,33 @@ class GameViewController: UIViewController, GameBoardDelegate {
         board.userInteractionEnabled = false
         board.alpha = 0.7
         
+        var gameData = [[[[Int]]]]()
+        
+        for player in game.userLastEdges{
+            var m = [[[Int]]]()
+            for move in player{
+                var f = [[Int]]()
+                for fence in move{
+                    var n = [Int]()
+                    for node in fence.nodes{
+                        n.append(node.x * 10 + node.y)
+                    }
+                    f.append(n)
+                }
+                m.append(f)
+            }
+            gameData.append(m)
+        }
+        
         if self.isKindOfClass(MPGame1ViewController){
             let cont = self as! MPGame1ViewController
             var winID = cont.opponentId
             if winPlayer == cont.currentPlayer{
                 winID = Connection.getUserId()
             }
-            Connection.uploadGame([Connection.getUserNickName(), cont.opponentName], playerIds: [Connection.getUserId(),cont.opponentId], roomNumber: mpSocket.roomNumber, move: AIBoard(bigGame: cont.game).playerLastMoves, winId: winID)
+            Connection.uploadGame([Connection.getUserNickName(), cont.opponentName], playerIds: [Connection.getUserId(),cont.opponentId], roomNumber: mpSocket.roomNumber, move: gameData, winId: winID)
         }else{
-            Connection.uploadGame([Connection.getUserNickName()], playerIds: [Connection.getUserId()], roomNumber: "", move: AIBoard(bigGame: self.game).playerLastMoves, winId: Connection.getUserId())
+            Connection.uploadGame([Connection.getUserNickName()], playerIds: [Connection.getUserId()], roomNumber: "", move: gameData, winId: Connection.getUserId())
 
         }
         mpSocket = nil

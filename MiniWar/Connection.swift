@@ -103,9 +103,9 @@ class UserData: NSObject {
         }
     }
     
-    func uploadGame(playerNames: [String], playerIds: [String], roomNumber: String, move: [[Set<Int>]], winId: String){
+    func uploadGame(playerNames: [String], playerIds: [String], roomNumber: String, move: [[[[Int]]]], winId: String){
         
-        Alamofire.request(.POST, "http://o.hl0.co:3000/report", parameters: ["playerNames": playerNames, "playerIds": playerIds, "roomNumber": roomNumber, "move" :move, "winId": winId])
+        Alamofire.request(.POST, "http://o.hl0.co:3000/report", parameters: ["playerNames": playerNames, "playerIds": playerIds, "roomNumber": roomNumber, "move" :move, "winId": winId], encoding: ParameterEncoding.JSON)
             .responseJSON { response in
                 
                 print(response.request)  // original URL request
