@@ -13,7 +13,7 @@ protocol SocketGameDelegate{
 protocol SocketSuccessDelegate{
     func joinSuccess(success: Bool)
     func gotRoomNumber(number: String)
-    func playerSequence(player: Int, names: [String])
+    func playerSequence(player: Int, names: [String], ids: [String], level: String)
 }
 
 public class Socket: NSObject {
@@ -90,11 +90,19 @@ public class Socket: NSObject {
            
             let data = str.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!
             var namesArr = [String]()
+            var idArr = [String]()
+            var level = ""
             var num = 0
             do {
                 let json = try NSJSONSerialization.JSONObjectWithData(data, options: []) as! [String: AnyObject]
                 if let names = json["names"] as? [String] {
                     namesArr = names
+                }
+                if let l = json["level"] as? String {
+                    level = l
+                }
+                if let ids = json["ids"] as? [String] {
+                    idArr = ids
                 }
                 if let index = json["index"] as? Int {
                     num = index
@@ -102,8 +110,8 @@ public class Socket: NSObject {
             } catch let error as NSError {
                 print("Failed to load: \(error.localizedDescription)")
             }
-            self.level = "1"
-            self.startDelegate?.playerSequence(num, names:[namesArr[0],namesArr[1]])
+            self.level = level
+            self.startDelegate?.playerSequence(num, names: [namesArr[0],namesArr[1]], ids: [idArr[0],idArr[1]], level: level)
             self.startDelegate?.joinSuccess(true)
         }
 

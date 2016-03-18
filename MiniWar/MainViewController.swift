@@ -29,7 +29,9 @@ class MainViewController: UIViewController, UserDataDelegate, MFMailComposeViewC
     @IBOutlet var aboutus: UIButton!
 
     var sudoGame = EnclosureGame()
-    
+    var onlinePlayer = 0
+    var opponentName = ""
+    var opponentId = ""
     override func viewDidLoad() {
         nickname.addTarget(self, action: "changeNickName:", forControlEvents: UIControlEvents.TouchUpInside)
         feedback.addTarget(self, action: "feedback:", forControlEvents: UIControlEvents.TouchUpInside)
@@ -94,7 +96,6 @@ class MainViewController: UIViewController, UserDataDelegate, MFMailComposeViewC
         
     }
     
-    var onlinePlayer = 0
     
     func createGameRoom(level: String){
         mpSocket = Socket(roomNumber: "", level: level)
@@ -114,15 +115,23 @@ class MainViewController: UIViewController, UserDataDelegate, MFMailComposeViewC
         
     }
     
-    var opponentName = ""
     
-    func playerSequence(player: Int, names: [String]){
+    
+    func playerSequence(player: Int, names: [String], ids: [String], level: String){
+
         self.onlinePlayer = player
         if names[0] == Connection.getUserNickName(){
             opponentName = names[1]
         }else{
             opponentName = names[0]
         }
+        
+        if ids[0] == Connection.getUserId(){
+            opponentId = ids[1]
+        }else{
+            opponentId = ids[0]
+        }
+        
     }
     
     func joinSuccess(success: Bool) {
@@ -138,6 +147,7 @@ class MainViewController: UIViewController, UserDataDelegate, MFMailComposeViewC
             let destinationVC = segue.destinationViewController as! MPGame1ViewController
             destinationVC.currentPlayer = self.onlinePlayer
             destinationVC.opponentName = self.opponentName
+            destinationVC.opponentId = self.opponentId
         }
     }
     
