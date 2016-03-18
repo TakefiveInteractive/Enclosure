@@ -146,13 +146,13 @@ app.post('/register', (req, res) => {
   .then((results) => {
     return res.json({
       name : results[1],
-      rank : results[0]
+      rank : -1
     })
   })
 })
 app.get('/info', (req, res) => {
   let user = {
-    deviceId : req.body.userId
+    deviceId : req.query.userId
   }
   models.Player.findOne(user).then((doc) => {
     if (doc != null) {
@@ -172,7 +172,7 @@ app.get('/info', (req, res) => {
     let user = results[0]
     res.json({
       name : user.name,
-      rank : rank,
+      rank : rank + 1,
     })
   })
   .catch(errorHandler)
