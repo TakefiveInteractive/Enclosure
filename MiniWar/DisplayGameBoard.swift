@@ -39,7 +39,7 @@ class InputText: UITextField {
         self.textAlignment = NSTextAlignment.Center
         self.font = UIFont(name: "Avenir-Heavy", size: 30.0 * size / 414.0)
         self.textColor = color
-        self.backgroundColor = UIColor(hexString: "FBFBFC")
+        self.backgroundColor = tableViewBackground
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -337,7 +337,6 @@ class BoardBack: UIView , UITextFieldDelegate{
         cleanBoard(drawTwoMode)
     }
     
-    
     func joinGame(but:UIButton){
         if input.text != nil && input.text != "" {
             controller.searchGameRoom(input.text!)
@@ -355,20 +354,20 @@ class BoardBack: UIView , UITextFieldDelegate{
         createRoom.addTarget(self, action: "createGame:", forControlEvents: UIControlEvents.TouchUpInside)
         self.addSubview(createRoom)
         
-        x = board.game.nodes[2][5].fences[board.game.nodes[3][5]]!.view.frame.origin.x
-        y = board.game.nodes[2][5].fences[board.game.nodes[2][6]]!.view.frame.origin.y
-        width = board.game.nodes[6][5].fences[board.game.nodes[6][6]]!.view.frame.origin.x - x
-        height = board.game.nodes[4][6].fences[board.game.nodes[5][6]]!.view.frame.origin.y - y
+        x = board.game.nodes[2][7].fences[board.game.nodes[3][7]]!.view.frame.origin.x
+        y = board.game.nodes[2][7].fences[board.game.nodes[2][8]]!.view.frame.origin.y
+        width = board.game.nodes[6][7].fences[board.game.nodes[6][8]]!.view.frame.origin.x - x
+        height = board.game.nodes[4][8].fences[board.game.nodes[5][8]]!.view.frame.origin.y - y
         let joinGame = BoardButton(frame: CGRect(x: x, y: y, width: width, height: height), text: "Join Room", color: controller.beta.textColor, size: controller.view.frame.width)
         joinGame.tag = 1
         joinGame.addTarget(self, action: "joinGame:", forControlEvents: UIControlEvents.TouchUpInside)
         joinGame.alpha = 0
         self.addSubview(joinGame)
         
-        x = board.game.nodes[1][7].fences[board.game.nodes[2][7]]!.view.frame.origin.x
-        y = board.game.nodes[1][7].fences[board.game.nodes[1][8]]!.view.frame.origin.y
-        width = board.game.nodes[4][7].fences[board.game.nodes[4][8]]!.view.frame.origin.x - x
-        height = board.game.nodes[4][8].fences[board.game.nodes[5][8]]!.view.frame.origin.y - y
+        x = board.game.nodes[1][5].fences[board.game.nodes[2][5]]!.view.frame.origin.x
+        y = board.game.nodes[1][5].fences[board.game.nodes[1][6]]!.view.frame.origin.y
+        width = board.game.nodes[4][5].fences[board.game.nodes[4][6]]!.view.frame.origin.x - x
+        height = board.game.nodes[4][6].fences[board.game.nodes[5][6]]!.view.frame.origin.y - y
         let room = BoardText(frame: CGRect(x: x, y: y, width: width, height: height), text: "Room:", color: controller.beta.textColor, size: controller.view.frame.width)
         room.alpha = 0
         self.addSubview(room)
@@ -382,10 +381,10 @@ class BoardBack: UIView , UITextFieldDelegate{
         back.addTarget(self, action: "back:", forControlEvents: UIControlEvents.TouchUpInside)
         self.addSubview(back)
         
-        x = board.game.nodes[4][7].fences[board.game.nodes[5][7]]!.view.frame.origin.x
-        y = board.game.nodes[4][7].fences[board.game.nodes[4][8]]!.view.frame.origin.y
+        x = board.game.nodes[4][5].fences[board.game.nodes[5][5]]!.view.frame.origin.x
+        y = board.game.nodes[4][5].fences[board.game.nodes[4][6]]!.view.frame.origin.y
         width = board.game.nodes[7][1].fences[board.game.nodes[7][2]]!.view.frame.origin.x - x
-        height = board.game.nodes[4][8].fences[board.game.nodes[5][8]]!.view.frame.origin.y - y
+        height = board.game.nodes[4][6].fences[board.game.nodes[5][6]]!.view.frame.origin.y - y
         input = InputText(frame: CGRect(x: x, y: y, width: width, height: height), text: "", color: controller.beta.textColor, size: controller.view.frame.width)
         input.keyboardType = UIKeyboardType.NumberPad
         input.alpha = 0
@@ -399,10 +398,10 @@ class BoardBack: UIView , UITextFieldDelegate{
         I.alpha = 0
         self.addSubview(I)
         
-        x = board.game.nodes[1][5].fences[board.game.nodes[2][5]]!.view.frame.origin.x
-        y = board.game.nodes[1][5].fences[board.game.nodes[1][6]]!.view.frame.origin.y
+        x = board.game.nodes[1][7].fences[board.game.nodes[2][7]]!.view.frame.origin.x
+        y = board.game.nodes[1][7].fences[board.game.nodes[1][8]]!.view.frame.origin.y
         width = board.game.nodes[2][3].fences[board.game.nodes[2][4]]!.view.frame.origin.x - x
-        height = board.game.nodes[1][6].fences[board.game.nodes[2][6]]!.view.frame.origin.y - y
+        height = board.game.nodes[1][8].fences[board.game.nodes[2][8]]!.view.frame.origin.y - y
         let II = BoardText(frame: CGRect(x: x, y: y, width: width, height: height), text: "2", color: controller.beta.textColor, size: controller.view.frame.width)
         II.alpha = 0
         self.addSubview(II)
@@ -425,29 +424,30 @@ class BoardBack: UIView , UITextFieldDelegate{
         elements.append(B)
         elements.append(II)
         
-        board.game.nodes[2][3].fences[board.game.nodes[2][4]]?.player = 0
-        board.game.nodes[2][4].fences[board.game.nodes[3][4]]?.player = 0
-        board.game.nodes[3][3].fences[board.game.nodes[2][3]]?.player = 0
-        board.game.nodes[3][3].fences[board.game.nodes[3][4]]?.player = 0
-        
-        board.game.nodes[1][5].fences[board.game.nodes[1][6]]?.player = 0
-        board.game.nodes[1][5].fences[board.game.nodes[2][5]]?.player = 0
-        board.game.nodes[2][6].fences[board.game.nodes[2][5]]?.player = 0
-        board.game.nodes[2][6].fences[board.game.nodes[1][6]]?.player = 0
-        
         board.game.nodes[1][1].fences[board.game.nodes[1][2]]?.player = 1
         board.game.nodes[1][1].fences[board.game.nodes[2][1]]?.player = 1
         board.game.nodes[2][1].fences[board.game.nodes[2][2]]?.player = 1
         board.game.nodes[1][2].fences[board.game.nodes[2][2]]?.player = 1
         
-        board.game.nodes[4][7].fences[board.game.nodes[5][7]]?.player = 0
-        board.game.nodes[4][7].fences[board.game.nodes[4][8]]?.player = 0
-        board.game.nodes[5][8].fences[board.game.nodes[4][8]]?.player = 0
-        board.game.nodes[5][8].fences[board.game.nodes[6][8]]?.player = 0
-        board.game.nodes[6][8].fences[board.game.nodes[7][8]]?.player = 0
-        board.game.nodes[7][7].fences[board.game.nodes[7][8]]?.player = 0
-        board.game.nodes[6][7].fences[board.game.nodes[7][7]]?.player = 0
-        board.game.nodes[6][7].fences[board.game.nodes[5][7]]?.player = 0
+        board.game.nodes[2][3].fences[board.game.nodes[2][4]]?.player = 0
+        board.game.nodes[2][4].fences[board.game.nodes[3][4]]?.player = 0
+        board.game.nodes[3][3].fences[board.game.nodes[2][3]]?.player = 0
+        board.game.nodes[3][3].fences[board.game.nodes[3][4]]?.player = 0
+        
+        board.game.nodes[1][7].fences[board.game.nodes[1][8]]?.player = 0
+        board.game.nodes[1][7].fences[board.game.nodes[2][7]]?.player = 0
+        board.game.nodes[2][8].fences[board.game.nodes[2][7]]?.player = 0
+        board.game.nodes[2][8].fences[board.game.nodes[1][8]]?.player = 0
+
+        
+        board.game.nodes[4][5].fences[board.game.nodes[5][5]]?.player = 0
+        board.game.nodes[4][5].fences[board.game.nodes[4][6]]?.player = 0
+        board.game.nodes[5][6].fences[board.game.nodes[4][6]]?.player = 0
+        board.game.nodes[5][6].fences[board.game.nodes[6][6]]?.player = 0
+        board.game.nodes[6][6].fences[board.game.nodes[7][6]]?.player = 0
+        board.game.nodes[7][5].fences[board.game.nodes[7][6]]?.player = 0
+        board.game.nodes[6][5].fences[board.game.nodes[7][5]]?.player = 0
+        board.game.nodes[6][5].fences[board.game.nodes[5][5]]?.player = 0
         
         showElements()
     }
@@ -682,24 +682,6 @@ class DisplayGameBoard: GameBoard {
             }
         }
     }
-    
-    
-//     func getCorrespondingGrid(p: CGPoint)->Grid{
-//        var x = Int(p.x/unitWidth)
-//        if x < 0{
-//            x = 0
-//        }else if x >= game.boardSize{
-//            x = game.boardSize - 1
-//        }
-//        var y = Int(p.y/unitWidth)
-//        if y < 0{
-//            y = 0
-//        }else if y >= game.boardSize{
-//            y = game.boardSize - 1
-//        }
-//        return game.nodes[x][y].view as! Grid
-//    }
-
     
 }
 

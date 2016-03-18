@@ -12,6 +12,7 @@ import ChameleonFramework
 
 let redOnBoard = UIColor(hexString: "F7959D")
 let blueOnBoard = UIColor(hexString: "78B4FF")
+let tableViewBackground = UIColor(hexString: "E6E6EE")
 
 var mpSocket: Socket!
 
