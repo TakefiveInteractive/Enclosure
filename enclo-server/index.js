@@ -28,7 +28,10 @@ let conns = {
 let rooms = {
 
 } // room name to [] of sockets
+let processingId = []
+
 const handlers = require('./socket-handlers')(conns, rooms, io)
+const ranker = require('./ranking.js')
 
 io.on('connection', function(socket){
   let selfname
@@ -68,7 +71,78 @@ app.post('/setName', (req, res) => {
   })
   .then((dbResult) => res.end(dbResult))
 })
-app.post('/getInfo', (req, res) => {
+app.post('/report', (req, res) => {
+  let body = req.body
+  l(body)
+  if (body.playerIds && body.playerIds.length == 2) {
+    let winId = body.winId
+    let anotherId = body.playerIds[1 - body.playerIds.indexOf(winId)]
+    Promise.all(body.playerIds.map((id) => {
+      return models.Player.findOne({deviceId : id})
+    }))
+    .then((userInfoArray) => {
+      l(userInfoArray)
+      l('fuck')
+      body.ranks = ranker({
+        ranks : userInfoArray.map((u) => u.elo),
+        scores : userInfoArray.map((u) => {
+          return (u.deviceId == winId) ? 1 : 0
+        }),
+      })
+      l(body.ranks)
+      let gameDoc = new models.Game(body)
+      gameDoc.save().then((result) => {
+        res.json(result)
+      })
+      Promise.all(body.ranks.map((rank, index) => {
+        userInfoArray[index].elo = userInfoArray[index].elo + rank
+        return userInfoArray[index].save()
+      })).then(() => {
+        l('rankupdated')
+      })
+    }).catch(errorHandler) 
+  } else {
+    let gameDoc = new models.Game(body)
+    gameDoc.save().then((result) => {
+      res.json(result)
+    })
+  }
+  
+})
+app.get('/top100', (req, res) => {
+  models.Player.find({}).sort({
+    elo: -1
+  }).limit(100)
+  .then((users) => {
+    res.json(users.map((u) => u.name))
+  })
+})
+app.post('/register', (req, res) => {
+  let user = {
+    deviceId : req.body.userId
+  }
+  let userDoc = new models.Player(user)
+  userDoc.save()
+  .then((u) => {
+    return Promise.all([
+      redisClient.zaddAsync('playerRank', u.elo, u._id.toString()),
+      Promise.resolve(u)
+    ])
+  })
+  .then((results) => {
+    return Promise.all([
+      redisClient.zrankAsync(user._id.toString()),
+      Promise.resolve(results[1].name),
+    ])
+  })
+  .then((results) => {
+    return res.json({
+      name : results[1],
+      rank : results[0]
+    })
+  })
+})
+app.get('/info', (req, res) => {
   let user = {
     deviceId : req.body.userId
   }
@@ -76,25 +150,16 @@ app.post('/getInfo', (req, res) => {
     if (doc != null) {
       return doc
     } else {
-      let userDoc = new models.Player(user)
-      return userDoc.save()
+      res.json({})
     }
   })
   .then((user) => {
     return Promise.all([
-      user,
-      redisClient.zaddAsync('playerRank', user.elo, user._id.toString())
-    ])
-  })
-  .then((results) => {
-    let user = results[0]
-    return Promise.all([
       Promise.resolve(user),
-      redisClient.zrankAsync('playerRank', user._id.toString()),
+      redisClient.zrankAsync('playerRank', user._id.toString())
     ])
   })
   .then((results) => {
-    l(results)
     let rank = results[1]
     let user = results[0]
     res.json({
