@@ -114,7 +114,11 @@ app.post('/report', (req, res) => {
   
 })
 app.get('/top100', (req, res) => {
-  models.Player.find({}).sort({
+  models.Player.find({
+    elo : {
+      $gt : -1
+    }
+  }).sort({
     elo: -1
   }).limit(100)
   .then((users) => {
