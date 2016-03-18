@@ -139,7 +139,7 @@ app.post('/register', (req, res) => {
   })
   .then((results) => {
     return Promise.all([
-      redisClient.zrankAsync(user._id.toString()),
+      redisClient.zrevrankAsync(user._id.toString()),
       Promise.resolve(results[1].name),
     ])
   })
@@ -164,7 +164,7 @@ app.get('/info', (req, res) => {
   .then((user) => {
     return Promise.all([
       Promise.resolve(user),
-      redisClient.zrankAsync('playerRank', user._id.toString())
+      redisClient.zrevrankAsync('playerRank', user._id.toString())
     ])
   })
   .then((results) => {
