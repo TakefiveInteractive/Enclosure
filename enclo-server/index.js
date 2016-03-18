@@ -190,7 +190,7 @@ Promise.all([
     models.Player.count({})
 ]).then((countResult) => {
   if (countResult[1] > countResult[0]) {
-    return models.Player.find({})
+    return models.Player.find({elo : {$ne : -1}}).sort({_id : -1})
   } else {
     return null
   }
