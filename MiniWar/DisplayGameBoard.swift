@@ -180,7 +180,7 @@ class BoardBack: UIView , UITextFieldDelegate{
         elements.append(back)
         elements.append(roomNumLab)
         
-        showElements()
+        showElements({})
 
     }
     
@@ -240,7 +240,7 @@ class BoardBack: UIView , UITextFieldDelegate{
         board.game.nodes[6][3].fences[board.game.nodes[5][3]]?.player = 1
         board.game.nodes[7][3].fences[board.game.nodes[6][3]]?.player = 1
         
-        showElements()
+        showElements({})
 
         input.becomeFirstResponder()
 
@@ -316,7 +316,7 @@ class BoardBack: UIView , UITextFieldDelegate{
         elements.append(B)
         elements.append(back)
         
-        showElements()
+        showElements({})
     }
     
     func mp(but:UIButton){
@@ -324,8 +324,12 @@ class BoardBack: UIView , UITextFieldDelegate{
     }
     
     func createGame(but:UIButton){
-        firstSelection = but.tag
-        cleanBoard(drawTwoMode)
+        cleanBoard { () -> () in
+            self.controller.createGameRoom("1")
+            self.waitRoom()
+        }
+//        firstSelection = but.tag
+//        cleanBoard(drawTwoMode)
     }
     
     func joinGame(but:UIButton){
@@ -439,10 +443,10 @@ class BoardBack: UIView , UITextFieldDelegate{
         board.game.nodes[6][5].fences[board.game.nodes[7][5]]?.player = 0
         board.game.nodes[6][5].fences[board.game.nodes[5][5]]?.player = 0
         
-        showElements()
+        showElements({})
     }
     
-    func showElements(){
+    func showElements(after: ()->()){
         board.drawBoard()
         
         UIView.animateWithDuration(0.5, animations: { () -> Void in
@@ -450,7 +454,7 @@ class BoardBack: UIView , UITextFieldDelegate{
                 elem.alpha = 1
             }
             }) { (finish) -> Void in
-                
+                after()
         }
     }
     
@@ -555,7 +559,10 @@ class BoardBack: UIView , UITextFieldDelegate{
         board.game.nodes[2][8].fences[board.game.nodes[2][7]]?.player = 1
         board.game.nodes[2][8].fences[board.game.nodes[1][8]]?.player = 1
         
-        showElements()
+        showElements({
+            ranking.alpha = 0.7
+            ranking.userInteractionEnabled = false
+        })
 
     }    
     

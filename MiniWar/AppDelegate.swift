@@ -17,7 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         Connection.getInfo()        
         if NSUserDefaults.standardUserDefaults().objectForKey("nickName") == nil{
-            NSUserDefaults.standardUserDefaults().setObject("NOName", forKey: "nickName")
             Connection.setName("NOName")
         }
         

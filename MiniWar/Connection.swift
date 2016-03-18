@@ -68,12 +68,16 @@ class UserData: NSObject {
 
                 if let JSON = response.result.value {
                     if let name = JSON["name"]{
-                        NSUserDefaults.standardUserDefaults().setObject(name, forKey: "nickName")
-                        self.delegate?.nicknameUpdate(self.getUserNickName())
+                        if name != nil{
+                            NSUserDefaults.standardUserDefaults().setObject(name, forKey: "nickName")
+                            self.delegate?.nicknameUpdate(self.getUserNickName())
+                        }
                     }
                     if let rank = JSON["rank"]{
-                        NSUserDefaults.standardUserDefaults().setObject(rank, forKey: "rank")
-                        self.delegate?.rankUpdate(self.getUserRank())
+                        if rank != nil{
+                            NSUserDefaults.standardUserDefaults().setObject(rank, forKey: "rank")
+                            self.delegate?.rankUpdate(self.getUserRank())
+                        }
                     }
                     print("JSON: \(JSON)")
                 }
