@@ -73,5 +73,8 @@ class UserData: NSObject {
         }
     }
     
+    func getTop100() {
+        
+    }
     
 }
