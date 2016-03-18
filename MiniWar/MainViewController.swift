@@ -181,6 +181,7 @@ class MainViewController: UIViewController, UserDataDelegate, MFMailComposeViewC
     
     @IBAction func backToMain(segue:UIStoryboardSegue) {
         board.cleanBoard(board.drawMenu1)
+        Connection.getInfo()
     }
     
 }

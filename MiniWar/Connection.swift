@@ -63,7 +63,7 @@ class UserData: NSObject {
     
     func getInfo()->Bool{
         
-        Alamofire.request(.POST, "http://o.hl0.co:3000/info", parameters: ["userId": Connection.getUserId()])
+        Alamofire.request(.GET, "http://o.hl0.co:3000/info", parameters: ["userId": Connection.getUserId()])
             .responseJSON { response in
 
                 if let JSON = response.result.value {
