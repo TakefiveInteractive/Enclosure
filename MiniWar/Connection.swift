@@ -27,7 +27,11 @@ class UserData: NSObject {
     
     func getUserRank()->String{
         if let rank = NSUserDefaults.standardUserDefaults().objectForKey("rank"){
-            return "\(rank)"
+            if "\(rank)" == "-1"{
+                return "-"
+            }else{
+                return "\(rank)"
+            }
         }else{
             return "-"
         }

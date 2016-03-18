@@ -77,6 +77,7 @@ class MainViewController: UIViewController, UserDataDelegate, MFMailComposeViewC
     
     override func viewDidAppear(animated: Bool) {
         
+        Connection.getInfo()
         mpSocket = nil
 
         if view.frame.width < 350{
