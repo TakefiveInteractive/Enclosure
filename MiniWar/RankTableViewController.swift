@@ -7,14 +7,20 @@
 //
 
 import UIKit
+import Spring
 
 class RankTableViewController: UITableViewController {
 
+    var names = [String]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         Connection.getTop100 { (res) -> () in
-            
+            self.names = res
+            self.tableView.reloadData()
         }
+        insertBlurView(self.view, style: .Dark)
+        self.tableView.tableFooterView = UIView()
     }
 
     override func didReceiveMemoryWarning() {
@@ -24,23 +30,37 @@ class RankTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 0
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return names.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("rankTableViewCell", forIndexPath: indexPath) as! RankTableViewCell
+        let row = indexPath.row + 1
+        cell.name.text = names[row - 1]
+        var rankStr = "\(row)"
+        if row == 1 {
+            rankStr += "st"
+        } else if row == 2{
+            rankStr += "nd"
+        } else {
+            rankStr += "th"
+        }
+        cell.rank.text = rankStr
         return cell
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.touchesBegan(touches, withEvent: event)
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
+    @IBAction func backButtonDidClicked(sender: UIButton) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
