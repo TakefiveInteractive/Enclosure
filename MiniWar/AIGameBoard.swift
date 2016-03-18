@@ -11,9 +11,7 @@ import UIKit
 class AIGameBoard: GameBoard {
     
     var aiPlayer = 0
-    
-    var hasRestart = false
-    
+        
     override func buildGame(game: EnclosureGame) {
         super.buildGame(game)
         

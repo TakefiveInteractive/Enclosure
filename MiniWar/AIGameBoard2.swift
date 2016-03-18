@@ -57,7 +57,7 @@ class AIGameBoard2: GameBoard2 {
         if game.currentPlayer() == aiPlayer{
             self.userInteractionEnabled = false
             self.alpha = 0.65
-            let ai = AI(game: game)
+            let ai = AI2(game: game)
             let qualityOfServiceClass = QOS_CLASS_BACKGROUND
             let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
             dispatch_async(backgroundQueue, {

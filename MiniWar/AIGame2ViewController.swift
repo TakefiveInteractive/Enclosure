@@ -25,9 +25,14 @@ class AIGame2ViewController: GameViewController {
         board.buildGame(game)
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func setPlayerNames() {
+        if (board as! AIGameBoard2).aiPlayer == 1{
+            player0Name.text = Connection.getUserNickName()
+            player1Name.text = "Kedan's AI"
+        }else{
+            player0Name.text = "Kedan's AI"
+            player1Name.text = Connection.getUserNickName()
+        }
     }
 
 }

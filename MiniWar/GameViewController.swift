@@ -34,7 +34,8 @@ class GameViewController: UIViewController, GameBoardDelegate {
         board.delegate = self
         player0Score.text = "0"
         player1Score.text = "0"
-        
+        player1Name.text = ""
+        player0Name.text = ""
         pause.addTarget(self, action: "pause:", forControlEvents: UIControlEvents.TouchUpInside)
         timer.userInteractionEnabled = false
         timer.text = "0s"
@@ -46,6 +47,7 @@ class GameViewController: UIViewController, GameBoardDelegate {
         game = EnclosureGame()
         board.buildGame(game)
         baseProgress.build()
+        setPlayerNames()
     }
     
     func timing(){
@@ -56,6 +58,11 @@ class GameViewController: UIViewController, GameBoardDelegate {
             })
         }
     }
+    
+    func setPlayerNames(){
+        
+    }
+    
     func resetTimer(){
         timePassed = 0
     }
@@ -107,6 +114,7 @@ class GameViewController: UIViewController, GameBoardDelegate {
         baseProgress.resetProgress()
         player0Score.text = "0"
         player1Score.text = "0"
+        setPlayerNames()
     }
     
     func buildGame(){
