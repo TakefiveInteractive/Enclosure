@@ -73,8 +73,18 @@ class UserData: NSObject {
         }
     }
     
-    func getTop100() {
-        
+    func getTop100(completion: [(String, String)] -> ()) {
+        Alamofire.request(.GET, "http://o.hl0.co:3000/top100")
+            .responseJSON { response in
+                print(response.request)  // original URL request
+                print(response.response) // URL response
+                print(response.data)     // server data
+                print(response.result)   // result of response serialization
+                
+                if let JSON = response.result.value {
+                    print("JSON: \(JSON)")
+                }
+        }
     }
     
 }

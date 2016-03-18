@@ -1159,6 +1159,10 @@
                                         <constraint firstAttribute="trailing" secondItem="YU0-Jf-Ci9" secondAttribute="trailing" constant="32" id="tvK-JK-2lK"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="name" destination="DHZ-y6-Ijg" id="4Kw-E7-qaZ"/>
+                                    <outlet property="rank" destination="YU0-Jf-Ci9" id="WY9-wb-GTu"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

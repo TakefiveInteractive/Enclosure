@@ -12,7 +12,9 @@ class RankTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        Connection.getTop100 { (res) -> () in
+            
+        }
     }
 
     override func didReceiveMemoryWarning() {
