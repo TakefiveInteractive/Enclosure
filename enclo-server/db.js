@@ -11,8 +11,10 @@ let gameSchema = new mongoose.Schema({
     type : Date,
     default : Date.now()
   },
-  players : [String],
-  move: []
+  playerNames : [String],
+  playerIds: [String],
+  move: [],
+  winId : String,
 }, {
   strict: false
 })
@@ -24,7 +26,7 @@ let playerSchema = new mongoose.Schema({
   },
   name : {
     type:String,
-    default : '',
+    default : 'NoName',
   },
   elo : {
     type:Number,
