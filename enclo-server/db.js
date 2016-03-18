@@ -30,7 +30,7 @@ let playerSchema = new mongoose.Schema({
   },
   elo : {
     type:Number,
-    default:1000,
+    default:-1,
   },
   deviceId : {
     type : String
