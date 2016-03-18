@@ -15,9 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        Connection.getInfo()
-        
-        
+        Connection.getInfo()        
         if NSUserDefaults.standardUserDefaults().objectForKey("nickName") == nil{
             Connection.setName("NOName")
         }

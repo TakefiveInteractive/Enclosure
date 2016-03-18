@@ -88,10 +88,13 @@ class MainViewController: UIViewController, UserDataDelegate, MFMailComposeViewC
         board.board = back
         board.controller = self
         
-        if Connection.getUserNickName() == "NOName"{
-            board.inputNickName()
-        }else{
+        if let register = NSUserDefaults.standardUserDefaults().objectForKey("register"){
             board.drawMenu1()
+
+        }else{
+            board.inputNickName()
+            Connection.register()
+            NSUserDefaults.standardUserDefaults().setObject(true, forKey: "register")
         }
         
     }
@@ -114,9 +117,7 @@ class MainViewController: UIViewController, UserDataDelegate, MFMailComposeViewC
         board.roomNum.text = number
         
     }
-    
-    
-    
+        
     func playerSequence(player: Int, names: [String], ids: [String], level: String){
 
         self.onlinePlayer = player
