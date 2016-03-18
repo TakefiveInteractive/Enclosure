@@ -133,7 +133,8 @@ app.post('/register', (req, res) => {
   userDoc.save()
   .then((u) => {
     return Promise.all([
-      redisClient.zaddAsync('playerRank', u.elo, u._id.toString()),
+      Promise.resolve(),
+      //redisClient.zaddAsync('playerRank', u.elo, u._id.toString()),
       Promise.resolve(u)
     ])
   })
