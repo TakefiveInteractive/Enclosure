@@ -55,7 +55,9 @@ let handlers = (conns, rooms, io) => {
         theRoom.forEach((socket, index) => {
           socket.emit('gameCanStart', JSON.stringify({
             index : index,
-            names : names
+            names : names,
+            ids : docs.map((doc) => doc.deviceId),
+            level : levels[roomNumber],
           }))
         })
       })
@@ -75,7 +77,7 @@ let handlers = (conns, rooms, io) => {
             players : rooms[roomNumber].map((socket) => socket.id),
             move : moves[roomNumber]
           })
-          thisGame.save()
+          //thisGame.save()
         })
         socket.on('gameRestart', () => {
           l('1')
