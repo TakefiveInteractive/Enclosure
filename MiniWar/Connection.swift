@@ -45,11 +45,13 @@ class UserData: NSObject {
             .responseJSON { response in
 
                 if let JSON = response.result.value {
-                    if JSON["name"] as! String != ""{
-                        NSUserDefaults.standardUserDefaults().setObject(JSON["name"], forKey: "nickName")
-                        NSUserDefaults.standardUserDefaults().setObject(JSON["rank"], forKey: "rank")
-                        self.delegate?.rankUpdate(self.getUserRank())
+                    if let name = JSON["name"]{
+                        NSUserDefaults.standardUserDefaults().setObject(name, forKey: "nickName")
                         self.delegate?.nicknameUpdate(self.getUserNickName())
+                    }
+                    if let rank = JSON["rank"]{
+                        NSUserDefaults.standardUserDefaults().setObject(rank, forKey: "rank")
+                        self.delegate?.rankUpdate(self.getUserRank())
                     }
                     print("JSON: \(JSON)")
                 }
@@ -85,6 +87,20 @@ class UserData: NSObject {
                     print("JSON: \(JSON)")
                 }
         }
+    }
+    
+    func uploadGame(playerNames: [String], playerId: [String], roomNumber: String) {
+//        Alamofire.request(.GET, "http://o.hl0.co:3000/top100")
+//            .responseJSON { response in
+//                print(response.request)  // original URL request
+//                print(response.response) // URL response
+//                print(response.data)     // server data
+//                print(response.result)   // result of response serialization
+//                
+//                if let JSON = response.result.value {
+//                    print("JSON: \(JSON)")
+//                }
+//        }
     }
     
 }

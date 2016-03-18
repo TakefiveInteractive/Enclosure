@@ -133,14 +133,16 @@ class GameViewController: UIViewController, GameBoardDelegate {
             endContr.view.alpha = 0.9
         }
         if winPlayer == 1{
-            player1Score.text = "WIN"
             endContr.showWin(winPlayer, name: player1Name.text!)
         }else{
-            player0Score.text = "WIN"
             endContr.showWin(winPlayer, name: player0Name.text!)
         }
         board.userInteractionEnabled = false
         board.alpha = 0.7
+        
+        if self.isKindOfClass(MPGame1ViewController){
+            
+        }
         
     }
     
