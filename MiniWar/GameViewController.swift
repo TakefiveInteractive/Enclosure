@@ -169,7 +169,6 @@ class GameViewController: UIViewController, GameBoardDelegate {
             Connection.uploadGame([Connection.getUserNickName()], playerIds: [Connection.getUserId()], roomNumber: "", move: gameData, winId: Connection.getUserId())
 
         }
-        mpSocket = nil
         
     }
     

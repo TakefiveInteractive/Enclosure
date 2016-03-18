@@ -339,21 +339,20 @@ class BoardBack: UIView , UITextFieldDelegate{
         var y = board.game.nodes[3][3].fences[board.game.nodes[3][4]]!.view.frame.origin.y
         var width = board.game.nodes[7][3].fences[board.game.nodes[7][4]]!.view.frame.origin.x - x
         var height = board.game.nodes[3][4].fences[board.game.nodes[4][4]]!.view.frame.origin.y - y
-        let createRoom = BoardButton(frame: CGRect(x: x, y: y, width: width, height: height), text: "Create Room", color: controller.beta.textColor, size: controller.view.frame.width)
-        createRoom.tag = 2
-        createRoom.alpha = 0
-        createRoom.addTarget(self, action: "createGame:", forControlEvents: UIControlEvents.TouchUpInside)
-        self.addSubview(createRoom)
+        let jRoom = BoardButton(frame: CGRect(x: x, y: y, width: width, height: height), text: "Join Room", color: controller.beta.textColor, size: controller.view.frame.width)
+        jRoom.alpha = 0
+        jRoom.addTarget(self, action: "joinGame:", forControlEvents: UIControlEvents.TouchUpInside)
+        self.addSubview(jRoom)
         
         x = board.game.nodes[2][7].fences[board.game.nodes[3][7]]!.view.frame.origin.x
         y = board.game.nodes[2][7].fences[board.game.nodes[2][8]]!.view.frame.origin.y
         width = board.game.nodes[6][7].fences[board.game.nodes[6][8]]!.view.frame.origin.x - x
         height = board.game.nodes[4][8].fences[board.game.nodes[5][8]]!.view.frame.origin.y - y
-        let joinGame = BoardButton(frame: CGRect(x: x, y: y, width: width, height: height), text: "Join Room", color: controller.beta.textColor, size: controller.view.frame.width)
-        joinGame.tag = 1
-        joinGame.addTarget(self, action: "joinGame:", forControlEvents: UIControlEvents.TouchUpInside)
-        joinGame.alpha = 0
-        self.addSubview(joinGame)
+        let createGame = BoardButton(frame: CGRect(x: x, y: y, width: width, height: height), text: "Create Room", color: controller.beta.textColor, size: controller.view.frame.width)
+        createGame.tag = 2
+        createGame.addTarget(self, action: "createGame:", forControlEvents: UIControlEvents.TouchUpInside)
+        createGame.alpha = 0
+        self.addSubview(createGame)
         
         x = board.game.nodes[1][5].fences[board.game.nodes[2][5]]!.view.frame.origin.x
         y = board.game.nodes[1][5].fences[board.game.nodes[1][6]]!.view.frame.origin.y
@@ -406,8 +405,8 @@ class BoardBack: UIView , UITextFieldDelegate{
         self.addSubview(B)
         
         input.delegate = self
-        elements.append(joinGame)
-        elements.append(createRoom)
+        elements.append(createGame)
+        elements.append(jRoom)
         elements.append(back)
         elements.append(input)
         elements.append(room)

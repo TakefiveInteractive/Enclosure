@@ -77,6 +77,8 @@ class MainViewController: UIViewController, UserDataDelegate, MFMailComposeViewC
     
     override func viewDidAppear(animated: Bool) {
         
+        mpSocket = nil
+
         if view.frame.width < 350{
             enclosure.font = UIFont(name: "AvenirNext-Regular", size: 55.0)
             titleWidth.constant = 250
