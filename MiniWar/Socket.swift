@@ -134,7 +134,7 @@ public class Socket: NSObject {
 //            self.gameDelegate?.gotMove(String(data[0]))
         }
         self.socketClient.on("userDisconnect") { (data, ack) -> Void in
-            print(data)
+            self.gameDelegate?.playerDisconnect()
         }
         
         self.socketClient.onAny {
