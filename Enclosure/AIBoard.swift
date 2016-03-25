@@ -312,7 +312,7 @@ class AIBoard: NSObject {
         neutralLand = [Int]()
         //create fences
         for var x = 0; x <  boardSize; x += 1 {
-            for var y = 0; y < boardSize; y++ {
+            for var y = 0; y < boardSize; y += 1 {
                 if x < boardSize - 1{
                     let one = x*10+y
                     let two = (x+1)*10+y
@@ -339,7 +339,7 @@ class AIBoard: NSObject {
         
         //create lands
         for var x = 0; x <  boardSize - 1; x += 1 {
-            for var y = 0; y < boardSize; y++ {
+            for var y = 0; y < boardSize; y += 1 {
                 if x < boardSize - 1 && y < boardSize - 1{
                     let land = x * 10 + y
                     if bigGame.lands[x][y].player == -1{
