@@ -14,6 +14,7 @@ class AIGame2ViewController: GameViewController {
         game = EnclosureGame2()
         board.buildGame(game)
         baseProgress.build()
+        setPlayerNames()
     }
     
     override func replay() {

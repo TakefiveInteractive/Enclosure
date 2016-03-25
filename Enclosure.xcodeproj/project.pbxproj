@@ -11,6 +11,7 @@
 		42384B0B1C96E6B500A02BC8 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42384B0A1C96E6B500A02BC8 /* GameViewController.swift */; };
 		42384B0D1C96EA2800A02BC8 /* PauseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42384B0C1C96EA2800A02BC8 /* PauseViewController.swift */; };
 		42384B0F1C975CDE00A02BC8 /* DisplayGameBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42384B0E1C975CDE00A02BC8 /* DisplayGameBoard.swift */; };
+		4243205A1CA4E6CE00DEE387 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424320591CA4E6CE00DEE387 /* TutorialViewController.swift */; };
 		4260A0B31C87CF4800116F8E /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4260A0B21C87CF4800116F8E /* Socket.swift */; };
 		42627FE01C783E0700DC69EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42627FDF1C783E0700DC69EC /* AppDelegate.swift */; };
 		42627FE51C783E0700DC69EC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42627FE31C783E0700DC69EC /* Main.storyboard */; };
@@ -52,6 +53,7 @@
 		42384B0A1C96E6B500A02BC8 /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		42384B0C1C96EA2800A02BC8 /* PauseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PauseViewController.swift; sourceTree = "<group>"; };
 		42384B0E1C975CDE00A02BC8 /* DisplayGameBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayGameBoard.swift; sourceTree = "<group>"; };
+		424320591CA4E6CE00DEE387 /* TutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		4260A0B21C87CF4800116F8E /* Socket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Socket.swift; sourceTree = "<group>"; };
 		42627FDC1C783E0700DC69EC /* Enclosure.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Enclosure.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42627FDF1C783E0700DC69EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				42627FDF1C783E0700DC69EC /* AppDelegate.swift */,
+				424320591CA4E6CE00DEE387 /* TutorialViewController.swift */,
 				427F5C361C952C03004EA629 /* MainViewController.swift */,
 				42384B0E1C975CDE00A02BC8 /* DisplayGameBoard.swift */,
 				42384B0A1C96E6B500A02BC8 /* GameViewController.swift */,
@@ -337,6 +340,7 @@
 				427F5C431C95DA4D004EA629 /* Connection.swift in Sources */,
 				42CAFAC21C8A59E500AE6BE9 /* AIGame1ViewController.swift in Sources */,
 				42CAFABE1C8943A400AE6BE9 /* MPGameBoard.swift in Sources */,
+				4243205A1CA4E6CE00DEE387 /* TutorialViewController.swift in Sources */,
 				427F5C371C952C03004EA629 /* MainViewController.swift in Sources */,
 				426280021C7976FE00DC69EC /* Game1ViewController.swift in Sources */,
 				88E975F11C9BBD9100186588 /* RankTableViewCell.swift in Sources */,

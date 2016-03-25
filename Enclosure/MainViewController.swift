@@ -91,9 +91,8 @@ class MainViewController: UIViewController, UserDataDelegate, MFMailComposeViewC
         board.board = back
         board.controller = self
         
-        if let register = NSUserDefaults.standardUserDefaults().objectForKey("register"){
+        if (NSUserDefaults.standardUserDefaults().objectForKey("register") != nil){
             board.drawMenu1()
-
         }else{
             board.inputNickName()
             Connection.register()

@@ -15,7 +15,7 @@ class PauseViewController: UIViewController {
     
     override func viewDidLoad() {
         resume.addTarget(self, action: #selector(PauseViewController.removePause(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-        restart.addTarget(self, action: "restart:", forControlEvents: UIControlEvents.TouchUpInside)
+        restart.addTarget(self, action: #selector(PauseViewController.restart(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         exit.addTarget(self, action: #selector(PauseViewController.exit(_:)), forControlEvents: UIControlEvents.TouchUpInside)
     }
     
