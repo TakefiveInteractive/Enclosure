@@ -5,6 +5,7 @@ PODS:
     - ChameleonFramework/Default
   - Socket.IO-Client-Swift (5.4.1)
   - Spring (1.0.3)
+  - SwiftGifOrigin (1.5.3)
   - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
@@ -12,6 +13,7 @@ DEPENDENCIES:
   - ChameleonFramework/Swift
   - Socket.IO-Client-Swift (~> 5.4.1)
   - Spring (from `https://github.com/MengTo/Spring.git`, branch `swift2`)
+  - SwiftGifOrigin
   - SwiftyJSON
 
 EXTERNAL SOURCES:
@@ -29,6 +31,7 @@ SPEC CHECKSUMS:
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   Socket.IO-Client-Swift: ad65f1437dd97c4ac01e2e506386fafc3de2ece1
   Spring: 3f02b5dc3308572ef177b3cad0fa7bbc4b0706f7
+  SwiftGifOrigin: 893ebcceabe215a00b607328b5322b4e228347e5
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
 COCOAPODS: 0.39.0

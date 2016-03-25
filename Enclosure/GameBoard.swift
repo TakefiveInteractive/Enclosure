@@ -196,7 +196,8 @@ class GameBoard: UIView {
         if sender.state == UIGestureRecognizerState.Cancelled || sender.state == UIGestureRecognizerState.Ended || sender.state == UIGestureRecognizerState.Failed {
 
             //haven't finish game
-            if tempPath.count < game.playerFencesNum[game.currentPlayer()] + 1{
+            
+            if shouldReset() {
                 tempPath.removeAll()
                 self.delegate?.showTotalRow(game.currentPlayer(), row: game.playerFencesNum[game.currentPlayer()])
                 drawBoard()
@@ -214,7 +215,7 @@ class GameBoard: UIView {
                     }
                 }
                 tempPath.removeAll()
-                moveToNextStep(fences, nodes: nodes)
+                moveToNextStep(fences)
                 afterPlayerMove()
             }
             
@@ -231,19 +232,25 @@ class GameBoard: UIView {
         
     }
     
+    func shouldReset()->Bool{
+        return tempPath.count < game.playerFencesNum[game.currentPlayer()] + 1
+    }
+    
     func afterPlayerMove(){
         self.delegate!.resetTimer()
     }
     
-    func moveToNextStep(fences: [Fence], nodes:[FenceNode]){
+    func moveToNextStep(fences: [Fence]){
 
         self.delegate?.showTotalRow(game.currentPlayer(), row: 0)
 
+        
         // move to next step
-        let areaChanged = game.updateMove(fences, nodes: nodes)
+        let areaChanged = game.updateMove(fences)
         for land in areaChanged{
             self.delegate?.animateScore(land.view as! Area, score: land.score, player: (game.currentPlayer()+1)%2)
         }
+        
         if areaChanged.count > 0{
             self.delegate?.updateScoreLabel((game.currentPlayer()+1)%2)
             self.delegate?.changeProgress((game.currentPlayer()+1)%2)
@@ -258,7 +265,6 @@ class GameBoard: UIView {
         }
         drawBoard()
         self.delegate?.showTotalRow(game.currentPlayer(), row: game.playerFencesNum[game.currentPlayer()])
-
     }
 
     func getCorrespondingGrid(p: CGPoint)->Grid{

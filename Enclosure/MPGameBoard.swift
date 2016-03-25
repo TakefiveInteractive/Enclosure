@@ -37,16 +37,13 @@ class MPGameBoard: GameBoard, SocketGameDelegate{
         if Int(splitData[0]) == game.currentPlayer(){
             let fs = splitData[1].componentsSeparatedByString("|")
             var fences = [Fence]()
-            var setofNodes = Set<FenceNode>()
             for fence in Array(fs){
                 let twoNode = fence.componentsSeparatedByString("$")
                 let node1 = self.game.nodes[Int(twoNode[0].componentsSeparatedByString(",")[0])!][Int(twoNode[0].componentsSeparatedByString(",")[1])!]
                 let node2 = self.game.nodes[Int(twoNode[1].componentsSeparatedByString(",")[0])!][Int(twoNode[1].componentsSeparatedByString(",")[1])!]
-                setofNodes.insert(node1)
-                setofNodes.insert(node2)
                 fences.append(node1.fences[node2]!)
             }
-            self.moveToNextStep(fences, nodes: Array(setofNodes))
+            self.moveToNextStep(fences)
         }
         changeBoardAvailabiliity()
     }

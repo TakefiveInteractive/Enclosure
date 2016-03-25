@@ -63,13 +63,10 @@ class AIGameBoard: GameBoard {
                 let currentState = AIBoard(bigGame: self.game)
                 let moves = ai.calculateNextStep()
                 var fences = [Fence]()
-                var setofNodes = Set<FenceNode>()
                 for fence in Array(moves){
                     let fenceArr = Array(fence)
                     let node1 = self.game.nodes[fenceArr[0]/10][fenceArr[0]%10]
                     let node2 = self.game.nodes[fenceArr[1]/10][fenceArr[1]%10]
-                    setofNodes.insert(node1)
-                    setofNodes.insert(node2)
                     fences.append(node1.fences[node2]!)
                 }
                 
@@ -78,7 +75,7 @@ class AIGameBoard: GameBoard {
                     let currentboard = AIBoard(bigGame: self.game)
                     if currentState.playerFence == currentboard.playerFence{
                         
-                        self.moveToNextStep(fences, nodes: Array(setofNodes))
+                        self.moveToNextStep(fences)
                         if !self.highlighting{
                             self.highlighting = true
                             self.highlightLastAIMove()

@@ -40,11 +40,19 @@ class EnclosureGame: NSObject {
         return self.totalStep % self.playerNum
     }
     
-    func updateMove(fs:[Fence], nodes:[FenceNode])->[Land]{
+    func updateMove(fs:[Fence])->[Land]{
+        
+        var nodesSet = Set<FenceNode>()
+        
         for f in fs{
             f.player = currentPlayer()
             playerFence[currentPlayer()].append(f)
+            nodesSet.insert(f.nodes[0])
+            nodesSet.insert(f.nodes[1])
         }
+        
+        var nodes = Array(nodesSet)
+        
         let set1 = Set(neutralFence)
         let set2 = Set(fs)
         neutralFence = Array(Tool.subtractSet(set1, subset: set2))

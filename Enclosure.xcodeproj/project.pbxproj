@@ -13,6 +13,10 @@
 		42384B0F1C975CDE00A02BC8 /* DisplayGameBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42384B0E1C975CDE00A02BC8 /* DisplayGameBoard.swift */; };
 		4243205A1CA4E6CE00DEE387 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424320591CA4E6CE00DEE387 /* TutorialViewController.swift */; };
 		4243205C1CA4EC6100DEE387 /* GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4243205B1CA4EC6100DEE387 /* GuideViewController.swift */; };
+		4243205E1CA56C3F00DEE387 /* guide1.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4243205D1CA56C3F00DEE387 /* guide1.gif */; };
+		424320601CA5701300DEE387 /* TutorialBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4243205F1CA5701300DEE387 /* TutorialBoard.swift */; };
+		424320631CA5814A00DEE387 /* guide2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 424320621CA5814A00DEE387 /* guide2.gif */; };
+		424320651CA5838200DEE387 /* guide3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 424320641CA5838200DEE387 /* guide3.jpg */; };
 		4260A0B31C87CF4800116F8E /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4260A0B21C87CF4800116F8E /* Socket.swift */; };
 		42627FE01C783E0700DC69EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42627FDF1C783E0700DC69EC /* AppDelegate.swift */; };
 		42627FE51C783E0700DC69EC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42627FE31C783E0700DC69EC /* Main.storyboard */; };
@@ -28,7 +32,6 @@
 		4265F75C1C8207800000BCD7 /* Tool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4265F75B1C8207800000BCD7 /* Tool.swift */; };
 		427F5C371C952C03004EA629 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427F5C361C952C03004EA629 /* MainViewController.swift */; };
 		427F5C431C95DA4D004EA629 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427F5C421C95DA4D004EA629 /* Connection.swift */; };
-		42A5D15A1C7A0B5000C0AAC8 /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 42A5D1591C7A0B5000C0AAC8 /* 1.jpg */; };
 		42CAFABA1C893B4100AE6BE9 /* MPGame1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CAFAB91C893B4100AE6BE9 /* MPGame1ViewController.swift */; };
 		42CAFABC1C893CBA00AE6BE9 /* MultiplePlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CAFABB1C893CBA00AE6BE9 /* MultiplePlayerController.swift */; };
 		42CAFABE1C8943A400AE6BE9 /* MPGameBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42CAFABD1C8943A400AE6BE9 /* MPGameBoard.swift */; };
@@ -43,8 +46,6 @@
 		88E975EF1C9BA6C200186588 /* EndGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E975EE1C9BA6C200186588 /* EndGameViewController.swift */; };
 		88E975F11C9BBD9100186588 /* RankTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E975F01C9BBD9100186588 /* RankTableViewCell.swift */; };
 		88E975F31C9BBDA500186588 /* RankTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E975F21C9BBDA500186588 /* RankTableViewController.swift */; };
-		B5D624E81C79A5C60072A98C /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = B5D624E71C79A5C60072A98C /* 2.png */; };
-		B5D624EC1C79ABC30072A98C /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = B5D624EB1C79ABC30072A98C /* 3.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,10 @@
 		42384B0E1C975CDE00A02BC8 /* DisplayGameBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayGameBoard.swift; sourceTree = "<group>"; };
 		424320591CA4E6CE00DEE387 /* TutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		4243205B1CA4EC6100DEE387 /* GuideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideViewController.swift; sourceTree = "<group>"; };
+		4243205D1CA56C3F00DEE387 /* guide1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = guide1.gif; sourceTree = "<group>"; };
+		4243205F1CA5701300DEE387 /* TutorialBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialBoard.swift; sourceTree = "<group>"; };
+		424320621CA5814A00DEE387 /* guide2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = guide2.gif; sourceTree = "<group>"; };
+		424320641CA5838200DEE387 /* guide3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = guide3.jpg; sourceTree = "<group>"; };
 		4260A0B21C87CF4800116F8E /* Socket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Socket.swift; sourceTree = "<group>"; };
 		42627FDC1C783E0700DC69EC /* Enclosure.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Enclosure.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42627FDF1C783E0700DC69EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -74,7 +79,6 @@
 		427F5C361C952C03004EA629 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		427F5C3E1C95D596004EA629 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		427F5C421C95DA4D004EA629 /* Connection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
-		42A5D1591C7A0B5000C0AAC8 /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
 		42CAFAB91C893B4100AE6BE9 /* MPGame1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPGame1ViewController.swift; sourceTree = "<group>"; };
 		42CAFABB1C893CBA00AE6BE9 /* MultiplePlayerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiplePlayerController.swift; sourceTree = "<group>"; };
 		42CAFABD1C8943A400AE6BE9 /* MPGameBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPGameBoard.swift; sourceTree = "<group>"; };
@@ -88,8 +92,6 @@
 		88E975EE1C9BA6C200186588 /* EndGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndGameViewController.swift; sourceTree = "<group>"; };
 		88E975F01C9BBD9100186588 /* RankTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RankTableViewCell.swift; sourceTree = "<group>"; };
 		88E975F21C9BBDA500186588 /* RankTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RankTableViewController.swift; sourceTree = "<group>"; };
-		B5D624E71C79A5C60072A98C /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
-		B5D624EB1C79ABC30072A98C /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		424320611CA5721F00DEE387 /* Tutorial */ = {
+			isa = PBXGroup;
+			children = (
+				424320591CA4E6CE00DEE387 /* TutorialViewController.swift */,
+				4243205F1CA5701300DEE387 /* TutorialBoard.swift */,
+				4243205B1CA4EC6100DEE387 /* GuideViewController.swift */,
+			);
+			name = Tutorial;
+			sourceTree = "<group>";
+		};
 		42627FD31C783E0700DC69EC = {
 			isa = PBXGroup;
 			children = (
@@ -136,8 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				42627FDF1C783E0700DC69EC /* AppDelegate.swift */,
-				424320591CA4E6CE00DEE387 /* TutorialViewController.swift */,
-				4243205B1CA4EC6100DEE387 /* GuideViewController.swift */,
+				424320611CA5721F00DEE387 /* Tutorial */,
 				427F5C361C952C03004EA629 /* MainViewController.swift */,
 				42384B0E1C975CDE00A02BC8 /* DisplayGameBoard.swift */,
 				42384B0A1C96E6B500A02BC8 /* GameViewController.swift */,
@@ -151,9 +162,9 @@
 				426280011C7976FE00DC69EC /* Game1ViewController.swift */,
 				42627FF11C78445A00DC69EC /* GameBoard.swift */,
 				4265F7551C8001540000BCD7 /* EnclosureGame.swift */,
-				42A5D1591C7A0B5000C0AAC8 /* 1.jpg */,
-				B5D624E71C79A5C60072A98C /* 2.png */,
-				B5D624EB1C79ABC30072A98C /* 3.png */,
+				4243205D1CA56C3F00DEE387 /* guide1.gif */,
+				424320621CA5814A00DEE387 /* guide2.gif */,
+				424320641CA5838200DEE387 /* guide3.jpg */,
 				42627FE31C783E0700DC69EC /* Main.storyboard */,
 				88E975F01C9BBD9100186588 /* RankTableViewCell.swift */,
 				88E975F21C9BBDA500186588 /* RankTableViewController.swift */,
@@ -263,10 +274,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				424320631CA5814A00DEE387 /* guide2.gif in Resources */,
 				42627FEA1C783E0700DC69EC /* LaunchScreen.storyboard in Resources */,
-				B5D624E81C79A5C60072A98C /* 2.png in Resources */,
-				B5D624EC1C79ABC30072A98C /* 3.png in Resources */,
-				42A5D15A1C7A0B5000C0AAC8 /* 1.jpg in Resources */,
+				424320651CA5838200DEE387 /* guide3.jpg in Resources */,
+				4243205E1CA56C3F00DEE387 /* guide1.gif in Resources */,
 				42627FE71C783E0700DC69EC /* Assets.xcassets in Resources */,
 				42627FE51C783E0700DC69EC /* Main.storyboard in Resources */,
 			);
@@ -352,6 +363,7 @@
 				42CAFABA1C893B4100AE6BE9 /* MPGame1ViewController.swift in Sources */,
 				4243205C1CA4EC6100DEE387 /* GuideViewController.swift in Sources */,
 				42CAFAC41C8A601D00AE6BE9 /* EnclosureGame2.swift in Sources */,
+				424320601CA5701300DEE387 /* TutorialBoard.swift in Sources */,
 				42627FE01C783E0700DC69EC /* AppDelegate.swift in Sources */,
 				4265F7581C80029B0000BCD7 /* Enumerations.swift in Sources */,
 				42D7A2961C836DC200633D80 /* AIBoard.swift in Sources */,
