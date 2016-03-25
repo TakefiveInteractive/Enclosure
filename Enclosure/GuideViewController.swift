@@ -20,6 +20,9 @@ class GuideViewController: UIViewController {
     }
     override func viewDidAppear(animated: Bool) {
         back.layer.cornerRadius = 3
+        if image.image == nil{
+            back.alpha = 0
+        }
     }
     
     override func didReceiveMemoryWarning() {

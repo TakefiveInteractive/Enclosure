@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="UOl-SJ-FHN">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="pIg-8W-YRy">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -634,7 +634,7 @@
                                                 <userDefinedRuntimeAttribute type="string" keyPath="animation" value="squeezeDown"/>
                                             </userDefinedRuntimeAttributes>
                                         </textView>
-                                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NxZ-Pz-rxw">
+                                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NxZ-Pz-rxw" customClass="SpringView" customModule="Spring">
                                             <rect key="frame" x="168" y="433" width="289" height="167"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0p7-Yl-eiW">
@@ -660,6 +660,11 @@
                                                 <constraint firstAttribute="bottom" secondItem="0p7-Yl-eiW" secondAttribute="bottom" constant="5" id="jgc-hR-cnK"/>
                                                 <constraint firstItem="0p7-Yl-eiW" firstAttribute="top" secondItem="NxZ-Pz-rxw" secondAttribute="top" constant="5" id="nZT-cw-i53"/>
                                             </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="autostart" value="YES"/>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="autohide" value="YES"/>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="animation" value="squeezeUp"/>
+                                            </userDefinedRuntimeAttributes>
                                         </view>
                                     </subviews>
                                     <constraints>

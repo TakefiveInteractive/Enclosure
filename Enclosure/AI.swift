@@ -243,9 +243,8 @@ class AI: NSObject {
     
     func freeSearch(startBoard: AIBoard)->[(AIBoard, Int)]{
         
-        print(aiBoardsDone.count)
         var distinceBoard = [(Set<Set<Int>>): AIBoard]()
-        for index in 0 ..< startBoard.gameTree.count {
+        for var index = 0; index < startBoard.gameTree.count; index += 1 {
             let b = startBoard.gameTree[index]
             let current = (b.playerToGo + 1) % 2
             b.playerToGo = current
