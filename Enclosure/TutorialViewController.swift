@@ -11,19 +11,28 @@ import SwiftGifOrigin
 
 class TutorialViewController: GameViewController, TutorialDelegate{
     
-    var informations = ["Welcome to Enclosure! \n \n The goal of the game is to capture areas with fences. \n *Now, set up your first fences by dragging on the dots!* \n\n *Tap to continue*",
+    var informations = ["Welcome to Enclosure Tutorial! \n \n The goal of the game is to capture areas with fences. \n *Now, set up your first fences by dragging on the dots!* \n\n *Tap to continue*",
         "This indicator shows whose turn it is and how many move is left by the player. \n\n *Now, encircle an area!*",
         "Congrat!! \n\n You scored 1 by capturing an area. \n\n The progress bar indicate the percentage of your captured area. \n\n *Now, encircle more areas!*",
         "It's a good strategy to encircle big chunk of areas.",
         "Watch out of your opponent! Time to stop them.",
         "skip",
         "Secure your own area is also important!",
-        "The "
+        "The empty fence between enemy's area can also be useful!",
+        "skip",
+        "Block your opponent decisively!",
+        "Time for a BIG MOVE!",
+        "Once an area is captured, your opponent can't recapture it.",
+        "skip",
+        "skip",
+        "Congrat!! You already got 31 points. \n\n Capture over half of the areas! you'll win!",
+        "You can overlap on your own fences when needed, but not your opponent's"
         ]
     
+   // "You can overlap on your own fences when needed, but not your opponent's",
+
     
-    
-    var images = [UIImage.gifWithName("guide1"), UIImage.gifWithName("guide2"), UIImage(named: "guide3.jpg"), nil, nil, nil,nil,]
+    var images = [UIImage.gifWithName("guide1"), UIImage.gifWithName("guide2"), UIImage(named: "guide3.jpg"), nil, nil, nil, nil, UIImage(named: "guide7.jpg"), nil, nil, nil, UIImage(named: "guide11.jpg"),nil, nil, UIImage(named: "guide13.jpg"),nil]
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -41,7 +50,7 @@ class TutorialViewController: GameViewController, TutorialDelegate{
     
     func showGuide(){
         if informations[(board as! TutorialBoard).stage] != "skip"{
-
+            print((board as! TutorialBoard).stage)
             let guideControl = self.storyboard?.instantiateViewControllerWithIdentifier("guideView") as! GuideViewController
             guideControl.view.alpha = 0
             guideControl.modalPresentationStyle = .OverCurrentContext

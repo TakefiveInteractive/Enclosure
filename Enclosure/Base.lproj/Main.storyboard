@@ -529,7 +529,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="120"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="chi-zm-5uv" customClass="SpringLabel" customModule="Spring">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="chi-zm-5uv" customClass="SpringLabel" customModule="Spring">
                                             <rect key="frame" x="260" y="40" width="80" height="41"/>
                                             <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="40"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1199,6 +1199,7 @@
                         <segue destination="Ysi-Pd-sMV" kind="presentation" identifier="play1" modalTransitionStyle="crossDissolve" id="pt9-Tn-0VR"/>
                         <segue destination="waq-4p-1lB" kind="presentation" identifier="play2" modalTransitionStyle="crossDissolve" id="32a-5F-XH3"/>
                         <segue destination="ND5-Yv-F8f" kind="presentation" identifier="startMPGame" modalTransitionStyle="crossDissolve" id="2Rg-ye-rw4"/>
+                        <segue destination="UOl-SJ-FHN" kind="presentation" identifier="tutorial" modalTransitionStyle="crossDissolve" id="OIx-Ol-5a0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IhR-Db-SJl" userLabel="First Responder" sceneMemberID="firstResponder"/>

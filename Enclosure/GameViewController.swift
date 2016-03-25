@@ -50,6 +50,10 @@ class GameViewController: UIViewController, GameBoardDelegate {
         setPlayerNames()
     }
     
+    func afterEnd(){
+        self.performSegueWithIdentifier("exit", sender: self)
+    }
+    
     func timing(){
         if !isPaused{
             timePassed += 1

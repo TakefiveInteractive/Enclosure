@@ -28,7 +28,7 @@ class EndGameViewController: UIViewController {
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         super.touchesBegan(touches, withEvent: event)
-        self.dismissViewControllerAnimated(true, completion: nil)
+        (parentViewController as! GameViewController).afterEnd()
     }
     
 }
