@@ -50,7 +50,7 @@ class GameBoard: UIView {
             edgeWidth = 4
         }
         super.init(frame: frame)
-        gesture = UIPanGestureRecognizer(target: self, action: "dragged:")
+        gesture = UIPanGestureRecognizer(target: self, action: #selector(GameBoard.dragged(_:)))
         self.addGestureRecognizer(gesture)
     }
     
@@ -284,7 +284,7 @@ class GameBoard: UIView {
             edgeWidth = 4
         }
         super.init(coder: aDecoder)
-        gesture = UIPanGestureRecognizer(target: self, action: "dragged:")
+        gesture = UIPanGestureRecognizer(target: self, action: #selector(GameBoard.dragged(_:)))
         self.addGestureRecognizer(gesture)
     }
     

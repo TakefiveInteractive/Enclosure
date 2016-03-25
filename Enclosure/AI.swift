@@ -176,7 +176,7 @@ class AI: NSObject {
         print(dots)
         for way in ways{
             let tempBoard = AIBoard(copy: startBoard)
-            tempBoard.depth++
+            tempBoard.depth += 1
             tempBoard.playerMove(way)
             tempBoard.originalMoves = way
             startBoard.gameTree.append(tempBoard)
@@ -192,7 +192,9 @@ class AI: NSObject {
         return determineAction(startBoard, incremental: false).sort{$0.1 > $1.1}
     }
     
-    func twoStepEmptySearch(startBoard: AIBoard, var ways: Set<Set<Set<Int>>>)->[(AIBoard, Int)]{
+    func twoStepEmptySearch(startBoard: AIBoard, oways: Set<Set<Set<Int>>>)->[(AIBoard, Int)]{
+        
+        var ways = oways
         
         aiBoardsProcessing = [AIBoard]()
         aiBoardsDone = [AIBoard]()
@@ -209,7 +211,7 @@ class AI: NSObject {
         
         for way in ways{
             let tempBoard = AIBoard(copy: startBoard)
-            tempBoard.depth++
+            tempBoard.depth += 1
             tempBoard.playerMove(way)
             tempBoard.originalMoves = way
             startBoard.gameTree.append(tempBoard)
@@ -243,7 +245,7 @@ class AI: NSObject {
         
         print(aiBoardsDone.count)
         var distinceBoard = [(Set<Set<Int>>): AIBoard]()
-        for var index = 0; index < startBoard.gameTree.count; index++ {
+        for index in 0 ..< startBoard.gameTree.count {
             let b = startBoard.gameTree[index]
             let current = (b.playerToGo + 1) % 2
             b.playerToGo = current
@@ -274,7 +276,7 @@ class AI: NSObject {
             let pFence = b.playerFence[b.otherPlayer()]
             if let val = playerDistinct[pFence]{
                 b.identicalUpdate(val)
-                val.concurrent++
+                val.concurrent += 1
                 b.concurrent = val.concurrent
                 
             }else{
@@ -299,7 +301,7 @@ class AI: NSObject {
         }
         for way in ways{
             let tempBoard = AIBoard(copy: startBoard)
-            tempBoard.depth++
+            tempBoard.depth += 1
             tempBoard.playerMove(way)
             tempBoard.originalMoves = way
             startBoard.gameTree.append(tempBoard)
@@ -345,7 +347,7 @@ class AI: NSObject {
                 }
                 for w in ways{
                     let newBoard = AIBoard(copy: lastBoard)
-                    newBoard.depth++
+                    newBoard.depth += 1
                     newBoard.playerMove(w)
                     lastBoard.gameTree.append(newBoard)
                     aiBoardsProcessing.append(newBoard)
@@ -354,7 +356,7 @@ class AI: NSObject {
                 aiBoardsDone.append(aiBoardsProcessing[indexer])
             }
             aiBoardsProcessing.removeAtIndex(indexer)
-            indexer++
+            indexer += 1
             if indexer > aiBoardsProcessing.count - 1{
                 indexer = 0
             }
@@ -393,7 +395,7 @@ class AI: NSObject {
                 }
                 for w in ways{
                     let newBoard = AIBoard(copy: lastBoard)
-                    newBoard.depth++
+                    newBoard.depth += 1
                     newBoard.playerMove(w)
                     lastBoard.gameTree.append(newBoard)
                     aiBoardsProcessing.append(newBoard)
@@ -402,7 +404,7 @@ class AI: NSObject {
                 aiBoardsDone.append(aiBoardsProcessing[indexer])
             }
             aiBoardsProcessing.removeAtIndex(indexer)
-            indexer++
+            indexer += 1
             if indexer > aiBoardsProcessing.count - 1{
                 indexer = 0
             }
@@ -427,7 +429,7 @@ class AI: NSObject {
                 }
                 for w in ways{
                     let newBoard = AIBoard(copy: lastBoard)
-                    newBoard.depth++
+                    newBoard.depth += 1
                     newBoard.playerMove(w)
                     lastBoard.gameTree.append(newBoard)
                     aiBoardsProcessing.append(newBoard)
@@ -436,7 +438,7 @@ class AI: NSObject {
                 aiBoardsDone.append(aiBoardsProcessing[indexer])
             }
             aiBoardsProcessing.removeAtIndex(indexer)
-            indexer++
+            indexer += 1
             if indexer > aiBoardsProcessing.count - 1{
                 indexer = 0
             }
@@ -445,8 +447,8 @@ class AI: NSObject {
     
     func getAllPossibleMove(){
         var total = 0
-        for var x = 0; x < self.rootBoard.boardSize; x++ {
-            for var y = 0; y < self.rootBoard.boardSize; y++ {
+        for x in 0 ..< self.rootBoard.boardSize {
+            for y in 0 ..< self.rootBoard.boardSize {
                 total = total + self.rootBoard.getAllWaysWithoutEmpty([x,y]).count
             }
         }

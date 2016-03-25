@@ -14,9 +14,9 @@ class PauseViewController: UIViewController {
     @IBOutlet var exit: UIButton!
     
     override func viewDidLoad() {
-        resume.addTarget(self, action: "removePause:", forControlEvents: UIControlEvents.TouchUpInside)
+        resume.addTarget(self, action: #selector(PauseViewController.removePause(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         restart.addTarget(self, action: "restart:", forControlEvents: UIControlEvents.TouchUpInside)
-        exit.addTarget(self, action: "exit:", forControlEvents: UIControlEvents.TouchUpInside)
+        exit.addTarget(self, action: #selector(PauseViewController.exit(_:)), forControlEvents: UIControlEvents.TouchUpInside)
     }
     
     func exit(but: UIButton){

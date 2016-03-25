@@ -51,7 +51,7 @@ class EnclosureGame: NSObject {
         
         if !firstMove {
             firstMove = true
-            playerFencesNum[currentPlayer()]++
+            playerFencesNum[currentPlayer()] += 1
         }
         
         let polygons = searchPolygon(nodes[0], good: [currentPlayer()])
@@ -60,7 +60,7 @@ class EnclosureGame: NSObject {
         
         userLastEdges[currentPlayer()].append(fs)
         prevMovesByUser[currentPlayer()].append(nodes)
-        totalStep++
+        totalStep += 1
 //        let c = playerFence[1].count + playerFence[0].count + neutralFence.count
 //        print(c)
         return updatedAreas
@@ -68,7 +68,7 @@ class EnclosureGame: NSObject {
     
     func recalculateScore(){
         playerScore = [Int](count: playerNum, repeatedValue: 0)
-        for var player = 0; player < playerNum; player++ {
+        for player in 0 ..< playerNum {
             for land in playerLand[player]{
                 playerScore[player] += land.score
             }
@@ -85,7 +85,8 @@ class EnclosureGame: NSObject {
         tempPathes.append([seed])
         
         while tempPathes.count > 0{
-            for var path = tempPathes.count-1 ; path >= 0 ; path-- {
+            
+            for var path = tempPathes.count-1 ; path >= 0 ; path -= 1 {
                 let toExpand = tempPathes[path].last
                 for n in (toExpand?.fences.keys)!{
                     if good.contains(toExpand!.fences[n]!.player) && !toExpand!.fences[n]!.exploreFlag{
@@ -115,9 +116,9 @@ class EnclosureGame: NSObject {
         }
         
         var uiPolygon = [[CGPoint]]()
-        for var x = 0; x < polygons.count; x++ {
+        for x in 0 ..< polygons.count {
             uiPolygon.append([CGPoint]())
-            for var y = 0; y < polygons[x].count; y++ {
+            for y in 0 ..< polygons[x].count {
                 uiPolygon[x].append(polygons[x][y].view.center)
             }
         }
@@ -223,16 +224,16 @@ class EnclosureGame: NSObject {
         playerFence = [[Fence]](count: playerNum, repeatedValue: [Fence]())
         
         //create nodees
-        for var x = 0; x <  boardSize; x++ {
+        for x in 0 ..< boardSize {
             nodes.append([FenceNode]())
-            for var y = 0; y < boardSize; y++ {
+            for y in 0 ..< boardSize {
                 nodes[x].append(FenceNode(x: x, y: y))
             }
         }
         
         //create fences
-        for var x = 0; x <  boardSize; x++ {
-            for var y = 0; y < boardSize; y++ {
+        for x in 0 ..< boardSize {
+            for y in 0 ..< boardSize {
                 if x < boardSize - 1{
                     let fence = Fence(player: -1)
                     fence.nodes.append(nodes[x][y])
@@ -256,10 +257,10 @@ class EnclosureGame: NSObject {
             }
         }
         //create lands
-        for var x = 0; x <  boardSize; x++ {
+        for x in 0 ..< boardSize {
             if x < boardSize - 1{
                 lands.append([Land]())
-                for var y = 0; y < boardSize; y++ {
+                for y in 0 ..< boardSize {
                     if x < boardSize - 1 && y < boardSize - 1{
                         let land = Land(player: -1, x: x, y: y)
                         lands[x].append(land)

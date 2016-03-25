@@ -36,11 +36,11 @@ class GameViewController: UIViewController, GameBoardDelegate {
         player1Score.text = "0"
         player1Name.text = ""
         player0Name.text = ""
-        pause.addTarget(self, action: "pause:", forControlEvents: UIControlEvents.TouchUpInside)
+        pause.addTarget(self, action: #selector(GameViewController.pause(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         timer.userInteractionEnabled = false
         timer.text = "0s"
         
-        nstimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "timing", userInfo: nil, repeats: true)
+        nstimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(GameViewController.timing), userInfo: nil, repeats: true)
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -52,7 +52,7 @@ class GameViewController: UIViewController, GameBoardDelegate {
     
     func timing(){
         if !isPaused{
-            timePassed++
+            timePassed += 1
             dispatch_async(dispatch_get_main_queue(), {
                 self.timer.text = "\(self.timePassed)s"
             })
@@ -288,7 +288,7 @@ class Rows: UIView {
         }
         views = [UIView]()
         let startIndex: CGFloat = (self.frame.width - (length * CGFloat(num) + 10 * CGFloat(num - 1))) / 2
-        for var index = 0; index < num; index++ {
+        for index in 0 ..< num {
             let v = UIView(frame: CGRect(x: startIndex + (10.0 + length) * CGFloat(index), y: 0, width: length, height: 6))
             v.backgroundColor = color
             views.append(v)

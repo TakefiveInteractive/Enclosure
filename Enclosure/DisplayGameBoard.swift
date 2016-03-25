@@ -148,7 +148,7 @@ class BoardBack: UIView , UITextFieldDelegate{
         height = board.game.nodes[4][2].fences[board.game.nodes[5][2]]!.view.frame.origin.y - y
         let back = BoardButton(frame: CGRect(x: x, y: y, width: width, height: height), text: "Back", color: controller.beta.textColor, size: controller.view.frame.width)
         back.alpha = 0
-        back.addTarget(self, action: "back:", forControlEvents: UIControlEvents.TouchUpInside)
+        back.addTarget(self, action: #selector(BoardBack.back(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         self.addSubview(back)
         
         
@@ -207,7 +207,7 @@ class BoardBack: UIView , UITextFieldDelegate{
         height = board.game.nodes[4][6].fences[board.game.nodes[5][6]]!.view.frame.origin.y - y
         let submit = BoardButton(frame: CGRect(x: x, y: y, width: width, height: height), text: "Submit", color: controller.beta.textColor, size: controller.view.frame.width)
         submit.alpha = 0
-        submit.addTarget(self, action: "submit:", forControlEvents: UIControlEvents.TouchUpInside)
+        submit.addTarget(self, action: #selector(BoardBack.submit(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         self.addSubview(submit)
         
         x = board.game.nodes[1][5].fences[board.game.nodes[2][5]]!.view.frame.origin.x
@@ -215,7 +215,7 @@ class BoardBack: UIView , UITextFieldDelegate{
         width = board.game.nodes[3][3].fences[board.game.nodes[3][4]]!.view.frame.origin.x - x
         height = board.game.nodes[4][6].fences[board.game.nodes[5][6]]!.view.frame.origin.y - y
         let back = BoardButton(frame: CGRect(x: x, y: y, width: width, height: height), text: "Back", color: controller.beta.textColor, size: controller.view.frame.width)
-        back.addTarget(self, action: "back:", forControlEvents: UIControlEvents.TouchUpInside)
+        back.addTarget(self, action: #selector(BoardBack.back(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         back.alpha = 0
         self.addSubview(back)
         
@@ -276,7 +276,7 @@ class BoardBack: UIView , UITextFieldDelegate{
         let chapter1 = ChapterButton(frame: CGRect(x: x, y: y, width: width, height: height), text: "1", color: controller.beta.textColor, size: controller.view.frame.width)
         chapter1.alpha = 0
         chapter1.tag = 0
-        chapter1.addTarget(self, action: "selectChap:", forControlEvents: UIControlEvents.TouchUpInside)
+        chapter1.addTarget(self, action: #selector(BoardBack.selectChap(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         self.addSubview(chapter1)
     
         x = board.game.nodes[2][5].fences[board.game.nodes[3][5]]!.view.frame.origin.x
@@ -286,7 +286,7 @@ class BoardBack: UIView , UITextFieldDelegate{
         let chapter2 = ChapterButton(frame: CGRect(x: x, y: y, width: width, height: height), text: "2", color: controller.enclosure.textColor, size: controller.view.frame.width)
         chapter2.tag = 1
         chapter2.alpha = 0
-        chapter2.addTarget(self, action: "selectChap:", forControlEvents: UIControlEvents.TouchUpInside)
+        chapter2.addTarget(self, action: #selector(BoardBack.selectChap(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         self.addSubview(chapter2)
         
         x = board.game.nodes[2][1].fences[board.game.nodes[3][1]]!.view.frame.origin.x
@@ -295,7 +295,7 @@ class BoardBack: UIView , UITextFieldDelegate{
         height = board.game.nodes[4][2].fences[board.game.nodes[5][2]]!.view.frame.origin.y - y
         let back = BoardButton(frame: CGRect(x: x, y: y, width: width, height: height), text: "Back", color: controller.beta.textColor, size: controller.view.frame.width)
         back.alpha = 0
-        back.addTarget(self, action: "back:", forControlEvents: UIControlEvents.TouchUpInside)
+        back.addTarget(self, action: #selector(BoardBack.back(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         self.addSubview(back)
         
         x = board.game.nodes[1][1].fences[board.game.nodes[2][1]]!.view.frame.origin.x
@@ -345,7 +345,7 @@ class BoardBack: UIView , UITextFieldDelegate{
         var height = board.game.nodes[3][4].fences[board.game.nodes[4][4]]!.view.frame.origin.y - y
         let jRoom = BoardButton(frame: CGRect(x: x, y: y, width: width, height: height), text: "Join Room", color: controller.beta.textColor, size: controller.view.frame.width)
         jRoom.alpha = 0
-        jRoom.addTarget(self, action: "joinGame:", forControlEvents: UIControlEvents.TouchUpInside)
+        jRoom.addTarget(self, action: #selector(BoardBack.joinGame(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         self.addSubview(jRoom)
         
         x = board.game.nodes[2][7].fences[board.game.nodes[3][7]]!.view.frame.origin.x
@@ -354,7 +354,7 @@ class BoardBack: UIView , UITextFieldDelegate{
         height = board.game.nodes[4][8].fences[board.game.nodes[5][8]]!.view.frame.origin.y - y
         let createGame = BoardButton(frame: CGRect(x: x, y: y, width: width, height: height), text: "Create Room", color: controller.beta.textColor, size: controller.view.frame.width)
         createGame.tag = 2
-        createGame.addTarget(self, action: "createGame:", forControlEvents: UIControlEvents.TouchUpInside)
+        createGame.addTarget(self, action: #selector(BoardBack.createGame(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         createGame.alpha = 0
         self.addSubview(createGame)
         
@@ -372,7 +372,7 @@ class BoardBack: UIView , UITextFieldDelegate{
         height = board.game.nodes[4][2].fences[board.game.nodes[5][2]]!.view.frame.origin.y - y
         let back = BoardButton(frame: CGRect(x: x, y: y, width: width, height: height), text: "Back", color: controller.enclosure.textColor, size: controller.view.frame.width)
         back.alpha = 0
-        back.addTarget(self, action: "back:", forControlEvents: UIControlEvents.TouchUpInside)
+        back.addTarget(self, action: #selector(BoardBack.back(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         self.addSubview(back)
         
         x = board.game.nodes[4][5].fences[board.game.nodes[5][5]]!.view.frame.origin.x
@@ -467,7 +467,7 @@ class BoardBack: UIView , UITextFieldDelegate{
         let classic = BoardButton(frame: CGRect(x: x, y: y, width: width, height: height), text: "Single Player", color: controller.beta.textColor, size: controller.view.frame.width)
         classic.tag = 0
         classic.alpha = 0
-        classic.addTarget(self, action: "play:", forControlEvents: UIControlEvents.TouchUpInside)
+        classic.addTarget(self, action: #selector(BoardBack.play(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         self.addSubview(classic)
         
         x = board.game.nodes[2][3].fences[board.game.nodes[3][3]]!.view.frame.origin.x
@@ -476,7 +476,7 @@ class BoardBack: UIView , UITextFieldDelegate{
         height = board.game.nodes[4][4].fences[board.game.nodes[5][4]]!.view.frame.origin.y - y
         let multiplayer = BoardButton(frame: CGRect(x: x, y: y, width: width, height: height), text: "Multi Player", color: controller.beta.textColor, size: controller.view.frame.width)
         multiplayer.tag = 1
-        multiplayer.addTarget(self, action: "play:", forControlEvents: UIControlEvents.TouchUpInside)
+        multiplayer.addTarget(self, action: #selector(BoardBack.play(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         multiplayer.alpha = 0
         self.addSubview(multiplayer)
         
@@ -493,7 +493,7 @@ class BoardBack: UIView , UITextFieldDelegate{
         width = board.game.nodes[7][7].fences[board.game.nodes[7][8]]!.view.frame.origin.x - x
         height = board.game.nodes[4][8].fences[board.game.nodes[5][8]]!.view.frame.origin.y - y
         let friend = BoardButton(frame: CGRect(x: x, y: y, width: width, height: height), text: "Play w/ Friends", color: controller.enclosure.textColor, size: controller.view.frame.width)
-        friend.addTarget(self, action: "mp:", forControlEvents: UIControlEvents.TouchUpInside)
+        friend.addTarget(self, action: #selector(BoardBack.mp(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         friend.tag = 2
         friend.alpha = 0
         self.addSubview(friend)

@@ -33,9 +33,9 @@ class MainViewController: UIViewController, UserDataDelegate, MFMailComposeViewC
     var opponentName = ""
     var opponentId = ""
     override func viewDidLoad() {
-        nickname.addTarget(self, action: "changeNickName:", forControlEvents: UIControlEvents.TouchUpInside)
-        feedback.addTarget(self, action: "feedback:", forControlEvents: UIControlEvents.TouchUpInside)
-        aboutus.addTarget(self, action: "aboutus:", forControlEvents: UIControlEvents.TouchUpInside)
+        nickname.addTarget(self, action: #selector(MainViewController.changeNickName(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        feedback.addTarget(self, action: #selector(MainViewController.feedback(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        aboutus.addTarget(self, action: #selector(MainViewController.aboutus(_:)), forControlEvents: UIControlEvents.TouchUpInside)
 
         Connection.delegate = self
         Connection.getInfo()
@@ -174,7 +174,7 @@ class MainViewController: UIViewController, UserDataDelegate, MFMailComposeViewC
     
     // MARK: MFMailComposeViewControllerDelegate
     
-    func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
         controller.dismissViewControllerAnimated(true, completion: nil)
         board.cleanBoard(board.drawMenu1)
     }

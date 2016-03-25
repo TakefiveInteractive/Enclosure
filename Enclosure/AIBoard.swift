@@ -57,22 +57,22 @@ class AIBoard: NSObject {
         var total = 0
         if searchPoint / 10 - 1 >= 0{
             if neutralFence.contains(Set([searchPoint - 10, searchPoint])){
-                total++
+                total += 1
             }
         }
         if searchPoint / 10 + 1 < boardSize{
             if neutralFence.contains(Set([searchPoint + 10, searchPoint])){
-                total++
+                total += 1
             }
         }
         if searchPoint % 10 - 1 >= 0{
             if neutralFence.contains(Set([searchPoint - 1, searchPoint])){
-                total++
+                total += 1
             }
         }
         if searchPoint % 10 + 1 < boardSize{
             if neutralFence.contains(Set([searchPoint + 1, searchPoint])){
-                total++
+                total += 1
             }
         }
         return total
@@ -213,7 +213,7 @@ class AIBoard: NSObject {
         while unreachedFences.count > 0{
             
             while tempPathes.count > 0{
-                for var path = tempPathes.count-1 ; path >= 0 ; path-- {
+                for var path = tempPathes.count-1 ; path >= 0 ; path -= 1 {
                     let toExpand = tempPathes[path].last
                     
                     let f = getPossibleFences(toExpand!)
@@ -250,9 +250,9 @@ class AIBoard: NSObject {
         }
         
         var uiPolygon = [[CGPoint]]()
-        for var x = 0; x < polygons.count; x++ {
+        for x in 0 ..< polygons.count {
             uiPolygon.append([CGPoint]())
-            for var y = 0; y < polygons[x].count; y++ {
+            for y in 0 ..< polygons[x].count {
                 uiPolygon[x].append(CGPoint(x: CGFloat(polygons[x][y] / 10), y: CGFloat(polygons[x][y] % 10)))
             }
         }
@@ -294,7 +294,7 @@ class AIBoard: NSObject {
         playerGain = [Set<Int>](count: playerNum, repeatedValue: Set<Int>())
         
         playerLastMoves = [[Set<Int>]](count: bigGame.playerNum, repeatedValue:[Set<Int>]())
-        for var p = 0; p < bigGame.playerNum; p++ {
+        for p in 0 ..< bigGame.playerNum {
             for m in bigGame.prevMovesByUser[p]{
                 var move = Set<Int>()
                 for n in m{
@@ -311,7 +311,7 @@ class AIBoard: NSObject {
         playerLand = [[Int]](count: playerNum, repeatedValue: [Int]())
         neutralLand = [Int]()
         //create fences
-        for var x = 0; x <  boardSize; x++ {
+        for var x = 0; x <  boardSize; x += 1 {
             for var y = 0; y < boardSize; y++ {
                 if x < boardSize - 1{
                     let one = x*10+y
@@ -338,7 +338,7 @@ class AIBoard: NSObject {
         }
         
         //create lands
-        for var x = 0; x <  boardSize - 1; x++ {
+        for var x = 0; x <  boardSize - 1; x += 1 {
             for var y = 0; y < boardSize; y++ {
                 if x < boardSize - 1 && y < boardSize - 1{
                     let land = x * 10 + y

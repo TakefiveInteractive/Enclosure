@@ -19,10 +19,10 @@ class EnclosureGame2: EnclosureGame{
         playerLand = [[Land]](count: playerNum, repeatedValue: [Land]())
     
         //create lands
-        for var x = 0; x <  boardSize; x++ {
+        for x in 0 ..< boardSize {
             if x < boardSize - 1{
                 lands.append([Land]())
-                for var y = 0; y < boardSize; y++ {
+                for y in 0 ..< boardSize {
                     if x < boardSize - 1 && y < boardSize - 1{
                         let land = Land2(player: -1, x: x, y: y)
                         lands[x].append(land)

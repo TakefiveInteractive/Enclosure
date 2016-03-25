@@ -27,8 +27,8 @@ class AI2: AI {
         if rootBoard.neutralLand.count < (rootBoard.boardSize - 1) * (rootBoard.boardSize - 1) / 6{
             minToExplore = 1
         }
-        for var x = 0; x <  game.boardSize; x++ {
-            for var y = 0; y < game.boardSize; y++ {
+        for x in 0 ..< game.boardSize {
+            for y in 0 ..< game.boardSize {
                 if x < game.boardSize - 1 && y < game.boardSize - 1{
                     scoreMap.append((x * 10 + y, game.lands[x][y].score))
                 }
@@ -139,16 +139,16 @@ class AI2: AI {
                 //highest score land haven't been taken
                 var fenceAvailable = 0
                 if rootBoard.neutralFence.contains(Set([land.0,land.0+10])){
-                    fenceAvailable++
+                    fenceAvailable += 1
                 }
                 if rootBoard.neutralFence.contains(Set([land.0,land.0+1])){
-                    fenceAvailable++
+                    fenceAvailable += 1
                 }
                 if rootBoard.neutralFence.contains(Set([land.0+11,land.0+10])){
-                    fenceAvailable++
+                    fenceAvailable += 1
                 }
                 if rootBoard.neutralFence.contains(Set([land.0+11,land.0+1])){
-                    fenceAvailable++
+                    fenceAvailable += 1
                 }
                 if fenceAvailable > 2{
                     dots.insert(land.0)
@@ -181,7 +181,7 @@ class AI2: AI {
         }
         for way in ways{
             let tempBoard = AIBoard(copy: startBoard)
-            tempBoard.depth++
+            tempBoard.depth += 1
             tempBoard.playerMove(way)
             tempBoard.originalMoves = way
             startBoard.gameTree.append(tempBoard)

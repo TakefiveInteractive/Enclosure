@@ -16,7 +16,7 @@ class AIGameBoard2: GameBoard2 {
     
     override func buildGame(game: EnclosureGame) {
         super.buildGame(game)
-        shiningThread = NSThread(target: self, selector: "highlightLastAIMove", object: nil)
+        shiningThread = NSThread(target: self, selector: #selector(AIGameBoard2.highlightLastAIMove), object: nil)
         shiningThread.start()
         aiPlayer = Int(arc4random_uniform(10)) % 2
         if aiPlayer == 0{
