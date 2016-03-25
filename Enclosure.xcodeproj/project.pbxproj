@@ -12,6 +12,7 @@
 		42384B0D1C96EA2800A02BC8 /* PauseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42384B0C1C96EA2800A02BC8 /* PauseViewController.swift */; };
 		42384B0F1C975CDE00A02BC8 /* DisplayGameBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42384B0E1C975CDE00A02BC8 /* DisplayGameBoard.swift */; };
 		4243205A1CA4E6CE00DEE387 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424320591CA4E6CE00DEE387 /* TutorialViewController.swift */; };
+		4243205C1CA4EC6100DEE387 /* GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4243205B1CA4EC6100DEE387 /* GuideViewController.swift */; };
 		4260A0B31C87CF4800116F8E /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4260A0B21C87CF4800116F8E /* Socket.swift */; };
 		42627FE01C783E0700DC69EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42627FDF1C783E0700DC69EC /* AppDelegate.swift */; };
 		42627FE51C783E0700DC69EC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42627FE31C783E0700DC69EC /* Main.storyboard */; };
@@ -54,6 +55,7 @@
 		42384B0C1C96EA2800A02BC8 /* PauseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PauseViewController.swift; sourceTree = "<group>"; };
 		42384B0E1C975CDE00A02BC8 /* DisplayGameBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayGameBoard.swift; sourceTree = "<group>"; };
 		424320591CA4E6CE00DEE387 /* TutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
+		4243205B1CA4EC6100DEE387 /* GuideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideViewController.swift; sourceTree = "<group>"; };
 		4260A0B21C87CF4800116F8E /* Socket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Socket.swift; sourceTree = "<group>"; };
 		42627FDC1C783E0700DC69EC /* Enclosure.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Enclosure.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42627FDF1C783E0700DC69EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 			children = (
 				42627FDF1C783E0700DC69EC /* AppDelegate.swift */,
 				424320591CA4E6CE00DEE387 /* TutorialViewController.swift */,
+				4243205B1CA4EC6100DEE387 /* GuideViewController.swift */,
 				427F5C361C952C03004EA629 /* MainViewController.swift */,
 				42384B0E1C975CDE00A02BC8 /* DisplayGameBoard.swift */,
 				42384B0A1C96E6B500A02BC8 /* GameViewController.swift */,
@@ -347,6 +350,7 @@
 				88E975EF1C9BA6C200186588 /* EndGameViewController.swift in Sources */,
 				42F5F5911C8DF75F00C2771D /* AI2.swift in Sources */,
 				42CAFABA1C893B4100AE6BE9 /* MPGame1ViewController.swift in Sources */,
+				4243205C1CA4EC6100DEE387 /* GuideViewController.swift in Sources */,
 				42CAFAC41C8A601D00AE6BE9 /* EnclosureGame2.swift in Sources */,
 				42627FE01C783E0700DC69EC /* AppDelegate.swift in Sources */,
 				4265F7581C80029B0000BCD7 /* Enumerations.swift in Sources */,

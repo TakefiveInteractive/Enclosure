@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="pIg-8W-YRy">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="UOl-SJ-FHN">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -141,7 +141,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="90I-L8-57Y" customClass="ProgressView" customModule="Enclosure" customModuleProvider="target">
-                                <rect key="frame" x="70" y="33" width="460" height="15"/>
+                                <rect key="frame" x="80" y="33" width="440" height="15"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15" id="gSB-zV-GKl"/>
@@ -157,7 +157,7 @@
                             <constraint firstItem="pzH-Cg-p22" firstAttribute="top" secondItem="vuc-Jv-6lx" secondAttribute="bottom" constant="5" id="D3U-aS-Z4w"/>
                             <constraint firstItem="90I-L8-57Y" firstAttribute="centerY" secondItem="sws-Ub-1lj" secondAttribute="centerY" id="DGA-x8-sb5"/>
                             <constraint firstItem="9zD-Tp-OV4" firstAttribute="leading" secondItem="ocW-C6-oAG" secondAttribute="leading" id="FGe-GX-evw"/>
-                            <constraint firstItem="ypp-FF-d1i" firstAttribute="leading" secondItem="90I-L8-57Y" secondAttribute="trailing" constant="10" id="I8V-jh-PG4"/>
+                            <constraint firstItem="ypp-FF-d1i" firstAttribute="leading" secondItem="90I-L8-57Y" secondAttribute="trailing" constant="20" id="I8V-jh-PG4"/>
                             <constraint firstItem="vuc-Jv-6lx" firstAttribute="top" secondItem="754-C7-gYi" secondAttribute="bottom" constant="40" id="ICx-1Q-mRI"/>
                             <constraint firstItem="ocW-C6-oAG" firstAttribute="top" secondItem="754-C7-gYi" secondAttribute="bottom" constant="15" id="JpH-Vm-GzE"/>
                             <constraint firstItem="90I-L8-57Y" firstAttribute="top" secondItem="754-C7-gYi" secondAttribute="bottom" id="KX2-Kf-MO0"/>
@@ -439,7 +439,7 @@
                                 </variation>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0hV-5A-1EN" customClass="ProgressView" customModule="Enclosure" customModuleProvider="target">
-                                <rect key="frame" x="70" y="52" width="460" height="15"/>
+                                <rect key="frame" x="80" y="52" width="440" height="15"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15" id="NH0-Je-prX"/>
@@ -469,7 +469,7 @@
                             <constraint firstItem="L07-So-tYf" firstAttribute="top" secondItem="A4N-Kr-qP1" secondAttribute="bottom" constant="55" id="f9S-U1-gMV"/>
                             <constraint firstItem="0hV-5A-1EN" firstAttribute="centerX" secondItem="Tbs-Pv-fYd" secondAttribute="centerX" id="fRS-u2-2Dd"/>
                             <constraint firstAttribute="trailingMargin" secondItem="A4N-Kr-qP1" secondAttribute="trailing" constant="20" id="fqO-ZG-j48"/>
-                            <constraint firstItem="0bo-UR-TCn" firstAttribute="leading" secondItem="0hV-5A-1EN" secondAttribute="trailing" constant="10" id="gw6-2l-bpg"/>
+                            <constraint firstItem="0bo-UR-TCn" firstAttribute="leading" secondItem="0hV-5A-1EN" secondAttribute="trailing" constant="20" id="gw6-2l-bpg"/>
                             <constraint firstItem="0hV-5A-1EN" firstAttribute="leading" secondItem="Tbs-Pv-fYd" secondAttribute="leading" constant="10" id="hI0-wH-1Lu"/>
                             <constraint firstItem="HAi-7B-fGK" firstAttribute="leading" secondItem="Tbs-Pv-fYd" secondAttribute="leadingMargin" id="hZY-Us-ieC"/>
                             <constraint firstItem="C5E-hy-v8Q" firstAttribute="leading" secondItem="Tbs-Pv-fYd" secondAttribute="leadingMargin" constant="10" id="jgr-G6-cMg"/>
@@ -529,9 +529,9 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="120"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="chi-zm-5uv" customClass="SpringLabel" customModule="Spring">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="chi-zm-5uv" customClass="SpringLabel" customModule="Spring">
                                             <rect key="frame" x="260" y="40" width="80" height="41"/>
-                                            <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="30"/>
+                                            <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="40"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                             <userDefinedRuntimeAttributes>
@@ -555,8 +555,18 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="chi-zm-5uv" firstAttribute="centerY" secondItem="ejd-Uy-dvu" secondAttribute="centerY" id="AU1-aj-y9d"/>
+                                        <constraint firstItem="chi-zm-5uv" firstAttribute="top" secondItem="ejd-Uy-dvu" secondAttribute="top" id="FVU-JS-R8X"/>
                                         <constraint firstItem="chi-zm-5uv" firstAttribute="centerX" secondItem="ejd-Uy-dvu" secondAttribute="centerX" id="FyZ-9r-ykX"/>
+                                        <constraint firstAttribute="bottom" secondItem="chi-zm-5uv" secondAttribute="bottom" id="VcK-Wz-UEe"/>
+                                        <constraint firstAttribute="trailing" secondItem="chi-zm-5uv" secondAttribute="trailing" id="a8x-0Z-DJK"/>
+                                        <constraint firstItem="chi-zm-5uv" firstAttribute="leading" secondItem="ejd-Uy-dvu" secondAttribute="leading" id="f7d-Pc-aH5"/>
                                     </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="AU1-aj-y9d"/>
+                                            <exclude reference="FyZ-9r-ykX"/>
+                                        </mask>
+                                    </variation>
                                 </view>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -590,6 +600,76 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fno-aw-05R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1752" y="-443"/>
+        </scene>
+        <!--Guide View Controller-->
+        <scene sceneID="dPH-w8-zhU">
+            <objects>
+                <viewController storyboardIdentifier="guideView" id="A72-Gr-BGN" customClass="GuideViewController" customModule="Enclosure" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Zzm-sC-4OS"/>
+                        <viewControllerLayoutGuide type="bottom" id="mq9-6C-zDa"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="m9B-HE-06V">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L8n-F8-sWP">
+                                <rect key="frame" x="0.0" y="175" width="600" height="250"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="R7Z-Td-oga">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="250"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" text="Welcome to Enclosure" translatesAutoresizingMaskIntoConstraints="NO" id="kbJ-ED-5Jr" customClass="SpringTextView" customModule="Spring">
+                                            <rect key="frame" x="20" y="15" width="560" height="220"/>
+                                            <color key="textColor" red="0.98431372549999996" green="0.98431372549999996" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="autostart" value="YES"/>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="autohide" value="YES"/>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="animation" value="squeezeDown"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </textView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="kbJ-ED-5Jr" secondAttribute="bottom" constant="15" id="UhS-d8-Ld0"/>
+                                        <constraint firstItem="kbJ-ED-5Jr" firstAttribute="leading" secondItem="R7Z-Td-oga" secondAttribute="leading" constant="20" id="Uu1-Br-9hW"/>
+                                        <constraint firstItem="kbJ-ED-5Jr" firstAttribute="top" secondItem="R7Z-Td-oga" secondAttribute="top" constant="15" id="ZzY-ee-u5u"/>
+                                        <constraint firstAttribute="trailing" secondItem="kbJ-ED-5Jr" secondAttribute="trailing" constant="20" id="gHt-1q-UYg"/>
+                                    </constraints>
+                                </view>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="YTC-3B-drG"/>
+                                </constraints>
+                                <blurEffect style="dark"/>
+                            </visualEffectView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.2235127687" green="0.2235423923" blue="0.22349575159999999" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="L8n-F8-sWP" secondAttribute="trailing" id="1Mc-i4-RvS"/>
+                            <constraint firstItem="L8n-F8-sWP" firstAttribute="centerY" secondItem="m9B-HE-06V" secondAttribute="centerY" id="Mme-NW-uLK"/>
+                            <constraint firstItem="L8n-F8-sWP" firstAttribute="top" secondItem="Zzm-sC-4OS" secondAttribute="bottom" id="NV1-hu-8Ld"/>
+                            <constraint firstItem="L8n-F8-sWP" firstAttribute="leading" secondItem="m9B-HE-06V" secondAttribute="leading" id="Wkl-aB-qsp"/>
+                            <constraint firstItem="L8n-F8-sWP" firstAttribute="top" secondItem="m9B-HE-06V" secondAttribute="top" constant="120" id="pfJ-6r-NX0"/>
+                            <constraint firstItem="mq9-6C-zDa" firstAttribute="top" secondItem="L8n-F8-sWP" secondAttribute="bottom" constant="120" id="rrT-Tu-emp"/>
+                            <constraint firstItem="L8n-F8-sWP" firstAttribute="centerX" secondItem="m9B-HE-06V" secondAttribute="centerX" id="vlt-Mr-obW"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="NV1-hu-8Ld"/>
+                                <exclude reference="pfJ-6r-NX0"/>
+                                <exclude reference="rrT-Tu-emp"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="info" destination="kbJ-ED-5Jr" id="Qc7-Js-oL7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3PO-xC-UWI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2480" y="-765"/>
         </scene>
         <!--Game2 View Controller-->
         <scene sceneID="4jf-pC-d7m">
@@ -746,7 +826,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pUy-Ed-Y4I" customClass="ProgressView" customModule="Enclosure" customModuleProvider="target">
-                                <rect key="frame" x="70" y="53" width="460" height="15"/>
+                                <rect key="frame" x="80" y="53" width="440" height="15"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15" id="86M-6v-iPf"/>
@@ -780,7 +860,7 @@
                             <constraint firstItem="dQu-Th-2ti" firstAttribute="centerY" secondItem="hwH-SO-Mgn" secondAttribute="centerY" id="lb1-UN-W9V"/>
                             <constraint firstAttribute="trailing" secondItem="a4j-Ux-vQW" secondAttribute="trailing" id="nRt-no-Wkz"/>
                             <constraint firstAttribute="trailingMargin" secondItem="dxV-kA-uiN" secondAttribute="trailing" constant="20" id="nmd-Fs-oUV"/>
-                            <constraint firstItem="HKo-zF-Xsc" firstAttribute="leading" secondItem="pUy-Ed-Y4I" secondAttribute="trailing" constant="10" id="of8-3c-6yW"/>
+                            <constraint firstItem="HKo-zF-Xsc" firstAttribute="leading" secondItem="pUy-Ed-Y4I" secondAttribute="trailing" constant="20" id="of8-3c-6yW"/>
                             <constraint firstItem="dQu-Th-2ti" firstAttribute="top" secondItem="TpE-UW-RQG" secondAttribute="bottom" constant="15" id="qjX-0r-gfQ"/>
                             <constraint firstItem="drw-lM-NHY" firstAttribute="top" secondItem="TpE-UW-RQG" secondAttribute="bottom" constant="20" id="rSd-99-nfC"/>
                             <constraint firstItem="dxV-kA-uiN" firstAttribute="centerX" secondItem="hwH-SO-Mgn" secondAttribute="centerX" id="w90-lu-1HG"/>
@@ -1325,7 +1405,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Evi-Lx-YSe" customClass="ProgressView" customModule="Enclosure" customModuleProvider="target">
-                                <rect key="frame" x="70" y="52" width="460" height="15"/>
+                                <rect key="frame" x="80" y="52" width="440" height="15"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15" id="aa5-7Y-t5Q"/>
@@ -1346,7 +1426,7 @@
                             <constraint firstItem="abq-mX-vPR" firstAttribute="centerX" secondItem="Udy-0q-d7w" secondAttribute="centerX" id="WK9-C5-SSh"/>
                             <constraint firstItem="99X-lH-sB2" firstAttribute="top" secondItem="abq-mX-vPR" secondAttribute="bottom" constant="55" id="aI3-Qu-WGf"/>
                             <constraint firstItem="Evi-Lx-YSe" firstAttribute="centerX" secondItem="Udy-0q-d7w" secondAttribute="centerX" id="bRf-uB-8ny"/>
-                            <constraint firstItem="6Wz-vH-49E" firstAttribute="leading" secondItem="Evi-Lx-YSe" secondAttribute="trailing" constant="10" id="bWf-KN-PHo"/>
+                            <constraint firstItem="6Wz-vH-49E" firstAttribute="leading" secondItem="Evi-Lx-YSe" secondAttribute="trailing" constant="20" id="bWf-KN-PHo"/>
                             <constraint firstItem="gCi-CH-LHW" firstAttribute="leading" secondItem="Udy-0q-d7w" secondAttribute="leadingMargin" id="cOx-TO-7eE"/>
                             <constraint firstItem="wIo-ST-Pxz" firstAttribute="top" secondItem="PVK-YG-hVg" secondAttribute="bottom" constant="30" id="dE4-2W-Xyp"/>
                             <constraint firstItem="6Wz-vH-49E" firstAttribute="bottom" secondItem="gCi-CH-LHW" secondAttribute="bottom" id="dNJ-Wz-deN"/>
@@ -1540,7 +1620,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Orc-rm-8Ke" customClass="ProgressView" customModule="Enclosure" customModuleProvider="target">
-                                <rect key="frame" x="70" y="53" width="460" height="15"/>
+                                <rect key="frame" x="80" y="53" width="440" height="15"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15" id="lhs-95-TNP"/>
@@ -1560,7 +1640,7 @@
                             <constraint firstItem="Orc-rm-8Ke" firstAttribute="centerY" secondItem="AeU-Vw-r0X" secondAttribute="centerY" id="2sm-mO-b3V"/>
                             <constraint firstItem="E4g-Kr-edq" firstAttribute="top" secondItem="y1v-0e-b6f" secondAttribute="bottom" constant="20" id="4y3-l7-Amc"/>
                             <constraint firstItem="AeU-Vw-r0X" firstAttribute="leading" secondItem="O7c-ci-A0c" secondAttribute="leadingMargin" id="6Og-CB-4Bg"/>
-                            <constraint firstItem="7ag-SF-UBQ" firstAttribute="leading" secondItem="Orc-rm-8Ke" secondAttribute="trailing" constant="10" id="Dxb-mj-A5R"/>
+                            <constraint firstItem="7ag-SF-UBQ" firstAttribute="leading" secondItem="Orc-rm-8Ke" secondAttribute="trailing" constant="20" id="Dxb-mj-A5R"/>
                             <constraint firstItem="E4g-Kr-edq" firstAttribute="leading" secondItem="O7c-ci-A0c" secondAttribute="leading" constant="20" id="G68-pj-qHN"/>
                             <constraint firstItem="NW4-9j-Sn5" firstAttribute="top" secondItem="y1v-0e-b6f" secondAttribute="bottom" constant="15" id="GIM-Yl-rTe"/>
                             <constraint firstItem="8DW-qV-rq9" firstAttribute="top" secondItem="E4g-Kr-edq" secondAttribute="bottom" constant="55" id="MbG-Uh-Is7"/>
@@ -1654,8 +1734,8 @@
                                     <constraint firstAttribute="height" constant="15" id="1SI-dk-6wo"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kQK-t7-q27">
-                                <rect key="frame" x="540" y="40" width="40" height="40"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kQK-t7-q27">
+                                <rect key="frame" x="540" y="33" width="40" height="53"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="IIR-Yu-n9e"/>
                                     <constraint firstAttribute="width" constant="60" id="Qua-2L-EaA"/>
@@ -1663,7 +1743,7 @@
                                     <constraint firstAttribute="width" constant="40" id="xOM-K7-Kmv"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-Heavy" family="Avenir Next" pointSize="30"/>
-                                <state key="normal" title="II">
+                                <state key="normal" title="?">
                                     <color key="titleColor" red="0.22352941179999999" green="0.22352941179999999" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <variation key="default">
@@ -1746,7 +1826,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XZu-C9-b3c" customClass="ProgressView" customModule="Enclosure" customModuleProvider="target">
-                                <rect key="frame" x="70" y="53" width="460" height="15"/>
+                                <rect key="frame" x="80" y="53" width="440" height="15"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15" id="pgn-db-mBn"/>
@@ -1776,7 +1856,7 @@
                             <constraint firstItem="vD1-MO-lSk" firstAttribute="top" secondItem="r13-oz-3aM" secondAttribute="bottom" constant="5" id="Pwn-IW-oUi"/>
                             <constraint firstItem="Osr-4X-8T3" firstAttribute="top" secondItem="d1j-vE-uzZ" secondAttribute="bottom" constant="55" id="TkG-4f-m7q"/>
                             <constraint firstAttribute="trailingMargin" secondItem="vD1-MO-lSk" secondAttribute="trailing" constant="10" id="WB7-mc-TOA"/>
-                            <constraint firstItem="kQK-t7-q27" firstAttribute="leading" secondItem="XZu-C9-b3c" secondAttribute="trailing" constant="10" id="WZE-ha-6ch"/>
+                            <constraint firstItem="kQK-t7-q27" firstAttribute="leading" secondItem="XZu-C9-b3c" secondAttribute="trailing" constant="20" id="WZE-ha-6ch"/>
                             <constraint firstItem="XZu-C9-b3c" firstAttribute="centerY" secondItem="xAv-O3-8xn" secondAttribute="centerY" id="WxU-fO-BK9"/>
                             <constraint firstItem="3bH-jz-Vwc" firstAttribute="centerY" secondItem="Z7A-Z0-tDj" secondAttribute="centerY" id="bGN-no-au2"/>
                             <constraint firstItem="r13-oz-3aM" firstAttribute="centerX" secondItem="Z7A-Z0-tDj" secondAttribute="centerX" id="dhv-rB-43c"/>
