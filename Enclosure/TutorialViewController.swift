@@ -72,4 +72,9 @@ class TutorialViewController: GameViewController, TutorialDelegate{
         player0Name.text = "You"
         player1Name.text = "Trainer"
     }
+    
+    override func afterEnd() {
+        NSUserDefaults.standardUserDefaults().setObject(true, forKey: "hadTutorial")
+        super.afterEnd()
+    }
 }

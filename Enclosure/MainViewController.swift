@@ -91,12 +91,16 @@ class MainViewController: UIViewController, UserDataDelegate, MFMailComposeViewC
         board.board = back
         board.controller = self
         
-        if (NSUserDefaults.standardUserDefaults().objectForKey("register") != nil){
-            board.drawMenu1()
+        if (NSUserDefaults.standardUserDefaults().objectForKey("hadTutorial") != nil){
+            if (NSUserDefaults.standardUserDefaults().objectForKey("register") != nil){
+                board.drawMenu1()
+            }else{
+                board.inputNickName()
+                Connection.register()
+                NSUserDefaults.standardUserDefaults().setObject(true, forKey: "register")
+            }
         }else{
-            board.inputNickName()
-            Connection.register()
-            NSUserDefaults.standardUserDefaults().setObject(true, forKey: "register")
+            self.performSegueWithIdentifier("tutorial", sender: self)
         }
         
     }
