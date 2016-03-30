@@ -529,8 +529,38 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="120"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GlA-hy-Uo2" customClass="SpringLabel" customModule="Spring">
+                                            <rect key="frame" x="188" y="88" width="253" height="32"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="32" id="1Z9-Vu-4aI"/>
+                                                <constraint firstAttribute="width" constant="253" id="ntD-4J-Vc3"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="25"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="animation" value="slideLeft"/>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="y">
+                                                    <real key="value" value="50"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="scaleX">
+                                                    <real key="value" value="2"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="scaleY">
+                                                    <real key="value" value="2"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="autostart" value="YES"/>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="autohide" value="YES"/>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="delay">
+                                                    <real key="value" value="0.10000000000000001"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="duration">
+                                                    <real key="value" value="2"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="chi-zm-5uv" customClass="SpringLabel" customModule="Spring">
-                                            <rect key="frame" x="260" y="40" width="80" height="41"/>
+                                            <rect key="frame" x="260" y="39" width="80" height="41"/>
                                             <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="40"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
@@ -557,12 +587,18 @@
                                         <constraint firstItem="chi-zm-5uv" firstAttribute="centerY" secondItem="ejd-Uy-dvu" secondAttribute="centerY" id="AU1-aj-y9d"/>
                                         <constraint firstItem="chi-zm-5uv" firstAttribute="top" secondItem="ejd-Uy-dvu" secondAttribute="top" id="FVU-JS-R8X"/>
                                         <constraint firstItem="chi-zm-5uv" firstAttribute="centerX" secondItem="ejd-Uy-dvu" secondAttribute="centerX" id="FyZ-9r-ykX"/>
+                                        <constraint firstItem="GlA-hy-Uo2" firstAttribute="top" secondItem="chi-zm-5uv" secondAttribute="bottom" constant="5" id="IYF-2a-Geb"/>
+                                        <constraint firstAttribute="bottom" secondItem="GlA-hy-Uo2" secondAttribute="bottom" id="RGQ-wT-vye"/>
+                                        <constraint firstAttribute="bottom" secondItem="GlA-hy-Uo2" secondAttribute="bottom" id="UkK-GZ-QaA"/>
                                         <constraint firstAttribute="bottom" secondItem="chi-zm-5uv" secondAttribute="bottom" id="VcK-Wz-UEe"/>
                                         <constraint firstAttribute="trailing" secondItem="chi-zm-5uv" secondAttribute="trailing" id="a8x-0Z-DJK"/>
                                         <constraint firstItem="chi-zm-5uv" firstAttribute="leading" secondItem="ejd-Uy-dvu" secondAttribute="leading" id="f7d-Pc-aH5"/>
+                                        <constraint firstItem="GlA-hy-Uo2" firstAttribute="centerX" secondItem="ejd-Uy-dvu" secondAttribute="centerX" id="ocU-Ff-U6p"/>
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
+                                            <exclude reference="IYF-2a-Geb"/>
+                                            <exclude reference="RGQ-wT-vye"/>
                                             <exclude reference="AU1-aj-y9d"/>
                                             <exclude reference="FyZ-9r-ykX"/>
                                         </mask>
@@ -595,6 +631,7 @@
                     </view>
                     <connections>
                         <outlet property="label" destination="chi-zm-5uv" id="uY0-BK-2ZX"/>
+                        <outlet property="rank" destination="GlA-hy-Uo2" id="pjb-ke-7kt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fno-aw-05R" userLabel="First Responder" sceneMemberID="firstResponder"/>

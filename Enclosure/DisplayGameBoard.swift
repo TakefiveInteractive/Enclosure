@@ -123,7 +123,9 @@ class BoardBack: UIView , UITextFieldDelegate{
     }
     
     func back(but: UIButton){
-        mpSocket.socketClient.disconnect()
+        if mpSocket != nil{
+            mpSocket.socketClient.disconnect()
+        }
         cleanBoard(drawMenu1)
     }
     

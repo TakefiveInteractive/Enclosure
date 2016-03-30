@@ -41,7 +41,6 @@ class MainViewController: UIViewController, UserDataDelegate, MFMailComposeViewC
         Connection.getInfo()
         self.rankUpdate(Connection.getUserRank())
         self.nicknameUpdate(Connection.getUserNickName())
-
     }
    
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -91,13 +90,16 @@ class MainViewController: UIViewController, UserDataDelegate, MFMailComposeViewC
         board.board = back
         board.controller = self
         
+        Connection.register()
+        
+        NSUserDefaults.standardUserDefaults().setObject(true, forKey: "hadTutorial")
+        
         if (NSUserDefaults.standardUserDefaults().objectForKey("hadTutorial") != nil){
             if (NSUserDefaults.standardUserDefaults().objectForKey("register") != nil){
                 board.cleanBoard(board.drawMenu1)
             }else{
                 board.cleanBoard(board.inputNickName)
                 Connection.register()
-                NSUserDefaults.standardUserDefaults().setObject(true, forKey: "register")
             }
         }else{
             self.performSegueWithIdentifier("tutorial", sender: self)
@@ -162,6 +164,9 @@ class MainViewController: UIViewController, UserDataDelegate, MFMailComposeViewC
     }
     
     func configuredMailComposeViewController() -> MFMailComposeViewController {
+        if mpSocket != nil{
+            mpSocket.socketClient.disconnect()
+        }
         let mailComposerVC = MFMailComposeViewController()
         mailComposerVC.mailComposeDelegate = self // Extremely important to set the --mailComposeDelegate-- property, NOT the --delegate-- property
         

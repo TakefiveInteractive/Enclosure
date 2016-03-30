@@ -129,6 +129,7 @@ class GameViewController: UIViewController, GameBoardDelegate {
     func endGame(winPlayer: Int) {
         let endContr = self.storyboard?.instantiateViewControllerWithIdentifier("endGame") as! EndGameViewController
         endContr.view.alpha = 0
+        Connection.rankDelegate = endContr 
         endContr.modalPresentationStyle = .OverCurrentContext
         self.addChildViewController(endContr)
         view.addSubview(endContr.view)

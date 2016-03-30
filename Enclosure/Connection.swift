@@ -16,12 +16,18 @@ protocol UserDataDelegate{
     func nicknameUpdate(name: String)
 }
 
+protocol RankUpdateDelegate{
+    func rankUpdate(new: Int, old: Int)
+}
+
 let url = "http://o.hl0.co:8888"
 
 class UserData: NSObject {
     
     var delegate: UserDataDelegate?
     
+    var rankDelegate: RankUpdateDelegate?
+
     //request for the user id with UDID
     func getUserId()->String{
         return UIDevice.currentDevice().identifierForVendor!.UUIDString
@@ -52,10 +58,13 @@ class UserData: NSObject {
                     if let name = JSON["name"]{
                         NSUserDefaults.standardUserDefaults().setObject(name, forKey: "nickName")
                         self.delegate?.nicknameUpdate(self.getUserNickName())
+                        NSUserDefaults.standardUserDefaults().setObject(true, forKey: "register")
                     }
                     if let rank = JSON["rank"]{
                         NSUserDefaults.standardUserDefaults().setObject(rank, forKey: "rank")
                         self.delegate?.rankUpdate(self.getUserRank())
+                        NSUserDefaults.standardUserDefaults().setObject(true, forKey: "register")
+                        
                     }
                     print("JSON: \(JSON)")
                 }
@@ -125,6 +134,9 @@ class UserData: NSObject {
                 
                 if let JSON = response.result.value {
                     print("JSON: \(JSON)")
+                    if roomNumber == "r" {
+                        self.rankDelegate?.rankUpdate(JSON["new"] as! Int, old: JSON["old"] as! Int)
+                    }
                 }
         }
     }
