@@ -12,12 +12,12 @@ import SwiftGifOrigin
 class TutorialViewController: GameViewController, TutorialDelegate{
     
     var informations = ["Welcome to Enclosure Tutorial! \n \n The goal of the game is to capture areas with fences. \n *Now, set up your first fences by dragging on the dots!* \n\n *Tap to continue*",
-        "This indicator shows whose turn it is and how many move is left by the player. \n\n *Now, encircle an area!*",
-        "Congrat!! \n\n You scored 1 by capturing an area. \n\n The progress bar indicate the percentage of your captured area. \n\n *Now, encircle more areas!*",
+        "This indicator shows whose turn it is and how many moves are left by the player. Player has to finish all the moves. \n\n *Now, encircle an area!*",
+        "Congrat!! \n\n You scored 1 by capturing an area. \n\n The progress bar indicates the percentage of your captured area. \n\n *Now, encircle more areas!*",
         "It's a good strategy to encircle big chunk of areas.",
-        "Watch out of your opponent! Time to stop them.",
+        "Watch out of your opponent! Time to stop him.",
         "skip",
-        "Secure your own area is also important!",
+        "Secure your areas is also important!",
         "The empty fence between enemy's area can also be useful!",
         "skip",
         "Block your opponent decisively!",
@@ -25,7 +25,7 @@ class TutorialViewController: GameViewController, TutorialDelegate{
         "Once an area is captured, your opponent can't recapture it.",
         "skip",
         "skip",
-        "Congrat!! You already got 31 points. \n\n Capture over half of the areas! you'll win!",
+        "Congrat!! You already got 31 points. \n\n Capture over half of the areas! You'll win!",
         "You can overlap on your own fences when needed, but not your opponent's"
         ]
     
@@ -69,7 +69,7 @@ class TutorialViewController: GameViewController, TutorialDelegate{
     }
     
     override func setPlayerNames() {
-        player0Name.text = "You"
+        player0Name.text = "Player"
         player1Name.text = "Trainer"
     }
     

@@ -184,10 +184,10 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="KX2-Kf-MO0"/>
-                                <exclude reference="yA6-ea-Ida"/>
                                 <exclude reference="JpH-Vm-GzE"/>
                                 <exclude reference="er2-l5-IF5"/>
+                                <exclude reference="KX2-Kf-MO0"/>
+                                <exclude reference="yA6-ea-Ida"/>
                                 <exclude reference="98v-2Q-CPZ"/>
                                 <exclude reference="ICx-1Q-mRI"/>
                                 <exclude reference="SPk-an-SOX"/>
@@ -1210,10 +1210,10 @@
         <scene sceneID="9Zi-5R-UtN">
             <objects>
                 <tableViewController id="RP1-mg-u0E" customClass="RankTableViewController" customModule="Enclosure" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="hJi-7j-Vue">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="hJi-7j-Vue">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <view key="tableHeaderView" alpha="0.90000000000000002" contentMode="scaleToFill" id="bhv-S9-UAe">
                             <rect key="frame" x="0.0" y="0.0" width="600" height="88"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1790,8 +1790,8 @@
                                 <nil key="highlightedColor"/>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="zQu-pV-AaC"/>
                                         <exclude reference="jGT-qs-dyI"/>
+                                        <exclude reference="zQu-pV-AaC"/>
                                     </mask>
                                 </variation>
                             </label>
@@ -1811,9 +1811,9 @@
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="N5V-wY-0ep"/>
+                                        <exclude reference="aHw-xW-gk3"/>
                                         <exclude reference="bEa-5q-2MI"/>
                                         <exclude reference="xnR-Ck-Ojc"/>
-                                        <exclude reference="aHw-xW-gk3"/>
                                     </mask>
                                 </variation>
                             </label>
@@ -1832,8 +1832,8 @@
                                 <nil key="highlightedColor"/>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="IXP-2n-Guo"/>
                                         <exclude reference="Ajk-a0-Y8b"/>
+                                        <exclude reference="IXP-2n-Guo"/>
                                         <exclude reference="bJN-OX-Vch"/>
                                         <exclude reference="lA5-im-mUt"/>
                                     </mask>
@@ -1900,9 +1900,9 @@
                                 <exclude reference="Jl2-sS-2x6"/>
                                 <exclude reference="bGN-no-au2"/>
                                 <exclude reference="3sl-be-8qL"/>
+                                <exclude reference="Ehk-Ps-q4m"/>
                                 <exclude reference="r1b-IP-fI5"/>
                                 <exclude reference="zpJ-M9-yQj"/>
-                                <exclude reference="Ehk-Ps-q4m"/>
                                 <exclude reference="dhv-rB-43c"/>
                             </mask>
                         </variation>

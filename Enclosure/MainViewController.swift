@@ -93,9 +93,9 @@ class MainViewController: UIViewController, UserDataDelegate, MFMailComposeViewC
         
         if (NSUserDefaults.standardUserDefaults().objectForKey("hadTutorial") != nil){
             if (NSUserDefaults.standardUserDefaults().objectForKey("register") != nil){
-                board.drawMenu1()
+                board.cleanBoard(board.drawMenu1)
             }else{
-                board.inputNickName()
+                board.cleanBoard(board.inputNickName)
                 Connection.register()
                 NSUserDefaults.standardUserDefaults().setObject(true, forKey: "register")
             }
@@ -111,6 +111,11 @@ class MainViewController: UIViewController, UserDataDelegate, MFMailComposeViewC
         mpSocket.startDelegate = self
     }
     
+    func createRank(level: String){
+        mpSocket = Socket(roomNumber: "r", level: level)
+        mpSocket.startDelegate = self
+    }
+    
     func searchGameRoom(room: String){
         if room != "" {
             mpSocket = Socket(roomNumber: room, level: "")
@@ -119,9 +124,7 @@ class MainViewController: UIViewController, UserDataDelegate, MFMailComposeViewC
     }
     
     func gotRoomNumber(number: String) {
-        
-        board.roomNum.text = number
-        
+        board.roomNum.setTitle(number, forState: UIControlState.Normal)
     }
         
     func playerSequence(player: Int, names: [String], ids: [String], level: String){

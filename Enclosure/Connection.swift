@@ -16,6 +16,8 @@ protocol UserDataDelegate{
     func nicknameUpdate(name: String)
 }
 
+let url = "http://o.hl0.co:8888"
+
 class UserData: NSObject {
     
     var delegate: UserDataDelegate?
@@ -43,7 +45,7 @@ class UserData: NSObject {
     
     func register()->Bool{
         
-        Alamofire.request(.POST, "http://o.hl0.co:3000/register", parameters: ["userId": Connection.getUserId()])
+        Alamofire.request(.POST, url+"/register", parameters: ["userId": Connection.getUserId()])
             .responseJSON { response in
                 
                 if let JSON = response.result.value {
@@ -63,7 +65,7 @@ class UserData: NSObject {
     
     func getInfo()->Bool{
         
-        Alamofire.request(.GET, "http://o.hl0.co:3000/info", parameters: ["userId": Connection.getUserId()])
+        Alamofire.request(.GET, url+"/info", parameters: ["userId": Connection.getUserId()])
             .responseJSON { response in
 
                 if let JSON = response.result.value {
@@ -88,7 +90,7 @@ class UserData: NSObject {
     func setName(name: String){
         NSUserDefaults.standardUserDefaults().setObject(name, forKey: "nickName")
         self.delegate?.nicknameUpdate(name)
-        Alamofire.request(.POST, "http://o.hl0.co:3000/setName", parameters: ["userId": Connection.getUserId(), "name": Connection.getUserNickName()])
+        Alamofire.request(.POST, url+"/setName", parameters: ["userId": Connection.getUserId(), "name": Connection.getUserNickName()])
             .responseJSON { response in
                 print(response.request)  // original URL request
                 print(response.response) // URL response
@@ -102,7 +104,7 @@ class UserData: NSObject {
     }
     
     func getTop100(completion: [String] -> ()) {
-        Alamofire.request(.GET, "http://o.hl0.co:3000/top100")
+        Alamofire.request(.GET, url+"/top100")
             .responseJSON { response in
                 if let res = response.result.value {
                     let json = res as? [String] ?? []
@@ -113,7 +115,7 @@ class UserData: NSObject {
     
     func uploadGame(playerNames: [String], playerIds: [String], roomNumber: String, move: [[[[Int]]]], winId: String){
         
-        Alamofire.request(.POST, "http://o.hl0.co:3000/report", parameters: ["playerNames": playerNames, "playerIds": playerIds, "roomNumber": roomNumber, "move" :move, "winId": winId], encoding: ParameterEncoding.JSON)
+        Alamofire.request(.POST, url+"/report", parameters: ["playerNames": playerNames, "playerIds": playerIds, "roomNumber": roomNumber, "move" :move, "winId": winId], encoding: ParameterEncoding.JSON)
             .responseJSON { response in
                 
                 print(response.request)  // original URL request

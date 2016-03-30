@@ -9,13 +9,12 @@
 
 import UIKit
 
-class BoardText: UILabel {
+class BoardText: UIButton {
     init(frame: CGRect, text: String, color: UIColor, size: CGFloat) {
         super.init(frame: frame)
-        self.text = text
-        self.textAlignment = NSTextAlignment.Center
-        self.font = UIFont(name: "Avenir-Heavy", size: 30.0 * size / 414.0)
-        self.textColor = color
+        self.setTitle(text, forState: UIControlState.Normal)
+        self.titleLabel?.font = UIFont(name: "Avenir-Heavy", size: 30.0 * size / 414.0)
+        self.setTitleColor(color, forState: UIControlState.Normal)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -124,7 +123,8 @@ class BoardBack: UIView , UITextFieldDelegate{
     }
     
     func back(but: UIButton){
-       cleanBoard(drawMenu1)
+        mpSocket.socketClient.disconnect()
+        cleanBoard(drawMenu1)
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -158,6 +158,7 @@ class BoardBack: UIView , UITextFieldDelegate{
         height = board.game.nodes[1][2].fences[board.game.nodes[2][2]]!.view.frame.origin.y - y
         let B = BoardText(frame: CGRect(x: x, y: y, width: width, height: height), text: "B", color: controller.beta.textColor, size: controller.view.frame.width)
         B.alpha = 0
+        B.addTarget(self, action: #selector(BoardBack.back(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         self.addSubview(B)
         
         x = board.game.nodes[3][5].fences[board.game.nodes[4][5]]!.view.frame.origin.x
@@ -182,6 +183,49 @@ class BoardBack: UIView , UITextFieldDelegate{
         
         showElements({})
 
+    }
+    
+    func waitRank(){
+        var x = board.game.nodes[1][3].fences[board.game.nodes[2][3]]!.view.frame.origin.x
+        var y = board.game.nodes[1][3].fences[board.game.nodes[1][4]]!.view.frame.origin.y
+        var width = board.game.nodes[8][3].fences[board.game.nodes[8][4]]!.view.frame.origin.x - x
+        var height = board.game.nodes[3][4].fences[board.game.nodes[4][4]]!.view.frame.origin.y - y
+        let roomNumLab = BoardText(frame: CGRect(x: x, y: y, width: width, height: height), text: "Matching...", color: controller.beta.textColor, size: controller.view.frame.width)
+        roomNumLab.alpha = 0
+        self.addSubview(roomNumLab)
+        
+        x = board.game.nodes[2][1].fences[board.game.nodes[3][1]]!.view.frame.origin.x
+        y = board.game.nodes[2][1].fences[board.game.nodes[2][2]]!.view.frame.origin.y
+        width = board.game.nodes[4][1].fences[board.game.nodes[4][2]]!.view.frame.origin.x - x
+        height = board.game.nodes[4][2].fences[board.game.nodes[5][2]]!.view.frame.origin.y - y
+        let back = BoardButton(frame: CGRect(x: x, y: y, width: width, height: height), text: "Back", color: controller.beta.textColor, size: controller.view.frame.width)
+        back.alpha = 0
+        back.addTarget(self, action: #selector(BoardBack.back(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        self.addSubview(back)
+        
+        
+        x = board.game.nodes[1][1].fences[board.game.nodes[2][1]]!.view.frame.origin.x
+        y = board.game.nodes[1][1].fences[board.game.nodes[1][2]]!.view.frame.origin.y
+        width = board.game.nodes[2][1].fences[board.game.nodes[2][2]]!.view.frame.origin.x - x
+        height = board.game.nodes[1][2].fences[board.game.nodes[2][2]]!.view.frame.origin.y - y
+        let B = BoardText(frame: CGRect(x: x, y: y, width: width, height: height), text: "B", color: controller.beta.textColor, size: controller.view.frame.width)
+        B.alpha = 0
+        B.addTarget(self, action: #selector(BoardBack.back(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        self.addSubview(B)
+        
+        board.game.nodes[1][1].fences[board.game.nodes[1][2]]?.player = 0
+        board.game.nodes[1][1].fences[board.game.nodes[2][1]]?.player = 0
+        board.game.nodes[2][1].fences[board.game.nodes[2][2]]?.player = 0
+        board.game.nodes[1][2].fences[board.game.nodes[2][2]]?.player = 0
+        
+        self.addSubview(B)
+        
+        elements.append(roomNumLab)
+        elements.append(B)
+        elements.append(back)
+        
+        showElements({})
+        
     }
     
     func inputNickName(){
@@ -304,6 +348,7 @@ class BoardBack: UIView , UITextFieldDelegate{
         height = board.game.nodes[1][2].fences[board.game.nodes[2][2]]!.view.frame.origin.y - y
         let B = BoardText(frame: CGRect(x: x, y: y, width: width, height: height), text: "B", color: controller.beta.textColor, size: controller.view.frame.width)
         B.alpha = 0
+        B.addTarget(self, action: #selector(BoardBack.back(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         self.addSubview(B)
         
         board.game.nodes[1][1].fences[board.game.nodes[1][2]]?.player = 0
@@ -336,6 +381,11 @@ class BoardBack: UIView , UITextFieldDelegate{
         if input.text != nil && input.text != "" {
             controller.searchGameRoom(input.text!)
         }
+    }
+    
+    func rank(but: UIButton){
+        controller.createRank("1")
+        cleanBoard(waitRank)
     }
     
     func multiPlayerGame(){
@@ -389,6 +439,7 @@ class BoardBack: UIView , UITextFieldDelegate{
         width = board.game.nodes[3][2].fences[board.game.nodes[3][3]]!.view.frame.origin.x - x
         height = board.game.nodes[3][4].fences[board.game.nodes[4][4]]!.view.frame.origin.y - y
         let I = BoardText(frame: CGRect(x: x, y: y, width: width, height: height), text: "1", color: controller.beta.textColor, size: controller.view.frame.width)
+        I.addTarget(self, action: #selector(BoardBack.joinGame(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         I.alpha = 0
         self.addSubview(I)
         
@@ -398,6 +449,7 @@ class BoardBack: UIView , UITextFieldDelegate{
         height = board.game.nodes[1][8].fences[board.game.nodes[2][8]]!.view.frame.origin.y - y
         let II = BoardText(frame: CGRect(x: x, y: y, width: width, height: height), text: "2", color: controller.beta.textColor, size: controller.view.frame.width)
         II.alpha = 0
+        II.addTarget(self, action: #selector(BoardBack.createGame(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         self.addSubview(II)
         
         x = board.game.nodes[1][1].fences[board.game.nodes[2][1]]!.view.frame.origin.x
@@ -406,6 +458,7 @@ class BoardBack: UIView , UITextFieldDelegate{
         height = board.game.nodes[1][2].fences[board.game.nodes[2][2]]!.view.frame.origin.y - y
         let B = BoardText(frame: CGRect(x: x, y: y, width: width, height: height), text: "B", color: controller.enclosure.textColor, size: controller.view.frame.width)
         B.alpha = 0
+        B.addTarget(self, action: #selector(BoardBack.back(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         self.addSubview(B)
         
         input.delegate = self
@@ -458,6 +511,8 @@ class BoardBack: UIView , UITextFieldDelegate{
         }
     }
     
+    
+    
     func drawMenu1(){
         
         var x = board.game.nodes[3][1].fences[board.game.nodes[4][1]]!.view.frame.origin.x
@@ -486,6 +541,7 @@ class BoardBack: UIView , UITextFieldDelegate{
         height = board.game.nodes[3][6].fences[board.game.nodes[4][6]]!.view.frame.origin.y - y
         let ranking = BoardButton(frame: CGRect(x: x, y: y, width: width, height: height), text: "Ranking Match", color: controller.enclosure.textColor, size: controller.view.frame.width)
         ranking.alpha = 0
+        ranking.addTarget(self, action: #selector(BoardBack.rank(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         self.addSubview(ranking)
         
         x = board.game.nodes[2][7].fences[board.game.nodes[3][7]]!.view.frame.origin.x
@@ -504,6 +560,9 @@ class BoardBack: UIView , UITextFieldDelegate{
         height = board.game.nodes[2][2].fences[board.game.nodes[3][2]]!.view.frame.origin.y - y
         let I = BoardText(frame: CGRect(x: x, y: y, width: width, height: height), text: "1", color: controller.beta.textColor, size: controller.view.frame.width)
         I.alpha = 0
+        I.tag = 0
+        I.addTarget(self, action: #selector(BoardBack.play(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        self.addSubview(classic)
         self.addSubview(I)
 
         x = board.game.nodes[1][3].fences[board.game.nodes[2][3]]!.view.frame.origin.x
@@ -512,6 +571,8 @@ class BoardBack: UIView , UITextFieldDelegate{
         height = board.game.nodes[1][4].fences[board.game.nodes[2][4]]!.view.frame.origin.y - y
         let II = BoardText(frame: CGRect(x: x, y: y, width: width, height: height), text: "2", color: controller.beta.textColor, size: controller.view.frame.width)
         II.alpha = 0
+        II.tag = 1
+        II.addTarget(self, action: #selector(BoardBack.play(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         self.addSubview(II)
         
         x = board.game.nodes[2][5].fences[board.game.nodes[3][5]]!.view.frame.origin.x
@@ -520,6 +581,7 @@ class BoardBack: UIView , UITextFieldDelegate{
         height = board.game.nodes[2][6].fences[board.game.nodes[3][6]]!.view.frame.origin.y - y
         let III = BoardText(frame: CGRect(x: x, y: y, width: width, height: height), text: "3", color: controller.enclosure.textColor, size: controller.view.frame.width)
         III.alpha = 0
+        III.addTarget(self, action: #selector(BoardBack.rank(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         self.addSubview(III)
         
         x = board.game.nodes[1][7].fences[board.game.nodes[2][7]]!.view.frame.origin.x
@@ -528,6 +590,7 @@ class BoardBack: UIView , UITextFieldDelegate{
         height = board.game.nodes[1][8].fences[board.game.nodes[2][8]]!.view.frame.origin.y - y
         let IV = BoardText(frame: CGRect(x: x, y: y, width: width, height: height), text: "4", color: controller.enclosure.textColor,size: controller.view.frame.width)
         IV.alpha = 0
+        IV.addTarget(self, action: #selector(BoardBack.mp(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         self.addSubview(IV)
         
         elements.append(I)
@@ -560,8 +623,7 @@ class BoardBack: UIView , UITextFieldDelegate{
         board.game.nodes[2][8].fences[board.game.nodes[1][8]]?.player = 1
         
         showElements({
-            ranking.alpha = 0.7
-            ranking.userInteractionEnabled = false
+            // after show element
         })
 
     }    

@@ -28,16 +28,21 @@ public class Socket: NSObject {
     init(roomNumber: String, level: String) {
         self.roomNumber = roomNumber
         self.level = level
-        socketClient = SocketIOClient(socketURL: NSURL(string: "http://o.hl0.co:3000")!, options: [.Log(false), .ForcePolling(true)])
+        socketClient = SocketIOClient(socketURL: NSURL(string: url)!, options: [.Log(false), .ForcePolling(true)])
         super.init()
         self.addHandlers()
         socketClient.connect()
         print("init new sockect")
     }
     
+    func rankGame(){
+        let json: JSON = ["id": Connection.getUserId(), "level": level]
+        socketClient.emit("joinRank", json.rawString()!)
+    }
+    
     func createRoom() {
         let json: JSON = ["id": Connection.getUserId(), "level": level]
-        self.socketClient.emit("createRoom",json.rawString()!)
+        self.socketClient.emit("createRoom", json.rawString()!)
     }
     
     func searchRoom() {
@@ -68,6 +73,8 @@ public class Socket: NSObject {
         self.socketClient.on("connect") { (data, ack) -> Void in
             if self.roomNumber == ""{
                 self.createRoom()
+            }else if self.roomNumber == "r"{
+                self.rankGame()
             }else{
                 self.searchRoom()
             }
