@@ -70,7 +70,10 @@ class AI: NSObject {
             enemyBoard.playerToGo = (enemyBoard.playerToGo+1) % 2
             let sortedBestEnemyMove = searchAllPossibleRoutes(enemyBoard)
             let sortedBestSelfMove = searchAllPossibleRoutes(rootBoard)
-            if sortedBestEnemyMove[0].1 <= minToExplore && sortedBestSelfMove[0].1 <= minToExplore{
+            
+            if sortedBestEnemyMove.count == 0{
+                return useBestMove(sortedBestSelfMove)
+            }else if sortedBestEnemyMove[0].1 <= minToExplore && sortedBestSelfMove[0].1 <= minToExplore{
                 // explore when both have under minToExplore
                 print("explore when both have under 2")
                 var bestCombinedMoves = self.freeSearch(self.rootBoard)
