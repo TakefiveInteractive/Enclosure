@@ -104,7 +104,6 @@ class MainViewController: UIViewController, UserDataDelegate, MFMailComposeViewC
         board.board = back
         board.controller = self
         }
-        NSUserDefaults.standardUserDefaults().setObject(true, forKey: "hadTutorial")
         
         if (NSUserDefaults.standardUserDefaults().objectForKey("hadTutorial") != nil){
             if (NSUserDefaults.standardUserDefaults().objectForKey("register") != nil){
