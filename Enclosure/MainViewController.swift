@@ -69,7 +69,17 @@ class MainViewController: UIViewController, UserDataDelegate, MFMailComposeViewC
     }
     
     func rankUpdate(rank: String){
-        self.rank.setTitle("World Rank: \(rank)", forState: UIControlState.Normal)
+        var suf1 = "th"
+        if rank == "1"{
+            suf1 = "st"
+        }
+        if rank == "2"{
+            suf1 = "nd"
+        }
+        if rank == "3"{
+            suf1 = "rd"
+        }
+        self.rank.setTitle("World Rank: \(rank)\(suf1)", forState: UIControlState.Normal)
     }
     
     func nicknameUpdate(name: String){
@@ -91,9 +101,7 @@ class MainViewController: UIViewController, UserDataDelegate, MFMailComposeViewC
         back.buildGame(sudoGame)
         board.board = back
         board.controller = self
-        
-        Connection.register()
-        
+                
         NSUserDefaults.standardUserDefaults().setObject(true, forKey: "hadTutorial")
         
         if (NSUserDefaults.standardUserDefaults().objectForKey("hadTutorial") != nil){

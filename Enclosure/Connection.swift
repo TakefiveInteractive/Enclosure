@@ -49,7 +49,7 @@ class UserData: NSObject {
         return NSUserDefaults.standardUserDefaults().objectForKey("nickName") as! String
     }
     
-    func register()->Bool{
+    func register(){
         
         Alamofire.request(.POST, url+"/register", parameters: ["userId": Connection.getUserId()])
             .responseJSON { response in
@@ -64,12 +64,10 @@ class UserData: NSObject {
                         NSUserDefaults.standardUserDefaults().setObject(rank, forKey: "rank")
                         self.delegate?.rankUpdate(self.getUserRank())
                         NSUserDefaults.standardUserDefaults().setObject(true, forKey: "register")
-                        
                     }
                     print("JSON: \(JSON)")
                 }
         }
-        return true
     }
     
     func getInfo()->Bool{

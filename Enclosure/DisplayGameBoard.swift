@@ -386,8 +386,12 @@ class BoardBack: UIView , UITextFieldDelegate{
     }
     
     func rank(but: UIButton){
-        controller.createRank("1")
-        cleanBoard(waitRank)
+        if (NSUserDefaults.standardUserDefaults().objectForKey("register") == nil){
+            Connection.register()
+        }else{
+            controller.createRank("1")
+            cleanBoard(waitRank)
+        }
     }
     
     func multiPlayerGame(){

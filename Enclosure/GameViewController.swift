@@ -83,6 +83,9 @@ class GameViewController: UIViewController, GameBoardDelegate {
     }
     
     func exit(){
+        if mpSocket != nil{
+            mpSocket.socketClient.disconnect()
+        }
         self.performSegueWithIdentifier("exit", sender: self)
     }
     
@@ -145,6 +148,11 @@ class GameViewController: UIViewController, GameBoardDelegate {
         board.userInteractionEnabled = false
         board.alpha = 0.7
         
+        reportGameResult(winPlayer)
+        
+    }
+    
+    func reportGameResult(winPlayer: Int){
         var gameData = [[[[Int]]]]()
         
         for player in game.userLastEdges{
@@ -174,9 +182,8 @@ class GameViewController: UIViewController, GameBoardDelegate {
             Connection.uploadGame([Connection.getUserNickName(), cont.opponentName], playerIds: [Connection.getUserId(),cont.opponentId], isOffLine: false, move: gameData, winId: winID, gameID: gameId, isRanking: isRankGame)
         }else{
             Connection.uploadGame([Connection.getUserNickName()], playerIds: [Connection.getUserId()], isOffLine: true, move: gameData, winId: Connection.getUserId(), gameID: "", isRanking: false)
-
+            
         }
-        
     }
     
     func updateScoreLabel(player: Int) {

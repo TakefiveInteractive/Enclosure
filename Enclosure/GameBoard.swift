@@ -16,6 +16,7 @@ protocol GameBoardDelegate{
     func showTotalRow(player:Int, row: Int)
     func updateScoreLabel(player: Int)
     func endGame(winPlayer: Int)
+    func reportGameResult(winPlayer: Int)
     func resetTimer()
     func changeProgress(player: Int)
 }

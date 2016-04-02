@@ -28,6 +28,9 @@ class MPGameBoard: GameBoard, SocketGameDelegate{
     
     func playerDisconnect(){
         parent.waiting.setTitle("opponent disconnected", forState: UIControlState.Normal)
+        if mpSocket.roomNumber == "r"{
+            self.delegate?.reportGameResult(onlineCurrentPlayer)
+        }
     }
     
     func gotMove(move: String) {
