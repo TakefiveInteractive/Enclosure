@@ -13,7 +13,8 @@ class MPGame1ViewController: GameViewController{
     var currentPlayer: Int = 0
     var opponentName = ""
     var opponentId = ""
-    
+    var gameId = ""
+
     @IBOutlet var waiting: UIButton!
     
     override func viewDidLoad() {

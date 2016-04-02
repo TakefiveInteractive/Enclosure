@@ -32,6 +32,8 @@ class MainViewController: UIViewController, UserDataDelegate, MFMailComposeViewC
     var onlinePlayer = 0
     var opponentName = ""
     var opponentId = ""
+    var gameId = ""
+
     override func viewDidLoad() {
         nickname.addTarget(self, action: #selector(MainViewController.changeNickName(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         feedback.addTarget(self, action: #selector(MainViewController.feedback(_:)), forControlEvents: UIControlEvents.TouchUpInside)
@@ -129,8 +131,8 @@ class MainViewController: UIViewController, UserDataDelegate, MFMailComposeViewC
         board.roomNum.setTitle(number, forState: UIControlState.Normal)
     }
         
-    func playerSequence(player: Int, names: [String], ids: [String], level: String){
-
+    func playerSequence(player: Int, names: [String], ids: [String], level: String, gameId: String){
+        self.gameId = gameId
         self.onlinePlayer = player
         if names[0] == Connection.getUserNickName(){
             opponentName = names[1]
@@ -160,6 +162,7 @@ class MainViewController: UIViewController, UserDataDelegate, MFMailComposeViewC
             destinationVC.currentPlayer = self.onlinePlayer
             destinationVC.opponentName = self.opponentName
             destinationVC.opponentId = self.opponentId
+            destinationVC.gameId = self.gameId
         }
     }
     

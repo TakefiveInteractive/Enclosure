@@ -169,9 +169,11 @@ class GameViewController: UIViewController, GameBoardDelegate {
             if winPlayer == cont.currentPlayer{
                 winID = Connection.getUserId()
             }
-            Connection.uploadGame([Connection.getUserNickName(), cont.opponentName], playerIds: [Connection.getUserId(),cont.opponentId], roomNumber: mpSocket.roomNumber, move: gameData, winId: winID)
+            let gameId = cont.gameId
+            let isRankGame = (mpSocket.roomNumber == "r")
+            Connection.uploadGame([Connection.getUserNickName(), cont.opponentName], playerIds: [Connection.getUserId(),cont.opponentId], isOffLine: false, move: gameData, winId: winID, gameID: gameId, isRanking: isRankGame)
         }else{
-            Connection.uploadGame([Connection.getUserNickName()], playerIds: [Connection.getUserId()], roomNumber: "", move: gameData, winId: Connection.getUserId())
+            Connection.uploadGame([Connection.getUserNickName()], playerIds: [Connection.getUserId()], isOffLine: true, move: gameData, winId: Connection.getUserId(), gameID: "", isRanking: false)
 
         }
         

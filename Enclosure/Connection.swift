@@ -122,9 +122,9 @@ class UserData: NSObject {
         }
     }
     
-    func uploadGame(playerNames: [String], playerIds: [String], roomNumber: String, move: [[[[Int]]]], winId: String){
+    func uploadGame(playerNames: [String], playerIds: [String], isOffLine: Bool, move: [[[[Int]]]], winId: String, gameID: String, isRanking: Bool){
         
-        Alamofire.request(.POST, url+"/report", parameters: ["playerNames": playerNames, "playerIds": playerIds, "roomNumber": roomNumber, "move" :move, "winId": winId], encoding: ParameterEncoding.JSON)
+        Alamofire.request(.POST, url+"/report", parameters: ["playerNames": playerNames, "playerIds": playerIds, "gameID": gameID, "move" :move, "winId": winId, "selfId": Connection.getUserId(), "isOffLine": isOffLine, "isRanking":isRanking], encoding: ParameterEncoding.JSON)
             .responseJSON { response in
                 
                 print(response.request)  // original URL request
@@ -134,7 +134,7 @@ class UserData: NSObject {
                 
                 if let JSON = response.result.value {
                     print("JSON: \(JSON)")
-                    if roomNumber == "r" {
+                    if isRanking {
                         self.rankDelegate?.rankUpdate(JSON["new"] as! Int, old: JSON["old"] as! Int)
                     }
                 }
