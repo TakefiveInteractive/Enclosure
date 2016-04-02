@@ -10,7 +10,7 @@ let expection = (ranks) =>
 
 let growthFactor = (ranks) =>
   10
-  // Math.abs(ranks[0] - ranks[1]) / 3
+  //Math.abs(ranks[0] - ranks[1]) / 2
 
 
 log(growthFactor([10, 1]))
