@@ -109,7 +109,7 @@ public class Socket: NSObject {
                 if let l = json["level"] as? String {
                     level = l
                 }
-                if let ri = json["c"] as? String {
+                if let ri = json["gameId"] as? String {
                     gameId = ri
                 }
                 if let ids = json["ids"] as? [String] {

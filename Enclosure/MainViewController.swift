@@ -96,12 +96,14 @@ class MainViewController: UIViewController, UserDataDelegate, MFMailComposeViewC
             titleWidth.constant = 250
         }
         
+        if board.board == nil{
         sudoGame.boardSize = 10
         sudoGame.buildGame()
+        
         back.buildGame(sudoGame)
         board.board = back
         board.controller = self
-                
+        }
         NSUserDefaults.standardUserDefaults().setObject(true, forKey: "hadTutorial")
         
         if (NSUserDefaults.standardUserDefaults().objectForKey("hadTutorial") != nil){
