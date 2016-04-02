@@ -304,6 +304,32 @@ class GameBoard: UIView {
         return total
     }
     
+    var highlighting = false
+    var highlightPlayer = 0
+    func highlightLastMove(){
+        if game.userLastEdges[highlightPlayer].count > 0 {
+            UIView.animateWithDuration(1, animations: { () -> Void in
+                for fence in self.game.userLastEdges[self.highlightPlayer].last!{
+                    fence.view.alpha = 0.4
+                }
+                }, completion: { (finish) -> Void in
+                    self.highlightLastMoveBack()
+            })
+        }
+    }
+    
+    func highlightLastMoveBack(){
+        if game.prevMovesByUser[highlightPlayer].count > 0 {
+            UIView.animateWithDuration(1, animations: { () -> Void in
+                for fence in self.game.userLastEdges[self.highlightPlayer].last!{
+                    fence.view.alpha = 1
+                }
+                }, completion: { (finish) -> Void in
+                    self.highlightLastMove()
+            })
+        }
+    }
+    
 }
 
 class Grid: UIView {

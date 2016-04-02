@@ -19,34 +19,10 @@ class AIGameBoard: GameBoard {
         if aiPlayer == 0{
             afterPlayerMove()
         }
+        highlightPlayer = aiPlayer
         print(aiPlayer)
     }
-    
-    var highlighting = false
-    
-    func highlightLastAIMove(){
-        if game.userLastEdges[aiPlayer].count > 0 {
-            UIView.animateWithDuration(1, animations: { () -> Void in
-                for fence in self.game.userLastEdges[self.aiPlayer].last!{
-                    fence.view.alpha = 0.4
-                }
-                }, completion: { (finish) -> Void in
-                    self.highlightLastAIMoveBack()
-            })
-        }
-    }
-    
-    func highlightLastAIMoveBack(){
-        if game.prevMovesByUser[aiPlayer].count > 0 {
-            UIView.animateWithDuration(1, animations: { () -> Void in
-                for fence in self.game.userLastEdges[self.aiPlayer].last!{
-                    fence.view.alpha = 1
-                }
-                }, completion: { (finish) -> Void in
-                    self.highlightLastAIMove()
-            })
-        }
-    }
+
     
     override func afterPlayerMove(){
         
@@ -78,7 +54,7 @@ class AIGameBoard: GameBoard {
                         self.moveToNextStep(fences)
                         if !self.highlighting{
                             self.highlighting = true
-                            self.highlightLastAIMove()
+                            self.highlightLastMove()
                         }
                         self.delegate?.resetTimer()
                     }

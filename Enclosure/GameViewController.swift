@@ -85,6 +85,7 @@ class GameViewController: UIViewController, GameBoardDelegate {
     func exit(){
         if mpSocket != nil{
             mpSocket.socketClient.disconnect()
+            mpSocket = nil
         }
         self.performSegueWithIdentifier("exit", sender: self)
     }

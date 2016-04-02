@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class MPGameBoard: GameBoard, SocketGameDelegate{
     
@@ -47,6 +48,16 @@ class MPGameBoard: GameBoard, SocketGameDelegate{
                 fences.append(node1.fences[node2]!)
             }
             self.moveToNextStep(fences)
+            // create a sound ID, in this case its the tweet sound.
+            let systemSoundID: SystemSoundID = 1016
+            
+            // to play sound
+            AudioServicesPlaySystemSound (systemSoundID)
+            
+            if !self.highlighting{
+                self.highlighting = true
+                self.highlightLastMove()
+            }
         }
         changeBoardAvailabiliity()
     }

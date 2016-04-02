@@ -21,10 +21,12 @@ class TutorialBoard: GameBoard {
     var highlight = [[Fence]]()
     var opponent = [[Fence]]()
     
-    var highlighting = true
     
     override func buildGame(game: EnclosureGame) {
         super.buildGame(game)
+        
+        highlighting = true
+
         highlight = [[game.nodes[4][5].fences[game.nodes[4][6]]!,game.nodes[4][5].fences[game.nodes[4][4]]!],
         [game.nodes[4][4].fences[game.nodes[5][4]]!,game.nodes[5][4].fences[game.nodes[5][5]]!,game.nodes[5][5].fences[game.nodes[4][5]]!],
         [game.nodes[7][6].fences[game.nodes[6][6]]!,game.nodes[6][6].fences[game.nodes[5][6]]!,game.nodes[5][6].fences[game.nodes[4][6]]!],

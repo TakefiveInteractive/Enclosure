@@ -16,38 +16,13 @@ class AIGameBoard2: GameBoard2 {
     
     override func buildGame(game: EnclosureGame) {
         super.buildGame(game)
-        shiningThread = NSThread(target: self, selector: #selector(AIGameBoard2.highlightLastAIMove), object: nil)
+        shiningThread = NSThread(target: self, selector: #selector(AIGameBoard2.highlightLastMove), object: nil)
         shiningThread.start()
         aiPlayer = Int(arc4random_uniform(10)) % 2
         if aiPlayer == 0{
             afterPlayerMove()
         }
-    }
-    
-    var highlighting = false
-    
-    func highlightLastAIMove(){
-        if game.userLastEdges[aiPlayer].count > 0 {
-            UIView.animateWithDuration(1, animations: { () -> Void in
-                for fence in self.game.userLastEdges[self.aiPlayer].last!{
-                    fence.view.alpha = 0.4
-                }
-                }, completion: { (finish) -> Void in
-                    self.highlightLastAIMoveBack()
-            })
-        }
-    }
-    
-    func highlightLastAIMoveBack(){
-        if game.prevMovesByUser[aiPlayer].count > 0 {
-            UIView.animateWithDuration(1, animations: { () -> Void in
-                for fence in self.game.userLastEdges[self.aiPlayer].last!{
-                    fence.view.alpha = 1
-                }
-                }, completion: { (finish) -> Void in
-                    self.highlightLastAIMove()
-            })
-        }
+        highlightPlayer = aiPlayer
     }
 
     override func afterPlayerMove(){
@@ -80,7 +55,7 @@ class AIGameBoard2: GameBoard2 {
                         self.moveToNextStep(fences)
                         if !self.highlighting{
                             self.highlighting = true
-                            self.highlightLastAIMove()
+                            self.highlightLastMove()
                         }
                         self.delegate?.resetTimer()
                     }

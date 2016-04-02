@@ -122,13 +122,15 @@ class UserData: NSObject {
     
     func uploadGame(playerNames: [String], playerIds: [String], isOffLine: Bool, move: [[[[Int]]]], winId: String, gameID: String, isRanking: Bool){
         
-        Alamofire.request(.POST, url+"/report", parameters: ["playerNames": playerNames, "playerIds": playerIds, "gameId": gameID, "move" :move, "winId": winId, "selfId": Connection.getUserId(), "isOffLine": isOffLine, "isRanking":isRanking], encoding: ParameterEncoding.JSON)
+        Alamofire.request(.POST, url+"/report", parameters: ["playerNames": playerNames, "playerIds": playerIds, "gameID": gameID, "move" :move, "winId": winId, "selfId": Connection.getUserId(), "isOffLine": isOffLine, "isRanking":isRanking], encoding: ParameterEncoding.JSON)
             .responseJSON { response in
                 
                 print(response.request)  // original URL request
                 print(response.response) // URL response
                 print(response.data)     // server data
                 print(response.result)   // result of response serialization
+                
+                //rankUpdate
                 
                 if let JSON = response.result.value {
                     print("JSON: \(JSON)")

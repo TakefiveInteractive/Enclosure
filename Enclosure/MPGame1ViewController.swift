@@ -21,6 +21,8 @@ class MPGame1ViewController: GameViewController{
         super.viewDidLoad()
         (board as! MPGameBoard).parent = self
         (board as! MPGameBoard).onlineCurrentPlayer = currentPlayer
+        (board as! MPGameBoard).highlightPlayer = (currentPlayer + 1) % 2
+
     }
     
     override func viewDidAppear(animated: Bool) {

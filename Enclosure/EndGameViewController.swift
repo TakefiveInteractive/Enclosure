@@ -19,6 +19,7 @@ class EndGameViewController: UIViewController, RankUpdateDelegate{
     }
     
     func rankUpdate(new: Int, old: Int){
+        
         var suf1 = "th"
         var suf2 = "th"
         if new == 1{
@@ -39,7 +40,8 @@ class EndGameViewController: UIViewController, RankUpdateDelegate{
         if old == 3{
             suf2 = "rd"
         }
-        if new <= old{
+        
+        if old != -1 {
             rank.text = "Rank \(old)\(suf2) → \(new)\(suf1)"
         }
     }
