@@ -43,6 +43,8 @@ class EndGameViewController: UIViewController, RankUpdateDelegate{
         
         if old != -1 {
             rank.text = "Rank \(old)\(suf2) → \(new)\(suf1)"
+        }else{
+            rank.text = "Rank \(new)\(suf1)"
         }
     }
     
