@@ -92,7 +92,14 @@ app.post('/report', (req, res) => {
       gameId : gameId
     }).then((result) => {
       if (result) {
-        return res.json(result._doc.rankChange[selfId])
+        l('another guy')
+        let ans = {}
+        ans.old = result._doc.rankChange[selfId][0]
+        ans.new = result._doc.rankChange[selfId][1]
+        if (ans.old != -1) ans.old ++
+        if (ans.new != -1) ans.new ++
+        l(ans)
+        return res.json(ans)
       }
       //if (result? && !body.isRanking)
       let oldElo = users.map((u) => u.elo)
@@ -105,7 +112,7 @@ app.post('/report', (req, res) => {
       //!!todo
       return Promise.all(eloChange.map((rank, index) => {
         let user = users[index]
-        let requestOldRanking = redisClient.zrevrankAsync('playerRank', user._id)
+        let requestOldRanking = redisClient.zrevrankAsync('playerRank', user._id.toString())
         if (user.elo == -1) {
           user.elo = 1000
           requestOldRanking = Promise.resolve(-1)
@@ -113,19 +120,21 @@ app.post('/report', (req, res) => {
         user.elo = user.elo + rank
         return requestOldRanking.then((oldRanking) => {
           return Promise.all([
-            Promise.resolve(oldRanking),
             user.save(),
             redisClient.zaddAsync('playerRank', user.elo, user._id.toString()),
-          ]).then((results) => {
-            let oldRanking = results.shift()
-            return Promise.all([
-              Promise.resolve(oldRanking),
-              redisClient.zrevrankAsync('playerRank', user._id)
-            ])
-          }).then((rankings) => {
-            if (body.playerIds[index] == selfId)
-              res.json(rankings)
-            return rankings
+          ]).then(() => 
+              redisClient.zrevrankAsync('playerRank', user._id.toString()))
+          .then((newRanking) => {
+            if (body.playerIds[index] == selfId) {
+              let ans = {}
+              ans.old = oldRanking
+              ans.new = newRanking
+              if (ans.old != -1) ans.old ++
+              if (ans.new != -1) ans.new ++
+              l(ans)
+              res.json(ans)
+            }
+            return [oldRanking, newRanking]
           })
         })
       })).then((twoRankings) => {
@@ -180,7 +189,7 @@ app.get('/info', (req, res) => {
     if (user == null)
       return null
     return Promise.all([
-      redisClient.zrevrankAsync('playerRank', user._id),
+      redisClient.zrevrankAsync('playerRank', user._id.toString()),
       Promise.resolve(user)
     ])
   })

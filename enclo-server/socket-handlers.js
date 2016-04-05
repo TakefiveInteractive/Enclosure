@@ -83,13 +83,10 @@ let handlers = (conns, rooms, io) => {
         //thisGame.save()
       })
       socket.on('gameRestart', () => {
-        l('1')
         if (ifNotInGame(socket, roomNumber))
           return
-        l('2')
         if (requestedRestart[theRoom.indexOf(socket)])
           return
-        l('3')
         requestedRestart[theRoom.indexOf(socket)] = true
         if (requestedRestart[0] && requestedRestart[1]) {
           io.to(roomNumber).emit('mapUpdate', 
