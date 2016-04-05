@@ -51,7 +51,7 @@ class GameViewController: UIViewController, GameBoardDelegate {
     }
     
     func afterEnd(){
-        self.performSegueWithIdentifier("exit", sender: self)
+        exit()
     }
     
     func timing(){
