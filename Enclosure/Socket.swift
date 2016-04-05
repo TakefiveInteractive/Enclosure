@@ -21,6 +21,8 @@ public class Socket: NSObject {
     let socketClient:SocketIOClient
     var roomNumber = ""
     var level = ""
+    var stayInGame = false
+    var gameId = ""
     
     var startDelegate: SocketSuccessDelegate?
     var gameDelegate: SocketGameDelegate?
@@ -53,7 +55,7 @@ public class Socket: NSObject {
     func gameEnd() {
         self.socketClient.emit("gameEnd","")
     }
-    
+
     func playerMove(move: String) {
         self.socketClient.emit("gameMove", move)
     }
@@ -71,12 +73,15 @@ public class Socket: NSObject {
         
         //connected
         self.socketClient.on("connect") { (data, ack) -> Void in
-            if self.roomNumber == ""{
-                self.createRoom()
-            }else if self.roomNumber == "r"{
-                self.rankGame()
-            }else{
-                self.searchRoom()
+            
+            if !self.stayInGame{
+                if self.roomNumber == ""{
+                    self.createRoom()
+                }else if self.roomNumber == "r"{
+                    self.rankGame()
+                }else{
+                    self.searchRoom()
+                }
             }
         }
         

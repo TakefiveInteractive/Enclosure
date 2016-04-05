@@ -22,7 +22,7 @@ class MPGame1ViewController: GameViewController{
         (board as! MPGameBoard).parent = self
         (board as! MPGameBoard).onlineCurrentPlayer = currentPlayer
         (board as! MPGameBoard).highlightPlayer = (currentPlayer + 1) % 2
-
+        mpSocket.stayInGame = true
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -64,6 +64,12 @@ class MPGame1ViewController: GameViewController{
     override func endGame(winPlayer: Int) {
         super.endGame(winPlayer)
         mpSocket.gameEnd()
+    }
+    
+    override func exit(){
+        super.exit()
+        (board as! MPGameBoard).updateTimer.invalidate()
+
     }
     
     func alertView(View: UIAlertView!, clickedButtonAtIndex buttonIndex: Int){

@@ -13,6 +13,9 @@ class MPGameBoard: GameBoard, SocketGameDelegate{
     
     var onlineCurrentPlayer: Int = 0
     var parent: MPGame1ViewController!
+    
+    var updateTimer = NSTimer()
+    
     override func afterPlayerMove(){
         super.afterPlayerMove()
         var fencess = game.userLastEdges[onlineCurrentPlayer].last!
@@ -69,17 +72,26 @@ class MPGameBoard: GameBoard, SocketGameDelegate{
     func requestRestart(){
         parent.requestedRestart()
     }
-    
+        
     func changeBoardAvailabiliity(){
         if game.currentPlayer() != onlineCurrentPlayer{
             self.userInteractionEnabled = false
             self.alpha = 0.65
             parent.waiting.alpha = 1
-            
+//            updateTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: #selector(MPGameBoard.checkBoardUpdate), userInfo: nil, repeats: true)
+
         }else{
             self.userInteractionEnabled = true
             self.alpha = 1
             parent.waiting.alpha = 0
+//            updateTimer.invalidate()
+        }
+    }
+    
+    func checkBoardUpdate(){
+        if mpSocket != nil{
+//            mpSocket.socketClient.connect()
+//            mpSocket.getLatest()
         }
     }
 
