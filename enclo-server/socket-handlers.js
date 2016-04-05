@@ -25,9 +25,11 @@ let waitingPlayers = {
   '2' : []
 }
 let moves = {}
+let rawMoveStore = {}
 let maps = {}
 let levels = {}
 let ids = {}
+let gameId = {}
 
 let handlers = (conns, rooms, io) => {
   const ifNotInGame = (personalSocket, roomNumber) => {
@@ -66,11 +68,14 @@ let handlers = (conns, rooms, io) => {
     })
     theRoom.forEach((socket, index) => {
       socket.on('gameMove', !ifNotInGame(socket, roomNumber) ? methods.onMove(roomNumber, theRoom, index) : () => {})
+      socket.on('getLatest', !ifNotInGame(socket, roomNumber) ? methods.getLatest(roomNumber, theRoom, index, socket) : () => {})
       socket.on('disconnect', () => {
+        l('one man died')
         io.to(roomNumber).emit('userDisconnect', '😲')
         delete rooms[roomNumber]
         delete moves[roomNumber]
         delete ids[roomNumber]
+        delete rawMoveStore[roomNumber]
       })
       socket.on('gameEnd', () => {
         if (!rooms[roomNumber])
@@ -158,7 +163,7 @@ let handlers = (conns, rooms, io) => {
       })
     } ,
     onMove : (roomNumber, theRoom, player) => function (rawMove) {
-      console.log('move '+roomNumber+' '+player+' '+rawMove)
+      l('move '+roomNumber+' '+player+' '+rawMove)
       theRoom[0].emit('gameMove', rawMove)
       theRoom[1].emit('gameMove', rawMove)
       if (!moves[roomNumber])
@@ -168,6 +173,13 @@ let handlers = (conns, rooms, io) => {
         .split('|').map((edgeStr) => 
           edgeStr.split('$').map((pointStr) => 
             pointStr.split(',').map((coordinate) => parseInt(coordinate)))))
+      if (!rawMoveStore[roomNumber])
+        rawMoveStore[roomNumber] = []
+      rawMoveStore[roomNumber].push(rawMove)
+    } ,
+    getLatest : (roomNumber, theRoom, player, socket) => function () {
+      if (rawMoveStore[roomNumber] && rawMoveStore[roomNumber].length > 0)
+        socket.emit('gameMove', rawMoveStore[roomNumber][rawMoveStore[roomNumber].length - 1])
     } ,
     updateMap : (roomNumber, level) => {
       let room = rooms[roomNumber]
