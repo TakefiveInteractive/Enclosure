@@ -180,9 +180,9 @@ class GameViewController: UIViewController, GameBoardDelegate {
             }
             let gameId = cont.gameId
             let isRankGame = (mpSocket.roomNumber == "r")
-            Connection.uploadGame([Connection.getUserNickName(), cont.opponentName], playerIds: [Connection.getUserId(),cont.opponentId], isOffLine: false, move: gameData, winId: winID, gameID: gameId, isRanking: isRankGame)
+            Connection.uploadGame([Connection.getUserNickName(), cont.opponentName], playerIds: [Connection.getUserId(),cont.opponentId], isOffLine: false, move: gameData, winId: winID, gameId: gameId, isRanking: isRankGame)
         }else{
-            Connection.uploadGame([Connection.getUserNickName()], playerIds: [Connection.getUserId()], isOffLine: true, move: gameData, winId: Connection.getUserId(), gameID: "", isRanking: false)
+            Connection.uploadGame([Connection.getUserNickName()], playerIds: [Connection.getUserId()], isOffLine: true, move: gameData, winId: Connection.getUserId(), gameId: "", isRanking: false)
             
         }
     }

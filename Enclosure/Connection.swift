@@ -20,7 +20,7 @@ protocol RankUpdateDelegate{
     func rankUpdate(new: Int, old: Int)
 }
 
-let url = "http://o.hl0.co:8888"
+let url = "http://c.hl0.co:8888"
 
 class UserData: NSObject {
     
@@ -120,9 +120,9 @@ class UserData: NSObject {
         }
     }
     
-    func uploadGame(playerNames: [String], playerIds: [String], isOffLine: Bool, move: [[[[Int]]]], winId: String, gameID: String, isRanking: Bool){
+    func uploadGame(playerNames: [String], playerIds: [String], isOffLine: Bool, move: [[[[Int]]]], winId: String, gameId: String, isRanking: Bool){
         
-        Alamofire.request(.POST, url+"/report", parameters: ["playerNames": playerNames, "playerIds": playerIds, "gameID": gameID, "move" :move, "winId": winId, "selfId": Connection.getUserId(), "isOffLine": isOffLine, "isRanking":isRanking], encoding: ParameterEncoding.JSON)
+        Alamofire.request(.POST, url+"/report", parameters: ["playerNames": playerNames, "playerIds": playerIds, "gameId": gameId, "move" :move, "winId": winId, "selfId": Connection.getUserId(), "isOffLine": isOffLine, "isRanking":isRanking], encoding: ParameterEncoding.JSON)
             .responseJSON { response in
                 
                 print(response.request)  // original URL request
