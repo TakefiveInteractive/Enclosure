@@ -32,6 +32,13 @@ let ids = {}
 let gameId = {}
 
 let handlers = (conns, rooms, io) => {
+  const killRoom = (roomNumber) => {
+    io.to(roomNumber).emit('userDisconnect', '😲')
+    delete rooms[roomNumber]
+    delete moves[roomNumber]
+    delete ids[roomNumber]
+    delete rawMoveStore[roomNumber]
+  }
   const ifNotInGame = (personalSocket, roomNumber) => {
     return !rooms[roomNumber] || rooms[roomNumber].indexOf(personalSocket) == -1
   }
@@ -71,11 +78,7 @@ let handlers = (conns, rooms, io) => {
       socket.on('getLatest', !ifNotInGame(socket, roomNumber) ? methods.getLatest(roomNumber, theRoom, index, socket) : () => {})
       socket.on('disconnect', () => {
         l('one man died')
-        io.to(roomNumber).emit('userDisconnect', '😲')
-        delete rooms[roomNumber]
-        delete moves[roomNumber]
-        delete ids[roomNumber]
-        delete rawMoveStore[roomNumber]
+        killRoom(roomNumber)
       })
       socket.on('gameEnd', () => {
         if (!rooms[roomNumber])
@@ -160,6 +163,10 @@ let handlers = (conns, rooms, io) => {
         l(idx)
         if (idx != -1)
           q.splice(idx, 1)
+        Object.keys(rooms).forEach(k => {
+          if (rooms[k].indexOf(socket) > -1)
+            killRoom(k)
+        })
       })
     } ,
     onMove : (roomNumber, theRoom, player) => function (rawMove) {
